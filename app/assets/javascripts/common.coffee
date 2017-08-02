@@ -1,0 +1,2 @@
+CustomerLoyalty.Common =
+  init: ->
