@@ -13,6 +13,12 @@
 !/log/.keep
 !/tmp/.keep
 
+# Ignore Mac DS_Store files
+.DS_Store
+.keep
+/public/uploads/*
+/public/assets/*
+
 /node_modules
 /yarn-error.log
 
