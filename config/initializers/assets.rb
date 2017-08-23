@@ -12,3 +12,10 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 # application.js, application.css, and all non-JS/CSS in the app/assets
 # folder are already added.
 # Rails.application.config.assets.precompile += %w( admin.js admin.css )
+
+Rails.application.config.assets.precompile += %w( admin/app.min.js )
+Rails.application.config.assets.precompile += %w( admin/dashboard.min.js )
+Rails.application.config.assets.precompile += %w( admin/layout.min.js )
+Rails.application.config.assets.precompile += %w( admin/demo.min.js)
+Rails.application.config.assets.precompile += %w( admin/quick-sidebar.min.js )
+Rails.application.config.assets.precompile += %w( admin/quick-nav.min.js )
