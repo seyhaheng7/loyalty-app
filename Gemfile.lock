@@ -227,6 +227,7 @@ DEPENDENCIES
   capybara (~> 2.13)
   carrierwave (~> 1.1.0)
   coffee-rails (~> 4.2)
+  devise (~> 4.3.0)
   devise_token_auth (~> 0.1.42)
   font-awesome-rails (~> 4.7.0.2)
   haml-rails (~> 0.9)
