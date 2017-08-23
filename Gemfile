@@ -21,6 +21,7 @@ gem 'devise', '~> 4.3.0'
 gem 'devise_token_auth', '~> 0.1.42'
 gem 'omniauth', '~> 1.6.1'
 gem 'font-awesome-rails', '~> 4.7.0.2'
+gem 'haml-rails', '~> 0.9'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
