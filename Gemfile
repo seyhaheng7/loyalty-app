@@ -22,6 +22,8 @@ gem 'devise',             '~> 4.3.0'
 gem 'devise_token_auth',  '~> 0.1.42'
 gem 'omniauth',           '~> 1.6.1'
 gem 'font-awesome-rails', '~> 4.7.0.2'
+gem 'devise_security_extension', git: "https://github.com/phatworx/devise_security_extension.git", ref: 'b2ee978af7d49f0fb0e7271c6ac074dfb4d39353' # TO DO: use version after next release
+gem 'rails_email_validator'
 gem 'haml-rails',         '~> 0.9'
 
 group :development, :test do
