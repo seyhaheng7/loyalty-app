@@ -1,4 +1,4 @@
-CustomerLoyalty.Initializer =
+Codingate.Initializer =
   exec: (pageName) ->
     if pageName && CustomerLoyalty[pageName]
       CustomerLoyalty[pageName]['init']()

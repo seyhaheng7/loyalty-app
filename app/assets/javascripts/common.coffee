@@ -1,2 +1,2 @@
-CustomerLoyalty.Common =
+Codingate.Common =
   init: ->

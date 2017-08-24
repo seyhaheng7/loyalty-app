@@ -1,1 +1,1 @@
-window.CustomerLoyalty = {}
+window.Codingate = {}
