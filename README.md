@@ -1,24 +1,7 @@
-# README
+# Rails Boilerplate
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Building Status: [![pipeline status](https://gitlab.com/codingategitlab/app-boilerplate/badges/master/pipeline.svg)](https://gitlab.com/codingategitlab/app-boilerplate/commits/master)
 
-Things you may want to cover:
+This Repo is a sample project for Ruby On Rails team. Before start every project we need to clone the existing feature in this project and extend feature.
 
-* Ruby version
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
