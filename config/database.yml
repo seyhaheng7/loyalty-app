@@ -23,7 +23,7 @@ default: &default
 
 development:
   <<: *default
-  database: customer-loyality_development
+  database: codingate_db_development
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -57,7 +57,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: customer-loyality_test
+  database: codingate_db_test
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -80,6 +80,6 @@ test:
 #
 production:
   <<: *default
-  database: customer-loyality_production
-  username: customer-loyality
-  password: <%= ENV['CUSTOMER-LOYALITY_DATABASE_PASSWORD'] %>
+  database: codingate_db_production
+  username: <%= ENV['DATABASE_USER'] %>
+  password: <%= ENV['DATABASE_PASSWORD'] %>
