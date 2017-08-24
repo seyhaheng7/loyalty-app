@@ -6,13 +6,13 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module CustomerLoyality
+module CodingateProject
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.1
 
     config.generators do |g|
-      g.test_framework  nil #to skip test framework
+      g.test_framework  :rspec
       g.assets  false
       g.helper false
       g.stylesheets false
