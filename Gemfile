@@ -5,6 +5,8 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+ruby '2.4.1'
+
 gem 'rails',              '~> 5.1.2'
 gem 'pg',                 '~> 0.18'
 gem 'puma',               '~> 3.7'
@@ -43,5 +45,6 @@ end
 
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
 gem "pundit", '~> 1.1.0'
 gem 'active_model_serializers', '~> 0.10.6'
