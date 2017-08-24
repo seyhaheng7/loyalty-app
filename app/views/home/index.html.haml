@@ -302,7 +302,7 @@
                     %i.icon-lock
                     Lock Screen
                 %li
-                  %a{:href => "page_user_login_1.html"}
+                  = link_to destroy_user_session_path, method: :delete do
                     %i.icon-key
                     Log Out
             / END USER LOGIN DROPDOWN
