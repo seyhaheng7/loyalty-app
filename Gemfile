@@ -38,6 +38,9 @@ group :development, :test do
   gem 'database_cleaner',   '~> 1.6.1'
   gem 'factory_girl_rails', '~> 4.8.0'
   gem 'shoulda-matchers', git: 'https://github.com/thoughtbot/shoulda-matchers.git', branch: 'rails-5'
+  gem 'capistrano-rails', '~> 1.1.1'
+  gem 'capistrano-passenger'
+  gem 'capistrano-rvm'
 end
 
 group :development do
