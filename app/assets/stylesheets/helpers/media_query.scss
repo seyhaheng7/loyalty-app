@@ -1,0 +1,52 @@
+/* .foo {
+  @include screen(large) {
+    width: 20%;
+  }
+  @include screen(desktop) {
+    width: 40%;
+  }
+  @include screen(tablet) {
+    width: 60%;
+  }
+  @include screen(phone) {
+    width: 80%;
+  }
+  @include screen(custom, max, 400) {
+    width: 100%;
+  }
+} */
+
+$breakpoint-phone: 768px;
+$breakpoint-tablet: 992px;
+$breakpoint-desktop: 1200px;
+
+@mixin screen($size, $type: max, $pixels: $breakpoint-phone) {
+  @if $size == 'phone' {
+    @media screen and ($type + -width: $breakpoint-phone) {
+        @content;
+    }
+  }
+  @else if $size == 'tablet' {
+    @media screen and ($type + -width: $breakpoint-tablet) {
+        @content;
+    }
+  }
+  @else if $size == 'desktop' {
+    @media screen and ($type + -width: $breakpoint-desktop) {
+        @content;
+    }
+  }
+ @else if $size == 'large' {
+    @media screen and ($type + -width: $breakpoint-desktop) {
+        @content;
+    }
+  }
+  @else if $size == 'custom' {
+    @media screen and ($type + -width: $pixels + px) {
+     @content;
+    }
+  }
+  @else {
+    @content;
+  }
+}

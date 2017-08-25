@@ -1,0 +1,29 @@
+/*
+.btn-rectangle {
+  @extend %no-radius;
+}
+*/
+%no-radius {
+  border-radius: 0;
+}
+
+/*
+.btn-circle {
+  @extend %circle;
+}
+*/
+%circle {
+  border-radius: 50%;
+}
+
+/*
+.btn-round {
+  @include round();
+}
+.btn-round {
+  @include round(4px);
+}
+*/
+@mixin round($radius: 4%) {
+  border-radius: $radius;
+}
