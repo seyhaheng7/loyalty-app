@@ -1,0 +1,14 @@
+.image-uploader > a > img {
+  border-radius: 0px;
+  width: 150px;
+  height: auto;
+}
+
+.control-label {
+  margin-top: 10px;
+  width: 150px;
+}
+
+.image-uploader [type=file]{
+  display: none;
+}

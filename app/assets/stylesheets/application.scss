@@ -11,4 +11,10 @@
 
 @import 'admin/default.min.css';
 @import 'admin/layout.min.css';
+@import 'admin/login.css';
 @import 'admin/custom.min.css';
+
+@import 'common/upload';
+@import 'common/thumbnail';
+
+@import 'devise/sessions/new';
