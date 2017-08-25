@@ -1,10 +1,54 @@
 !!!
 %html
+
   %head
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}
+    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}
+    %meta{:charset => "UTF-8"}
+    %meta{:content => "IE=edge", "http-equiv" => "X-UA-Compatible"}/
     %title CodingateProject
     = csrf_meta_tags
     = stylesheet_link_tag    'application'
     = javascript_include_tag 'application'
-  %body{ id: "#{controller_name}_#{params[:action]}" }
-    = yield
+
+  %body.page-container-bg-solid.page-header-fixed.page-sidebar-closed-hide-logo{ id: "#{controller_name}_#{params[:action]}" }
+
+    / BEGIN HEADER
+    = render 'partials/topnav'
+    / END HEADER
+
+    / BEGIN HEADER & CONTENT DIVIDER
+    .clearfix
+    / END HEADER & CONTENT DIVIDER
+
+    / BEGIN CONTAINER
+    .page-container
+
+      / BEGIN SIDEBAR
+      = render 'partials/sidebar'
+      / END SIDEBAR
+
+      / BEGIN CONTENT
+      .page-content-wrapper
+        .page-content
+          = yield
+      / BEGIN CONTENT
+
+      / BEGIN QUICK SIDEBAR
+      %a.page-quick-sidebar-toggler{:href => "javascript:;"}
+        %i.icon-login
+      = render 'partials/quick-sidebar'
+      / END QUICK SIDEBAR
+
+    / END CONTAINER
+
+    / BEGIN FOOTER
+    = render 'partials/footer'
+    / END FOOTER
+
+    / BEGIN QUICK NAV
+    = render 'partials/quick-nav'
+    / END QUICK NAV
+
+    = javascript_include_tag 'admin/quick-sidebar.min.js'
+    = javascript_include_tag 'admin/quick-nav.min.js'

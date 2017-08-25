@@ -1,0 +1,16 @@
+.page-sidebar-wrapper
+  .page-sidebar.navbar-collapse.collapse
+
+    / BEGIN SIDEBAR MENU
+    %ul.page-sidebar-menu{"data-auto-scroll" => "true", "data-keep-expanded" => "false", "data-slide-speed" => "200"}
+
+      %li.nav-item.start.active
+        = link_to root_path do
+          %i.icon-home
+          %span.title Dashboard
+
+      %li.nav-item
+        = link_to users_url do
+          %i.icon-user
+          %span.title Users
+    / END SIDEBAR MENU

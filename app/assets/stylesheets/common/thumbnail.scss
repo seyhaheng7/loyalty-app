@@ -1,0 +1,15 @@
+.thumbnail
+{
+  & > .caption
+  {
+    & > h3
+    {
+      margin-top: 0px;
+      margin-bottom: 0px;
+    }
+  }
+}
+.portlet
+{
+  margin-top: 15px;
+}

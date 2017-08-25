@@ -1,0 +1,24 @@
+!!!
+%html
+
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}
+    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}
+    %meta{:charset => "UTF-8"}
+    %meta{:content => "IE=edge", "http-equiv" => "X-UA-Compatible"}/
+
+    %title CustomerLoyality
+    = csrf_meta_tags
+    = stylesheet_link_tag 'application'
+    = javascript_include_tag 'application'
+
+  %body.login
+
+    .logo
+      %a{href: "#!"}
+        = image_tag 'logo-big.png'
+
+    .content
+      = yield
+      
+    .copyright 2017 © Metronic. Admin Dashboard Template.
