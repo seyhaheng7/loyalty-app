@@ -1,8 +1,17 @@
 class UsersController < ApplicationController
+  def index
+    @grid = UsersGrid.new(params[:users_grid]) do |scope|
+      scope.page(params[:page])
+    end
+  end
+  
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   def index
-    @users = User.all
+    # @users = User.all
+    @grid = UsersGrid.new(params[:users_grid]) do |scope|
+      scope.page(params[:page])
+    end
   end
   
   def show
