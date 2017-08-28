@@ -156,7 +156,7 @@
                   %i.icon-calendar
                   My Calendar
               %li
-                = link_to destroy_user_session_path do
+                = link_to destroy_user_session_path, method: :delete do
                   %i.icon-key
                   Log Out
           / END USER LOGIN DROPDOWN
