@@ -59,3 +59,4 @@ gem "pundit", '~> 1.1.0'
 gem 'active_model_serializers', '~> 0.10.6'
 gem 'dotenv-rails', '~> 2.2.1'
 gem 'rack-cors', :require => 'rack/cors'
+gem "paranoia", "~> 2.2"
