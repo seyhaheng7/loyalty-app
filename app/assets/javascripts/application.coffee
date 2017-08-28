@@ -7,7 +7,7 @@
 #= require util
 #= require initializer
 
-#= require admin/dashboard.min
-#= require admin/app.min
-#= require admin/layout.min
-#= require admin/demo.min
+#= require admin/dashboard
+#= require admin/app
+#= require admin/layout
+#= require admin/demo
