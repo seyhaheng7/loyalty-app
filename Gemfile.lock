@@ -175,6 +175,7 @@ GEM
       ruby_dep (~> 1.2)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
+    lunchy (0.10.4)
     mail (2.6.6)
       mime-types (>= 1.16, < 4)
     method_source (0.8.2)
@@ -343,7 +344,7 @@ DEPENDENCIES
   capistrano-passenger
   capistrano-rails (~> 1.1.1)
   capistrano-rvm
-  capybara (~> 2.13)
+  capybara (~> 2.15)
   carrierwave (~> 1.1.0)
   coffee-rails (~> 4.2)
   database_cleaner (~> 1.6.1)
@@ -358,6 +359,7 @@ DEPENDENCIES
   jquery-rails (~> 4.3.1)
   letter_opener (~> 1.4.1)
   listen (>= 3.0.5, < 3.2)
+  lunchy
   omniauth (~> 1.6.1)
   pg (~> 0.18)
   pry

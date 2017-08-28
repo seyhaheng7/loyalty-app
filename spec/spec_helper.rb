@@ -8,6 +8,9 @@ RSpec.configure do |config|
   config.include RequestSpecHelper, type: :controller
   config.include Warden::Test::Helpers
   Warden.test_mode!
+  config.after :each do
+    Warden.test_reset!
+  end
 
   config.expect_with :rspec do |expectations|
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
