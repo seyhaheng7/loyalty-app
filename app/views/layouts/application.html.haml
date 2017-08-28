@@ -32,6 +32,7 @@
       / BEGIN CONTENT
       .page-content-wrapper
         .page-content
+          = render "partials/flash_message", flash: flash
           = yield
       / BEGIN CONTENT
 

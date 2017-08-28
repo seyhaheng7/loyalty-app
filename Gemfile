@@ -30,8 +30,9 @@ gem 'swagger-docs',       '~> 0.2.9'
 gem 'rubocop', '~> 0.49.1'
 
 group :development, :test do
+  gem 'lunchy'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'capybara', '~> 2.13'
+  gem 'capybara', '~> 2.15'
   gem 'selenium-webdriver'
   gem 'pry'
   gem 'rspec-rails',        '~> 3.5'
