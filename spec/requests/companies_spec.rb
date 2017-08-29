@@ -1,0 +1,10 @@
+xdescribe "Companies" do
+  describe "GET /companies" do
+    let!(:user)    { create(:user) }
+
+    it "works! (now write some real specs)" do
+      get companies_path, user.create_new_auth_token
+      expect(response).to have_http_status(200)
+    end
+  end
+end

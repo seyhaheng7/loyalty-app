@@ -1,0 +1,10 @@
+= link_to company, class: 'btn btn-outline btn-circle dark btn-sm black' do
+  = fa_icon 'eye'
+  Show
+= link_to [:edit, company], class: 'btn btn-outline btn-circle btn-sm purple' do
+  = fa_icon 'pencil'
+  Edit
+= link_to company, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-outline btn-circle red btn-sm blue' do
+  = fa_icon 'trash'
+  Delete
+

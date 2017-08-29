@@ -8,13 +8,12 @@
               Show category
           .actions
             .btn-group.btn-group-devided
-              = link_to categories_path, class: 'btn btn-transparent dark btn-outline btn-circle btn-sm' do
-                Back
               = link_to edit_category_path(@category), class: 'btn btn-transparent dark btn-outline btn-circle btn-sm active' do
                 Edit
+              = link_to categories_path, class: 'btn btn-transparent dark btn-outline btn-circle btn-sm' do
+                Back
               = link_to @category, method: :delete, data: { confirm: 'Are You Sure?' }, class: 'btn btn-transparent dark btn-outline btn-circle btn-sm' do
-                Delete
-              
+                Delete              
         .portlet-body.form
           %dt Name:
           %dd= @category.name
