@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+
   # Include default devise modules.
   acts_as_paranoid
   devise :database_authenticatable, :registerable, :recoverable,
