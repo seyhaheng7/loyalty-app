@@ -11,4 +11,13 @@
   = f.input :name
   = f.input :email
   = f.input :password
+  = f.input :phone
+  = f.input :gender, collection: User::GENDER
+  = f.input :role, collection: User::ROLE
+  = f.input :address
+  = f.input :current_points
+  = f.input :language
+  = f.input :lat
+  = f.input :long
+
   = f.button :submit, class: 'btn btn-primary'

@@ -1,10 +1,4 @@
 class UsersController < ApplicationController
-  def index
-    @grid = UsersGrid.new(params[:users_grid]) do |scope|
-      scope.page(params[:page])
-    end
-  end
-  
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -13,14 +7,14 @@ class UsersController < ApplicationController
       scope.page(params[:page])
     end
   end
-  
+
   def show
   end
 
   def new
     @user = User.new
   end
-  
+
   def edit
   end
 
@@ -40,7 +34,7 @@ class UsersController < ApplicationController
       render :edit
     end
   end
-  
+
   def destroy
      @user.destroy
     redirect_to users_url, notice: 'User was successfully destroyed.'
@@ -54,6 +48,6 @@ class UsersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def user_params
-      params.require(:user).permit(:name, :avatar, :email, :password, :avatar_cache)
+      params.require(:user).permit(:name, :avatar, :email, :password, :phone, :address, :gender, :current_points, :role, :language, :lat, :long ,:avatar_cache)
     end
 end
