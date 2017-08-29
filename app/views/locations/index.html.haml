@@ -1,50 +1,9 @@
+= render 'partials/page-head', title: 'Listing Location'
+= link_to new_location_path, class: 'btn btn-primary' do
+  = fa_icon 'plus'
+  Add New Location
 
-.container
-  .col-lg-12.col-xs-12.col-sm-12
-    .portlet.light.bordered
-      .portlet-title
-        .caption
-          %span.caption-subject.bold.uppercase.font-dark Listing locations
-        .actions
-          = link_to new_location_path, class: 'btn btn-primary' do
-            New Location
-          %a.btn.btn-circle.btn-icon-only.btn-default.fullscreen{"data-original-title" => "", :href => "#", :title => ""}
-      .portlet-body
-        #dashboard_amchart_1.CSSAnimationChart
-          .col-md-12
-            .portlet
-              .portlet-body
-                .table-scrollable.table-responsive
-                  %table.table.table-striped.table-bordered.table-advance.table-hover
-                    %thead
-                      %tr
-                        %th Name
-                        %th Description
-                        %th
-
-                    %tbody
-                      - @locations.each do |location|
-                        %tr
-                          %td
-                            = location.name
-                          %td
-                            = location.description
-                          %td
-                            = link_to location, class: "btn btn-outline btn-circle dark btn-sm black" do
-                              %i.fa.fa-eye
-                              Show
-
-                            = link_to edit_location_path(location), class: "btn btn-outline btn-circle btn-sm purple" do
-                              %i.fa.fa-edit
-                              Edit
-                            = link_to location,class: "btn btn-outline btn-circle red btn-sm blue", data: { confirm: 'Are you sure?' }, method: :delete do
-                              %i.fa.fa-trash-o
-                              Destroy
-
-
-
-
-
-
-
-
+= datagrid_form_for @grid, :method => :get, :url => users_path
+= paginate(@grid.assets)
+= datagrid_table @grid
+= paginate(@grid.assets)

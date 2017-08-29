@@ -3,7 +3,9 @@ class LocationsController < ApplicationController
 
   # GET /locations
   def index
-    @locations = Location.all
+    @grid = LocationsGrid.new(params[:locations_grid]) do |scope|
+      scope.page(params[:page])
+    end
   end
 
   # GET /locations/1

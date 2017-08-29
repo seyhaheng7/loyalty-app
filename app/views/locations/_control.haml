@@ -1,0 +1,12 @@
+= link_to location, class: "btn btn-outline btn-circle dark btn-sm black" do
+  = fa_icon 'eye'
+  Show
+
+= link_to edit_location_path(location), class: "btn btn-outline btn-circle btn-sm purple" do
+  = fa_icon 'edit'
+  Edit
+= link_to location,class: "btn btn-outline btn-circle red btn-sm blue", data: { confirm: 'Are you sure?' }, method: :delete do
+  = fa_icon 'trash'
+  Destroy
+
+
