@@ -13,6 +13,7 @@
 
   %body.page-container-bg-solid.page-header-fixed.page-sidebar-closed-hide-logo{ id: "#{controller_name}_#{params[:action]}" }
 
+
     / BEGIN HEADER
     = render 'partials/topnav'
     = render 'partials/message'
@@ -32,7 +33,6 @@
       / BEGIN CONTENT
       .page-content-wrapper
         .page-content
-          = render "partials/flash_message", flash: flash
           = yield
       / BEGIN CONTENT
 
@@ -54,3 +54,4 @@
 
     = javascript_include_tag 'admin/quick-sidebar.js'
     = javascript_include_tag 'admin/quick-nav.js'
+

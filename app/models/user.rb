@@ -6,7 +6,11 @@ class User < ActiveRecord::Base
           :lockable
 
   # include DeviseTokenAuth::Concerns::User
-
   mount_uploader :avatar, ImageUploader
+
+  GENDER = ['Male', 'Female']
+  ROLE = ['Supper', 'Admin', 'Customer', 'Merchant']
+
+  validates :role, presence: true
 
 end
