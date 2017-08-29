@@ -1,21 +1,15 @@
 @import 'helpers/*';
-@import 'admin/bootstrap.min.css';
-
+@import 'admin/bootstrap.css';
 @import 'font-awesome';
 @import 'admin/simple-line-icons';
-@import 'admin/simple-line-icons.min';
 @import 'admin/morris.css';
-@import 'admin/fullcalendar.min.css';
 @import 'admin/jqvmap.css';
-@import 'admin/components.min.css';
-@import 'admin/plugins.min.css';
-
-@import 'admin/default.min.css';
-@import 'admin/layout.min.css';
+@import 'admin/components.css';
+@import 'admin/plugins.css';
+@import 'admin/default.css';
+@import 'admin/layout.css';
 @import 'admin/login.css';
-@import 'admin/custom.min.css';
-
+@import 'admin/custom.css';
 @import 'common/upload';
 @import 'common/thumbnail';
-
 @import 'devise/sessions/new';
