@@ -1,0 +1,22 @@
+= simple_form_for(@company) do |f|
+  = f.error_notification
+
+  .form-body
+    .form-group
+      = f.input :name
+      = f.input :address
+      = f.input :point_rate
+      .image-uploader{align: 'left'}
+        %a{:href => "#!"}
+          = image_tag f.object.logo, class: 'img-responsive', size: '150x150'
+        = f.input :logo, as: :file, label: 'Upload Logo',
+          :label_html => { class: 'btn btn-default'}
+        = f.hidden_field :logo_cache
+      = f.association :category
+
+      = f.button :submit, class: 'btn btn-primary'
+      .pull-right
+        = link_to companies_path, class: 'btn btn-success' do
+          Back
+        = link_to @company, class: 'btn btn-primary' do
+          Show
