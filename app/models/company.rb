@@ -1,9 +1,10 @@
 class Company < ApplicationRecord
-  acts_as_paranoid
-  
   belongs_to :category
   has_many :stores
 
+  has_many :stores
+  acts_as_paranoid
+  
   validates :name, presence: true
   validates :address, presence: true
 

@@ -59,7 +59,7 @@ feature 'Category' do
     scenario 'Destroy Successfully' do
       visit category_path(category)
       click_link 'Delete'
-      expect(page).to have_content 'Category was successfully destroyed.'
+      expect(page).to have_content 'Category was successfully deleted.'
     end
   end
 end

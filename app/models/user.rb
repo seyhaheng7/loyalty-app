@@ -14,4 +14,6 @@ class User < ActiveRecord::Base
 
   validates :role, presence: true
 
+  has_many :receipts
+
 end

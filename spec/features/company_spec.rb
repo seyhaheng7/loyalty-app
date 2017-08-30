@@ -64,7 +64,7 @@ feature 'Company' do
     scenario 'Destroy Successfully' do
       visit company_path(company)
       click_link 'Delete'
-      expect(page).to have_content 'Company was successfully destroyed.'
+      expect(page).to have_content 'Company was successfully deleted.'
     end
   end
 end

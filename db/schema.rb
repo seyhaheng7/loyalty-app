@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170829084002) do
+ActiveRecord::Schema.define(version: 20170830044716) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,22 @@ ActiveRecord::Schema.define(version: 20170829084002) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "receipts", force: :cascade do |t|
+    t.string "receipt_id"
+    t.float "total"
+    t.string "capture"
+    t.integer "earned_points"
+    t.string "status", default: "submitted"
+    t.bigint "store_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_receipts_on_deleted_at"
+    t.index ["store_id"], name: "index_receipts_on_store_id"
+    t.index ["user_id"], name: "index_receipts_on_user_id"
   end
 
   create_table "stores", force: :cascade do |t|
@@ -100,6 +116,8 @@ ActiveRecord::Schema.define(version: 20170829084002) do
   end
 
   add_foreign_key "companies", "categories"
+  add_foreign_key "receipts", "stores"
+  add_foreign_key "receipts", "users"
   add_foreign_key "stores", "companies"
   add_foreign_key "stores", "locations"
 end
