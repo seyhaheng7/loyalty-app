@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :receipts
   resources :stores
   resources :locations
   resources :companies

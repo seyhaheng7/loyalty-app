@@ -34,7 +34,7 @@ feature "User" do
   scenario "Admin deletes user" do
     visit users_path
     find("a[href='#{user_path(user1)}'][data-method='delete']").click
-    expect(page).to have_content 'User was successfully destroyed.'
+    expect(page).to have_content 'User was successfully deleted.'
   end
 
 end

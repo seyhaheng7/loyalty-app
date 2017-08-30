@@ -3,6 +3,7 @@ class Store < ApplicationRecord
   
   belongs_to :company
   belongs_to :location
+  has_many :receipts
 
   validates :name, presence: true
 
