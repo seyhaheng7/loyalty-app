@@ -22,6 +22,7 @@ module Api::V1
       response :ok, "Success", :User
       response :unauthorized
       response :not_acceptable
+      response :unprocessable_entity
     end
 
     def index
