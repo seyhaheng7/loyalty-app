@@ -1,10 +1,9 @@
 Rails.application.routes.draw do
-  
-  resources :companies
 
+  resources :stores
+  resources :locations
   resources :companies
   resources :categories
-  resources :locations
   resources :users
 
   namespace :api, defaults: { format: :json } do
@@ -18,8 +17,6 @@ Rails.application.routes.draw do
   scope :auth do
     devise_for :users
   end
-
-  resources :users
 
   root 'home#index'
 end

@@ -1,4 +1,5 @@
 @import 'helpers/*';
+
 @import 'admin/bootstrap';
 @import 'font-awesome';
 @import 'admin/simple-line-icons';
@@ -14,4 +15,7 @@
 
 @import 'common/upload';
 @import 'common/thumbnail';
+
 @import 'devise/sessions/new';
+
+@import 'stores/*';
