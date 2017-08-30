@@ -6,24 +6,29 @@ class CompaniesController < ApplicationController
     @grid = CompaniesGrid.new(params[:companies_grid]) do |scope|
       scope.page(params[:page]).without_deleted
     end
+    authorize @grid.assets
   end
 
   # GET /companies/1
   def show
+    authorize @company
   end
 
   # GET /companies/new
   def new
     @company = Company.new
+    authorize @company
   end
 
   # GET /companies/1/edit
   def edit
+    authorize @company
   end
 
   # POST /companies
   def create
     @company = Company.new(company_params)
+    authorize @company
 
     if @company.save
       redirect_to @company, notice: 'Company was successfully created.'
@@ -34,6 +39,8 @@ class CompaniesController < ApplicationController
 
   # PATCH/PUT /companies/1
   def update
+    authorize @company
+
     if @company.update(company_params)
       redirect_to @company, notice: 'Company was successfully updated.'
     else
@@ -43,6 +50,8 @@ class CompaniesController < ApplicationController
 
   # DELETE /companies/1
   def destroy
+    authorize @company
+    
     @company.destroy
     redirect_to companies_url, notice: 'Company was successfully deleted.'
   end

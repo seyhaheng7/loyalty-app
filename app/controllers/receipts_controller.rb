@@ -6,24 +6,29 @@ class ReceiptsController < ApplicationController
     @grid = ReceiptsGrid.new(params[:receipts_grid]) do |scope|
       scope.page(params[:page]).without_deleted
     end
+    authorize @grid.assets
   end
 
   # GET /receipts/1
   def show
+    authorize @receipt
   end
 
   # GET /receipts/new
   def new
     @receipt = Receipt.new
+    authorize @receipt
   end
 
   # GET /receipts/1/edit
   def edit
+    authorize @receipt
   end
 
   # POST /receipts
   def create
     @receipt = Receipt.new(receipt_params)
+    authorize @receipt
 
     if @receipt.save
       redirect_to @receipt, notice: 'Receipt was successfully created.'
@@ -34,6 +39,7 @@ class ReceiptsController < ApplicationController
 
   # PATCH/PUT /receipts/1
   def update
+    authorize @receipt
     if @receipt.update(receipt_params)
       redirect_to @receipt, notice: 'Receipt was successfully updated.'
     else
@@ -43,6 +49,7 @@ class ReceiptsController < ApplicationController
 
   # DELETE /receipts/1
   def destroy
+    authorize @receipt
     @receipt.destroy
     redirect_to receipts_url, notice: 'Receipt was successfully deleted.'
   end
