@@ -18,6 +18,8 @@
 .keep
 /public/uploads/*
 /public/assets/*
+/public/apidocs/api/v1
+/public/apidocs/api-docs.json
 
 /node_modules
 /yarn-error.log
