@@ -1,0 +1,30 @@
+.container
+  .row
+    .col-md-12
+      .portlet.light.bordered
+        .portlet-title
+          .caption
+            %span.caption-subject.font-dark.sbold.uppercase 
+              Show store
+          .actions
+            .btn-group.btn-group-devided
+              = link_to stores_path, class: 'btn btn-transparent dark btn-outline btn-circle btn-sm' do
+                Back
+              = link_to edit_store_path(@store), class: 'btn btn-transparent dark btn-outline btn-circle btn-sm active' do
+                Edit
+              = link_to @store, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-transparent dark btn-outline btn-circle btn-sm' do
+                Delete
+        .portlet-body.form
+          %dt Name:
+          %dd= @store.name
+          %dt Address:
+          %dd= @store.address
+          %dt Company:
+          %dd= @store.company.name
+          %dt Location:
+          %dd= @store.location.name
+
+        %input{type: 'hidden', value: @store.lat, id: 'lat_value'}
+        %input{type: 'hidden', value: @store.long, id: 'long_value'}
+        
+        #show-map

@@ -1,0 +1,22 @@
+= simple_form_for(@store) do |f|
+  = f.error_notification
+
+  .form-body
+    .form-group
+      = f.input :name
+
+      = f.input :lat, as: :hidden, input_html: {id: 'place_latitude'}
+      = f.input :long, as: :hidden, input_html: {id: 'place_longitude'}
+
+      = f.input :address
+      = f.association :company
+      = f.association :location
+
+      #map
+
+      = f.button :submit, class: 'btn btn-primary'
+      .pull-right
+        = link_to stores_path, class: 'btn btn-success' do
+          Back
+        = link_to @store, class: 'btn btn-primary' do
+          Show
