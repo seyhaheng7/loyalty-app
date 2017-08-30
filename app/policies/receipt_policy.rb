@@ -1,0 +1,2 @@
+class ReceiptPolicy < ApplicationPolicy
+end
