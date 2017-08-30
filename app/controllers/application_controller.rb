@@ -11,13 +11,13 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
 
   # trick to make devise token auth work
-  skip_before_action :verify_authenticity_token, if: :devise_controller?
-  skip_before_action :authenticate_user!, if: :devise_controller?
+  skip_before_action :verify_authenticity_token, if: :devise_token_controller?
+  skip_before_action :authenticate_user!, if: :devise_token_controller?
 
   layout :set_layout
   private
 
-  def devise_controller?
+  def devise_token_controller?
     params[:controller].split('/')[0] == 'devise_token_auth'
   end
 

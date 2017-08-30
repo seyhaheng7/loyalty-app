@@ -42,19 +42,6 @@ ActiveRecord::Schema.define(version: 20170829080103) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "stores", force: :cascade do |t|
-    t.string "name"
-    t.float "lat"
-    t.float "long"
-    t.string "address"
-    t.bigint "company_id"
-    t.bigint "location_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["company_id"], name: "index_stores_on_company_id"
-    t.index ["location_id"], name: "index_stores_on_location_id"
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "provider", default: "email", null: false
     t.string "uid", default: "", null: false
@@ -72,7 +59,8 @@ ActiveRecord::Schema.define(version: 20170829080103) do
     t.datetime "confirmation_sent_at"
     t.string "unconfirmed_email"
     t.string "name"
-    t.string "avatar"
+    t.string "nickname"
+    t.string "image"
     t.string "email"
     t.json "tokens"
     t.datetime "created_at", null: false
@@ -98,6 +86,4 @@ ActiveRecord::Schema.define(version: 20170829080103) do
   end
 
   add_foreign_key "companies", "categories"
-  add_foreign_key "stores", "companies"
-  add_foreign_key "stores", "locations"
 end
