@@ -8,7 +8,6 @@ module Api::V1
       summary 'Fetches all categories'
       notes "This lists all the active categories"
       param :query, :page, :integer, :optional, "Page number"
-      param :path, :nested_id, :integer, :optional, "Category Id"
       response :unauthorized
       response :success
       response :not_acceptable, "The request you made is not acceptable"
