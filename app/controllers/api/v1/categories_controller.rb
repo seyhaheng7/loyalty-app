@@ -25,6 +25,7 @@ module Api::V1
       response :unprocessable_entity
     end
 
+
     def index
       @categories = Category.all.page(params[:page])
       render json: @categories, status: :ok

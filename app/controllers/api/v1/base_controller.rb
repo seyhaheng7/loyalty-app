@@ -1,11 +1,12 @@
 module Api::V1
   class BaseController < ActionController::API
-    include Swagger::Docs::ImpotentMethods
+    Swagger::Docs::Generator::set_real_methods
     include DeviseTokenAuth::Concerns::SetUserByToken
     include Pundit
-    
+
     before_action :authenticate_user!
 
+    # user not allow to access
     rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
     def user_not_authorized
@@ -15,7 +16,7 @@ module Api::V1
       expose error
     end
 
-    # swagger doc header request
+    # swagger doc authentication header request
     class << self
       Swagger::Docs::Generator::set_real_methods
 
