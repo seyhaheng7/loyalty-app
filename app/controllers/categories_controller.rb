@@ -6,24 +6,29 @@ class CategoriesController < ApplicationController
     @grid = CategoriesGrid.new(params[:categories_grid]) do |scope|
       scope.page(params[:page])
     end
+    authorize @grid.assets
   end
 
   # GET /categories/1
   def show
+    authorize @category
   end
 
   # GET /categories/new
   def new
     @category = Category.new
+    authorize @category
   end
 
   # GET /categories/1/edit
   def edit
+    authorize @category
   end
 
   # POST /categories
   def create
     @category = Category.new(category_params)
+    authorize @category
 
     if @category.save
       redirect_to @category, notice: 'Category was successfully created.'
@@ -34,6 +39,7 @@ class CategoriesController < ApplicationController
 
   # PATCH/PUT /categories/1
   def update
+    authorize @category
     if @category.update(category_params)
       redirect_to @category, notice: 'Category was successfully updated.'
     else
@@ -43,8 +49,9 @@ class CategoriesController < ApplicationController
 
   # DELETE /categories/1
   def destroy
+    authorize @category
     @category.destroy
-    redirect_to categories_url, notice: 'Category was successfully destroyed.'
+    redirect_to categories_url, notice: 'Category was successfully deleted.'
   end
 
   private

@@ -1,12 +1,4 @@
 GIT
-  remote: https://github.com/anhtrantuan/swagger-docs.git
-  revision: 98d69bfeace76aadd6276a1c0e3190085ab25b32
-  specs:
-    swagger-docs (0.2.8)
-      activesupport (>= 3)
-      rails (>= 3)
-
-GIT
   remote: https://github.com/phatworx/devise_security_extension.git
   revision: b2ee978af7d49f0fb0e7271c6ac074dfb4d39353
   ref: b2ee978af7d49f0fb0e7271c6ac074dfb4d39353
@@ -111,6 +103,8 @@ GEM
       activemodel (>= 4.0.0)
       activesupport (>= 4.0.0)
       mime-types (>= 1.16)
+    carrierwave-base64 (2.3.5)
+      carrierwave (>= 0.8.0)
     case_transform (0.2)
       activesupport
     childprocess (0.7.1)
@@ -331,6 +325,9 @@ GEM
     sshkit (1.14.0)
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
+    swagger-docs (0.2.9)
+      activesupport (>= 3)
+      rails (>= 3)
     thor (0.20.0)
     thread_safe (0.3.6)
     tilt (2.0.8)
@@ -365,6 +362,7 @@ DEPENDENCIES
   capistrano-rvm
   capybara (~> 2.15)
   carrierwave (~> 1.1.0)
+  carrierwave-base64 (~> 2.3.5)
   coffee-rails (~> 4.2)
   database_cleaner (~> 1.6.1)
   datagrid (~> 1.5)
@@ -397,7 +395,7 @@ DEPENDENCIES
   simple_form (= 3.5.0)
   spring
   spring-watcher-listen (~> 2.0.0)
-  swagger-docs!
+  swagger-docs
   tzinfo-data
   uglifier (>= 1.3.0)
   web-console (>= 3.3.0)

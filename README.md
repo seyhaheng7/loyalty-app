@@ -1,9 +1,6 @@
-# Rails Boilerplate
+# Customer Loyalty
 
-Building Status: [![pipeline status](https://gitlab.com/codingategitlab/app-boilerplate/badges/master/pipeline.svg)](https://gitlab.com/codingategitlab/app-boilerplate/commits/master)
+Building Status: [![pipeline status](https://gitlab.com/codingategitlab/app-customer-loyalty/badges/master/pipeline.svg)](https://gitlab.com/codingategitlab/app-customer-loyalty/commits/master)
 
-This Repo is a sample project for Ruby On Rails team. Before start every project we need to clone the existing feature in this project and extend feature.
-
-
-Waring: Please remove unnecessary Gems as the overload gems will slow down the app performance. 
-Note: Review the Wiki for Gem removal
+Customer is loyalty is an app that customer can capture their receipt and summit to admin. After admin approved customer will earned some points.
+Customer can use those points to claim for reward.

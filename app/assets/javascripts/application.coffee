@@ -11,3 +11,6 @@
 #= require admin/app
 #= require admin/layout
 #= require admin/demo
+
+#= require stores/form
+#= require stores/show

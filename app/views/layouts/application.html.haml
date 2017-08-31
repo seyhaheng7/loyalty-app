@@ -2,12 +2,15 @@
 %html
 
   %head
+    %script{:async => "", :defer => "defer", :src => "https://maps.googleapis.com/maps/api/js?key=AIzaSyDuw4koZzF6P6rPoLhGSRaX2iLC3M63kG8"}
+
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}
     %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}
     %meta{:charset => "UTF-8"}
     %meta{:content => "IE=edge", "http-equiv" => "X-UA-Compatible"}/
     %title CodingateProject
     = csrf_meta_tags
+
     = stylesheet_link_tag    'application'
     = javascript_include_tag 'application'
 

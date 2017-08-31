@@ -50,7 +50,7 @@ feature 'Location' do
     scenario 'Destroy Successfully' do
       visit location_path(location)
       click_link 'Delete'
-      expect(page).to have_content 'Location was successfully deleted'
+      expect(page).to have_content 'Location was successfully deleted.'
     end
   end
 end

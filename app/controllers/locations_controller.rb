@@ -6,24 +6,29 @@ class LocationsController < ApplicationController
     @grid = LocationsGrid.new(params[:locations_grid]) do |scope|
       scope.page(params[:page])
     end
+    authorize @grid.assets
   end
 
   # GET /locations/1
   def show
+    authorize @location
   end
 
   # GET /locations/new
   def new
     @location = Location.new
+    authorize @location
   end
 
   # GET /locations/1/edit
   def edit
+    authorize @location
   end
 
   # POST /locations
   def create
     @location = Location.new(location_params)
+    authorize @location
 
     if @location.save
       redirect_to @location, notice: 'Location was successfully created.'
@@ -34,6 +39,7 @@ class LocationsController < ApplicationController
 
   # PATCH/PUT /locations/1
   def update
+    authorize @location
     if @location.update(location_params)
       redirect_to @location, notice: 'Location was successfully updated.'
     else
@@ -43,6 +49,7 @@ class LocationsController < ApplicationController
 
   # DELETE /locations/1
   def destroy
+    authorize @location
     @location.destroy
     redirect_to locations_url, notice: 'Location was successfully deleted.'
   end
