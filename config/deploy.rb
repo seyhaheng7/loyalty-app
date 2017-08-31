@@ -1,8 +1,8 @@
 lock "3.9.0"
 
 
-set :application, 'codingate-app'
-set :repo_url, "git@gitlab.com:codingategitlab/codingate-app.git"
+set :application, 'customer-layalty'
+set :repo_url, "git@gitlab.com:codingategitlab/app-customer-loyalty.git"
 
 ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
