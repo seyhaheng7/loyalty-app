@@ -33,9 +33,10 @@ class UsersController < ApplicationController
       render :edit
     end
   end
+  
 
   def destroy
-     @user.destroy
+    @user.destroy
     redirect_to users_url, notice: 'User was successfully deleted.'
   end
 
