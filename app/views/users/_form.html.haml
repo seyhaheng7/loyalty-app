@@ -1,23 +1,26 @@
-= simple_form_for(@user) do |f|
-  = f.error_notification
-  
-  .image-uploader{align: 'center'}
-    %a{:href => "#!"}
-      = image_tag f.object.avatar, class: 'img-responsive', size: '150x150'
-    = f.input :avatar, as: :file, label: 'Upload Image',
-      :label_html => { class: 'btn btn-default'}
-    = f.hidden_field :avatar_cache
+.row
+  .col-xs-12.col-md-4
+    = simple_form_for(@user) do |f|
+      = f.error_notification
 
-  = f.input :name
-  = f.input :email
-  = f.input :password
-  = f.input :phone
-  = f.input :gender, collection: User::GENDER
-  = f.input :role, collection: User::ROLE
-  = f.input :address
-  = f.input :current_points
-  = f.input :language
-  = f.input :lat
-  = f.input :long
+      .image-uploader{align: 'center'}
+        %a{:href => "#!"}
+          = image_tag f.object.avatar, class: 'img-responsive', size: '150x150'
+        = f.input :avatar, as: :file, label: 'Upload Image',
+          :label_html => { class: 'btn btn-default'}
+        = f.hidden_field :avatar_cache
 
-  = f.button :submit, class: 'btn btn-primary'
+      = f.input :name
+      = f.input :email
+      = f.input :password
+      = f.input :phone
+      = f.input :gender, collection: User::GENDER
+      = f.input :role, collection: User::ROLE
+      = f.input :address
+      = f.input :current_points
+      = f.input :language
+      = f.input :lat
+      = f.input :long
+
+
+      = f.button :submit, class: 'btn btn-primary'

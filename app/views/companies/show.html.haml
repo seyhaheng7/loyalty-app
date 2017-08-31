@@ -1,27 +1,37 @@
-.container
-  .row
-    .col-md-12
-      .portlet.light.bordered
-        .portlet-title
-          .caption
-            %span.caption-subject.font-dark.sbold.uppercase 
-              Show company
-          .actions
-            .btn-group.btn-group-devided
-              = link_to edit_company_path(@company), class: 'btn btn-transparent dark btn-outline btn-circle btn-sm active' do
-                Edit
-              = link_to companies_path, class: 'btn btn-transparent dark btn-outline btn-circle btn-sm' do
-                Back
-              = link_to @company, method: :delete, data: { confirm: 'Are You Sure?' }, class: 'btn btn-transparent dark btn-outline btn-circle btn-sm' do
-                Delete
-        .portlet-body.form
-          %dt Name:
-          %dd= @company.name
-          %dt Address:
-          %dd= @company.address
-          %dt Point rate:
-          %dd= @company.point_rate
-          %dt Logo:
-          %dd= image_tag @company.logo_url, class: 'img-responsive'
-          %dt Category:
-          %dd= @company.category.name
+= render 'partials/page-head', title: 'Show Company'
+.portlet.light.bordered
+  .portlet-title
+    .caption
+      = @company.name
+          
+  .portlet-body
+    %table.table
+      %col{width: '10'}
+      %col{width: '350'}
+      %tr
+        %th Logo:
+        %td= image_tag @company.logo_url, size: '150x150'
+      %tr
+        %th Name:
+        %td= @company.name
+
+      %tr
+        %th Address:
+        %td= @company.address
+      %tr
+        %th Point rate:
+        %td= @company.point_rate
+      %tr
+        %th Category:
+        %td= @company.category.name
+
+    %br
+    = link_to companies_path, class: 'btn btn-default' do
+      = fa_icon 'chevron-left'
+      Back
+    = link_to [:edit, @company], class: 'btn btn-primary' do
+      = fa_icon 'pencil'
+      Edit
+    = link_to @company, method: :delete, data: {confirm: 'Are you sure?'} ,class: 'btn btn-danger' do
+      = fa_icon 'trash'
+      Delete

@@ -7,9 +7,9 @@ class UsersGrid
   end
 
   filter(:name, :string)
+  filter(:role, :string)
   filter(:email, :string)
   filter(:phone, :string)
-  filter(:role, :string)
 
 
   column(:avatar, html: true) do |record|
@@ -18,11 +18,8 @@ class UsersGrid
 
   column(:name)
   column(:role)
-  column(:gender)
   column(:email)
   column(:phone)
-  column(:address)
-  column(:language)
 
   # column(:created_at) do |model|
   #   model.created_at.to_date

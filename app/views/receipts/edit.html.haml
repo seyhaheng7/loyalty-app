@@ -1,10 +1,15 @@
-.container
-  .row
-    .col-md-12
-      .portlet.light.bordered
-        .portlet-title
-          .caption
-            %span.caption-subject.font-dark.sbold.uppercase 
-            Editing receipt
-        .portlet-body.form
-          = render 'form'
+.portlet.light.bordered
+
+  .portlet-title
+    .caption
+      Editing Receipt
+
+  .portlet-body.form
+    = render 'form'
+    %br
+    = link_to receipts_path, class: 'btn btn-default' do
+      = fa_icon 'chevron-left'
+      Back
+    = link_to @receipt, class: 'btn btn-success' do
+      = fa_icon 'eye'
+      Show

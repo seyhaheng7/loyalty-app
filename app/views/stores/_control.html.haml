@@ -1,9 +1,9 @@
-= link_to store, class: 'btn btn-outline btn-circle dark btn-sm black' do
+= link_to store, class: 'btn btn-success' do
   = fa_icon 'eye'
   Show
-= link_to [:edit, store], class: 'btn btn-outline btn-circle btn-sm purple' do
+= link_to [:edit, store], class: 'btn btn-primary' do
   = fa_icon 'pencil'
   Edit
-= link_to store, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-outline btn-circle red btn-sm blue' do
+= link_to store, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-danger' do
   = fa_icon 'trash'
   Delete

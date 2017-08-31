@@ -1,31 +1,42 @@
-.container
-  .row
-    .col-md-12
-      .portlet.light.bordered
-        .portlet-title
-          .caption
-            %span.caption-subject.font-dark.sbold.uppercase 
-              Show receipt
-          .actions
-            .btn-group.btn-group-devided
-              = link_to edit_receipt_path(@receipt), class: 'btn btn-transparent dark btn-outline btn-circle btn-sm active' do
-                Edit
-              = link_to receipts_path, class: 'btn btn-transparent dark btn-outline btn-circle btn-sm' do
-                Back
-              = link_to @receipt, method: :delete, data: { confirm: 'Are You Sure?' }, class: 'btn btn-transparent dark btn-outline btn-circle btn-sm' do
-                Delete
-        .portlet-body.form
-          %dt Receipt:
-          %dd= @receipt.receipt_id
-          %dt Total:
-          %dd= @receipt.total
-          %dt Earned points:
-          %dd= @receipt.earned_points
-          %dt Status:
-          %dd= @receipt.status
-          %dt Store:
-          %dd= @receipt.store.name
-          %dt User:
-          %dd= @receipt.user.name
-          %dt Capture:
-          %dd= image_tag @receipt.capture_url, class: 'img-responsive'
+= render 'partials/page-head', title: 'Show Receipt'
+.portlet.light.bordered
+  .portlet-title
+    .caption
+      = @receipt.receipt_id
+          
+  .portlet-body
+    %table.table
+      %col{width: '10'}
+      %col{width: '350'}
+      %tr
+        %th Capture:
+        %td= image_tag @receipt.capture_url, size: '150x150'
+      %tr
+        %th Receipt ID:
+        %td= @receipt.receipt_id
+      %tr
+        %th Total:
+        %td= @receipt.total
+      %tr
+        %th Earned Points:
+        %td= @receipt.earned_points
+      %tr
+        %th Status:
+        %td= @receipt.status
+      %tr
+        %th Store:
+        %td= @receipt.store.name
+      %tr
+        %th User:
+        %td= @receipt.user.name
+
+    %br
+    = link_to receipts_path, class: 'btn btn-default' do
+      = fa_icon 'chevron-left'
+      Back
+    = link_to [:edit, @receipt], class: 'btn btn-primary' do
+      = fa_icon 'pencil'
+      Edit
+    = link_to @receipt, method: :delete, data: {confirm: 'Are you sure?'} ,class: 'btn btn-danger' do
+      = fa_icon 'trash'
+      Delete

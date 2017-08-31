@@ -1,24 +1,19 @@
-= simple_form_for(@receipt) do |f|
-  = f.error_notification
+.row
+  .col-xs-12.col-md-4
+    = simple_form_for(@receipt) do |f|
+      = f.error_notification
 
-  .form-body
-    .form-group
-      = f.input :receipt_id, label: 'Receipt ID'
-      = f.input :total
-      .image-uploader{align: 'left'}
+      .image-uploader{align: 'center'}
         %a{:href => "#!"}
           = image_tag f.object.capture, class: 'img-responsive', size: '150x150'
         = f.input :capture, as: :file, label: 'Upload Image',
           :label_html => { class: 'btn btn-default'}
         = f.hidden_field :capture_cache
-      
+
+      = f.input :receipt_id, label: 'Receipt ID'
+      = f.input :total
       = f.input :earned_points
       = f.association :store
       = f.association :user
 
       = f.button :submit, class: 'btn btn-primary'
-      .pull-right
-        = link_to receipts_path, class: 'btn btn-success' do
-          Back
-        = link_to @receipt, class: 'btn btn-primary' do
-          Show
