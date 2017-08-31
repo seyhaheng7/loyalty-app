@@ -148,9 +148,13 @@
 
             %ul.dropdown-menu.dropdown-menu-default
               %li
-                %a{:href => "page_user_profile_1.html"}
+                = link_to edit_user_path(current_user) do
                   %i.icon-user
                   My Profile
+              %li
+                = link_to edit_user_registration_path do
+                  %i.icon-key
+                  Change Password
               %li
                 %a{:href => "app_calendar.html"}
                   %i.icon-calendar
