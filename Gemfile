@@ -63,3 +63,4 @@ gem 'dotenv-rails', '~> 2.2.1'
 gem 'rack-cors', :require => 'rack/cors'
 gem 'kaminari'
 gem "paranoia", "~> 2.2"
+gem 'carrierwave-base64', "~> 2.3.5"
