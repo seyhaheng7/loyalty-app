@@ -1,19 +1,15 @@
-= simple_form_for(@category) do |f|
-  = f.error_notification
+.row
+  .col-xs-12.col-md-4
+    = simple_form_for(@category) do |f|
+      = f.error_notification
 
-  .form-body
-    .form-group
-      = f.input :name
-      .image-uploader{align: 'left'}
+      .image-uploader{align: 'center'}
         %a{:href => "#!"}
           = image_tag f.object.icon, class: 'img-responsive', size: '150x150'
         = f.input :icon, as: :file, label: 'Upload Icon',
           :label_html => { class: 'btn btn-default'}
         = f.hidden_field :icon_cache
 
+      = f.input :name
+
       = f.button :submit, class: 'btn btn-primary'
-      .pull-right
-        = link_to categories_path, class: 'btn btn-success' do
-          Back
-        = link_to @category, class: 'btn btn-primary' do
-          Show

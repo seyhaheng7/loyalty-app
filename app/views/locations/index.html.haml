@@ -1,9 +1,20 @@
-= render 'partials/page-head', title: 'Listing Location'
-= link_to new_location_path, class: 'btn btn-primary' do
-  = fa_icon 'plus'
-  Add New Location
+= render 'partials/page-head', title: 'Listing Locations'
 
-= datagrid_form_for @grid, :method => :get, :url => users_path
-= paginate(@grid.assets)
-= datagrid_table @grid
-= paginate(@grid.assets)
+%br
+
+.m-heading-1.border-green.m-bordered
+  = datagrid_form_for @grid, :method => :get, :url => users_path
+
+.portlet.light.bordered
+  .portlet-title
+    .caption
+      %i.icon-map
+      Locations
+  .portlet-body
+    = link_to new_location_path, class: 'btn btn-primary' do
+      = fa_icon 'plus'
+      Add New Location
+    .table-scrollable
+      = paginate(@grid.assets)
+      = datagrid_table @grid
+      = paginate(@grid.assets)

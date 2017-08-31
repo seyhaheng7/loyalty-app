@@ -1,35 +1,46 @@
-.row
-  .col-xs-12.col-md-4
-    .profile-sidebar
-      .portlet.light.profile-sidebar-portlet.bordered
+= render 'partials/page-head', title: 'Show User'
+.portlet.light.bordered
+  .portlet-title
+    .caption
+      = @user.name
+          
+  .portlet-body
+    %table.table
+      %col{width: '10'}
+      %col{width: '350'}
+      %tr
+        %th Avatar
+        %td= image_tag @user.avatar_url, size: '150x150'
+      %tr
+        %th Name
+        %td= @user.name
+      %tr
+        %th Email
+        %td= @user.email
+      %tr
+        %th Phone
+        %td= @user.phone
+      %tr
+        %th Gender
+        %td= @user.gender
+      %tr
+        %th Address
+        %td= @user.address
+      %tr
+        %th Role
+        %td= @user.role
+      %tr
+        %th Current Points
+        %td= @user.current_points
 
-        .profile-userpic
-          = image_tag @user.avatar_url, class: 'img-responsive'
+    %br
+    = link_to users_path, class: 'btn btn-default' do
+      = fa_icon 'chevron-left'
+      Back
+    = link_to [:edit, @user], class: 'btn btn-primary' do
+      = fa_icon 'pencil'
+      Edit
+    = link_to @user, method: :delete, data: {confirm: 'Are you sure?'} ,class: 'btn btn-danger' do
+      = fa_icon 'trash'
+      Delete
 
-        .profile-usertitle
-          %br
-          %table.table
-            %tr
-              %th Name
-              %td= @user.name
-            %tr
-              %th Email
-              %td= @user.email
-            %tr
-              %th Phone
-              %td= @user.phone
-            %tr
-              %th Gender
-              %td= @user.gender
-            %tr
-              %th Address
-              %td= @user.address
-            %tr
-              %th Role
-              %td= @user.role
-            %tr
-              %th Current Points
-              %td= @user.current_points
-        .profile-userbuttons
-          = link_to 'Edit', edit_user_path(@user), class: 'btn btn-circle green btn-sm'
-          = link_to 'Back', { action: :index }, class: 'btn btn-circle red btn-sm'

@@ -9,7 +9,6 @@ Codingate.StoresShow =
     latValue = $('#lat_value').val()
     longValue = $('#long_value').val()
 
-    alert longValue
     lat_lng = new (google.maps.LatLng)(latValue, longValue)
 
     map = new (google.maps.Map)(mapElement,

@@ -1,8 +1,8 @@
-= simple_form_for(@store) do |f|
-  = f.error_notification
+.row
+  .col-xs-12.col-md-4
+    = simple_form_for(@store) do |f|
+      = f.error_notification
 
-  .form-body
-    .form-group
       = f.input :name
 
       = f.input :lat, as: :hidden, input_html: {id: 'place_latitude'}
@@ -12,11 +12,4 @@
       = f.association :company
       = f.association :location
 
-      #map
-
       = f.button :submit, class: 'btn btn-primary'
-      .pull-right
-        = link_to stores_path, class: 'btn btn-success' do
-          Back
-        = link_to @store, class: 'btn btn-primary' do
-          Show

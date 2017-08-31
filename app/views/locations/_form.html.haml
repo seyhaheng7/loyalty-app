@@ -1,14 +1,9 @@
-= simple_form_for(@location) do |f|
-  = f.error_notification
+.row
+  .col-xs-12.col-md-4
+    = simple_form_for(@location) do |f|
+      = f.error_notification
 
-  .form-body
-    .form-group
       = f.input :name
       = f.input :description
 
-      = f.button :submit
-      .pull-right
-        = link_to locations_path, class: 'btn btn-success' do
-          Back
-        = link_to @location, class: 'btn btn-primary' do
-          Show
+      = f.button :submit, class: 'btn btn-primary'

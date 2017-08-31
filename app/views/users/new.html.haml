@@ -1,11 +1,12 @@
-= render 'partials/page-head', title: 'Creating User'
-.row
-  .col-xs-12.col-md-5
-    .thumbnail
-      .caption
-        %h3 New User
-        %hr
-        = render 'form'
-        %hr
-        %p
-          = link_to 'Back', { action: :index }, class: 'btn btn-default'
+.portlet.light.bordered
+
+  .portlet-title
+    .caption
+      New User
+
+  .portlet-body.form
+    = render 'form'
+    %br
+    = link_to users_path, class: 'btn btn-default' do
+      = fa_icon 'chevron-left'
+      Back
