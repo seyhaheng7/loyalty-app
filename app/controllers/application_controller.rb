@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
   private
 
   def devise_token_controller?
-    params[:controller].split('/')[0] == 'devise_token_auth'
+    params[:controller].include? 'devise_token_auth'
   end
 
   def set_layout
@@ -26,6 +26,8 @@ class ApplicationController < ActionController::Base
   end
 
   protected
+
+  before_action :configure_permitted_parameters, if: :devise_controller?
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:email, :phone, :registration ])

@@ -45,7 +45,7 @@
               "message": "Not Acceptable"
             }
           ],
-          "nickname": "DeviseTokenAuth::Registrations#create",
+          "nickname": "Overrides::DeviseTokenAuth::Registrations#create",
           "method": "post"
         }
       ]
