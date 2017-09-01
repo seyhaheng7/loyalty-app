@@ -16,7 +16,7 @@ class Receipt < ApplicationRecord
   end
 
   acts_as_paranoid
-  
+
   belongs_to :store
   belongs_to :user
 
@@ -25,9 +25,9 @@ class Receipt < ApplicationRecord
   validates :receipt_id, presence: true
   validates :total, presence: true
   validates :capture, presence: true
-  validates :receipt_id, :uniqueness => {:scope => :store_id, message: "Receipt is already submitted"} 
+  validates :receipt_id, :uniqueness => {:scope => :store_id, message: "Receipt is already submitted"}
 
-  private 
+  private
 
   def add_points_to_user
     user.add_points earned_points.to_i

@@ -38,7 +38,7 @@
               "message": "Not Acceptable"
             }
           ],
-          "nickname": "DeviseTokenAuth::Sessions#create",
+          "nickname": "Overrides::DeviseTokenAuth::Sessions#create",
           "method": "post"
         }
       ]
@@ -89,7 +89,7 @@
               "message": "Not Acceptable"
             }
           ],
-          "nickname": "DeviseTokenAuth::Sessions#destroy",
+          "nickname": "Overrides::DeviseTokenAuth::Sessions#destroy",
           "method": "delete"
         }
       ]
