@@ -1,6 +1,9 @@
 module Api::V1
   class BaseController < ActionController::API
+    # set up swagger docs
+    include Swagger::Docs::ImpotentMethods
     Swagger::Docs::Generator::set_real_methods
+
     include DeviseTokenAuth::Concerns::SetUserByToken
     include Pundit
 

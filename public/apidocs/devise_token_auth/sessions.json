@@ -9,7 +9,7 @@
       "operations": [
         {
           "summary": "Login a User",
-          "notes": "use information of User Registration by filling the form",
+          "notes": "user login with email and password",
           "parameters": [
             {
               "paramType": "form",
@@ -48,7 +48,7 @@
       "operations": [
         {
           "summary": "Destroy user session",
-          "notes": "destroy User Session by filling the form",
+          "notes": "user sign out",
           "parameters": [
             {
               "paramType": "form",
