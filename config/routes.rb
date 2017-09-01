@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
 
-  resources :receipts
+  resources :receipts do 
+    member do
+      patch :reject
+      patch :approve
+    end
+  end
+
   resources :stores
   resources :locations
   resources :companies

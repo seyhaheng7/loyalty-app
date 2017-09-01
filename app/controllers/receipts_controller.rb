@@ -1,5 +1,5 @@
 class ReceiptsController < ApplicationController
-  before_action :set_receipt, only: [:show, :edit, :update, :destroy]
+  before_action :set_receipt, only: [:show, :edit, :update, :destroy, :approve, :reject]
 
   # GET /receipts
   def index
@@ -52,6 +52,28 @@ class ReceiptsController < ApplicationController
     authorize @receipt
     @receipt.destroy
     redirect_to receipts_url, notice: 'Receipt was successfully deleted.'
+  end
+
+  # APPROVE /receipts/1
+  def approve
+    authorize @receipt
+
+    if @receipt.update(receipt_params)
+
+      @receipt.approving!
+
+      redirect_to @receipt, notice: 'Receipt was successfully approved.'
+    else
+      redirect_to @receipt, notice: 'Receipt was unsuccessfully approved.'
+    end
+  end
+
+  # REJECT /receipts/1
+  def reject
+    authorize @receipt
+
+    @receipt.rejecting!
+    redirect_to @receipt, notice: 'Receipt was successfully rejected.'
   end
 
   private

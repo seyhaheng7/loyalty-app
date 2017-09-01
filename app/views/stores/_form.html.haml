@@ -1,5 +1,5 @@
 .row
-  .col-xs-12.col-md-4
+  .col-xs-12.col-md-12
     = simple_form_for(@store) do |f|
       = f.error_notification
 
@@ -11,5 +11,7 @@
       = f.input :address
       = f.association :company
       = f.association :location
+
+      #map
 
       = f.button :submit, class: 'btn btn-primary'

@@ -1,5 +1,6 @@
 require 'devise'
 require 'rails_helper'
+require 'aasm/rspec'
 
 Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
