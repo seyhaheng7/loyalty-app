@@ -24,6 +24,9 @@
       %tr
         %th Category:
         %td= @company.category.name
+      %tr
+        %th Partner:
+        %td= @company.partner
 
     %br
     = link_to companies_path, class: 'btn btn-default' do
