@@ -10,4 +10,7 @@ class Company < ApplicationRecord
 
   mount_uploader :logo, LogoUploader
 
+  scope :partners, -> { where(partner: true) }
+  scope :in_category, ->(category_id){ where(category_id: category_id) }
+
 end
