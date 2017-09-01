@@ -5,5 +5,6 @@ FactoryGirl.define do
     point_rate 1
     logo "MyString"
     association :category
+    partner true
   end
 end

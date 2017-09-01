@@ -8,6 +8,10 @@ module Api::V1
       summary 'Fetches all stores'
       notes "This lists all the active stores"
       param :query, :page, :integer, :optional, "Page number"
+      param :query, :lat, :float, :optional
+      param :query, :long, :float, :optional
+      param :query, :category_id, :integer, :optional
+      param :query, :only_partners, :boolean, :optional, '[true, false]'
       response :unauthorized
       response :success
       response :not_acceptable, "The request you made is not acceptable"
@@ -25,7 +29,7 @@ module Api::V1
     end
 
     def index
-      @stores = Store.all.page(params[:page])
+      @stores = Store.filter(params).page(params[:page])
       render json: @stores, status: :ok
     end
 

@@ -6,5 +6,25 @@ class Store < ApplicationRecord
   has_many :receipts
 
   validates :name, presence: true
+  
+  reverse_geocoded_by :lat, :long
+  
+  def self.filter(params)
 
+    records = all
+    
+    if params[:lat].present? && params[:long].present?
+      records = records.near([params[:lat], params[:long]], 5, units: :km)
+    end
+
+    if params[:category_id]
+      records = records.joins(:company).merge(Company.in_category(params[:category_id]))
+    end
+
+    if params[:only_partners] == 'true'
+      records = records.joins(:company).merge(Company.partners)
+    end
+    records
+  
+  end
 end
