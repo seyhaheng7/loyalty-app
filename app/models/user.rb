@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   mount_uploader :avatar, ImageUploader
 
   GENDER = ['Male', 'Female']
-  ROLE = ['Supper', 'Admin', 'Customer', 'Merchant']
+  ROLE = ['Super', 'Admin', 'Customer', 'Merchant']
 
   ROLE.each do |role_name|
     scope role_name.downcase, -> { where(role: role_name) }
@@ -23,4 +23,8 @@ class User < ActiveRecord::Base
 
   has_many :receipts
 
+  def add_points(points)
+    self.current_points = current_points.to_i + points.to_i
+    self.save
+  end
 end

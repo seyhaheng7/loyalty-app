@@ -30,6 +30,17 @@
         %th User:
         %td= @receipt.user.name
 
+    - if policy(@receipt).approve?
+      = simple_form_for @receipt, :url => approve_receipt_path do |f|
+        = f.input :earned_points, label: 'Add more points?', input_html: {value: '0'}
+        = f.submit 'Approve', class: 'btn btn-success'
+      %br
+
+    - if policy(@receipt).reject?
+      = link_to reject_receipt_path(@receipt.id), method: :patch, class: 'btn btn-danger' do
+        Reject
+    %hr
+
     %br
     = link_to receipts_path, class: 'btn btn-default' do
       = fa_icon 'chevron-left'

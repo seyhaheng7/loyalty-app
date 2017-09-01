@@ -77,7 +77,7 @@ describe 'stores' do
       get api_v1_stores_path(only_partners: true), headers: user.create_new_auth_token
     end
 
-    it "should return store that have company parter true" do
+    it "should return store that have company partner true" do
       json = JSON.parse(response.body)
       ids = json.map{ |j| j['id'] }
       expect(ids).to include store2.id
