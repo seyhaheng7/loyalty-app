@@ -7,6 +7,7 @@
   .portlet-body.form
     = render 'form'
     %br
-    = link_to stores_path, class: 'btn btn-default' do
-      = fa_icon 'chevron-left'
-      Back
+    -if policy(@store).index?
+      = link_to stores_path, class: 'btn btn-default' do
+        = fa_icon 'chevron-left'
+        Back

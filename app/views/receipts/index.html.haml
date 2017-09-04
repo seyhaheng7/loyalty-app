@@ -11,9 +11,10 @@
       %i.icon-doc
       Receipt
   .portlet-body
-    = link_to new_receipt_path, class: 'btn btn-primary' do
-      = fa_icon 'plus'
-      Add New Receipt
+    -if policy(@grid.assets).new?
+      = link_to new_receipt_path, class: 'btn btn-primary' do
+        = fa_icon 'plus'
+        Add New Receipt
     .table-scrollable
       = paginate(@grid.assets)
       = datagrid_table @grid

@@ -11,9 +11,10 @@
       %i.icon-pie-chart
       Categories
   .portlet-body
-    = link_to new_category_path, class: 'btn btn-primary' do
-      = fa_icon 'plus'
-      Add New Category
+    -if policy(@grid.assets).new?
+      = link_to new_category_path, class: 'btn btn-primary' do
+        = fa_icon 'plus'
+        Add New Category
     .table-scrollable
       = paginate(@grid.assets)
       = datagrid_table @grid

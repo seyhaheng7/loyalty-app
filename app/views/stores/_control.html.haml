@@ -1,9 +1,12 @@
-= link_to store, class: 'btn btn-success' do
-  = fa_icon 'eye'
-  Show
-= link_to [:edit, store], class: 'btn btn-primary' do
-  = fa_icon 'pencil'
-  Edit
-= link_to store, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-danger' do
-  = fa_icon 'trash'
-  Delete
+-if policy(store).show?
+  = link_to store, class: 'btn btn-success' do
+    = fa_icon 'eye'
+    Show
+-if policy(store).edit?
+  = link_to [:edit, store], class: 'btn btn-primary' do
+    = fa_icon 'pencil'
+    Edit
+-if policy(store).destroy?
+  = link_to store, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-danger' do
+    = fa_icon 'trash'
+    Delete

@@ -7,9 +7,11 @@
   .portlet-body.form
     = render 'form'
     %br
-    = link_to companies_path, class: 'btn btn-default' do
-      = fa_icon 'chevron-left'
-      Back
-    = link_to @company, class: 'btn btn-success' do
-      = fa_icon 'eye'
-      Show
+    -if policy(@company).index?
+      = link_to companies_path, class: 'btn btn-default' do
+        = fa_icon 'chevron-left'
+        Back
+    -if policy(@company).show?
+      = link_to @company, class: 'btn btn-success' do
+        = fa_icon 'eye'
+        Show

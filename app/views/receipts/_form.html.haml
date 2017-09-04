@@ -16,4 +16,5 @@
       = f.association :store
       = f.association :user
 
-      = f.button :submit, class: 'btn btn-primary'
+      -if policy(@receipt).create? || policy(@receipt).update?
+        = f.button :submit, class: 'btn btn-primary'

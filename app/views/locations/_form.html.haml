@@ -6,4 +6,5 @@
       = f.input :name
       = f.input :description
 
-      = f.button :submit, class: 'btn btn-primary'
+      -if policy(@location).create? || policy(@location).update?
+        = f.button :submit, class: 'btn btn-primary'
