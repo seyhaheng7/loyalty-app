@@ -1,0 +1,39 @@
+= render 'partials/page-head', title: 'Show Receipt'
+
+.portlet.light.bordered
+  .portlet-title
+    .caption
+
+
+
+
+  .portlet-body
+    %table.table
+      %col{width: '10'}
+      %col{width: '350'}
+      %tr
+        %th Image:
+        %td= image_tag @reward.image_url, size: '150x150'
+      %tr
+        %th Name:
+        %td= @reward.name
+      %tr
+        %th Require Point:
+        %td= @reward.require_points
+      %tr
+        %th Quantity:
+        %td= @reward.quantity
+      %tr
+        %th Company:
+        %td= @reward.company
+
+    %br
+    = link_to rewards_path, class: 'btn btn-default' do
+      = fa_icon 'chevron-left'
+      Back
+    = link_to [:edit, @reward], class: 'btn btn-primary' do
+      = fa_icon 'pencil'
+      Edit
+    = link_to @reward, method: :delete, data: {confirm: 'Are you sure?'} ,class: 'btn btn-danger' do
+      = fa_icon 'trash'
+      Delete
