@@ -29,5 +29,7 @@ module CodingateProject
     config.assets.enabled = true
     config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
     config.assets.precompile += %w( .svg .eot .woff .ttf)
+    config.active_record.default_timezone = :local
+    config.time_zone = 'Bangkok'
   end
 end
