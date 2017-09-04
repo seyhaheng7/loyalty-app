@@ -13,5 +13,6 @@
       = f.association :location
 
       #map
-
-      = f.button :submit, class: 'btn btn-primary'
+      
+      -if policy(@store).create? || policy(@store).update?
+        = f.button :submit, class: 'btn btn-primary'

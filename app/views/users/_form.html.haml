@@ -22,5 +22,5 @@
       = f.input :lat
       = f.input :long
 
-
-      = f.button :submit, class: 'btn btn-primary'
+      -if policy(@user).create? || policy(@user).update?
+        = f.button :submit, class: 'btn btn-primary'

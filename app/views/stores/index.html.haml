@@ -11,9 +11,10 @@
       %i.icon-basket
       Stores
   .portlet-body
-    = link_to new_store_path, class: 'btn btn-primary' do
-      = fa_icon 'plus'
-      Add New Store
+    -if policy(@grid.assets).new?
+      = link_to new_store_path, class: 'btn btn-primary' do
+        = fa_icon 'plus'
+        Add New Store
     .table-scrollable
       = paginate(@grid.assets)
       = datagrid_table @grid
