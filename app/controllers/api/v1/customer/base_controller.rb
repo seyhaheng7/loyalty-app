@@ -1,4 +1,4 @@
-module Api::V1
+module Api::V1::Customer
   class BaseController < ActionController::API
     # set up swagger docs
     include Swagger::Docs::ImpotentMethods

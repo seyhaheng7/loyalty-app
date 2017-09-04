@@ -3,10 +3,10 @@ describe 'Receipts' do
   let!(:receipts){ create_list(:receipt, 10) }
   let!(:receipt){ create(:receipt) }
 
-  describe 'GET  api/v1/receipts' do
+  describe 'GET  api/v1/customer/receipts' do
 
     before do
-      get api_v1_receipts_path, headers: user.create_new_auth_token
+      get api_v1_customer_receipts_path, headers: user.create_new_auth_token
     end
 
     it 'return status successful' do
@@ -26,9 +26,9 @@ describe 'Receipts' do
 
   end
 
-  describe 'GET api/v1/receipts/:id' do
+  describe 'GET api/v1/customer/receipts/:id' do
     before do
-      get api_v1_receipt_path(receipt), headers: user.create_new_auth_token
+      get api_v1_customer_receipt_path(receipt), headers: user.create_new_auth_token
     end
 
     it 'return status successful' do
@@ -42,7 +42,7 @@ describe 'Receipts' do
     end
   end
 
-  describe 'POST api/v1/receipts' do
+  describe 'POST api/v1/customer/receipts' do
 
     let!(:store){  create(:store) }
     let!(:capture) { "data:image/png;base64,#{Base64.encode64(open('spec/support/default.png').read)}" }
@@ -54,16 +54,16 @@ describe 'Receipts' do
     end
 
     it 'return status successful' do
-      post api_v1_receipts_path, headers: user.create_new_auth_token, params: { receipt: params1 } 
+      post api_v1_customer_receipts_path, headers: user.create_new_auth_token, params: { receipt: params1 }
       expect(response).to have_http_status(201)
     end
 
     it 'errors when have duplicate receipts' do
-      post api_v1_receipts_path, headers: user.create_new_auth_token, params: { receipt: params2 } 
+      post api_v1_customer_receipts_path, headers: user.create_new_auth_token, params: { receipt: params2 }
       json = JSON.parse(response.body)
-      expect(response).to have_http_status(422)    
+      expect(response).to have_http_status(422)
       expect(json["errors"]["receipt_id"]).to include 'Receipt is already submitted'
     end
-    
+
   end
 end

@@ -1,4 +1,4 @@
-module Api::V1
+module Api::V1::Customer
   class UsersController < BaseController
     before_action :set_user, only: [:show, :update, :destroy]
 
@@ -35,7 +35,7 @@ module Api::V1
     swagger_api :create do |api|
       summary 'create a user'
       notes 'make sure you pass parameters in user'
-      Api::V1::UsersController::add_common_params(api)
+      Api::V1::Customer::UsersController::add_common_params(api)
       response :ok
       response :unprocessable_entity
     end
@@ -53,7 +53,7 @@ module Api::V1
       summary 'update user'
       notes 'make sure you pass parameters in users'
       param :path,  :id, :integer, :required, 'ID of User'
-      Api::V1::UsersController::add_common_params(api)
+      Api::V1::Customer::UsersController::add_common_params(api)
       response :ok
       response :unprocessable_entity
       response :not_found

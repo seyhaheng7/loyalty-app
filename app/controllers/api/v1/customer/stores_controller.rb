@@ -1,4 +1,4 @@
-module Api::V1
+module Api::V1::Customer
   class StoresController < BaseController
     before_action :set_store, only: [:show, :update, :destroy]
 
