@@ -29,6 +29,8 @@ gem 'swagger-docs'
 gem 'rubocop', '~> 0.49.1'
 gem 'brakeman', '>= 3.7.2'
 gem 'datagrid', '~> 1.5'
+gem 'nexmo', '~> 4.7.0'
+gem 'sidekiq', '~> 5.0.4'
 
 group :development, :test do
   gem 'lunchy'
