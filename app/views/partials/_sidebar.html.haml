@@ -9,33 +9,45 @@
           %i.icon-bar-chart
           %span.title Dashboard
 
-      -if current_user.admin? || current_user.supper?
-        %li.nav-item
-          = link_to users_url do
-            %i.icon-user
-            %span.title Users
-        %li.nav-item
-          = link_to categories_url do
-            %i.icon-pie-chart
-            %span.title Categories
-        %li.nav-item
-          = link_to companies_url do
-            %i.icon-home
-            %span.title Companies
-        %li.nav-item
-          = link_to locations_url do
-            %i.icon-map
-            %span.title Locations
-        %li.nav-item
-          = link_to stores_url do
-            %i.icon-basket
-            %span.title Stores
-        %li.nav-item
-          = link_to receipts_url do
-            %i.icon-doc
-            %span.title Receipts
-        %li.nav-item
-          = link_to rewards_url do
-            %i.icon-doc
-            %span.title Rewards
-      / END SIDEBAR MENU
+        - if policy(:user).index?
+          %li.nav-item
+            = link_to users_url do
+              %i.icon-user
+              %span.title Users
+
+        - if policy(:category).index?
+          %li.nav-item
+            = link_to categories_url do
+              %i.icon-pie-chart
+              %span.title Categories
+
+        - if policy(:company).index?
+          %li.nav-item
+            = link_to companies_url do
+              %i.icon-home
+              %span.title Companies
+
+        - if policy(:location).index?
+          %li.nav-item
+            = link_to locations_url do
+              %i.icon-map
+              %span.title Locations
+
+        - if policy(:store).index?
+          %li.nav-item
+            = link_to stores_url do
+              %i.icon-basket 
+              %span.title Stores
+              
+        - if policy(:receipt).index?
+          %li.nav-item
+            = link_to receipts_url do
+              %i.icon-doc
+              %span.title Receipts
+
+        - if policy(:reward).index?
+          %li.nav-item
+            = link_to rewards_url do
+              %i.icon-doc
+              %span.title Rewards
+/ END SIDEBAR MENU
