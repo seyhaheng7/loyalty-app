@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170901033957) do
+ActiveRecord::Schema.define(version: 20170904015620) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,16 @@ ActiveRecord::Schema.define(version: 20170901033957) do
     t.string "icon"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "claimed_rewards", force: :cascade do |t|
+    t.string "status", default: "submitted"
+    t.bigint "user_id"
+    t.bigint "reward_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["reward_id"], name: "index_claimed_rewards_on_reward_id"
+    t.index ["user_id"], name: "index_claimed_rewards_on_user_id"
   end
 
   create_table "companies", force: :cascade do |t|
@@ -128,6 +138,8 @@ ActiveRecord::Schema.define(version: 20170901033957) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
+  add_foreign_key "claimed_rewards", "rewards"
+  add_foreign_key "claimed_rewards", "users"
   add_foreign_key "companies", "categories"
   add_foreign_key "receipts", "stores"
   add_foreign_key "receipts", "users"
