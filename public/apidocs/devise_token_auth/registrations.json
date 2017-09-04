@@ -8,6 +8,121 @@
       "path": "/api/v1/auth",
       "operations": [
         {
+          "summary": "edit User Profile",
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "access-token",
+              "type": "string",
+              "description": "Authentication token",
+              "required": true
+            },
+            {
+              "paramType": "header",
+              "name": "token-type",
+              "type": "string",
+              "description": "Bearer",
+              "required": true
+            },
+            {
+              "paramType": "header",
+              "name": "client",
+              "type": "string",
+              "description": "Simultaneous sessions on different clients",
+              "required": true
+            },
+            {
+              "paramType": "header",
+              "name": "expiry",
+              "type": "string",
+              "description": "The date at which the current session will expire",
+              "required": true
+            },
+            {
+              "paramType": "header",
+              "name": "uid",
+              "type": "string",
+              "description": "A unique value that is used to identify the user",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "name",
+              "type": "string",
+              "description": "Name",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "gender",
+              "type": "string",
+              "description": "Gender",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "avatar",
+              "type": "string",
+              "description": "Avatar",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "phone",
+              "type": "string",
+              "description": "Phone",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "address",
+              "type": "string",
+              "description": "Address",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "lat",
+              "type": "float",
+              "description": "Lat",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "long",
+              "type": "float",
+              "description": "Long",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "email",
+              "type": "string",
+              "description": "Email",
+              "required": false
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 200,
+              "responseModel": "User",
+              "message": "Success"
+            },
+            {
+              "code": 406,
+              "responseModel": null,
+              "message": "Not Acceptable"
+            }
+          ],
+          "nickname": "DeviseTokenAuth::Registrations#update",
+          "method": "patch"
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/auth",
+      "operations": [
+        {
           "summary": "Register a new User",
           "notes": "user register by email and password",
           "parameters": [
