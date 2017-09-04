@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :rewards
   resources :receipts do
     member do
       patch :reject

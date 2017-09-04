@@ -59,6 +59,17 @@ ActiveRecord::Schema.define(version: 20170901033957) do
     t.index ["user_id"], name: "index_receipts_on_user_id"
   end
 
+  create_table "rewards", force: :cascade do |t|
+    t.string "name"
+    t.string "image"
+    t.integer "require_points"
+    t.integer "quantity", default: 0
+    t.bigint "company_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_rewards_on_company_id"
+  end
+
   create_table "stores", force: :cascade do |t|
     t.string "name"
     t.float "lat"
@@ -91,8 +102,7 @@ ActiveRecord::Schema.define(version: 20170901033957) do
     t.datetime "confirmation_sent_at"
     t.string "unconfirmed_email"
     t.string "name"
-    t.string "nickname"
-    t.string "image"
+    t.string "avatar"
     t.string "email"
     t.json "tokens"
     t.datetime "created_at", null: false
@@ -109,6 +119,7 @@ ActiveRecord::Schema.define(version: 20170901033957) do
     t.string "language"
     t.float "lat"
     t.float "long"
+    t.string "phone_number"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["deleted_at"], name: "index_users_on_deleted_at"
     t.index ["email"], name: "index_users_on_email", unique: true
@@ -120,6 +131,7 @@ ActiveRecord::Schema.define(version: 20170901033957) do
   add_foreign_key "companies", "categories"
   add_foreign_key "receipts", "stores"
   add_foreign_key "receipts", "users"
+  add_foreign_key "rewards", "companies"
   add_foreign_key "stores", "companies"
   add_foreign_key "stores", "locations"
 end

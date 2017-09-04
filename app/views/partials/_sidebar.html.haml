@@ -8,6 +8,7 @@
         = link_to root_path do
           %i.icon-bar-chart
           %span.title Dashboard
+
       -if current_user.admin? || current_user.supper?
         %li.nav-item
           = link_to users_url do
@@ -27,10 +28,14 @@
             %span.title Locations
         %li.nav-item
           = link_to stores_url do
-            %i.icon-basket 
+            %i.icon-basket
             %span.title Stores
         %li.nav-item
           = link_to receipts_url do
             %i.icon-doc
             %span.title Receipts
+        %li.nav-item
+          = link_to rewards_url do
+            %i.icon-doc
+            %span.title Rewards
       / END SIDEBAR MENU

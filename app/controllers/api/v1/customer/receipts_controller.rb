@@ -13,8 +13,11 @@ module Api::V1::Customer
 
     swagger_api :index do
       summary 'Fetches all receipts'
+      param :query, :page, :integer, :optional, "Page number"
       response :unauthorized
-      response :not_acceptable
+      response :success
+      response :not_acceptable, "The request you made is not acceptable"
+      response :requested_range_not_satisfiable
     end
 
     swagger_api :show do
