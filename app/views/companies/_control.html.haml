@@ -1,9 +1,12 @@
-= link_to company, class: 'btn btn-success' do
-  = fa_icon 'eye'
-  Show
-= link_to [:edit, company], class: 'btn btn-primary' do
-  = fa_icon 'pencil'
-  Edit
-= link_to company, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-danger' do
-  = fa_icon 'trash'
-  Delete
+-if policy(company).show?
+  = link_to company, class: 'btn btn-success' do
+    = fa_icon 'eye'
+    Show
+-if policy(company).edit?
+  = link_to [:edit, company], class: 'btn btn-primary' do
+    = fa_icon 'pencil'
+    Edit
+-if policy(company).destroy?
+  = link_to company, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-danger' do
+    = fa_icon 'trash'
+    Delete

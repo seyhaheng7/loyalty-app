@@ -11,9 +11,10 @@
       %i.icon-user
       User
   .portlet-body
-    = link_to new_user_path, class: 'btn btn-primary' do
-      = fa_icon 'plus'
-      Add New User
+    -if policy(@grid.assets).new?
+      = link_to new_user_path, class: 'btn btn-primary' do
+        = fa_icon 'plus'
+        Add New User
     .table-scrollable
       = paginate(@grid.assets)
       = datagrid_table @grid

@@ -5,20 +5,25 @@ class UsersController < ApplicationController
     @grid = UsersGrid.new(params[:users_grid]) do |scope|
       scope.page(params[:page])
     end
+    authorize @grid.assets
   end
 
   def show
+    authorize @user
   end
 
   def new
     @user = User.new
+    authorize @user
   end
 
   def edit
+    authorize @user
   end
 
   def create
     @user = User.new(user_params)
+    authorize @user
     if @user.save
       redirect_to @user, notice: 'User was successfully created.'
     else
@@ -27,6 +32,7 @@ class UsersController < ApplicationController
   end
 
   def update
+    authorize @user
     if @user.update_without_password(user_params)
       redirect_to @user, notice: 'User was successfully updated.'
     else
@@ -36,6 +42,7 @@ class UsersController < ApplicationController
   
 
   def destroy
+    authorize @user
     @user.destroy
     redirect_to users_url, notice: 'User was successfully deleted.'
   end

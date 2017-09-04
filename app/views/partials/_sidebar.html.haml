@@ -8,28 +8,29 @@
         = link_to root_path do
           %i.icon-bar-chart
           %span.title Dashboard
-      %li.nav-item
-        = link_to users_url do
-          %i.icon-user
-          %span.title Users
-      %li.nav-item
-        = link_to categories_url do
-          %i.icon-pie-chart
-          %span.title Categories
-      %li.nav-item
-        = link_to companies_url do
-          %i.icon-home
-          %span.title Companies
-      %li.nav-item
-        = link_to locations_url do
-          %i.icon-map
-          %span.title Locations
-      %li.nav-item
-        = link_to stores_url do
-          %i.icon-basket 
-          %span.title Stores
-      %li.nav-item
-        = link_to receipts_url do
-          %i.icon-doc
-          %span.title Receipts
-    / END SIDEBAR MENU
+      -if current_user.admin? || current_user.supper?
+        %li.nav-item
+          = link_to users_url do
+            %i.icon-user
+            %span.title Users
+        %li.nav-item
+          = link_to categories_url do
+            %i.icon-pie-chart
+            %span.title Categories
+        %li.nav-item
+          = link_to companies_url do
+            %i.icon-home
+            %span.title Companies
+        %li.nav-item
+          = link_to locations_url do
+            %i.icon-map
+            %span.title Locations
+        %li.nav-item
+          = link_to stores_url do
+            %i.icon-basket 
+            %span.title Stores
+        %li.nav-item
+          = link_to receipts_url do
+            %i.icon-doc
+            %span.title Receipts
+      / END SIDEBAR MENU

@@ -1,9 +1,12 @@
-= link_to user, class: 'btn btn-success' do
-  = fa_icon 'eye'
-  Show
-= link_to [:edit, user], class: 'btn btn-primary' do
-  = fa_icon 'pencil'
-  Edit
-= link_to user, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-danger' do
-  = fa_icon 'trash'
-  Delete
+-if policy(user).show?
+  = link_to user, class: 'btn btn-success' do
+    = fa_icon 'eye'
+    Show
+-if policy(user).edit?
+  = link_to [:edit, user], class: 'btn btn-primary' do
+    = fa_icon 'pencil'
+    Edit
+-if policy(user).destroy?
+  = link_to user, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-danger' do
+    = fa_icon 'trash'
+    Delete

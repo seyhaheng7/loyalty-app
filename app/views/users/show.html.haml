@@ -34,13 +34,16 @@
         %td= @user.current_points
 
     %br
-    = link_to users_path, class: 'btn btn-default' do
-      = fa_icon 'chevron-left'
-      Back
-    = link_to [:edit, @user], class: 'btn btn-primary' do
-      = fa_icon 'pencil'
-      Edit
-    = link_to @user, method: :delete, data: {confirm: 'Are you sure?'} ,class: 'btn btn-danger' do
-      = fa_icon 'trash'
-      Delete
+    -if policy(@user).index?
+      = link_to users_path, class: 'btn btn-default' do
+        = fa_icon 'chevron-left'
+        Back
+    -if policy(@user).edit?
+      = link_to [:edit, @user], class: 'btn btn-primary' do
+        = fa_icon 'pencil'
+        Edit
+    -if policy(@user).destroy?
+      = link_to @user, method: :delete, data: {confirm: 'Are you sure?'} ,class: 'btn btn-danger' do
+        = fa_icon 'trash'
+        Delete
 

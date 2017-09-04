@@ -7,9 +7,11 @@
   .portlet-body.form
     = render 'form'
     %br
-    = link_to categories_path, class: 'btn btn-default' do
-      = fa_icon 'chevron-left'
-      Back
-    = link_to @category, class: 'btn btn-success' do
-      = fa_icon 'eye'
-      Show
+    -if policy(@category).index?
+      = link_to categories_path, class: 'btn btn-default' do
+        = fa_icon 'chevron-left'
+        Back
+    -if policy(@category).show?
+      = link_to @category, class: 'btn btn-success' do
+        = fa_icon 'eye'
+        Show
