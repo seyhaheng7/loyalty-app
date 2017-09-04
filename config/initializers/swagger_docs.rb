@@ -13,4 +13,4 @@ Swagger::Docs::Config.register_apis({
           }
 })
 
-Swagger::Docs::Config.base_api_controller = Api::V1::BaseController
+Swagger::Docs::Config.base_api_controller = Api::V1::Customer::BaseController

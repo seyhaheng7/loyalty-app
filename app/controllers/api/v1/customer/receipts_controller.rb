@@ -1,4 +1,4 @@
-module Api::V1
+module Api::V1::Customer
   class ReceiptsController < BaseController
     before_action :set_receipt, only: [:show, :update, :destroy]
 
@@ -28,7 +28,7 @@ module Api::V1
     swagger_api :create do |api|
       summary 'create a receipt'
       notes 'make sure you pass parameters in receipt'
-      Api::V1::ReceiptsController::add_common_params(api)
+      Api::V1::Customer::ReceiptsController::add_common_params(api)
       response :ok
     end
 

@@ -1,4 +1,4 @@
-module Api::V1
+module Api::V1::Customer
   class CategoriesController < BaseController
     before_action :set_category, only: [:show, :update, :destroy]
 
