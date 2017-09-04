@@ -14,9 +14,8 @@ module Api::V1
 
     def user_not_authorized
       # error! :forbidden
-      head 403
       error = { error: 'Action not allowed.', error_description: 'Sorry, you are not allowed to perform this action.'}
-      expose error
+      render json: error, status: 403
     end
 
     # swagger doc authentication header request

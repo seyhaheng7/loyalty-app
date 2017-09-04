@@ -43,7 +43,7 @@ class User < ActiveRecord::Base
   end
 
   def login
-    @login ||=  if admin? || supper?
+    @login ||=  if admin? || super?
                   self.email
                 else
                   self.phone

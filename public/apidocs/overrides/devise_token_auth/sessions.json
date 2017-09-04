@@ -15,7 +15,7 @@
               "paramType": "form",
               "name": "login",
               "type": "string",
-              "description": "Email",
+              "description": "Phone Number",
               "required": false
             },
             {

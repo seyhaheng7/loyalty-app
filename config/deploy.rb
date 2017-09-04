@@ -21,11 +21,18 @@ namespace :deploy do
 
   task :cleanup_assets do
     on roles :all do
-      execute "cd #{release_path}/ && ~/.rvm/bin/rvm default do bundle exec rake assets:clobber RAILS_ENV=#{fetch(:stage)}"
+      execute "cd #{release_path}/ && ~/.rvm/bin/rvm default do bundle exec rails assets:clobber RAILS_ENV=#{fetch(:stage)}"
+    end
+  end
+
+  task :swagger_docs do
+    on roles :all do
+      execute "cd #{release_path}/ && ~/.rvm/bin/rvm default do bundle exec rails swagger:docs RAILS_ENV=#{fetch(:stage)}"
     end
   end
 
   before :updated, :cleanup_assets
+  after :updated, :swagger_docs
 end
 
 
