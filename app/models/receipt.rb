@@ -19,6 +19,7 @@ class Receipt < ApplicationRecord
 
   belongs_to :store
   belongs_to :user
+  belongs_to :managed_by, :class_name => "User", optional: true
 
   mount_base64_uploader :capture, ImageUploader
 

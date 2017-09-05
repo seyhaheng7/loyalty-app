@@ -58,7 +58,7 @@ class ReceiptsController < ApplicationController
   def approve
     authorize @receipt
 
-    if @receipt.update(receipt_params)
+    if @receipt.update(managed_by: current_user)
 
       @receipt.approving!
 
@@ -72,18 +72,24 @@ class ReceiptsController < ApplicationController
   def reject
     authorize @receipt
 
-    @receipt.rejecting!
-    redirect_to @receipt, notice: 'Receipt was successfully rejected.'
+    if @receipt.update(managed_by: current_user)
+
+      @receipt.rejecting!
+
+      redirect_to @receipt, notice: 'Receipt was successfully rejected.'
+    else
+      redirect_to @receipt, notice: 'Receipt was unsuccessfully rejected.'
+    end
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_receipt
-      @receipt = Receipt.find(params[:id])
+      @receipt = Receipt.find(params[:id]).decorate
     end
 
     # Only allow a trusted parameter "white list" through.
     def receipt_params
-      params.require(:receipt).permit(:receipt_id, :total, :capture, :capture_cache, :earned_points, :status, :store_id, :user_id)
+      params.require(:receipt).permit(:receipt_id, :total, :capture, :capture_cache, :status, :store_id, :user_id, :earned_points, :managed_by)
     end
 end
