@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170905072040) do
+ActiveRecord::Schema.define(version: 20170905042518) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,14 +53,6 @@ ActiveRecord::Schema.define(version: 20170905072040) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "operating_systems", force: :cascade do |t|
-    t.string "name"
-    t.bigint "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_operating_systems_on_user_id"
-  end
-
   create_table "receipts", force: :cascade do |t|
     t.string "receipt_id"
     t.float "total"
@@ -72,7 +64,9 @@ ActiveRecord::Schema.define(version: 20170905072040) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
+    t.bigint "managed_by_id"
     t.index ["deleted_at"], name: "index_receipts_on_deleted_at"
+    t.index ["managed_by_id"], name: "index_receipts_on_managed_by_id"
     t.index ["store_id"], name: "index_receipts_on_store_id"
     t.index ["user_id"], name: "index_receipts_on_user_id"
   end
@@ -155,7 +149,6 @@ ActiveRecord::Schema.define(version: 20170905072040) do
     t.string "language"
     t.float "lat"
     t.float "long"
-    t.string "phone_number"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["deleted_at"], name: "index_users_on_deleted_at"
     t.index ["email"], name: "index_users_on_email", unique: true
@@ -167,7 +160,6 @@ ActiveRecord::Schema.define(version: 20170905072040) do
   add_foreign_key "claimed_rewards", "rewards"
   add_foreign_key "claimed_rewards", "users"
   add_foreign_key "companies", "categories"
-  add_foreign_key "operating_systems", "users"
   add_foreign_key "receipts", "stores"
   add_foreign_key "receipts", "users"
   add_foreign_key "rewards", "companies"
