@@ -4,62 +4,63 @@
     / BEGIN SIDEBAR MENU
     %ul.page-sidebar-menu{"data-auto-scroll" => "true", "data-keep-expanded" => "false", "data-slide-speed" => "200"}
 
-      %li.nav-item.start.active
+      %li.nav-item.start{:class => ( "active" if sidebar_active?('home') )}
         = link_to root_path do
           %i.icon-bar-chart
           %span.title Dashboard
 
       -if current_user.admin? || current_user.super?
         - if policy(:user).index?
-          %li.nav-item
+          %li.nav-item{:class => ( "active" if sidebar_active?('users') )}
             = link_to users_url do
               %i.icon-user
               %span.title Users
 
         - if policy(:category).index?
-          %li.nav-item
+          %li.nav-item{:class => ( "active" if sidebar_active?('categories') )}
             = link_to categories_url do
               %i.icon-pie-chart
               %span.title Categories
 
         - if policy(:company).index?
-          %li.nav-item
+          %li.nav-item{:class => ( "active" if sidebar_active?('companies') )}
             = link_to companies_url do
               %i.icon-home
               %span.title Companies
 
         - if policy(:location).index?
-          %li.nav-item
+          %li.nav-item{:class => ( "active" if sidebar_active?('locations') )}
             = link_to locations_url do
               %i.icon-map
               %span.title Locations
 
         - if policy(:store).index?
-          %li.nav-item
+          %li.nav-item{:class => ( "active" if sidebar_active?('stores') )}
             = link_to stores_url do
               %i.icon-basket
               %span.title Stores
 
         - if policy(:receipt).index?
-          %li.nav-item
+          %li.nav-item{:class => ( "active" if sidebar_active?('receipts') )}
             = link_to receipts_url do
               %i.icon-doc
               %span.title Receipts
 
         - if policy(:reward).index?
-          %li.nav-item
+          %li.nav-item{:class => ( "active" if sidebar_active?('rewards') )}
             = link_to rewards_url do
               %i.icon-doc
               %span.title Rewards
+
         - if policy(:sticker_group).index?
-          %li.nav-item
+          %li.nav-item{:class => ( "active" if sidebar_active?('sticker_groups') )}
             = link_to sticker_groups_url do
               %i.icon-doc
               %span.title StickerGroups
         - if policy(:sticker).index?
-          %li.nav-item
+          %li.nav-item{:class => ( "active" if sidebar_active?('stickers') )}
             = link_to stickers_url do
               %i.icon-doc
               %span.title Stickers
-/ END SIDEBAR MENU
 
+  / END SIDEBAR MENU
