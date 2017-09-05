@@ -1,0 +1,3 @@
+class StickerPolicy < ApplicationPolicy
+end
+

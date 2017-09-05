@@ -1,0 +1,27 @@
+= render 'partials/page-head', title: 'Show Sticker Group'
+
+.portlet.light.bordered
+  .portlet-title
+    .caption
+
+  .portlet-body
+    %table.table
+      %col{width: '10'}
+      %col{width: '350'}
+      %tr
+        %th Image:
+        %td= image_tag @sticker_group.image_url, size: '150x150'
+      %tr
+        %th Name:
+        %td= @sticker_group.name
+
+    %br
+    = link_to sticker_groups_path, class: 'btn btn-default' do
+      = fa_icon 'chevron-left'
+      Back
+    = link_to [:edit, @sticker_group], class: 'btn btn-primary' do
+      = fa_icon 'pencil'
+      Edit
+    = link_to @sticker_group, method: :delete, data: {confirm: 'Are you sure?'} ,class: 'btn btn-danger' do
+      = fa_icon 'trash'
+      Delete

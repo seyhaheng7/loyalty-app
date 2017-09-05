@@ -1,0 +1,27 @@
+= render 'partials/page-head', title: 'Show Sticker'
+
+.portlet.light.bordered
+  .portlet-title
+    .caption
+
+  .portlet-body
+    %table.table
+      %col{width: '10'}
+      %col{width: '350'}
+      %tr
+        %th Image:
+        %td= image_tag @sticker.image_url, size: '150x150'
+      %tr
+        %th Name:
+        %td= @sticker.name
+
+    %br
+    = link_to stickers_path, class: 'btn btn-default' do
+      = fa_icon 'chevron-left'
+      Back
+    = link_to [:edit, @sticker], class: 'btn btn-primary' do
+      = fa_icon 'pencil'
+      Edit
+    = link_to @sticker, method: :delete, data: {confirm: 'Are you sure?'} ,class: 'btn btn-danger' do
+      = fa_icon 'trash'
+      Delete

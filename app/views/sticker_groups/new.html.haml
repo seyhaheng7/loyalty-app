@@ -1,0 +1,13 @@
+.portlet.light.bordered
+
+  .portlet-title
+    .caption
+      New Sticker Group
+
+  .portlet-body.form
+    = render 'form'
+    %br
+    -if policy(@sticker_group).index?
+      = link_to sticker_groups_path, class: 'btn btn-default' do
+        = fa_icon 'chevron-left'
+        Back
