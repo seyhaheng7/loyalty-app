@@ -2,7 +2,7 @@ feature 'Reward' do
   given!(:user)    { create(:user, name: 'test') }
   given!(:reward){ create(:reward) }
   given!(:company){create(:company, name: 'test')}
-
+  
   before do
     login_as user, scope: :user
   end

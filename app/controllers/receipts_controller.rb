@@ -4,7 +4,7 @@ class ReceiptsController < ApplicationController
   # GET /receipts
   def index
     @grid = ReceiptsGrid.new(params[:receipts_grid]) do |scope|
-      scope.page(params[:page]).without_deleted
+      scope.page(params[:page])
     end
     authorize @grid.assets
   end
