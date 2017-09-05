@@ -58,7 +58,7 @@ class ReceiptsController < ApplicationController
   def approve
     authorize @receipt
 
-    if @receipt.update(managed_by: current_user)
+    if @receipt.update(receipt_params.merge(managed_by: current_user))
 
       @receipt.approving!
 
