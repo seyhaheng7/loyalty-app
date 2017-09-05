@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170905042518) do
+ActiveRecord::Schema.define(version: 20170905085645) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,8 @@ ActiveRecord::Schema.define(version: 20170905042518) do
     t.bigint "reward_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "managed_by_id"
+    t.index ["managed_by_id"], name: "index_claimed_rewards_on_managed_by_id"
     t.index ["reward_id"], name: "index_claimed_rewards_on_reward_id"
     t.index ["user_id"], name: "index_claimed_rewards_on_user_id"
   end

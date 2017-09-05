@@ -1,0 +1,62 @@
+feature 'ClaimedReward' do
+  given!(:user) { create(:user, current_points: 15) }
+  given!(:admin) { create(:user, name: 'test') }
+  given!(:reward) { create(:reward, require_points: 14) }
+  given!(:claimed_reward) { create(:claimed_reward, user: user, reward: reward ) }
+  
+  before do
+    login_as admin, scope: :user
+  end
+  
+  feature 'Listing' do
+    scenario 'see all claimed_reward' do
+      visit root_path
+      click_link 'Claimed Reward'
+      expect(page).to have_content(claimed_reward.id)
+    end
+  end
+
+  feature 'Show' do
+    scenario 'Show claimed_reward detail' do
+      visit claimed_reward_path(claimed_reward)
+      expect(page).to have_content(claimed_reward.status)
+    end
+
+    scenario 'Approve claimed_reward detail' do
+      visit claimed_reward_path(claimed_reward)
+      click_on 'Approve'
+
+      expect(claimed_reward).to transition_from(:submitted).to(:approved).on_event(:approving)
+      expect(page).to have_content 'Claimed Reward was successfully approved.'
+    end
+
+    scenario 'Descrease points from user' do
+      visit claimed_reward_path(claimed_reward)
+      click_on 'Approve'
+
+      left_points = user.current_points.to_i - reward.require_points.to_i
+
+      expect(claimed_reward).to transition_from(:submitted).to(:approved).on_event(:approving)
+      expect(claimed_reward.user).to have_attributes(current_points: left_points)
+      expect(page).to have_content 'Claimed Reward was successfully approved.'
+    end
+
+    scenario 'Reject claimed_reward detail' do
+      visit claimed_reward_path(claimed_reward)
+      click_on 'Reject'
+
+      expect(claimed_reward).to transition_from(:submitted).to(:rejected).on_event(:rejecting)
+      expect(page).to have_content 'Claimed Reward was successfully rejected.'
+    end
+
+  end
+
+  feature 'Destroy' do
+    scenario 'Destroy Successfully' do
+      visit claimed_reward_path(claimed_reward)
+      click_link 'Delete'
+      expect(page).to have_content 'Claimed Reward was successfully deleted.'
+    end
+  end
+
+end
