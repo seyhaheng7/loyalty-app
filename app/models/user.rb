@@ -22,6 +22,7 @@ class User < ActiveRecord::Base
   validates :role, presence: true
 
   has_many :receipts, dependent: :destroy
+  has_many :claimed_rewards, dependent: :destroy
 
 
   # Login with Email And Phone Start

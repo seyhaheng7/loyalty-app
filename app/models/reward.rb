@@ -1,5 +1,8 @@
 class Reward < ApplicationRecord
+  acts_as_paranoid
+
   belongs_to :company, optional: true
+  has_many :claimed_rewards, dependent: :restrict_with_error
 
   validates :name, presence: true
   validates :require_points, presence: true

@@ -3,7 +3,8 @@ Rails.application.routes.draw do
   resources :stickers
   resources :sticker_groups
   resources :rewards
-  resources :receipts do
+
+  resources :receipts do 
     member do
       patch :reject
       patch :approve
@@ -27,8 +28,10 @@ Rails.application.routes.draw do
         resources :receipts, only: [:index, :show, :create]
         resources :categories, only: [:index, :show]
         resources :stores, only: [:index, :show]
+        resources :claimed_rewards
         resources :sticker_groups, only: [:index, :show]
       end
+
     end
   end
 
