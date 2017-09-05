@@ -1,10 +1,11 @@
 feature 'Receipt' do
-  given!(:user)    { create(:user, name: 'test') }
-  given!(:receipt){ create(:receipt) }
-  given!(:store){create(:store, name: 'test')}
+  given!(:user){ create(:user, name: 'user',current_points: 10) }
+  given!(:admin){ create(:user, name: 'admin') }
+  given!(:store){ create(:store, name: 'test') }
+  given!(:receipt){ create(:receipt, user: user) }
   
   before do
-    login_as user, scope: :user
+    login_as admin, scope: :user
   end
   
   feature 'Listing' do
@@ -23,7 +24,7 @@ feature 'Receipt' do
       fill_in 'Total', with: '15'
       attach_file('receipt[capture]', File.join(Rails.root, 'spec/support/default.png'))
       select 'test', :from => 'Store'
-      select 'test', :from => 'User'
+      select 'user', :from => 'User'
       click_on 'Create Receipt'
       expect(page).to have_content 'Receipt was successfully created.'
     end
@@ -35,14 +36,13 @@ feature 'Receipt' do
     end
   end
 
-
   feature 'Update' do
     scenario 'Update Successfully' do
       visit receipts_path
       find("a[href='#{edit_receipt_path(receipt)}']").click
       fill_in 'Receipt ID', with: 'Coffee Shop'
       select 'test', :from => 'Store'
-      select 'test', :from => 'User'
+      select 'user', :from => 'User'
       click_on 'Update Receipt'
       expect(page).to have_content 'Receipt was successfully updated.'
     end
@@ -69,29 +69,18 @@ feature 'Receipt' do
       expect(page).to have_content 'Receipt was successfully approved.'
     end
 
-    scenario 'Add points to receipt' do
-      visit receipt_path(receipt)
-      fill_in 'Add more points?', with: '15'
-      click_on 'Approve'
-
-      expect(receipt).to transition_from(:submitted).to(:approved).on_event(:approving)
-      expect(page).to have_content (receipt.earned_points)
-    end
-
     scenario 'Increase points to user' do
       visit receipt_path(receipt)
       click_on 'Approve'
-      
-      receipt.user.current_points = '15'
-      receipt.earned_points = '21'
-      points = receipt.user.current_points.to_i + receipt.earned_points.to_i 
-      receipt.user.current_points = points
 
-      expect(receipt.user).to have_attributes(current_points: points)
+      more_points = user.current_points.to_i + receipt.earned_points.to_i
+
       expect(receipt).to transition_from(:submitted).to(:approved).on_event(:approving)
+      expect(receipt.user).to have_attributes(current_points: more_points)
+      expect(page).to have_content 'Receipt was successfully approved.'
     end
 
-    scenario 'Approve receipt detail' do
+    scenario 'Reject receipt detail' do
       visit receipt_path(receipt)
       click_on 'Reject'
 
