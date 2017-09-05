@@ -13,4 +13,8 @@ module ApplicationHelper
         flash_type.to_s
     end
   end
+
+  def sidebar_active?(controller)
+    controller_name == controller
+  end
 end
