@@ -1,0 +1,8 @@
+-if policy(claimed_reward).show?
+  = link_to claimed_reward, class: 'btn btn-success' do
+    = fa_icon 'eye'
+    Show
+-if policy(claimed_reward).destroy?
+  = link_to claimed_reward, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-danger' do
+    = fa_icon 'trash'
+    Delete

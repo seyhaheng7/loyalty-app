@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
 
-  resources :stickers
-  resources :sticker_groups
-  resources :rewards
+  resources :claimed_rewards do
+    member do
+      patch :reject
+      patch :approve
+    end
+  end
 
   resources :receipts do 
     member do
@@ -16,6 +19,9 @@ Rails.application.routes.draw do
   resources :companies
   resources :categories
   resources :users
+  resources :rewards
+  resources :stickers
+  resources :sticker_groups
 
   namespace :api, defaults: { format: :json } do
     namespace :v1 do

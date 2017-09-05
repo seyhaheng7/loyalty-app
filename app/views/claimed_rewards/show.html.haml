@@ -1,0 +1,75 @@
+= render 'partials/page-head', title: 'Show Claimed Reward'
+.portlet.light.bordered
+  .portlet-title
+    .caption
+      Status : 
+      = @claimed_reward.status
+          
+  .portlet-body
+    .row
+      .col-xs-12.col-md-6
+        %h4 Reward
+        %table.table
+          %tr
+            %th Image
+            %td= image_tag @claimed_reward.reward.image_url, size: '150x150'
+          %tr
+            %th ID
+            %td= @claimed_reward.reward.id
+          %tr
+            %th Name
+            %td= @claimed_reward.reward.name
+          %tr
+            %th Required Points
+            %td= @claimed_reward.reward.require_points
+          %tr
+            %th Quantity
+            %td= @claimed_reward.reward.quantity
+
+      .col-xs-12.col-md-6
+        %h4 User
+        %table.table
+          %tr
+            %th Avatar
+            %td= image_tag @claimed_reward.user.avatar_url, size: '150x150'
+          %tr
+            %th Name
+            %td= @claimed_reward.user.name
+          %tr
+            %th Email
+            %td= @claimed_reward.user.email
+          %tr
+            %th Phone
+            %td= @claimed_reward.user.phone
+          %tr
+            %th Gender
+            %td= @claimed_reward.user.gender
+          %tr
+            %th Address
+            %td= @claimed_reward.user.address
+          %tr
+            %th Role
+            %td= @claimed_reward.user.role
+          %tr
+            %th Current Points
+            %td= @claimed_reward.user.current_points
+
+    %p= @claimed_reward.manage_climed_reward
+
+  - if policy(@claimed_reward).approve?
+    = link_to approve_claimed_reward_path(@claimed_reward.id), method: :patch, class: 'btn btn-primary' do
+      Approve
+  - if policy(@claimed_reward).reject?
+    = link_to reject_claimed_reward_path(@claimed_reward.id), method: :patch, class: 'btn btn-danger' do
+      Reject
+
+  %hr
+
+  -if policy(@claimed_reward).index?
+    = link_to claimed_rewards_path, class: 'btn btn-default' do
+      = fa_icon 'chevron-left'
+      Back
+  -if policy(@claimed_reward).destroy?
+    = link_to @claimed_reward, method: :delete, data: {confirm: 'Are you sure?'} ,class: 'btn btn-danger' do
+      = fa_icon 'trash'
+      Delete

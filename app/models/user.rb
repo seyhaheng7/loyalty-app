@@ -78,8 +78,13 @@ class User < ActiveRecord::Base
   end
   # End Login with Email And Phone
 
-  def add_points(points)
-    self.current_points = current_points.to_i + points.to_i
+  def add_points(earned_points)
+    self.current_points = current_points.to_i + earned_points.to_i
+    save
+  end
+
+  def sub_points(reward_points)
+    self.current_points = current_points.to_i - reward_points.to_i
     save
   end
 end
