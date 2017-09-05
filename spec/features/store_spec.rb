@@ -5,7 +5,7 @@ feature 'Store' do
   before do
     login_as user, scope: :user
   end
-  
+
   feature 'Listing' do
     scenario 'see all store' do
       visit root_path

@@ -9,6 +9,7 @@
           %i.icon-bar-chart
           %span.title Dashboard
 
+      -if current_user.admin? || current_user.super?
         - if policy(:user).index?
           %li.nav-item
             = link_to users_url do
@@ -36,9 +37,9 @@
         - if policy(:store).index?
           %li.nav-item
             = link_to stores_url do
-              %i.icon-basket 
+              %i.icon-basket
               %span.title Stores
-              
+
         - if policy(:receipt).index?
           %li.nav-item
             = link_to receipts_url do
@@ -50,4 +51,15 @@
             = link_to rewards_url do
               %i.icon-doc
               %span.title Rewards
+        - if policy(:sticker_group).index?
+          %li.nav-item
+            = link_to sticker_groups_url do
+              %i.icon-doc
+              %span.title StickerGroups
+        - if policy(:sticker).index?
+          %li.nav-item
+            = link_to stickers_url do
+              %i.icon-doc
+              %span.title Stickers
 / END SIDEBAR MENU
+

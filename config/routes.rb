@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :stickers
+  resources :sticker_groups
   resources :rewards
   resources :receipts do
     member do
@@ -25,6 +27,7 @@ Rails.application.routes.draw do
         resources :receipts, only: [:index, :show, :create]
         resources :categories, only: [:index, :show]
         resources :stores, only: [:index, :show]
+        resources :sticker_groups, only: [:index, :show]
       end
     end
   end

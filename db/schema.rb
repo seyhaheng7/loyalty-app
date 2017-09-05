@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170904015620) do
+
+ActiveRecord::Schema.define(version: 20170904091131) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -80,6 +81,22 @@ ActiveRecord::Schema.define(version: 20170904015620) do
     t.index ["company_id"], name: "index_rewards_on_company_id"
   end
 
+  create_table "sticker_groups", force: :cascade do |t|
+    t.string "name"
+    t.string "image"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "stickers", force: :cascade do |t|
+    t.string "name"
+    t.string "image"
+    t.bigint "sticker_group_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["sticker_group_id"], name: "index_stickers_on_sticker_group_id"
+  end
+
   create_table "stores", force: :cascade do |t|
     t.string "name"
     t.float "lat"
@@ -144,6 +161,7 @@ ActiveRecord::Schema.define(version: 20170904015620) do
   add_foreign_key "receipts", "stores"
   add_foreign_key "receipts", "users"
   add_foreign_key "rewards", "companies"
+  add_foreign_key "stickers", "sticker_groups"
   add_foreign_key "stores", "companies"
   add_foreign_key "stores", "locations"
 end
