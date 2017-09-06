@@ -11,12 +11,14 @@ module Api::V1::Customer
 
     swagger_api :index do
       summary 'Fetches all users'
+      # param :form, 'user[lat]', :float, :optional, 'Lat'
+      # param :form, 'user[long]', :float, :optional, 'Long'
       response :unauthorized
       response :not_acceptable
     end
 
     def index
-      @users = User.all
+      @users = User.page(params[:page])
       render json: @users, status: :ok
     end
 

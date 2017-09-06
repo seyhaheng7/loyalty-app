@@ -13,6 +13,8 @@ class Customer < ActiveRecord::Base
   has_many :claimed_rewards, dependent: :destroy
   has_many :operating_systems, dependent: :destroy
 
+  reverse_geocoded_by :lat, :long
+
   before_validation :generate_uid_from_phone, if: :phone_provider?, on: :create
 
   GENDER = ['Male', 'Female']
