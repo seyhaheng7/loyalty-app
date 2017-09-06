@@ -14,7 +14,7 @@
       = f.input :total
       = f.input :earned_points
       = f.association :store
-      = f.association :user
+      = f.association :customer
 
       -if policy(@receipt).create? || policy(@receipt).update?
         = f.button :submit, class: 'btn btn-primary'

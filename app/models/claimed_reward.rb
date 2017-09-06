@@ -13,25 +13,25 @@ class ClaimedReward < ApplicationRecord
     event :approving, after: :decrease_points do
       transitions :from => :submitted, :to => :approved
     end
-    
+
   end
 
-  belongs_to :user
+  belongs_to :customer
   belongs_to :managed_by, :class_name => "User", optional: true
   belongs_to :reward
 
-  validate :user_points
+  validate :customer_points
 
-  private 
+  private
 
-  def user_points
-    if user.current_points < reward.require_points
-      errors.add(:user_points, "User doesn't have enough points")
+  def customer_points
+    if customer.current_points < reward.require_points
+      errors.add(:customer_points, "Customer doesn't have enough points")
     end
   end
 
   def decrease_points
-    user.sub_points reward.require_points.to_i
+    customer.sub_points reward.require_points.to_i
   end
 
 end

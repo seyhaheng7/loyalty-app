@@ -4,10 +4,8 @@ module Api::V1::Customer
     include Swagger::Docs::ImpotentMethods
     Swagger::Docs::Generator::set_real_methods
 
-    include DeviseTokenAuth::Concerns::SetUserByToken
     include Pundit
-
-    before_action :authenticate_user!
+    include DeviseTokenAuth::Concerns::SetUserByToken
 
     # user not allow to access
     rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
@@ -16,6 +14,14 @@ module Api::V1::Customer
       # error! :forbidden
       error = { error: 'Action not allowed.', error_description: 'Sorry, you are not allowed to perform this action.'}
       render json: error, status: 403
+    end
+
+    def authenticate_user!
+      authenticate_customer!
+    end
+
+    def current_user
+      current_customer
     end
 
     # swagger doc authentication header request

@@ -73,9 +73,7 @@ class ReceiptsController < ApplicationController
     authorize @receipt
 
     if @receipt.update(managed_by: current_user)
-
       @receipt.rejecting!
-
       redirect_to @receipt, notice: 'Receipt was successfully rejected.'
     else
       redirect_to @receipt, notice: 'Receipt was unsuccessfully rejected.'
@@ -90,6 +88,6 @@ class ReceiptsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def receipt_params
-      params.require(:receipt).permit(:receipt_id, :total, :capture, :capture_cache, :status, :store_id, :user_id, :earned_points, :managed_by)
+      params.require(:receipt).permit(:receipt_id, :total, :capture, :capture_cache, :status, :store_id, :customer_id, :earned_points, :managed_by)
     end
 end

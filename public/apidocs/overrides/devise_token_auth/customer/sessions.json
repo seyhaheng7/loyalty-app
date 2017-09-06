@@ -2,7 +2,7 @@
   "apiVersion": "1.0",
   "swaggerVersion": "1.2",
   "basePath": "http://localhost:3000",
-  "resourcePath": "/api/v1/merchant",
+  "resourcePath": "sessions",
   "apis": [
     {
       "path": "/api/v1/customer/auth/sign_in",
@@ -24,7 +24,7 @@
               "required": false
             }
           ],
-          "summary": "Merchant Login ",
+          "summary": "Customer Login ",
           "responseMessages": [
             {
               "code": 200,
@@ -38,7 +38,7 @@
             }
           ],
           "notes": "user login with phone and password",
-          "nickname": "DeviseTokenAuth::Sessions#create",
+          "nickname": "Overrides::DeviseTokenAuth::Customer::Sessions#create",
           "method": "post"
         }
       ]
@@ -70,7 +70,7 @@
               "required": false
             }
           ],
-          "summary": "Destroy user session",
+          "summary": "Destroy customer session",
           "responseMessages": [
             {
               "code": 200,
@@ -88,8 +88,8 @@
               "message": "Not Acceptable"
             }
           ],
-          "notes": "user sign out",
-          "nickname": "DeviseTokenAuth::Sessions#destroy",
+          "notes": "merchant sign out",
+          "nickname": "Overrides::DeviseTokenAuth::Customer::Sessions#destroy",
           "method": "delete"
         }
       ]

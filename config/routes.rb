@@ -25,12 +25,10 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
+      namespace :merchant do
+      end
+
       namespace :customer do
-        mount_devise_token_auth_for 'User', at: 'auth', controllers: {
-          sessions:  'overrides/devise_token_auth/sessions',
-          registrations:  'overrides/devise_token_auth/registrations'
-        }
-        resources :users
         resources :receipts, only: [:index, :show, :create]
         resources :categories, only: [:index, :show]
         resources :stores, only: [:index, :show]
@@ -44,6 +42,14 @@ Rails.application.routes.draw do
   scope :auth do
     devise_for :users
   end
+
+  mount_devise_token_auth_for 'Customer', at: 'api/v1/customer/auth', controllers: {
+    sessions:  'overrides/devise_token_auth/customer/sessions',
+    registrations:  'overrides/devise_token_auth/customer/registrations'
+  }
+  mount_devise_token_auth_for 'Merchant', at: 'api/v1/merchant/auth', controllers: {
+    sessions:  'overrides/devise_token_auth/merchant/sessions'
+  }
 
   root 'home#index'
 end

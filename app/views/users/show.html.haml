@@ -3,7 +3,7 @@
   .portlet-title
     .caption
       = @user.name
-          
+
   .portlet-body
     %table.table
       %col{width: '10'}
@@ -18,20 +18,8 @@
         %th Email
         %td= @user.email
       %tr
-        %th Phone
-        %td= @user.phone
-      %tr
-        %th Gender
-        %td= @user.gender
-      %tr
-        %th Address
-        %td= @user.address
-      %tr
         %th Role
         %td= @user.role
-      %tr
-        %th Current Points
-        %td= @user.current_points
 
     %br
     -if policy(@user).index?

@@ -45,7 +45,7 @@ module Api::V1::Customer
     end
 
     def create
-      @receipt = current_user.receipts.new(receipt_params)
+      @receipt = current_customer.receipts.new(receipt_params)
       if @receipt.save
         render json: @receipt, status: :created, location: @receipt
       else

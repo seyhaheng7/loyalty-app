@@ -2,9 +2,9 @@
 .portlet.light.bordered
   .portlet-title
     .caption
-      Status : 
+      Status :
       = @claimed_reward.status
-          
+
   .portlet-body
     .row
       .col-xs-12.col-md-6
@@ -12,10 +12,7 @@
         %table.table
           %tr
             %th Image
-            %td= image_tag @claimed_reward.reward.image_url, size: '150x150'
-          %tr
-            %th ID
-            %td= @claimed_reward.reward.id
+            %td= image_tag @claimed_reward.reward.image, size: '150x150'
           %tr
             %th Name
             %td= @claimed_reward.reward.name
@@ -31,28 +28,25 @@
         %table.table
           %tr
             %th Avatar
-            %td= image_tag @claimed_reward.user.avatar_url, size: '150x150'
+            %td= image_tag @claimed_reward.customer.avatar, size: '150x150'
           %tr
             %th Name
-            %td= @claimed_reward.user.name
+            %td= @claimed_reward.customer.name
           %tr
             %th Email
-            %td= @claimed_reward.user.email
+            %td= @claimed_reward.customer.email
           %tr
             %th Phone
-            %td= @claimed_reward.user.phone
+            %td= @claimed_reward.customer.phone
           %tr
             %th Gender
-            %td= @claimed_reward.user.gender
+            %td= @claimed_reward.customer.gender
           %tr
             %th Address
-            %td= @claimed_reward.user.address
-          %tr
-            %th Role
-            %td= @claimed_reward.user.role
+            %td= @claimed_reward.customer.address
           %tr
             %th Current Points
-            %td= @claimed_reward.user.current_points
+            %td= @claimed_reward.customer.current_points
 
     %p= @claimed_reward.manage_climed_reward
 

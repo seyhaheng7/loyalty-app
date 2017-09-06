@@ -6,6 +6,6 @@ FactoryGirl.define do
     earned_points 1
     status "submitted"
     association :store
-    association :user
+    association :customer
   end
 end
