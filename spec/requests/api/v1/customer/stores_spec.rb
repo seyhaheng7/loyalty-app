@@ -77,8 +77,6 @@ describe 'stores' do
       get api_v1_customer_stores_path(only_partners: true), headers: customer.create_new_auth_token
     end
 
-
-
     it "should not return store that have company partner false" do
       json = JSON.parse(response.body)
       ids = json.map{ |j| j['id'] }
@@ -86,7 +84,6 @@ describe 'stores' do
     end
 
   end
-
 
   describe 'GET api/v1/customer/stores/:id' do
     before do
