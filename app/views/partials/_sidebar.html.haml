@@ -67,5 +67,10 @@
             = link_to stickers_url do
               %i.icon-doc
               %span.title Stickers
+        - if policy(:customer).index?
+          %li.nav-item{:class => ( "active" if sidebar_active?('customers') )}
+            = link_to customers_url do
+              %i.icon-doc
+              %span.title Customers
 
   / END SIDEBAR MENU

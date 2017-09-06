@@ -1,0 +1,13 @@
+.portlet.light.bordered
+
+  .portlet-title
+    .caption
+      New Customer
+
+  .portlet-body.form
+    = render 'form'
+    %br
+    -if policy(@customer).index?
+      = link_to customers_path, class: 'btn btn-default' do
+        = fa_icon 'chevron-left'
+        Back
