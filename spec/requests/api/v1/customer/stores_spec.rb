@@ -1,11 +1,11 @@
 describe 'stores' do
-  let!(:user){ create(:user) }
+  let!(:customer){ create(:customer) }
   let!(:stores){ create_list(:store, 10) }
   let!(:store){ create(:store) }
 
   describe 'GET api/v1/customer/stores' do
     before do
-      get api_v1_customer_stores_path, headers: user.create_new_auth_token
+      get api_v1_customer_stores_path, headers: customer.create_new_auth_token
     end
 
     it 'return status successful' do
@@ -28,7 +28,7 @@ describe 'stores' do
     let!(:store1){ create(:store, lat: 13.095730, long: 103.202205) }
     let!(:store2){ create(:store, lat: 13.082966, long: 103.145485) }
     before do
-      get api_v1_customer_stores_path(lat: 13.095730, long: 103.20221), headers: user.create_new_auth_token
+      get api_v1_customer_stores_path(lat: 13.095730, long: 103.20221), headers: customer.create_new_auth_token
     end
 
     it 'include nearby store' do
@@ -51,7 +51,7 @@ describe 'stores' do
     let!(:store2){create(:store)}
 
     before do
-      get api_v1_customer_stores_path(category_id: category1.id), headers: user.create_new_auth_token
+      get api_v1_customer_stores_path(category_id: category1.id), headers: customer.create_new_auth_token
     end
 
     it 'should return store of category' do
@@ -74,11 +74,11 @@ describe 'stores' do
     let!(:store2){ create(:store, company: company2) }
 
     before do
-      get api_v1_customer_stores_path(only_partners: true), headers: user.create_new_auth_token
+      get api_v1_customer_stores_path(only_partners: true), headers: customer.create_new_auth_token
     end
 
 
-    
+
     it "should not return store that have company partner false" do
       json = JSON.parse(response.body)
       ids = json.map{ |j| j['id'] }
@@ -90,7 +90,7 @@ describe 'stores' do
 
   describe 'GET api/v1/customer/stores/:id' do
     before do
-      get api_v1_customer_store_path(store), headers: user.create_new_auth_token
+      get api_v1_customer_store_path(store), headers: customer.create_new_auth_token
     end
 
     it 'return status successful' do

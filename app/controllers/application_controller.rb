@@ -4,11 +4,12 @@ class ApplicationController < ActionController::Base
   rescue_from Pundit::NotAuthorizedError do
     redirect_to root_url, alert: "You can't access to this page"
   end
-  before_action :configure_permitted_parameters, if: :devise_controller?
-
 
   protect_from_forgery with: :exception
+
+  before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :authenticate_user!
+  # before_action :authenticate_customer!, if: :customer_api?
 
   # trick to make devise token auth work
   skip_before_action :verify_authenticity_token, if: :devise_token_controller?
@@ -16,6 +17,14 @@ class ApplicationController < ActionController::Base
 
   layout :set_layout
   private
+
+  def api?
+    params[:controller].include? 'api/v1'
+  end
+
+  def customer_api?
+    params[:controller].include? 'api/v1/customer'
+  end
 
   def devise_token_controller?
     params[:controller].include? 'devise_token_auth'

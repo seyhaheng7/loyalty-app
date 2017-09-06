@@ -1,5 +1,6 @@
-module Overrides::DeviseTokenAuth
+module Overrides::DeviseTokenAuth::Customer
   class SessionsController < DeviseTokenAuth::SessionsController
+
     def create
       # Check
       field = (resource_params.keys.map(&:to_sym) & resource_class.authentication_keys).first
@@ -12,22 +13,14 @@ module Overrides::DeviseTokenAuth
           q_value.downcase!
         end
 
-        q = "#{field.to_s} = ? AND provider='email'"
+        # merchant use phone provider
+        q = "#{field.to_s} = ? AND provider='phone'"
 
         if ActiveRecord::Base.connection.adapter_name.downcase.starts_with? 'mysql'
           q = "BINARY " + q
         end
 
-        #LOG IN BY EMAIL AND USERNAME#
-        if field == :login
-          customer_condition = "(lower(phone) = :value AND role = 'Customer')"
-          admin_condition    = "(lower(email) = :value AND role = 'Admin')"
-
-          @resource = resource_class.where(["#{customer_condition} OR #{admin_condition}", { :value => q_value.downcase }]).first
-        else
-          @resource = resource_class.where(q, q_value).first
-        end
-        #LOG IN BY EMAIL AND USERNAME END#
+        @resource = resource_class.where(q, q_value).first
       end
       if @resource and valid_params?(field, q_value) and @resource.valid_password?(resource_params[:password]) and (!@resource.respond_to?(:active_for_authentication?) or @resource.active_for_authentication?)
         # create client id

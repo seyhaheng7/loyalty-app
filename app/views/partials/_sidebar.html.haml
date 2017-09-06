@@ -8,8 +8,6 @@
         = link_to root_path do
           %i.icon-bar-chart
           %span.title Dashboard
-
-      -if current_user.admin? || current_user.super?
         - if policy(:user).index?
           %li.nav-item{:class => ( "active" if sidebar_active?('users') )}
             = link_to users_url do
@@ -63,7 +61,7 @@
             = link_to sticker_groups_url do
               %i.icon-doc
               %span.title StickerGroups
-              
+
         - if policy(:sticker).index?
           %li.nav-item{:class => ( "active" if sidebar_active?('stickers') )}
             = link_to stickers_url do

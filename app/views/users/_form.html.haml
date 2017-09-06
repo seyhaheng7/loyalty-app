@@ -12,15 +12,7 @@
 
       = f.input :name
       = f.input :email
+      = f.input :role, collection: User::ROLES
       = f.input :password
-      = f.input :phone
-      = f.input :gender, collection: User::GENDER
-      = f.input :role, collection: User::ROLE
-      = f.input :address
-      = f.input :current_points
-      = f.input :language
-      = f.input :lat
-      = f.input :long
-
-      -if policy(@user).create? || policy(@user).update?
-        = f.button :submit, class: 'btn btn-primary'
+      = f.input :password_confirmation
+      = f.button :submit, class: 'btn btn-primary'

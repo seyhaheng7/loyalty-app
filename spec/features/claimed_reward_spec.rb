@@ -1,13 +1,13 @@
 feature 'ClaimedReward' do
-  given!(:user) { create(:user, current_points: 15) }
+  given!(:customer) { create(:customer, current_points: 15) }
   given!(:admin) { create(:user, name: 'test') }
   given!(:reward) { create(:reward, require_points: 14) }
-  given!(:claimed_reward) { create(:claimed_reward, user: user, reward: reward ) }
-  
+  given!(:claimed_reward) { create(:claimed_reward, customer: customer, reward: reward ) }
+
   before do
     login_as admin, scope: :user
   end
-  
+
   feature 'Listing' do
     scenario 'see all claimed_reward' do
       visit root_path
@@ -22,7 +22,7 @@ feature 'ClaimedReward' do
       expect(page).to have_content(claimed_reward.status)
     end
 
-    scenario 'Approve claimed_reward detail' do
+    scenario 'Approve Successfully' do
       visit claimed_reward_path(claimed_reward)
       click_on 'Approve'
 
@@ -34,14 +34,13 @@ feature 'ClaimedReward' do
       visit claimed_reward_path(claimed_reward)
       click_on 'Approve'
 
-      left_points = user.current_points.to_i - reward.require_points.to_i
-
-      expect(claimed_reward).to transition_from(:submitted).to(:approved).on_event(:approving)
-      expect(claimed_reward.user).to have_attributes(current_points: left_points)
+      left_points = customer.current_points.to_i - reward.require_points.to_i
+      customer.reload
+      expect(customer).to have_attributes(current_points: left_points)
       expect(page).to have_content 'Claimed Reward was successfully approved.'
     end
 
-    scenario 'Reject claimed_reward detail' do
+    scenario 'Reject Successfully' do
       visit claimed_reward_path(claimed_reward)
       click_on 'Reject'
 

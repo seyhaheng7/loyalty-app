@@ -3,7 +3,7 @@
   .portlet-title
     .caption
       = @receipt.receipt_id
-          
+
   .portlet-body
     %table.table
       %col{width: '10'}
@@ -27,14 +27,14 @@
         %th Store:
         %td= @receipt.store.name
       %tr
-        %th User:
-        %td= @receipt.user.name
+        %th Customer:
+        %td= @receipt.customer.name
 
     %p= @receipt.manage_receipt
 
     - if policy(@receipt).approve?
       = simple_form_for @receipt, :url => approve_receipt_path do |f|
-        = f.input :earned_points, label: 'Add more points?', input_html: {value: '0'}
+        = f.input :earned_points
         = f.submit 'Approve', class: 'btn btn-success'
 
     - if policy(@receipt).reject?

@@ -1,25 +1,17 @@
 FactoryGirl.define do
   factory :user do
     email { FFaker::Internet.email }
-    uid { FFaker::Internet.email }
-    role 'Admin'
+    name { FFaker::Name.name }
     password 'Codingate@2017'
     password_confirmation 'Codingate@2017'
-
+    role 'Admin'
     trait :admin do
-      'Admin'
+      role 'Admin'
     end
+
 
     trait :super do
-      'Super'
-    end
-
-    trait :customer do
-      'Customer'
-    end
-
-    trait :merchant do
-      'Merchant'
+      role 'Super'
     end
   end
 end

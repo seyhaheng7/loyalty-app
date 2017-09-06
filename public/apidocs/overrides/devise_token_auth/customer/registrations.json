@@ -46,6 +46,13 @@
             },
             {
               "paramType": "form",
+              "name": "phone",
+              "type": "string",
+              "description": "Phone Number",
+              "required": true
+            },
+            {
+              "paramType": "form",
               "name": "name",
               "type": "string",
               "description": "Name",
@@ -63,13 +70,6 @@
               "name": "avatar",
               "type": "string",
               "description": "Avatar",
-              "required": false
-            },
-            {
-              "paramType": "form",
-              "name": "phone",
-              "type": "string",
-              "description": "Phone",
               "required": false
             },
             {
@@ -114,8 +114,110 @@
               "message": "Not Acceptable"
             }
           ],
-          "nickname": "DeviseTokenAuth::Registrations#update",
+          "nickname": "Overrides::DeviseTokenAuth::Customer::Registrations#update",
           "method": "patch"
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/customer/auth",
+      "operations": [
+        {
+          "parameters": [
+            {
+              "paramType": "form",
+              "name": "phone",
+              "type": "string",
+              "description": "Phone Number",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "password",
+              "type": "string",
+              "description": "Phone Number",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "password_confirmation",
+              "type": "string",
+              "description": "Name",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "name",
+              "type": "string",
+              "description": "Name",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "email",
+              "type": "string",
+              "description": "email",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "gender",
+              "type": "string",
+              "description": "Gender",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "avatar",
+              "type": "base64",
+              "description": "Avatar",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "address",
+              "type": "string",
+              "description": "Address",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "lat",
+              "type": "float",
+              "description": "Lat",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "long",
+              "type": "float",
+              "description": "Long",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "email",
+              "type": "string",
+              "description": "Email",
+              "required": false
+            }
+          ],
+          "summary": "Customer Login ",
+          "responseMessages": [
+            {
+              "code": 200,
+              "responseModel": "User",
+              "message": "Success"
+            },
+            {
+              "code": 406,
+              "responseModel": null,
+              "message": "Not Acceptable"
+            }
+          ],
+          "notes": "user login with phone and password",
+          "nickname": "Overrides::DeviseTokenAuth::Customer::Registrations#create",
+          "method": "post"
         }
       ]
     }

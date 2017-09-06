@@ -1,10 +1,10 @@
 describe 'Categories' do
-  let!(:user){ create(:user) }
+  let!(:customer){ create(:customer) }
   let!(:categories){ create_list(:category, 10) }
   let!(:category){ create(:category) }
   describe 'GET api/v1/customer/categories' do
     before do
-      get api_v1_customer_categories_path, headers: user.create_new_auth_token
+      get api_v1_customer_categories_path, headers: customer.create_new_auth_token
     end
 
     it 'return status successful' do
@@ -26,7 +26,7 @@ describe 'Categories' do
 
   describe 'GET api/v1/customer/categories/:id' do
     before do
-      get api_v1_customer_category_path(category), headers: user.create_new_auth_token
+      get api_v1_customer_category_path(category), headers: customer.create_new_auth_token
     end
 
     it 'return status successful' do

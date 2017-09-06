@@ -18,7 +18,7 @@ class Receipt < ApplicationRecord
   acts_as_paranoid
 
   belongs_to :store
-  belongs_to :user
+  belongs_to :customer
   belongs_to :managed_by, :class_name => "User", optional: true
 
   mount_base64_uploader :capture, ImageUploader
@@ -31,7 +31,7 @@ class Receipt < ApplicationRecord
   private
 
   def add_points_to_user
-    user.add_points earned_points.to_i
+    customer.add_points earned_points.to_i
   end
 
 end
