@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   resources :claimed_rewards do
     member do
       patch :reject
@@ -7,7 +6,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :receipts do 
+  resources :receipts do
     member do
       patch :reject
       patch :approve
@@ -34,6 +33,7 @@ Rails.application.routes.draw do
         resources :stores, only: [:index, :show]
         resources :claimed_rewards
         resources :sticker_groups, only: [:index, :show]
+        resources :operating_systems, only: [:create]
       end
 
     end
