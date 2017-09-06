@@ -10,7 +10,7 @@ module Api::V1::Customer
     swagger_api :create do |api|
       summary 'create a claimed_reward'
       notes 'make sure you pass parameters in claimed_reward'
-      Api::V1::ClaimedRewardController::add_common_params(api)
+      Api::V1::Customer::ClaimedRewardsController::add_common_params(api)
       response :ok
     end
 

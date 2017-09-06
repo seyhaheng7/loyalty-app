@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170906020008) do
+ActiveRecord::Schema.define(version: 20170906090045) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -81,6 +81,9 @@ ActiveRecord::Schema.define(version: 20170906020008) do
     t.string "language"
     t.float "lat"
     t.float "long"
+    t.string "verification_code"
+    t.datetime "verification_expired_at"
+    t.datetime "verified_at"
     t.index ["confirmation_token"], name: "index_customers_on_confirmation_token", unique: true
     t.index ["deleted_at"], name: "index_customers_on_deleted_at"
     t.index ["email"], name: "index_customers_on_email", unique: true
@@ -127,6 +130,14 @@ ActiveRecord::Schema.define(version: 20170906020008) do
     t.index ["reset_password_token"], name: "index_merchants_on_reset_password_token", unique: true
     t.index ["store_id"], name: "index_merchants_on_store_id"
     t.index ["uid", "provider"], name: "index_merchants_on_uid_and_provider", unique: true
+  end
+
+  create_table "operating_systems", force: :cascade do |t|
+    t.string "name"
+    t.bigint "customer_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["customer_id"], name: "index_operating_systems_on_customer_id"
   end
 
   create_table "receipts", force: :cascade do |t|
@@ -217,6 +228,7 @@ ActiveRecord::Schema.define(version: 20170906020008) do
   add_foreign_key "claimed_rewards", "customers"
   add_foreign_key "claimed_rewards", "rewards"
   add_foreign_key "companies", "categories"
+  add_foreign_key "operating_systems", "customers"
   add_foreign_key "receipts", "customers"
   add_foreign_key "receipts", "stores"
   add_foreign_key "rewards", "companies"
