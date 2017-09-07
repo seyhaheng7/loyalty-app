@@ -1,0 +1,63 @@
+= render 'partials/page-head', title: 'Show Customer'
+.portlet.light.bordered
+  .portlet-title
+    .caption
+      = @customer.name
+
+  .portlet-body
+    %table.table
+      %col{width: '10'}
+      %col{width: '350'}
+      %tr
+        %th Logo:
+        %td= image_tag @customer.avatar_url, size: '150x150'
+      %tr
+        %th Name:
+        %td= @customer.name
+
+      %tr
+        %th Email:
+        %td= @customer.email
+      %tr
+
+      %tr
+        %th Phone:
+        %td= @customer.phone
+      %tr
+
+      %tr
+        %th Address:
+        %td= @customer.address
+      %tr
+
+      %tr
+        %th Gender:
+        %td= @customer.gender
+
+      %tr
+        %th Current Points:
+        %td= @customer.current_points
+      %tr
+        %th Lat:
+        %td= @customer.lat
+      %tr
+        %th Long:
+        %td= @customer.long
+
+      %tr
+        %th Current Sign In IP:
+        %td= @customer.current_sign_in_ip
+
+    %br
+    -if policy(@customer).index?
+      = link_to customers_path, class: 'btn btn-default' do
+        = fa_icon 'chevron-left'
+        Back
+    -if policy(@customer).edit?
+      = link_to [:edit, @customer], class: 'btn btn-primary' do
+        = fa_icon 'pencil'
+        Edit
+    -if policy(@customer).destroy?
+      = link_to @customer, method: :delete, data: {confirm: 'Are you sure?'} ,class: 'btn btn-danger' do
+        = fa_icon 'trash'
+        Delete
