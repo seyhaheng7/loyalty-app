@@ -20,5 +20,4 @@ class User < ApplicationRecord
 
   validates :role, presence: true
   validates :name, presence: true
-
 end

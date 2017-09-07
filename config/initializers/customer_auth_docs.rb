@@ -1,3 +1,4 @@
+# need to do class eval because skip authentication
 Overrides::DeviseTokenAuth::Customer::SessionsController.class_eval do
   Swagger::Docs::Generator::set_real_methods
   swagger_controller :customer_logins, 'Customer Authentication'

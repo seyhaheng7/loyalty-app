@@ -2,12 +2,14 @@ image: "ruby:2.4.1"
 services:
   - postgres:latest
   - node:latest
+  - redis:latest
 variables:
   POSTGRES_DB: codingate_db_test
   POSTGRES_USER: codingate_automate_tester
   POSTGRES_PASSWORD: ""
 before_script:
-  - apt-get update -qq && apt-get install -y -qq postgresql postgresql-contrib libpq-dev cmake nodejs
+  - apt-get update -qq && apt-get install -y -qq postgresql postgresql-contrib libpq-dev cmake nodejs redis-server
+  - redis-server &
   - ruby -v
   - which ruby
   - gem install bundler --no-ri --no-rdoc
