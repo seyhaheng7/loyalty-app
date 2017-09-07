@@ -125,6 +125,8 @@ GEM
     coffee-script-source (1.12.2)
     concurrent-ruby (1.0.5)
     connection_pool (2.2.1)
+    counter-cache (0.3.0)
+      activerecord (>= 3.0)
     database_cleaner (1.6.1)
     datagrid (1.5.4)
       rails (>= 4.0)
@@ -391,6 +393,7 @@ DEPENDENCIES
   carrierwave (~> 1.1.0)
   carrierwave-base64 (~> 2.3.5)
   coffee-rails (~> 4.2)
+  counter-cache
   database_cleaner (~> 1.6.1)
   datagrid (~> 1.5)
   devise (~> 4.3.0)

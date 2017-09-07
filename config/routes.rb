@@ -36,7 +36,8 @@ Rails.application.routes.draw do
         resources :receipts, only: [:index, :show, :create]
         resources :categories, only: [:index, :show]
         resources :stores, only: [:index, :show]
-        resources :claimed_rewards
+        resources :claimed_rewards, only: [:create]
+        resources :rewards, only: [:index, :show]
         resources :sticker_groups, only: [:index, :show]
         resources :near_by_customers, only: [:index]
         resources :operating_systems, only: [:create]

@@ -1,9 +1,9 @@
 FactoryGirl.define do
   factory :reward do
-    name "MyString"
+    name "CodingAte"
     image File.open('spec/support/default.png')
     require_points 1
-    quantity 1
+    quantity 4
     association :company
   end
 end
