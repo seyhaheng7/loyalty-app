@@ -13,6 +13,11 @@
             = link_to users_url do
               %i.icon-user
               %span.title Users
+        - if policy(:merchant).index?
+          %li.nav-item{:class => ( "active" if sidebar_active?('merchants') )}
+            = link_to merchants_url do
+              %i.icon-user
+              %span.title Merchants
 
         - if policy(:category).index?
           %li.nav-item{:class => ( "active" if sidebar_active?('categories') )}

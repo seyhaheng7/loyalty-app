@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   resources :companies
   resources :categories
   resources :users
+  resources :merchants
   resources :rewards
   resources :stickers
   resources :sticker_groups

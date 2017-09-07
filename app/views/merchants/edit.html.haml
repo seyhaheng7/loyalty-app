@@ -1,0 +1,16 @@
+.portlet.light.bordered
+  .portlet-title
+    .caption
+      Editing merchant
+
+  .portlet-body.form
+    = render 'form'
+    %br
+    -if policy(@merchant).index?
+      = link_to merchants_path, class: 'btn btn-default' do
+        = fa_icon 'chevron-left'
+        Back
+    -if policy(@merchant).show?
+      = link_to @merchant, class: 'btn btn-success' do
+        = fa_icon 'eye'
+        Show

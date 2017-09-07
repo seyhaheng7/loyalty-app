@@ -1,0 +1,2 @@
+class MerchantPolicy < ApplicationPolicy
+end

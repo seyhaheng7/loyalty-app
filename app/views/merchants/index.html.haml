@@ -1,0 +1,21 @@
+= render 'partials/page-head', title: 'Listing Merchant'
+
+%br
+
+.m-heading-1.border-green.m-bordered
+  = datagrid_form_for @grid, :method => :get, :url => merchants_path
+
+.portlet.light.bordered
+  .portlet-title
+    .caption
+      %i.icon-user
+      Merchant
+  .portlet-body
+    -if policy(@grid.assets).new?
+      = link_to new_merchant_path, class: 'btn btn-primary' do
+        = fa_icon 'plus'
+        Add New Merchant
+    .table-scrollable
+      = paginate(@grid.assets)
+      = datagrid_table @grid
+      = paginate(@grid.assets)
