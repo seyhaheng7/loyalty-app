@@ -1,0 +1,26 @@
+.row
+  .col-xs-12.col-md-4
+    = simple_form_for(@merchant) do |f|
+      = f.error_notification
+
+      .form-body
+        .form-group
+          .image-uploader{align: 'center'}
+            %a{:href => "#!"}
+              = image_tag f.object.avatar, class: 'img-responsive', size: '150x150'
+            = f.input :avatar, as: :file, label: 'Upload Image',
+              :label_html => { class: 'btn btn-default'}
+            = f.hidden_field :avatar_cache
+
+          = f.association :store
+          = f.input :name
+          = f.input :email
+          = f.input :phone
+          = f.input :password
+
+          = f.button :submit
+          .pull-right
+            = link_to merchants_path, class: 'btn btn-success' do
+              Back
+            = link_to @merchant, class: 'btn btn-primary' do
+              Show
