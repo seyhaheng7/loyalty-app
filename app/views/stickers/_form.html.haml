@@ -21,7 +21,7 @@
               = link_to stickers_path, class: 'btn btn-default' do
                 = fa_icon 'chevron-left'
                 Back
-            -if policy(@sticker).show?
+            - if params[:action] == "edit" && policy(@sticker).show?
               = link_to @sticker, class: 'btn btn-info' do
                 = fa_icon 'eye'
                 Show

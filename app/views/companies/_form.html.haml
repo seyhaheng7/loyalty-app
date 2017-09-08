@@ -24,7 +24,7 @@
           = link_to companies_path, class: 'btn btn-default' do
             = fa_icon 'chevron-left'
             Back
-        -if policy(@company).show?
+        -if params[:action] == "edit" && policy(@company).show?
           = link_to @company, class: 'btn btn-info' do
             = fa_icon 'eye'
             Show

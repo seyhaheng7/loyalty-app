@@ -51,7 +51,7 @@
               %span.title Rewards
 
         - if policy(:claimed_reward).index?
-          %li.nav-item
+          %li.nav-item{:class => ( "active" if sidebar_active?('claimed_rewards') )}
             = link_to claimed_rewards_url do
               %i.icon-doc
               %span.title Claimed Rewards

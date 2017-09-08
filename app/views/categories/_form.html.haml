@@ -20,7 +20,7 @@
           = link_to categories_path, class: 'btn btn-default' do
             = fa_icon 'chevron-left'
             Back
-        -if policy(@category).show?
+        -if params[:action] == "edit" && policy(@category).show?
           = link_to @category, class: 'btn btn-info' do
             = fa_icon 'eye'
             Show

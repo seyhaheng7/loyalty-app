@@ -25,7 +25,7 @@
             = link_to receipts_path, class: 'btn btn-default' do
               = fa_icon 'chevron-left'
               Back
-          -if policy(@receipt).show?
+          -if params[:action] == "edit" && policy(@receipt).show?
             = link_to @receipt, class: 'btn btn-info' do
               = fa_icon 'eye'
-            Show
+              Show

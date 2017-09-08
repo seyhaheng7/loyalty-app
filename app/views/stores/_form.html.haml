@@ -21,7 +21,7 @@
           = link_to stores_path, class: 'btn btn-default' do
             = fa_icon 'chevron-left'
             Back
-        -if policy(@store).show?
+        -if params[:action] == "edit" && policy(@store).show?
           = link_to @store, class: 'btn btn-info' do
             = fa_icon 'eye'
             Show
