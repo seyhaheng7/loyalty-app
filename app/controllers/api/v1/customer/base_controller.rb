@@ -6,22 +6,31 @@ module Api::V1::Customer
 
     include Pundit
     include DeviseTokenAuth::Concerns::SetUserByToken
+    before_action :authenticate_customer!
+    before_action :check_customer_verification!, if: ->{ customer_signed_in? }
 
     # user not allow to access
     rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
     def user_not_authorized
       # error! :forbidden
-      error = { error: 'Action not allowed.', error_description: 'Sorry, you are not allowed to perform this action.'}
+      error = { errors: ['Action not allowed'] }
       render json: error, status: 403
     end
 
+    # Trick to make token auth work start
     def authenticate_user!
       authenticate_customer!
     end
 
     def current_user
       current_customer
+    end
+    # Trick to make token auth work end
+
+
+    def devise_token_controller?
+      params[:controller].include? 'devise_token_auth'
     end
 
     # swagger doc authentication header request
@@ -49,5 +58,13 @@ module Api::V1::Customer
       end
     end
 
+    private
+
+    def check_customer_verification!
+      unless current_customer.active_for_authentication?
+        error = { errors: ['Unverified account'] }
+        render json: error, status: 401
+      end
+    end
   end
 end

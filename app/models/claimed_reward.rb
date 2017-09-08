@@ -18,9 +18,12 @@ class ClaimedReward < ApplicationRecord
 
   belongs_to :customer
   belongs_to :managed_by, :class_name => "User", optional: true
-  belongs_to :reward
+  belongs_to :reward, :counter_cache => :approved_claimed_rewards_count
 
   validate :customer_points
+
+  delegate :name, to: :customer, prefix: true, allow_nil: true
+  delegate :name, to: :reward, prefix: true, allow_nil: true
 
   private
 

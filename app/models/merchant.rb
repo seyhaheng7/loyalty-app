@@ -7,6 +7,8 @@ class Merchant < ActiveRecord::Base
 
   include DeviseTokenAuth::Concerns::User
 
+  mount_uploader :avatar, ImageUploader
+
   belongs_to :store
 
   before_validation :generate_uid_from_phone, if: :phone_provider?, on: :create
@@ -20,6 +22,10 @@ class Merchant < ActiveRecord::Base
       provider == provider_name
     end
   end
+
+   validates :name, presence: true
+
+   delegate :name, to: :store, prefix: true, allow_nil: true
 
   # Prevent Devise Validate Email Start
   # https://github.com/plataformatec/devise/wiki/How-To:-Allow-users-to-sign-in-with-something-other-than-their-email-address

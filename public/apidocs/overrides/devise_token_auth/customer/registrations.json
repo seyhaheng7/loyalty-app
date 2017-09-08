@@ -133,20 +133,6 @@
             },
             {
               "paramType": "form",
-              "name": "password",
-              "type": "string",
-              "description": "Phone Number",
-              "required": true
-            },
-            {
-              "paramType": "form",
-              "name": "password_confirmation",
-              "type": "string",
-              "description": "Name",
-              "required": true
-            },
-            {
-              "paramType": "form",
               "name": "name",
               "type": "string",
               "description": "Name",

@@ -13,6 +13,10 @@ class Customer < ActiveRecord::Base
   has_many :claimed_rewards, dependent: :destroy
   has_many :operating_systems, dependent: :destroy
 
+  scope :able_to_verify, ->{ where('verification_expired_at > ?', DateTime.now) }
+  scope :digit_not_yet_expired, ->{ where('digit_expired_at > ?', DateTime.now) }
+  scope :verified, ->{ where.not(verified_at: nil) }
+
   reverse_geocoded_by :lat, :long
 
   before_validation :generate_uid_from_phone, if: :phone_provider?, on: :create
@@ -26,6 +30,37 @@ class Customer < ActiveRecord::Base
     define_method "#{provider_name.downcase.parameterize.underscore}_provider?" do
       self.provider == provider_name
     end
+  end
+
+  before_save :generate_verification_code, unless: :verified?, if: :phone_changed?
+  after_save :send_comfirmation_code, unless: :verified?, if: :saved_change_to_phone?
+
+  def digit_expired?
+    digit_expired_at < DateTime.now
+  end
+
+  def valid_digit?(digit)
+    !digit_expired? && digit == login_digit
+  end
+
+  def verified?
+    verified_at.present?
+  end
+
+  def confirm!
+    update(verified_at: DateTime.now)
+  end
+
+  def active_for_authentication?
+    verified?
+  end
+
+  def send_login_digit
+    self.login_digit      = generate_4_digit
+    self.digit_expired_at = DateTime.now + 10.minutes
+    save
+    text = "Your login digit is #{login_digit} will expired in 10 minutes"
+    SendSmsWorker.perform_async(phone, text)
   end
 
   def add_points(points)
@@ -50,6 +85,21 @@ class Customer < ActiveRecord::Base
   # Prevent Devise Validate Email End
 
   private
+
+  def generate_verification_code
+    self.verified_at             = nil
+    self.verification_code       = generate_4_digit
+    self.verification_expired_at = DateTime.now + 10.minutes
+  end
+
+  def send_comfirmation_code
+    text = "Your verification code is #{verification_code} will expired in 10 minutes"
+    SendSmsWorker.perform_async(phone, text)
+  end
+
+  def generate_4_digit
+    '%04d' % Random.rand(2..9999)
+  end
 
   def generate_uid_from_phone
     self.uid = phone

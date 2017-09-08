@@ -13,6 +13,11 @@
             = link_to users_url do
               %i.icon-user
               %span.title Users
+        - if policy(:merchant).index?
+          %li.nav-item{:class => ( "active" if sidebar_active?('merchants') )}
+            = link_to merchants_url do
+              %i.icon-user
+              %span.title Merchants
 
         - if policy(:category).index?
           %li.nav-item{:class => ( "active" if sidebar_active?('categories') )}
@@ -67,5 +72,16 @@
             = link_to stickers_url do
               %i.icon-bulb
               %span.title Stickers
+        - if policy(:customer).index?
+          %li.nav-item{:class => ( "active" if sidebar_active?('customers') )}
+            = link_to customers_url do
+              %i.icon-doc
+              %span.title Customers
+
+        - if policy(:customer_location).index?
+          %li.nav-item{:class => ( "active" if sidebar_active?('stickers') )}
+            = link_to customer_locations_url do
+              %i.icon-map
+              %span.title Customer Locations
 
   / END SIDEBAR MENU

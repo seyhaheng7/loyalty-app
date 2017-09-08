@@ -14,3 +14,8 @@
 
 #= require stores/form
 #= require stores/show
+
+#= require customer_locations/index
+
+#= require customers/form
+#= require customers/show
