@@ -7,7 +7,7 @@ feature 'Location' do
   feature 'Listing' do
     scenario 'see all location' do
       visit root_path
-      click_link 'Location'
+      click_on "Locations"
       expect(page).to have_content(location.name)
     end
   end

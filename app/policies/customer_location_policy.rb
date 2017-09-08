@@ -1,0 +1,3 @@
+class CustomerLocationPolicy < ApplicationPolicy
+  
+end
