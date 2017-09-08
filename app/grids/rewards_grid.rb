@@ -14,7 +14,7 @@ class RewardsGrid
   end
   column(:require_points)
   column(:quantity)
-  column(:company)
+  column(:company_name)
   
   column(:actions, html:true) do |reward|
     render 'rewards/control', reward: reward

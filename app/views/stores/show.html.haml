@@ -1,8 +1,7 @@
-= render 'partials/page-head', title: 'Show Store'
 .portlet.light.bordered
   .portlet-title
     .caption
-      = @store.name
+      Show Store
           
   .portlet-body
     %table.table
@@ -26,16 +25,18 @@
 
     #show-map
 
-    %br
-    -if policy(@store).index?
-      = link_to stores_path, class: 'btn btn-default' do
-        = fa_icon 'chevron-left'
-        Back
-    -if policy(@store).edit?
-      = link_to [:edit, @store], class: 'btn btn-primary' do
-        = fa_icon 'pencil'
-        Edit
-    -if policy(@store).destroy?
-      = link_to @store, method: :delete, data: {confirm: 'Are you sure?'} ,class: 'btn btn-danger' do
-        = fa_icon 'trash'
-        Delete
+    .row.wrap-pad
+      .pull-left
+        -if policy(@store).index?
+          = link_to stores_path, class: 'btn btn-default' do
+            = fa_icon 'chevron-left'
+            Back
+      .pull-right
+        -if policy(@store).edit?
+          = link_to [:edit, @store], class: 'btn btn-primary' do
+            = fa_icon 'pencil'
+            Edit
+        -if policy(@store).destroy?
+          = link_to @store, method: :delete, data: {confirm: 'Are you sure?'} ,class: 'btn btn-danger' do
+            = fa_icon 'trash'
+            Delete

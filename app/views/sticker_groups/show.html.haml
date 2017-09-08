@@ -15,13 +15,18 @@
         %th Name:
         %td= @sticker_group.name
 
-    %br
-    = link_to sticker_groups_path, class: 'btn btn-default' do
-      = fa_icon 'chevron-left'
-      Back
-    = link_to [:edit, @sticker_group], class: 'btn btn-primary' do
-      = fa_icon 'pencil'
-      Edit
-    = link_to @sticker_group, method: :delete, data: {confirm: 'Are you sure?'} ,class: 'btn btn-danger' do
-      = fa_icon 'trash'
-      Delete
+    .row.wrap-pad
+      .pull-left
+        -if policy(@sticker_group).index?
+          = link_to sticker_groups_path, class: 'btn btn-default' do
+            = fa_icon 'chevron-left'
+            Back
+      .pull-right
+        -if policy(@sticker_group).edit?
+          = link_to [:edit, @sticker_group], class: 'btn btn-primary' do
+            = fa_icon 'pencil'
+            Edit
+        -if policy(@sticker_group).destroy?
+          = link_to @sticker_group, method: :delete, data: {confirm: 'Are you sure?'} ,class: 'btn btn-danger' do
+            = fa_icon 'trash'
+            Delete

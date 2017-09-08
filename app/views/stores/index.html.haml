@@ -1,7 +1,5 @@
 = render 'partials/page-head', title: 'Listing Stores'
 
-%br
-
 .m-heading-1.border-green.m-bordered
   = datagrid_form_for @grid, :method => :get, :url => stores_path
 
@@ -11,11 +9,11 @@
       %i.icon-basket
       Stores
   .portlet-body
-    -if policy(@grid.assets).new?
-      = link_to new_store_path, class: 'btn btn-primary' do
-        = fa_icon 'plus'
-        Add New Store
     .table-scrollable
       = paginate(@grid.assets)
       = datagrid_table @grid
       = paginate(@grid.assets)
+    -if policy(@grid.assets).new?
+      = link_to new_store_path, class: 'btn btn-primary' do
+        = fa_icon 'plus'
+        Add New Store

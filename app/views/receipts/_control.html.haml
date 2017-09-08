@@ -1,7 +1,3 @@
--if policy(receipt).new?
-  = link_to receipt, class: 'btn btn-success' do
-    = fa_icon 'eye'
-    Show
 -if policy(receipt).edit?
   = link_to [:edit, receipt], class: 'btn btn-primary' do
     = fa_icon 'pencil'

@@ -12,7 +12,16 @@
       = f.association :company
       = f.association :location
 
-      #map
-      
-      -if policy(@store).create? || policy(@store).update?
-        = f.button :submit, class: 'btn btn-primary'
+      #map  
+      .pull-left
+        -if policy(@store).create? || policy(@store).update?
+          = f.button :submit, class: "btn btn-primary"
+      .pull-right
+        -if policy(@store).index?
+          = link_to stores_path, class: 'btn btn-default' do
+            = fa_icon 'chevron-left'
+            Back
+        -if policy(@store).show?
+          = link_to @store, class: 'btn btn-info' do
+            = fa_icon 'eye'
+            Show

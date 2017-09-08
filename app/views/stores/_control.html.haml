@@ -1,7 +1,3 @@
--if policy(store).show?
-  = link_to store, class: 'btn btn-success' do
-    = fa_icon 'eye'
-    Show
 -if policy(store).edit?
   = link_to [:edit, store], class: 'btn btn-primary' do
     = fa_icon 'pencil'

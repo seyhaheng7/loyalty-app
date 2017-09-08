@@ -1,5 +1,5 @@
 .row
-  .col-xs-12.col-md-4
+  .col-xs-12.col-md-12
     = simple_form_for(@receipt) do |f|
       = f.error_notification
 
@@ -17,4 +17,15 @@
       = f.association :customer
 
       -if policy(@receipt).create? || policy(@receipt).update?
-        = f.button :submit, class: 'btn btn-primary'
+        .pull-left
+          -if policy(@receipt).create? || policy(@receipt).update?
+            = f.button :submit, class: "btn btn-primary"
+        .pull-right
+          -if policy(@receipt).index?
+            = link_to receipts_path, class: 'btn btn-default' do
+              = fa_icon 'chevron-left'
+              Back
+          -if policy(@receipt).show?
+            = link_to @receipt, class: 'btn btn-info' do
+              = fa_icon 'eye'
+            Show

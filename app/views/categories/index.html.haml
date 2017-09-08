@@ -1,7 +1,3 @@
-= render 'partials/page-head', title: 'Listing Categories'
-
-%br
-
 .m-heading-1.border-green.m-bordered
   = datagrid_form_for @grid, :method => :get, :url => categories_path
 
@@ -9,13 +5,13 @@
   .portlet-title
     .caption
       %i.icon-pie-chart
-      Categories
+      Listing Categories
   .portlet-body
-    -if policy(@grid.assets).new?
-      = link_to new_category_path, class: 'btn btn-primary' do
-        = fa_icon 'plus'
-        Add New Category
     .table-scrollable
       = paginate(@grid.assets)
       = datagrid_table @grid
       = paginate(@grid.assets)
+    -if policy(@grid.assets).new?
+      = link_to new_category_path, class: 'btn btn-primary' do
+        = fa_icon 'plus'
+        Add New Category

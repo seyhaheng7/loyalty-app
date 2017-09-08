@@ -1,7 +1,3 @@
--if policy(category).show?
-  = link_to category, class: 'btn btn-success' do
-    = fa_icon 'eye'
-    Show
 -if policy(category).edit?
   = link_to [:edit, category], class: 'btn btn-primary' do
     = fa_icon 'pencil'

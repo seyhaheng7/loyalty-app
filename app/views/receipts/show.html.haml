@@ -1,8 +1,7 @@
-= render 'partials/page-head', title: 'Show Receipt'
 .portlet.light.bordered
   .portlet-title
     .caption
-      = @receipt.receipt_id
+      Show Receipt
 
   .portlet-body
     %table.table
@@ -35,23 +34,30 @@
     - if policy(@receipt).approve?
       = simple_form_for @receipt, :url => approve_receipt_path do |f|
         = f.input :earned_points
-        = f.submit 'Approve', class: 'btn btn-success'
+        .pull-left
+          = f.submit 'Approve', class: 'btn btn-success'
 
     - if policy(@receipt).reject?
-      = link_to reject_receipt_path(@receipt), method: :patch, class: 'btn btn-danger' do
-        Reject
-
-    %hr
-    
-    -if policy(@receipt).index?
-      = link_to receipts_path, class: 'btn btn-default' do
-        = fa_icon 'chevron-left'
-        Back
-    -if policy(@receipt).edit?
-      = link_to [:edit, @receipt], class: 'btn btn-primary' do
-        = fa_icon 'pencil'
-        Edit
-    -if policy(@receipt).destroy?
-      = link_to @receipt, method: :delete, data: {confirm: 'Are you sure?'} ,class: 'btn btn-danger' do
-        = fa_icon 'trash'
-        Delete
+      .pull-right
+        = link_to reject_receipt_path(@receipt), method: :patch, class: 'btn btn-danger' do
+          Reject
+      %br
+      %br
+      %br
+      
+      .row
+        .col-md-12
+          .pull-left
+            -if policy(@receipt).index?
+              = link_to receipts_path, class: 'btn btn-default' do
+                = fa_icon 'chevron-left'
+                Back
+          .pull-right
+            -if policy(@receipt).edit?
+              = link_to [:edit, @receipt], class: 'btn btn-primary' do
+                = fa_icon 'pencil'
+                Edit
+            -if policy(@receipt).destroy?
+              = link_to @receipt, method: :delete, data: {confirm: 'Are you sure?'} ,class: 'btn btn-danger' do
+                = fa_icon 'trash'
+                Delete

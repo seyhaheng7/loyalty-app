@@ -11,4 +11,6 @@ class Reward < ApplicationRecord
 
   mount_uploader :image, ImageUploader
 
+  delegate :name, to: :company, prefix: true, allow_nil: true
+
 end

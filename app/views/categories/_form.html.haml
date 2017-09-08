@@ -1,5 +1,5 @@
 .row
-  .col-xs-12.col-md-4
+  .col-xs-12.col-md-12
     = simple_form_for(@category) do |f|
       = f.error_notification
 
@@ -11,6 +11,16 @@
         = f.hidden_field :icon_cache
 
       = f.input :name
+      .pull-left
+        -if policy(@category).create? || policy(@category).update?
+          = f.button :submit, class: 'btn btn-primary'
 
-      -if policy(@category).create? || policy(@category).update?
-        = f.button :submit, class: 'btn btn-primary'
+      .pull-right
+        -if policy(@category).index?
+          = link_to categories_path, class: 'btn btn-default' do
+            = fa_icon 'chevron-left'
+            Back
+        -if policy(@category).show?
+          = link_to @category, class: 'btn btn-info' do
+            = fa_icon 'eye'
+            Show

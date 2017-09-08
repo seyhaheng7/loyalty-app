@@ -1,7 +1,3 @@
--if policy(sticker).show?
-  = link_to sticker, class: 'btn btn-success' do
-    = fa_icon 'eye'
-    Show
 -if policy(sticker).edit?
   = link_to [:edit, sticker], class: 'btn btn-primary' do
     = fa_icon 'pencil'
