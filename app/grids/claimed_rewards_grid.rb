@@ -6,9 +6,9 @@ class ClaimedRewardsGrid
     ClaimedReward
   end
 
-  filter(:id, :integer)
-
   column(:id)
+  column(:reward_name)
+  column(:customer_name)
   column(:status)
   column(:created_at) do |model|
     model.created_at.to_date

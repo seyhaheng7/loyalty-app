@@ -22,6 +22,9 @@ class ClaimedReward < ApplicationRecord
 
   validate :customer_points
 
+  delegate :name, to: :customer, prefix: true, allow_nil: true
+  delegate :name, to: :reward, prefix: true, allow_nil: true
+
   private
 
   def customer_points
