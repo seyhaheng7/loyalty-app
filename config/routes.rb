@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+
+  resources :customer_locations, only: :index
+
   resources :claimed_rewards do
     member do
       patch :reject
