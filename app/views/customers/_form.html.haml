@@ -18,8 +18,8 @@
           = f.input :gender
           = f.input :password
           = f.input :current_points
-          = f.input :lat
-          = f.input :long
+          = f.input :lat, as: :hidden
+          = f.input :long, as: :hidden
           = f.input :language
           = f.input :current_sign_in_ip
 
@@ -32,3 +32,6 @@
 
           -if policy(@customer).create? || policy(@customer).updates?
             = f.button :submit, class: 'btn btn-primary'
+
+  .col-xs-12.col-md-8
+    #map-customer

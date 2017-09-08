@@ -28,12 +28,12 @@ module Api::V1::Customer
     end
     # Trick to make token auth work end
 
-    # swagger doc authentication header request
 
     def devise_token_controller?
       params[:controller].include? 'devise_token_auth'
     end
 
+    # swagger doc authentication header request
     class << self
       Swagger::Docs::Generator::set_real_methods
 
@@ -61,7 +61,7 @@ module Api::V1::Customer
     private
 
     def check_customer_verification!
-      unless current_customer.verified?
+      unless current_customer.active_for_authentication?
         error = { errors: ['Unverified account'] }
         render json: error, status: 401
       end

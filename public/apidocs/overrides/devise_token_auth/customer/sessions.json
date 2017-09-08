@@ -14,14 +14,14 @@
               "name": "phone",
               "type": "string",
               "description": "Phone Number",
-              "required": false
+              "required": true
             },
             {
               "paramType": "form",
-              "name": "password",
+              "name": "digit",
               "type": "string",
-              "description": "Password",
-              "required": false
+              "description": "Login Digit",
+              "required": true
             }
           ],
           "summary": "Customer Login ",
