@@ -15,16 +15,18 @@
         %th Name:
         %td= @category.name
 
-    %br
-    -if policy(@category).index?
-      = link_to categories_path, class: 'btn btn-default' do
-        = fa_icon 'chevron-left'
-        Back
-    -if policy(@category).edit?
-      = link_to [:edit, @category], class: 'btn btn-primary' do
-        = fa_icon 'pencil'
-        Edit
-    -if policy(@category).destroy?
-      = link_to @category, method: :delete, data: {confirm: 'Are you sure?'} ,class: 'btn btn-danger' do
-        = fa_icon 'trash'
-        Delete
+    .row.wrap-pad
+      .pull-left
+        -if policy(@category).index?
+          = link_to categories_path, class: 'btn btn-default' do
+            = fa_icon 'chevron-left'
+            Back
+      .pull-right
+        -if policy(@category).edit?
+          = link_to [:edit, @category], class: 'btn btn-primary' do
+            = fa_icon 'pencil'
+            Edit
+        -if policy(@category).destroy?
+          = link_to @category, method: :delete, data: {confirm: 'Are you sure?'} ,class: 'btn btn-danger' do
+            = fa_icon 'trash'
+            Delete

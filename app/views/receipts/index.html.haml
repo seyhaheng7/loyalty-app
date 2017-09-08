@@ -1,21 +1,20 @@
 = render 'partials/page-head', title: 'Listing Receipts'
 
-%br
-
 .m-heading-1.border-green.m-bordered
   = datagrid_form_for @grid, :method => :get, :url => receipts_path
 
 .portlet.light.bordered
   .portlet-title
     .caption
-      %i.icon-doc
+      %i.icon-wallet
       Receipt
   .portlet-body
-    -if policy(@grid.assets).new?
-      = link_to new_receipt_path, class: 'btn btn-primary' do
-        = fa_icon 'plus'
-        Add New Receipt
+
     .table-scrollable
       = paginate(@grid.assets)
       = datagrid_table @grid
       = paginate(@grid.assets)
+    -if policy(@grid.assets).new?
+      = link_to new_receipt_path, class: 'btn btn-primary' do
+        = fa_icon 'plus'
+        Add New Receipt

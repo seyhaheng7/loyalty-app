@@ -1,5 +1,5 @@
 .row
-  .col-xs-12.col-md-4
+  .col-xs-12.col-md-12
     = simple_form_for(@user) do |f|
       = f.error_notification
 
@@ -15,4 +15,15 @@
       = f.input :role, collection: User::ROLES
       = f.input :password
       = f.input :password_confirmation
-      = f.button :submit, class: 'btn btn-primary'
+      .pull-left
+        -if policy(@user).create? || policy(@user).update?
+          = f.button :submit, class: 'btn btn-primary'
+      .pull-right
+        -if policy(@user).index?
+          = link_to users_path, class: 'btn btn-default' do
+            = fa_icon 'chevron-left'
+            Back
+        -if params[:action] == "edit" && policy(@user).show?
+          = link_to @user, class: 'btn btn-info' do
+            = fa_icon 'eye'
+            Show

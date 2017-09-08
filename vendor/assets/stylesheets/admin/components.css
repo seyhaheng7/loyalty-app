@@ -5825,9 +5825,8 @@ Form Layouts
 
 .control-label .required,
 .form-group .required {
-  color: #e02222;
   font-size: 12px;
-  padding-left: 2px; }
+}
 
 .form {
   padding: 0 !important; }

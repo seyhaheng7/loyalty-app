@@ -1,10 +1,20 @@
 .row
-  .col-xs-12.col-md-4
+  .col-xs-12.col-md-12
     = simple_form_for(@location) do |f|
       = f.error_notification
 
       = f.input :name
       = f.input :description
 
-      -if policy(@location).create? || policy(@location).update?
-        = f.button :submit, class: 'btn btn-primary'
+      .pull-left
+        -if policy(@location).create? || policy(@location).update?
+          = f.button :submit, class: 'btn btn-primary' 
+      .pull-right
+        -if policy(@location).index?
+          = link_to locations_path, class: 'btn btn-default' do
+            = fa_icon 'chevron-left'
+            Back
+        -if params[:action] == "edit" && policy(@location).show?
+          = link_to @location, class: 'btn btn-info' do
+            = fa_icon 'eye'
+            Show

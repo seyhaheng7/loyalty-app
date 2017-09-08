@@ -1,22 +1,19 @@
 = render 'partials/page-head', title: 'Listing Stickers'
 
-%br
-
 .m-heading-1.border-green.m-bordered
   = datagrid_form_for @grid, :method => :get, :url => stores_path
 
 .portlet.light.bordered
   .portlet-title
     .caption
-      %i.icon-basket
+      %i.icon-bulb
       Stickers
   .portlet-body
-    -if policy(@grid.assets).new?
-      = link_to new_sticker_path, class: 'btn btn-primary' do
-        = fa_icon 'plus'
-        Add New Stickers
     .table-scrollable
       = paginate(@grid.assets)
       = datagrid_table @grid
       = paginate(@grid.assets)
-
+    -if policy(@grid.assets).new?
+      = link_to new_sticker_path, class: 'btn btn-primary' do
+        = fa_icon 'plus'
+        Add New Stickers

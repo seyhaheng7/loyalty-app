@@ -1,5 +1,5 @@
 .row
-  .col-xs-12.col-md-4
+  .col-xs-12.col-md-12
     = simple_form_for(@sticker) do |f|
       = f.error_notification
 
@@ -13,10 +13,15 @@
             = f.hidden_field :image_cache
           = f.input :name
           = f.association :sticker_group
-
-          = f.button :submit
+          .pull-left
+            -if policy(@sticker).create? || policy(@sticker).update?
+              = f.button :submit
           .pull-right
-            = link_to stickers_path, class: 'btn btn-success' do
-              Back
-            = link_to @sticker, class: 'btn btn-primary' do
-              Show
+            -if policy(@sticker).index?
+              = link_to stickers_path, class: 'btn btn-default' do
+                = fa_icon 'chevron-left'
+                Back
+            - if params[:action] == "edit" && policy(@sticker).show?
+              = link_to @sticker, class: 'btn btn-info' do
+                = fa_icon 'eye'
+                Show

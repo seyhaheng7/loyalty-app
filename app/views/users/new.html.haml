@@ -6,8 +6,3 @@
 
   .portlet-body.form
     = render 'form'
-    %br
-    -if policy(@user).index?
-      = link_to users_path, class: 'btn btn-default' do
-        = fa_icon 'chevron-left'
-        Back

@@ -15,16 +15,18 @@
         %th Description:
         %td= @location.description
 
-    %br
-    -if policy(@location).index?
-      = link_to locations_path, class: 'btn btn-default' do
-        = fa_icon 'chevron-left'
-        Back
-    -if policy(@location).edit?
-      = link_to [:edit, @location], class: 'btn btn-primary' do
-        = fa_icon 'pencil'
-        Edit
-    -if policy(@location).destroy?
-      = link_to @location, method: :delete, data: {confirm: 'Are you sure?'} ,class: 'btn btn-danger' do
-        = fa_icon 'trash'
-        Delete
+    .row.wrap-pad
+      .pull-left
+        -if policy(@location).index?
+          = link_to locations_path, class: 'btn btn-default' do
+            = fa_icon 'chevron-left'
+            Back
+      .pull-right
+        -if policy(@location).edit?
+          = link_to [:edit, @location], class: 'btn btn-primary' do
+            = fa_icon 'pencil'
+            Edit
+        -if policy(@location).destroy?
+          = link_to @location, method: :delete, data: {confirm: 'Are you sure?'} ,class: 'btn btn-danger' do
+            = fa_icon 'trash'
+            Delete

@@ -13,7 +13,7 @@ class Reward < ApplicationRecord
 
   mount_uploader :image, ImageUploader
 
-  scope :available, -> { where("quantity > approved_claimed_rewards_count") }
-
   delegate :name, to: :company, prefix: true, allow_nil: true
+
+  scope :available, -> { where("quantity > approved_claimed_rewards_count") }
 end

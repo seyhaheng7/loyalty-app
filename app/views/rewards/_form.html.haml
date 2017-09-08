@@ -1,11 +1,10 @@
 .row
-  .col-xs-12.col-md-4
+  .col-xs-12.col-md-12
     = simple_form_for(@reward) do |f|
       = f.error_notification
 
       .form-body
-        .form-group
-
+        .text-center
           .image-uploader{align: 'center'}
             %a{:href => "#!"}
               = image_tag f.object.image, class: 'img-responsive', size: '150x150'
@@ -13,14 +12,19 @@
               :label_html => { class: 'btn btn-default'}
             = f.hidden_field :image_cache
 
-          = f.input :name
-          = f.input :require_points
-          = f.input :quantity
-          = f.association :company
-
-          = f.button :submit
-          .pull-right
-            = link_to rewards_path, class: 'btn btn-success' do
+        = f.input :name
+        = f.input :require_points
+        = f.input :quantity
+        = f.association :company
+        .pull-left
+          -if policy(@reward).create? || policy(@reward).update?
+            = f.button :submit, class: "btn btn-primary"
+        .pull-right
+          -if policy(@reward).index?
+            = link_to rewards_path, class: 'btn btn-default' do
+              = fa_icon 'chevron-left'
               Back
-            = link_to @reward, class: 'btn btn-primary' do
+          -if params[:action] == "edit" && policy(@reward).show?
+            = link_to @reward, class: 'btn btn-info' do
+              = fa_icon 'eye'
               Show

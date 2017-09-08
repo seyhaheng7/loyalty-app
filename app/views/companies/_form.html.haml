@@ -1,5 +1,5 @@
 .row
-  .col-xs-12.col-md-4
+  .col-xs-12.col-md-12
     = simple_form_for(@company) do |f|
       = f.error_notification
 
@@ -15,6 +15,16 @@
       = f.input :point_rate
       = f.association :category
       = f.input :partner
+      .pull-left
+        -if policy(@company).create? || policy(@company).updates?
+          = f.button :submit, class: 'btn btn-primary'
 
-      -if policy(@company).create? || policy(@company).updates?
-        = f.button :submit, class: 'btn btn-primary'
+      .pull-right
+        -if policy(@company).index?
+          = link_to companies_path, class: 'btn btn-default' do
+            = fa_icon 'chevron-left'
+            Back
+        -if params[:action] == "edit" && policy(@company).show?
+          = link_to @company, class: 'btn btn-info' do
+            = fa_icon 'eye'
+            Show

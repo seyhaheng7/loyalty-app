@@ -11,8 +11,7 @@
         %h4 Reward
         %table.table
           %tr
-            %th Image
-            %td= image_tag @claimed_reward.reward.image, size: '150x150'
+            %td= image_tag @claimed_reward.reward.image, size: '150x150', class: "text-center"
           %tr
             %th Name
             %td= @claimed_reward.reward.name
@@ -26,9 +25,8 @@
       .col-xs-12.col-md-6
         %h4 User
         %table.table
-          %tr
-            %th Avatar
-            %td= image_tag @claimed_reward.customer.avatar, size: '150x150'
+          %tr.text-center
+            %td= image_tag @claimed_reward.customer.avatar, size: '150x150', class: "text-center"
           %tr
             %th Name
             %td= @claimed_reward.customer.name
@@ -57,13 +55,14 @@
     = link_to reject_claimed_reward_path(@claimed_reward.id), method: :patch, class: 'btn btn-danger' do
       Reject
 
-  %hr
-
-  -if policy(@claimed_reward).index?
-    = link_to claimed_rewards_path, class: 'btn btn-default' do
-      = fa_icon 'chevron-left'
-      Back
-  -if policy(@claimed_reward).destroy?
-    = link_to @claimed_reward, method: :delete, data: {confirm: 'Are you sure?'} ,class: 'btn btn-danger' do
-      = fa_icon 'trash'
-      Delete
+  .row.wrap-pad
+    .pull-left
+      -if policy(@claimed_reward).index?
+        = link_to claimed_rewards_path, class: 'btn btn-default' do
+          = fa_icon 'chevron-left'
+          Back
+    .pull-right
+      -if policy(@claimed_reward).destroy?
+        = link_to @claimed_reward, method: :delete, data: {confirm: 'Are you sure?'} ,class: 'btn btn-danger' do
+          = fa_icon 'trash'
+          Delete
