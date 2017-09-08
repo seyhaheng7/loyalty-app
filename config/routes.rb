@@ -33,6 +33,9 @@ Rails.application.routes.draw do
         resources :confirmations, only: [] do
           put :confirm, on: :collection
         end
+        resources :digits, only: [] do
+          put :send_digit, on: :collection
+        end
         resources :receipts, only: [:index, :show, :create]
         resources :categories, only: [:index, :show]
         resources :stores, only: [:index, :show]
@@ -55,7 +58,8 @@ Rails.application.routes.draw do
     registrations:  'overrides/devise_token_auth/customer/registrations'
   }
   mount_devise_token_auth_for 'Merchant', at: 'api/v1/merchant/auth', controllers: {
-    sessions:  'overrides/devise_token_auth/merchant/sessions'
+    sessions:  'overrides/devise_token_auth/merchant/sessions',
+    registrations:  'overrides/devise_token_auth/merchant/registrations'
   }
 
   root 'home#index'

@@ -6,8 +6,9 @@ Overrides::DeviseTokenAuth::Customer::SessionsController.class_eval do
   swagger_api :create do
     summary 'Customer Login '
     notes 'user login with phone and password'
-    param :form, 'phone', :string, :optional, 'Phone Number'
-    param :form, 'password', :string, :optional, 'Password'
+    param :form, 'phone', :string, :required, 'Phone Number'
+    param :form, 'digit', :string, :required, 'Login Digit'
+    # param :form, 'password', :string, :optional, 'Password'
     response :ok, "Success", :User
     response :not_acceptable
   end
@@ -32,8 +33,6 @@ Overrides::DeviseTokenAuth::Customer::RegistrationsController.class_eval do
     summary 'Customer Login '
     notes 'user login with phone and password'
     param :form, 'phone', :string, :required, 'Phone Number'
-    param :form, 'password', :string, :required, 'Phone Number'
-    param :form, 'password_confirmation', :string, :required, 'Name'
     param :form, 'name', :string, :optional, 'Name'
     param :form, 'email', :string, :optional, 'email'
     param :form, 'gender', :string, :optional, 'Gender'
@@ -41,7 +40,6 @@ Overrides::DeviseTokenAuth::Customer::RegistrationsController.class_eval do
     param :form, 'address', :string, :optional, 'Address'
     param :form, 'lat', :float, :optional, 'Lat'
     param :form, 'long', :float, :optional, 'Long'
-    param :form, 'email', :string, :optional, 'Email'
     response :ok, "Success", :User
     response :not_acceptable
   end

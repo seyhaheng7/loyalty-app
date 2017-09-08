@@ -2,6 +2,7 @@ module Overrides::DeviseTokenAuth::Customer
   class RegistrationsController < DeviseTokenAuth::RegistrationsController
     def create
       @resource            = resource_class.new(sign_up_params)
+      @resource.password   = Devise.friendly_token
       # honor devise configuration for case_insensitive_keys
       if resource_class.case_insensitive_keys.include?(:email)
         @resource.email = sign_up_params[:email].try :downcase
