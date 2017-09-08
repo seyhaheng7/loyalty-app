@@ -14,3 +14,6 @@
 
 #= require stores/form
 #= require stores/show
+
+#= require customers/form
+#= require customers/show
