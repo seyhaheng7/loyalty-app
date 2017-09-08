@@ -1,10 +1,10 @@
 module Overrides::DeviseTokenAuth::Customer
   class SessionsController < DeviseTokenAuth::SessionsController
+    before_action :configure_permitted_parameters, only: [:create]
 
     def create
       # Check
       field = (resource_params.keys.map(&:to_sym) & resource_class.authentication_keys).first
-
       @resource = nil
       if field
         q_value = resource_params[field]
@@ -22,7 +22,9 @@ module Overrides::DeviseTokenAuth::Customer
 
         @resource = resource_class.where(q, q_value).first
       end
-      if @resource and valid_params?(field, q_value) and @resource.valid_password?(resource_params[:password]) and (!@resource.respond_to?(:active_for_authentication?) or @resource.active_for_authentication?)
+
+      # change to use login digit
+      if @resource and valid_params?(field, q_value) and @resource.valid_digit?(resource_params[:digit]) and (!@resource.respond_to?(:active_for_authentication?) or @resource.active_for_authentication?)
         # create client id
         @client_id = SecureRandom.urlsafe_base64(nil, false)
         @token     = SecureRandom.urlsafe_base64(nil, false)
@@ -35,7 +37,10 @@ module Overrides::DeviseTokenAuth::Customer
 
         sign_in(:user, @resource, store: false, bypass: false)
 
-        yield if block_given?
+        yield @resource if block_given?
+
+        # update auth header manaully
+        update_auth_header
 
         render_create_success
       elsif @resource and not (!@resource.respond_to?(:active_for_authentication?) or @resource.active_for_authentication?)
@@ -43,6 +48,16 @@ module Overrides::DeviseTokenAuth::Customer
       else
         render_create_error_bad_credentials
       end
+    end
+
+    protected
+
+    def configure_permitted_parameters
+      devise_parameter_sanitizer.permit(:sign_in, keys: [:phone, :digit])
+    end
+
+    def valid_params?(key, val)
+      resource_params[:digit] && key && val
     end
   end
 end

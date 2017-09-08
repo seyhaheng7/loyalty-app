@@ -1,5 +1,6 @@
 module Overrides::DeviseTokenAuth::Merchant
   class SessionsController < DeviseTokenAuth::SessionsController
+
     def create
       # Check
       field = (resource_params.keys.map(&:to_sym) & resource_class.authentication_keys).first
@@ -21,6 +22,7 @@ module Overrides::DeviseTokenAuth::Merchant
 
         @resource = resource_class.where(q, q_value).first
       end
+
       if @resource and valid_params?(field, q_value) and @resource.valid_password?(resource_params[:password]) and (!@resource.respond_to?(:active_for_authentication?) or @resource.active_for_authentication?)
         # create client id
         @client_id = SecureRandom.urlsafe_base64(nil, false)
@@ -34,7 +36,10 @@ module Overrides::DeviseTokenAuth::Merchant
 
         sign_in(:user, @resource, store: false, bypass: false)
 
-        yield if block_given?
+        yield @resource if block_given?
+
+        # update auth header manaully
+        update_auth_header
 
         render_create_success
       elsif @resource and not (!@resource.respond_to?(:active_for_authentication?) or @resource.active_for_authentication?)
@@ -43,5 +48,6 @@ module Overrides::DeviseTokenAuth::Merchant
         render_create_error_bad_credentials
       end
     end
+
   end
 end

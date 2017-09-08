@@ -14,8 +14,10 @@ class Customer < ActiveRecord::Base
   has_many :operating_systems, dependent: :destroy
 
   scope :able_to_verify, ->{ where('verification_expired_at > ?', DateTime.now) }
-  reverse_geocoded_by :lat, :long
+  scope :digit_not_yet_expired, ->{ where('digit_expired_at > ?', DateTime.now) }
+  scope :verified, ->{ where.not(verified_at: nil) }
 
+  reverse_geocoded_by :lat, :long
 
   before_validation :generate_uid_from_phone, if: :phone_provider?, on: :create
 
@@ -30,8 +32,16 @@ class Customer < ActiveRecord::Base
     end
   end
 
-  before_create :generate_verification_code, unless: :verified?
-  after_create :send_comfirmation_code, unless: :verified?
+  before_save :generate_verification_code, unless: :verified?, if: :phone_changed?
+  after_save :send_comfirmation_code, unless: :verified?, if: :saved_change_to_phone?
+
+  def digit_expired?
+    digit_expired_at < DateTime.now
+  end
+
+  def valid_digit?(digit)
+    !digit_expired? && digit == login_digit
+  end
 
   def verified?
     verified_at.present?
@@ -39,6 +49,18 @@ class Customer < ActiveRecord::Base
 
   def confirm!
     update(verified_at: DateTime.now)
+  end
+
+  def active_for_authentication?
+    verified?
+  end
+
+  def send_login_digit
+    self.login_digit      = generate_4_digit
+    self.digit_expired_at = DateTime.now + 10.minutes
+    save
+    text = "Your login digit is #{login_digit} will expired in 10 minutes"
+    SendSmsWorker.perform_async(phone, text)
   end
 
   def add_points(points)
@@ -65,7 +87,8 @@ class Customer < ActiveRecord::Base
   private
 
   def generate_verification_code
-    self.verification_code = generate_4_digit
+    self.verified_at             = nil
+    self.verification_code       = generate_4_digit
     self.verification_expired_at = DateTime.now + 10.minutes
   end
 
