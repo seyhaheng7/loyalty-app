@@ -13,7 +13,7 @@ set :linked_files, fetch(:linked_files, []).push('.env')
 
 set :scm, :git
 
-set :pty, true
+set :pty, false
 
 set :keep_releases, 5
 
