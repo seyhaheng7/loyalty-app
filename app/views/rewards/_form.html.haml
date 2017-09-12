@@ -15,7 +15,7 @@
         = f.input :name
         = f.input :require_points
         = f.input :quantity
-        = f.association :company
+        = f.association :store
         .pull-left
           -if policy(@reward).create? || policy(@reward).update?
             = f.button :submit, class: "btn btn-primary"

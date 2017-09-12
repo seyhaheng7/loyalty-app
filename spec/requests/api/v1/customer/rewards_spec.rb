@@ -1,8 +1,8 @@
 describe 'Reward' do
   let!(:customer){ create(:customer) }
-  let!(:company){ create(:company, name: "Codingate", address: "btb") }
-  let!(:reward1){ create(:reward, name: "google", require_points: 300, quantity: 6, company: company ) }
-  let!(:reward2){ create(:reward, name: "facebook", require_points: 500, quantity: 2, approved_claimed_rewards_count: 2, company: company ) }
+  let!(:store){ create(:store, name: "Codingate") }
+  let!(:reward1){ create(:reward, name: "google", require_points: 300, quantity: 6, store: store ) }
+  let!(:reward2){ create(:reward, name: "facebook", require_points: 500, quantity: 2, approved_claimed_rewards_count: 2, store: store ) }
 
 
   describe 'GET api/v1/customer/rewards' do

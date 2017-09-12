@@ -4,6 +4,6 @@ FactoryGirl.define do
     image File.open('spec/support/default.png')
     require_points 1
     quantity 4
-    association :company
+    association :store
   end
 end

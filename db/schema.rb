@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170911091124) do
+
+ActiveRecord::Schema.define(version: 20170912075042) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -168,13 +169,13 @@ ActiveRecord::Schema.define(version: 20170911091124) do
     t.string "image"
     t.integer "require_points"
     t.integer "quantity", default: 0
-    t.bigint "company_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
     t.integer "approved_claimed_rewards_count", default: 0
-    t.index ["company_id"], name: "index_rewards_on_company_id"
+    t.bigint "store_id"
     t.index ["deleted_at"], name: "index_rewards_on_deleted_at"
+    t.index ["store_id"], name: "index_rewards_on_store_id"
   end
 
   create_table "sticker_groups", force: :cascade do |t|
@@ -237,7 +238,7 @@ ActiveRecord::Schema.define(version: 20170911091124) do
   add_foreign_key "operating_systems", "customers"
   add_foreign_key "receipts", "customers"
   add_foreign_key "receipts", "stores"
-  add_foreign_key "rewards", "companies"
+  add_foreign_key "rewards", "stores"
   add_foreign_key "stickers", "sticker_groups"
   add_foreign_key "stores", "companies"
   add_foreign_key "stores", "locations"

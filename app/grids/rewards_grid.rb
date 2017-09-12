@@ -6,7 +6,7 @@ class RewardsGrid
   end
 
   filter(:name, :string)
-  filter(:company, :string)
+  filter(:store, :string)
 
   column(:name)
   column(:image, html: true) do |reward|
@@ -14,7 +14,7 @@ class RewardsGrid
   end
   column(:require_points)
   column(:quantity)
-  column(:company_name)
+  column(:store_name)
   
   column(:actions, html:true) do |reward|
     render 'rewards/control', reward: reward
