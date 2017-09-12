@@ -20,10 +20,10 @@
         %th Quantity:
         %td= @reward.quantity
       %tr
-        %th Company:
-        %td= @reward.company_name
+        %th Store:
+        %td= @reward.store_name
 
-    .row.wrap-pad  
+    .row.wrap-pad
       .pull-left
         -if policy(@reward).index?
           = link_to rewards_path, class: 'btn btn-default' do

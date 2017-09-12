@@ -1,7 +1,7 @@
 feature 'Reward' do
   given!(:user)    { create(:user, name: 'test') }
   given!(:reward){ create(:reward) }
-  given!(:company){create(:company, name: 'test')}
+  given!(:store){create(:store, name: 'test')}
   
   before do
     login_as user, scope: :user
@@ -23,7 +23,7 @@ feature 'Reward' do
       fill_in 'Require points', with: '1'
       fill_in 'Quantity', with: '10'
       attach_file('reward[image]', File.join(Rails.root, 'spec/support/default.png'))
-      select 'test', :from => 'Company'
+      select 'test', :from => 'Store'
       click_on 'Create Reward'
       expect(page).to have_content 'Reward was successfully created.'
     end
@@ -41,7 +41,7 @@ feature 'Reward' do
       visit rewards_path
       find("a[href='#{edit_reward_path(reward)}']").click
       fill_in 'Name', with: 'Coffee Shop'
-      select 'test', :from => 'Company'
+      select 'test', :from => 'Store'
       click_on 'Update Reward'
       expect(page).to have_content 'Reward was successfully updated.'
     end
