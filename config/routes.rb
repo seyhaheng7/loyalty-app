@@ -1,7 +1,11 @@
+require 'sidekiq/web'
 Rails.application.routes.draw do
 
   resources :customer_locations, only: :index
 
+  mount ActionCable.server => '/cable'
+  mount Sidekiq::Web => '/sidekiq'
+  
   resources :claimed_rewards do
     member do
       patch :reject
