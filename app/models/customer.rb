@@ -19,8 +19,6 @@ class Customer < ActiveRecord::Base
 
   reverse_geocoded_by :lat, :long
 
-  before_validation :generate_uid_from_phone, if: :phone_provider?, on: :create
-
   GENDER = ['Male', 'Female']
   PROVIDERS = ['email', 'phone', 'facebook', 'google']
 
@@ -31,8 +29,13 @@ class Customer < ActiveRecord::Base
       self.provider == provider_name
     end
   end
+  scope :active, ->{ where("update_location_at > ?", DateTime.now - 30.minutes) }
 
+  before_validation :generate_uid_from_phone, if: :phone_provider?, on: :create
   before_save :generate_verification_code, unless: :verified?, if: :phone_changed?
+  before_save :change_update_location_at, if: :location_changed?
+
+  after_commit :broadcast_location, if: :saved_change_to_location?
   after_save :send_comfirmation_code, unless: :verified?, if: :saved_change_to_phone?
 
   def digit_expired?
@@ -103,5 +106,21 @@ class Customer < ActiveRecord::Base
 
   def generate_uid_from_phone
     self.uid = phone
+  end
+
+  def broadcast_location
+    UpdateCustomerLocationWorker.perform_async id
+  end
+
+  def saved_change_to_location?
+    saved_change_to_lat? || saved_change_to_long?
+  end
+
+  def location_changed?
+    lat_changed? || long_changed?
+  end
+
+  def change_update_location_at
+    self.update_location_at = DateTime.now
   end
 end
