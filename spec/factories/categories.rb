@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :category do
-    name "MyString"
+    name { FFaker::Name.name }
     icon "MyString"
   end
 end

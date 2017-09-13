@@ -1,11 +1,11 @@
 feature 'Company' do
   given!(:user)    { create(:user) }
   given!(:company){ create(:company) }
-  
+
   let!(:category) do
     create(:category, name: 'test')
   end
-  
+
   before do
     login_as user, scope: :user
   end
@@ -23,7 +23,7 @@ feature 'Company' do
       click_link 'New Company'
       fill_in 'Name', with: 'Codingate'
       fill_in 'Address', with: 'Phnom Penh'
-      select 'test', from: 'Category'      
+      select 'test', from: 'Category'
       click_on 'Create Company'
       expect(page).to have_content 'Company was successfully created.'
     end

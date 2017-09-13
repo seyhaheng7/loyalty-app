@@ -1,7 +1,8 @@
 describe 'Categories' do
   let!(:customer){ create(:customer, first_name: 'code', last_name: 'gate') }
-  let!(:categories){ create_list(:category, 10) }
   let!(:category){ create(:category) }
+  let!(:categories){ create_list(:category, 10) }
+
   describe 'GET api/v1/customer/categories' do
     before do
       get api_v1_customer_categories_path, headers: customer.create_new_auth_token
