@@ -1,11 +1,7 @@
-= render 'partials/page-head', title: 'Show merchant'
-
 .portlet.light.bordered
   .portlet-title
     .caption
-
-
-
+      Merchant Profile
 
   .portlet-body
     %table.table
@@ -13,7 +9,7 @@
       %col{width: '350'}
       %tr
         %th Avatar:
-        %td= image_tag @merchant.avatar_url, size: '150x150'
+        %td= image_tag @merchant.avatar_url, size: '50x50'
       %tr
         %th Name:
         %td= @merchant.name
@@ -27,13 +23,15 @@
         %th Store:
         %td= @merchant.store_name
 
-    %br
-    = link_to merchants_path, class: 'btn btn-default' do
-      = fa_icon 'chevron-left'
-      Back
-    = link_to [:edit, @merchant], class: 'btn btn-primary' do
-      = fa_icon 'pencil'
-      Edit
-    = link_to @merchant, method: :delete, data: {confirm: 'Are you sure?'} ,class: 'btn btn-danger' do
-      = fa_icon 'trash'
-      Delete
+    .row.wrap-pad
+      .pull-left
+        = link_to merchants_path, class: 'btn btn-default' do
+          = fa_icon 'chevron-left'
+          Back
+      .pull-right
+        = link_to [:edit, @merchant], class: 'btn btn-primary' do
+          = fa_icon 'pencil'
+          Edit
+        = link_to @merchant, method: :delete, data: {confirm: 'Are you sure?'} ,class: 'btn btn-danger' do
+          = fa_icon 'trash'
+          Delete

@@ -18,5 +18,5 @@ class CategoriesGrid
 
   column(:actions, html:true) do |record|
     render 'categories/control', category: record
-  end  
+  end
 end

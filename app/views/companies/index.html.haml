@@ -6,14 +6,15 @@
 .portlet.light.bordered
   .portlet-title
     .caption
-      %i.icon-home 
+      %i.icon-briefcase
       Companies
+    .pull-right
+      -if policy(@grid.assets).new?
+        = link_to new_company_path, class: 'btn btn-primary' do
+          = fa_icon 'plus'
+          Add New Company
   .portlet-body
     .table-scrollable
-      = paginate(@grid.assets)
       = datagrid_table @grid
+    .text-center
       = paginate(@grid.assets)
-    -if policy(@grid.assets).new?
-      = link_to new_company_path, class: 'btn btn-primary' do
-        = fa_icon 'plus'
-        Add New Company

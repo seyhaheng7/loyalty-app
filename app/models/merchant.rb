@@ -11,6 +11,11 @@ class Merchant < ActiveRecord::Base
 
   belongs_to :store
 
+  validates :phone,:presence => true, uniqueness: { message: "already registered" }
+  validates :phone, numericality: { message: 'Not a phone number' },
+              length: { minimum: 8, maximum: 9, message: 'Not a phone number' }
+
+
   before_validation :generate_uid_from_phone, if: :phone_provider?, on: :create
 
   PROVIDERS = ['email', 'phone', 'facebook', 'google']

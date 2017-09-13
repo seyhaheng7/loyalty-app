@@ -1,5 +1,5 @@
 .row
-  .col-xs-12.col-md-4
+  .col-xs-12.col-md-12
     = simple_form_for(@customer) do |f|
       = f.error_notification
 
@@ -11,9 +11,10 @@
             = f.input :avatar, as: :file, label: 'Upload Avatar',
               :label_html => { class: 'btn btn-default'}
             = f.hidden_field :avatar_cache
-          = f.input :name
+          = f.input :first_name
+          = f.input :last_name
           = f.input :email
-          = f.input :phone
+          = f.input :phone, input_html: { class: 'inputmask' }
           = f.input :address
           = f.input :gender
           = f.input :password
@@ -23,15 +24,20 @@
           = f.input :language
           = f.input :current_sign_in_ip
 
+      .row
+        .col-xs-12.col-md-12
+          #map-customer
+          .pull-left
+            -if policy(@customer).create? || policy(@customer).updates?
+              = f.button :submit, class: 'btn btn-primary'
+
           .pull-right
-            = link_to customers_path, class: 'btn btn-success' do
-              Back
-            = link_to @customer, class: 'btn btn-primary' do
-              Show
+            -if policy(@customer).index?
+              = link_to customers_path, class: 'btn btn-default' do
+                = fa_icon 'chevron-left'
+                Back
+            -if params[:action] == "edit" && policy(@customer).show?
+              = link_to @customer, class: 'btn btn-primary' do
+                = fa_icon 'eye'
+                Show
 
-
-          -if policy(@customer).create? || policy(@customer).updates?
-            = f.button :submit, class: 'btn btn-primary'
-
-  .col-xs-12.col-md-8
-    #map-customer

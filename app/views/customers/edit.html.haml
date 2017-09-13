@@ -6,12 +6,3 @@
 
   .portlet-body.form
     = render 'form'
-    %br
-    -if policy(@customer).index?
-      = link_to customers_path, class: 'btn btn-default' do
-        = fa_icon 'chevron-left'
-        Back
-    -if policy(@customer).show?
-      = link_to @customer, class: 'btn btn-success' do
-        = fa_icon 'eye'
-        Show

@@ -4,14 +4,15 @@
     .caption
       Status :
       = @claimed_reward.status
-
+    .pull-right
+      %h5= @claimed_reward.manage_climed_reward.html_safe
   .portlet-body
     .row
       .col-xs-12.col-md-6
-        %h4 Reward
+        %h4.text-center Reward
         %table.table
-          %tr
-            %td= image_tag @claimed_reward.reward.image, size: '150x150', class: "text-center"
+          .width-auto.text-center.wrap-mar
+            = image_tag @claimed_reward.reward.image, size: '50x50', class: "text-center"
           %tr
             %th Name
             %td= @claimed_reward.reward.name
@@ -23,10 +24,10 @@
             %td= @claimed_reward.reward.quantity
 
       .col-xs-12.col-md-6
-        %h4 User
+        %h4.text-center User
         %table.table
-          %tr.text-center
-            %td= image_tag @claimed_reward.customer.avatar, size: '150x150', class: "text-center"
+          .width-auto.text-center.wrap-mar
+            = image_tag @claimed_reward.customer.avatar, size: '50x50', class: "text-center"
           %tr
             %th Name
             %td= @claimed_reward.customer.name
@@ -46,7 +47,7 @@
             %th Current Points
             %td= @claimed_reward.customer.current_points
 
-    %p= @claimed_reward.manage_climed_reward
+
 
   - if policy(@claimed_reward).approve?
     = link_to approve_claimed_reward_path(@claimed_reward.id), method: :patch, class: 'btn btn-primary' do

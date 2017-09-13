@@ -7,6 +7,7 @@ class Store < ApplicationRecord
   has_many :rewards
 
   validates :name, presence: true
+  validates :address, presence: true
 
   reverse_geocoded_by :lat, :long
 

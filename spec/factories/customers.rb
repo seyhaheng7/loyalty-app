@@ -1,7 +1,9 @@
 FactoryGirl.define do
   factory :customer do
-    phone { FFaker::PhoneNumber.short_phone_number }
+    phone { [8, 9].sample.times.map { rand(0..9) }.join }
     verified_at { DateTime.now }
+    first_name 'jonh'
+    last_name 'wick'
     password 'Codingate@2017'
     password_confirmation 'Codingate@2017'
 

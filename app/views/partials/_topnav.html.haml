@@ -1,66 +1,15 @@
 .page-header.navbar.navbar-fixed-top
-
-  / BEGIN HEADER INNER
   .page-header-inner
-
-    / BEGIN LOGO
     .page-logo
       %a{:href => "/"}
-        %img.logo-default{:alt => "logo", :src => "/assets/logo-light.png"}
+        = image_tag "logo.png", width: "160", class: "logo-default"
       .menu-toggler.sidebar-toggler
-    / DOC: Remove the above "hide" to enable the sidebar toggler button on header
-    / END LOGO
 
-    / BEGIN RESPONSIVE MENU TOGGLER
     %a.menu-toggler.responsive-toggler{"data-target" => ".navbar-collapse", "data-toggle" => "collapse", :href => "javascript:;"}
-    / END RESPONSIVE MENU TOGGLER
-
-    / BEGIN PAGE TOP
     .page-top
-      / BEGIN HEADER SEARCH BOX
-      / DOC: Apply "search-form-expanded" right after the "search-form" class to have half expanded search box
-      %form.search-form{:action => "page_general_search_2.html", :method => "GET"}
-        .input-group
-          %input.form-control.input-sm{:name => "query", :placeholder => "Search...", :type => "text"}/
-          %span.input-group-btn
-            %a.btn.submit{:href => "javascript:;"}
-              %i.icon-magnifier
-      / END HEADER SEARCH BOX
-      / BEGIN TOP NAVIGATION MENU
       .top-menu
         %ul.nav.navbar-nav.pull-right
-          %li.separator.hide
-          / BEGIN NOTIFICATION DROPDOWN
-          / DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte
-          / DOC: Apply "dropdown-hoverable" class after "dropdown" and remove data-toggle="dropdown" data-hover="dropdown" data-close-others="true" attributes to enable hover dropdown mode
-          / DOC: Remove "dropdown-hoverable" and add data-toggle="dropdown" data-hover="dropdown" data-close-others="true" attributes to the below A element with dropdown-toggle class
-          %li#header_notification_bar.dropdown.dropdown-extended.dropdown-notification.dropdown-dark
-
-            %a.dropdown-toggle{"data-close-others" => "true", "data-hover" => "dropdown", "data-toggle" => "dropdown", :href => "javascript:;"}
-              %i.icon-bell
-
-          / END NOTIFICATION DROPDOWN
-          %li.separator.hide
-          / BEGIN INBOX DROPDOWN
-          / DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte
-          %li#header_inbox_bar.dropdown.dropdown-extended.dropdown-inbox.dropdown-dark
-            %a.dropdown-toggle{"data-close-others" => "true", "data-hover" => "dropdown", "data-toggle" => "dropdown", :href => "javascript:;"}
-              %i.icon-envelope-open
-
-          / END INBOX DROPDOWN
-          %li.separator.hide
-          / BEGIN TODO DROPDOWN
-          / DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte
-          %li#header_task_bar.dropdown.dropdown-extended.dropdown-tasks.dropdown-dark
-
-            %a.dropdown-toggle{"data-close-others" => "true", "data-hover" => "dropdown", "data-toggle" => "dropdown", :href => "javascript:;"}
-              %i.icon-calendar
-
-          / END TODO DROPDOWN
-          / BEGIN USER LOGIN DROPDOWN
-          / DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte
           %li.dropdown.dropdown-user.dropdown-dark
-
             %a.dropdown-toggle{"data-close-others" => "true", "data-hover" => "dropdown", "data-toggle" => "dropdown", :href => "javascript:;"}
               %span.username.username-hide-on-mobile= current_user.name
               = image_tag current_user.avatar, class: 'img-circle'
@@ -82,13 +31,3 @@
                 = link_to destroy_user_session_path, method: :delete do
                   %i.icon-key
                   Log Out
-          / END USER LOGIN DROPDOWN
-          / BEGIN QUICK SIDEBAR TOGGLER
-          %li.dropdown.dropdown-extended.quick-sidebar-toggler
-            %span.sr-only Toggle Quick Sidebar
-            %i.icon-logout
-          / END QUICK SIDEBAR TOGGLER
-      / END TOP NAVIGATION MENU
-    / END PAGE TOP
-
-  / END HEADER INNER

@@ -1,4 +1,4 @@
-feature 'StickerGroup' do
+xfeature 'StickerGroup' do
   given!(:user)    { create(:user) }
   given!(:sticker_group) { create(:sticker_group) }
 

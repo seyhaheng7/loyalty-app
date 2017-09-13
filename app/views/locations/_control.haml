@@ -1,5 +1,9 @@
+-if policy(location).show?
+  = link_to location, class: 'btn btn-info' do
+    = fa_icon 'eye'
+    Show
 -if policy(location).edit?
-  = link_to [:edit, location], class: 'btn btn-primary' do
+  = link_to [:edit, location], class: 'btn btn-default' do
     = fa_icon 'pencil'
     Edit
 -if policy(location).destroy?

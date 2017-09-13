@@ -6,6 +6,9 @@ class ClaimedRewardsGrid
     ClaimedReward
   end
 
+  filter(:reward_name, :string)
+  filter(:customer_name, :string)
+
   column(:id)
   column(:reward_name)
   column(:customer_name)

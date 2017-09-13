@@ -9,7 +9,7 @@ class CustomersGrid
   filter(:name, :string)
   filter(:phone, :string)
   column(:avatar, html: true) do |record|
-    image_tag record.avatar, size: '150x150'
+    image_tag record.avatar, size: '30x30'
   end
 
   column(:name)

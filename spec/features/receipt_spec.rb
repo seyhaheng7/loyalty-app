@@ -1,6 +1,6 @@
 feature 'Receipt' do
   given!(:admin){ create(:user) }
-  given!(:customer){ create(:customer, name: 'Jonh', current_points: 10) }
+  given!(:customer){ create(:customer, first_name: 'Jonh',last_name: 'Wick', current_points: 10,) }
   given!(:store){create(:store, name: 'CoffeeShop')}
   given!(:receipt){ create(:receipt, customer: customer) }
 

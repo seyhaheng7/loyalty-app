@@ -1,5 +1,5 @@
 describe 'Categories' do
-  let!(:customer){ create(:customer) }
+  let!(:customer){ create(:customer, first_name: 'code', last_name: 'gate') }
   let!(:categories){ create_list(:category, 10) }
   let!(:category){ create(:category) }
   describe 'GET api/v1/customer/categories' do

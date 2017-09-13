@@ -1,5 +1,7 @@
-@import 'helpers/*';
+@import 'select2';
+@import 'select2-bootstrap';
 
+@import 'globals/*';
 @import 'admin/bootstrap';
 @import 'font-awesome';
 @import 'admin/simple-line-icons';
@@ -11,12 +13,9 @@
 @import 'admin/layout';
 @import 'admin/login';
 @import 'admin/custom';
-
 @import 'common/upload';
 @import 'common/alert';
-
 @import 'devise/sessions/new';
-
 @import 'stores/*';
 @import 'companies/*';
 @import 'customer_locations/*';

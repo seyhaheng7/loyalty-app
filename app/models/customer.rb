@@ -9,6 +9,11 @@ class Customer < ActiveRecord::Base
   include DeviseTokenAuth::Concerns::User
   mount_uploader :avatar, ImageUploader
 
+  validates :phone,:presence => true, uniqueness: { message: "already registered" }
+  validates :phone, numericality: { message: 'Not a phone number' },
+              length: { minimum: 8, maximum: 9, message: 'Not a phone number' }
+
+
   has_many :receipts, dependent: :destroy
   has_many :claimed_rewards, dependent: :destroy
   has_many :operating_systems, dependent: :destroy
@@ -87,6 +92,10 @@ class Customer < ActiveRecord::Base
   end
   # Prevent Devise Validate Email End
 
+  def name
+    "#{first_name} #{last_name}"
+  end
+
   private
 
   def generate_verification_code
@@ -123,4 +132,5 @@ class Customer < ActiveRecord::Base
   def change_update_location_at
     self.update_location_at = DateTime.now
   end
+
 end

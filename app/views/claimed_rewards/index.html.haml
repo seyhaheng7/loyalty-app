@@ -1,7 +1,5 @@
 = render 'partials/page-head', title: 'Listing Claimed Rewards'
 
-%br
-
 .m-heading-1.border-green.m-bordered
   = datagrid_form_for @grid, :method => :get, :url => claimed_rewards_path
 
@@ -12,6 +10,6 @@
       Claimed Reward
   .portlet-body
     .table-scrollable
-      = paginate(@grid.assets)
       = datagrid_table @grid
+    .text-center
       = paginate(@grid.assets)

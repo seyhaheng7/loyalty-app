@@ -11,9 +11,9 @@ class ReceiptDecorator < Draper::Decorator
 
   def managed_by_status
     if model.approved?
-      'Approved By ' + managed_by.name
+      '<b>Approved by</b> ' + managed_by.name
     else
-      'Rejected By ' + managed_by.name
+      '<b>Rejected by</b> ' + managed_by.name
     end
   end
 

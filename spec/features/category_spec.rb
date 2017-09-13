@@ -1,11 +1,11 @@
 feature 'Category' do
   given!(:user)    { create(:user) }
   given!(:category){ create(:category) }
-  
+
   before do
     login_as user, scope: :user
   end
-  
+
   feature 'Listing' do
     scenario 'see all category' do
       visit root_path

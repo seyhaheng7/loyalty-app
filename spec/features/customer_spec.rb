@@ -1,6 +1,6 @@
 feature 'Customer' do
   given!(:user){ create(:user) }
-  given!(:customer){ create(:customer) }
+  given!(:customer){ create(:customer, first_name: 'Jonh', last_name: 'Wick') }
 
   before do
     login_as user, scope: :user
@@ -18,12 +18,13 @@ feature 'Customer' do
     scenario 'Create Successfully' do
       visit customers_path
       click_link 'New Customer'
-      fill_in 'Name', with: 'Codingate'
+      fill_in 'First name', with: 'Codingate'
+      fill_in 'Last name', with: 'Google'
       fill_in 'Email', with: 'bunutu1@gmail.com'
       fill_in 'Phone', with: '14567890'
       fill_in 'Password', with: 'Ubuntu1234!'
       click_on 'Create Customer'
-
+    
       expect(page).to have_content 'Customer was successfully created.'
     end
 
@@ -38,7 +39,8 @@ feature 'Customer' do
     scenario 'Update Successfully' do
       visit customers_path
       find("a[href='#{edit_customer_path(customer)}']").click
-      fill_in 'Name', with: 'Codingate'
+      fill_in 'First name', with: 'Codingate'
+      fill_in 'Last name', with: 'Codingate'
       fill_in 'Password', with: 'Ubuntu1234!'
       click_on 'Update Customer'
       expect(page).to have_content 'Customer was successfully updated.'
@@ -46,7 +48,7 @@ feature 'Customer' do
 
     scenario 'Update Unsuccessful' do
       visit edit_customer_path(customer)
-      fill_in 'Name', with: ''
+      fill_in 'First name', with: ''
       click_on 'Update Customer'
       expect(page).to have_content 'can\'t be blank'
     end
