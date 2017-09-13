@@ -9,11 +9,14 @@
       %i.icon-puzzle
       Reward
     .pull-right
-      = link_to new_reward_path, class: 'btn btn-primary' do
-        = fa_icon 'plus'
-        Add New Reward
+      -if policy(@grid.assets).new?
+        = link_to new_reward_path, class: 'btn btn-primary' do
+          = fa_icon 'plus'
+          Add New Reward
   .portlet-body
     .table-scrollable
       = datagrid_table @grid
+
     .text-center
       = paginate(@grid.assets)
+    

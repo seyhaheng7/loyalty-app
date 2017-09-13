@@ -8,7 +8,7 @@ class User < ApplicationRecord
 
   mount_uploader :avatar, ImageUploader
 
-  ROLES = ['Super', 'Admin']
+  ROLES = ['Super', 'Admin', 'Receptionist', 'Approver']
 
   # Create role scopes and methods (super? admin? ...)
   ROLES.each do |role_name|
