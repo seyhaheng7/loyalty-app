@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :company do
-    name "MyString"
+    name { FFaker::Name.name }
     address "MyString"
     logo "MyString"
     association :category

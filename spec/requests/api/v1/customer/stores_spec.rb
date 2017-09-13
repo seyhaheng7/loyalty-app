@@ -1,7 +1,7 @@
 describe 'stores' do
   let!(:customer){ create(:customer) }
-  let!(:stores){ create_list(:store, 10) }
   let!(:store){ create(:store) }
+  let!(:stores){ create_list(:store, 10) }
 
   describe 'GET api/v1/customer/stores' do
     before do

@@ -21,6 +21,7 @@ class ClaimedReward < ApplicationRecord
   belongs_to :reward, :counter_cache => :approved_claimed_rewards_count
 
   validate :customer_points
+  validate :reward_available, on: :create
 
   delegate :name, to: :customer, prefix: true, allow_nil: true
   delegate :name, to: :reward, prefix: true, allow_nil: true
@@ -32,6 +33,11 @@ class ClaimedReward < ApplicationRecord
       errors.add(:customer_points, "Customer doesn't have enough points")
     end
   end
+
+  def reward_available
+    errors.add(:reward, 'not available in stock') if reward.unavailable?
+  end
+
 
   def decrease_points
     customer.sub_points reward.require_points.to_i

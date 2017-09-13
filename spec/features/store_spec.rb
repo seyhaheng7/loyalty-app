@@ -1,6 +1,8 @@
 feature 'Store' do
   given!(:user)    { create(:user) }
   given!(:store){ create(:store) }
+  given!(:location){ create(:location, name: "MyString") }
+  given!(:company){ create(:company, name: "MyString") }
 
   before do
     login_as user, scope: :user

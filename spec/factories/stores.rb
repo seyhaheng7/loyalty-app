@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :store do
-    name "MyString"
+    name { FFaker::Name.name }
     lat 1.5
     long 1.5
     address "MyString"

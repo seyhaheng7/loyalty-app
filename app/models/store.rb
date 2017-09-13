@@ -6,7 +6,7 @@ class Store < ApplicationRecord
   has_many :receipts
   has_many :rewards
 
-  validates :name, presence: true
+  validates :name, presence: true, uniqueness: {scope: :company_id}
   validates :address, presence: true
 
   reverse_geocoded_by :lat, :long

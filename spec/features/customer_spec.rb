@@ -24,7 +24,7 @@ feature 'Customer' do
       fill_in 'Phone', with: '14567890'
       fill_in 'Password', with: 'Ubuntu1234!'
       click_on 'Create Customer'
-    
+
       expect(page).to have_content 'Customer was successfully created.'
     end
 
