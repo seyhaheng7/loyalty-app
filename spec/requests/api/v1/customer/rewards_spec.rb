@@ -5,6 +5,7 @@ describe 'Reward' do
   let!(:reward2){ create(:reward, name: "facebook", require_points: 500, quantity: 2, approved_claimed_rewards_count: 2, store: store ) }
 
 
+
   describe 'GET api/v1/customer/rewards' do
 
     before do

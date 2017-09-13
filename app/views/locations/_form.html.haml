@@ -8,7 +8,7 @@
 
       .pull-left
         -if policy(@location).create? || policy(@location).update?
-          = f.button :submit, class: 'btn btn-primary' 
+          = f.button :submit, class: 'btn btn-primary'
       .pull-right
         -if policy(@location).index?
           = link_to locations_path, class: 'btn btn-default' do

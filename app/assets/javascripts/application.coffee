@@ -1,6 +1,7 @@
 #= require jquery
 #= require jquery_ujs
 #= require bootstrap
+#= require select2
 #= require cable
 
 #= require namespace
@@ -12,6 +13,7 @@
 #= require admin/app
 #= require admin/layout
 #= require admin/demo
+#= require jasny-bootstrap
 
 #= require stores/form
 #= require stores/show

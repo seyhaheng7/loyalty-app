@@ -1,5 +1,5 @@
 .row
-  .col-xs-12.col-md-4
+  .col-xs-12.col-md-12
     = simple_form_for(@merchant) do |f|
       = f.error_notification
 
@@ -17,10 +17,15 @@
           = f.input :email
           = f.input :phone
           = f.input :password
-
-          = f.button :submit
+          .pull-left
+            -if policy(@merchant).create? || policy(@merchant).update?
+              = f.button :submit, class: "btn btn-primary"
           .pull-right
-            = link_to merchants_path, class: 'btn btn-success' do
-              Back
-            = link_to @merchant, class: 'btn btn-primary' do
-              Show
+            -if policy(@merchant).index?
+              = link_to merchants_path, class: 'btn btn-default' do
+                = fa_icon 'chevron-left'
+                Back
+            -if params[:action] == "edit" && policy(@merchant).show?
+              = link_to @merchant, class: 'btn btn-info' do
+                = fa_icon 'eye'
+                Show

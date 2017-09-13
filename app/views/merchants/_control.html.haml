@@ -1,9 +1,9 @@
 -if policy(merchant).show?
-  = link_to merchant, class: 'btn btn-success' do
+  = link_to merchant, class: 'btn btn-info' do
     = fa_icon 'eye'
     Show
 -if policy(merchant).edit?
-  = link_to [:edit, merchant], class: 'btn btn-primary' do
+  = link_to [:edit, merchant], class: 'btn btn-default' do
     = fa_icon 'pencil'
     Edit
 -if policy(merchant).destroy?

@@ -522,7 +522,8 @@ var App = function() {
 
     // Handle Select2 Dropdowns
     var handleSelect2 = function() {
-        if ($().select2) {
+        if(false){
+        // if ($().select2) {
             $.fn.select2.defaults.set("theme", "bootstrap");
             $('.select2me').select2({
                 placeholder: "Select",

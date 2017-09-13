@@ -3,14 +3,14 @@
   .portlet-title
     .caption
       = @company.name
-          
+
   .portlet-body
     %table.table
       %col{width: '10'}
       %col{width: '350'}
       %tr
         %th Logo:
-        %td= image_tag @company.logo_url, size: '150x150'
+        %td= image_tag @company.logo_url, size: '50x50'
       %tr
         %th Name:
         %td= @company.name
@@ -19,14 +19,11 @@
         %th Address:
         %td= @company.address
       %tr
-        %th Point rate:
-        %td= @company.point_rate
-      %tr
         %th Category:
         %td= @company.category.name
       %tr
         %th Partner:
-        %td= @company.partner
+        %td= @company.partner_status
 
     .row.wrap-pad
       .pull-left

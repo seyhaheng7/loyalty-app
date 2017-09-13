@@ -11,9 +11,9 @@ class ClaimedRewardDecorator < ApplicationDecorator
 
   def managed_by_status
     if approved?
-      'Approved By ' + managed_by.name
+      '<b>Approved By </b>' + managed_by.name
     else
-      'Rejected By ' + managed_by.name
+      '<b>Rejected By </b>' + managed_by.name
     end
   end
 

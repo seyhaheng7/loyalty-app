@@ -1,6 +1,8 @@
 Codingate.Common =
   init: ->
     @_initImageUploader()
+    @_initSelect2()
+    @_initInputMask()
 
   _initImageUploader: ->
     $.each $('.image-uploader'), (index, uploader)->
@@ -18,3 +20,9 @@ Codingate.Common =
 
       imageHolder.click ->
         input.click()
+
+  _initSelect2: ->
+    $('select').select2 theme: 'bootstrap'
+
+  _initInputMask: ->
+    $('.inputmask').inputmask mask: '999-999-9999'

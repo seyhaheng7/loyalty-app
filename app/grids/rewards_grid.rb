@@ -1,4 +1,4 @@
-class RewardsGrid 
+class RewardsGrid
   include Datagrid
 
   scope do
@@ -10,13 +10,12 @@ class RewardsGrid
 
   column(:name)
   column(:image, html: true) do |reward|
-    image_tag reward.image, size: '150x150'
+    image_tag reward.image, size: '30x30'
   end
   column(:require_points)
   column(:quantity)
   column(:store_name)
-  
   column(:actions, html:true) do |reward|
     render 'rewards/control', reward: reward
-  end 
+  end
 end

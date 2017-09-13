@@ -1,5 +1,9 @@
+-if policy(receipt).show?
+  = link_to receipt, class: 'btn btn-info' do
+    = fa_icon 'eye'
+    Show
 -if policy(receipt).edit?
-  = link_to [:edit, receipt], class: 'btn btn-primary' do
+  = link_to [:edit, receipt], class: 'btn btn-default' do
     = fa_icon 'pencil'
     Edit
 -if policy(receipt).destroy?

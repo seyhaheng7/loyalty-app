@@ -19,6 +19,7 @@ feature 'Store' do
       visit stores_path
       click_link 'Add New Store'
       fill_in 'Name', with: 'Caltax Shop'
+      fill_in 'Address', with: 'Caltax Shop'
       select 'MyString', from: 'Company'
       select 'MyString', from: 'Location'
       click_on 'Create Store'

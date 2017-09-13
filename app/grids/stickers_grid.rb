@@ -11,7 +11,7 @@ class StickersGrid
   column(:id)
   column(:name)
   column(:image, html: true) do |sticker|
-    image_tag sticker.image, size: '150x150'
+    image_tag sticker.image, size: '30x30'
   end
 
   column(:actions, html:true) do |record|

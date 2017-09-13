@@ -1,9 +1,9 @@
 -if policy(customer).show?
-  = link_to customer, class: 'btn btn-success' do
+  = link_to customer, class: 'btn btn-info' do
     = fa_icon 'eye'
     Show
 -if policy(customer).edit?
-  = link_to [:edit, customer], class: 'btn btn-primary' do
+  = link_to [:edit, customer], class: 'btn btn-default' do
     = fa_icon 'pencil'
     Edit
 -if policy(customer).destroy?

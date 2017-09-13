@@ -8,7 +8,7 @@
       %col{width: '350'}
       %tr
         %th Image:
-        %td= image_tag @sticker.image_url, size: '150x150'
+        %td= image_tag @sticker.image_url, size: '50x50'
       %tr
         %th Name:
         %td= @sticker.name
@@ -24,7 +24,7 @@
           = link_to [:edit, @sticker], class: 'btn btn-primary' do
             = fa_icon 'pencil'
             Edit
-        -if policy(@sticker).destroy?  
+        -if policy(@sticker).destroy?
           = link_to @sticker, method: :delete, data: {confirm: 'Are you sure?'} ,class: 'btn btn-danger' do
             = fa_icon 'trash'
             Delete
