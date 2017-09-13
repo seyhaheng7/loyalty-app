@@ -6,9 +6,11 @@ module Api::V1::Customer
 
     def self.add_common_params(api)
       api.param :form, 'receipt[receipt_id]', :string, :optional, 'Receipt_id'
-      api.param :form, 'receipt[total]', :float, :optional, 'Total'
-      api.param :form, 'receipt[capture]', :file, :optional, 'Capture'
-      api.param :form, 'receipt[store_id]', :integer, :optional, 'Status'
+      api.param :form, 'receipt[store][name]', :string, :optional, 'Receipt_id'
+      api.param :form, 'receipt[store][location_id]', :string, :optional, 'Receipt_id'
+      api.param :form, 'receipt[total]', :float, :required, 'Total'
+      api.param :form, 'receipt[capture]', :file, :required, 'Capture'
+      api.param :form, 'receipt[store_id]', :integer, :required, 'Status'
     end
 
     swagger_api :index do
@@ -60,7 +62,7 @@ module Api::V1::Customer
       end
 
       def receipt_params
-        params.require(:receipt).permit(:total,:receipt_id, :capture, :store_id)
+        params.require(:receipt).permit(:total,:receipt_id, :capture, :store_id, new_store: [:name, :location_id])
       end
   end
 end
