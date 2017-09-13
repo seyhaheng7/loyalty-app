@@ -28,10 +28,15 @@ class Receipt < ApplicationRecord
   validates :capture, presence: true
   validates :receipt_id, :uniqueness => {:scope => :store_id, message: "Receipt is already submitted"}
 
+  def new_store=(params)
+    new_store = Store.new params
+    new_store.save(validate: false)
+    self.store = new_store
+  end
+
   private
 
   def add_points_to_user
     customer.add_points earned_points.to_i
   end
-
 end

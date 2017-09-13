@@ -45,9 +45,11 @@ describe 'Receipts' do
   describe 'POST api/v1/customer/receipts' do
 
     let!(:store){  create(:store) }
+    let!(:location){  create(:location) }
     let!(:capture) { "data:image/png;base64,#{Base64.encode64(open('spec/support/default.png').read)}" }
     let!(:params1){ { receipt_id: '1234567',total: 21.213, capture: capture, store_id: store.id } }
     let!(:params2){ { receipt_id: '123456',total: 21.213, capture: capture, store_id: store.id } }
+    let!(:params3){ { receipt_id: '1234567',total: 21.213, capture: capture, new_store: { name: 'Total', location_id: location.id} } }
     let!(:receipt) { create(:receipt, params2) }
 
     before do
@@ -63,6 +65,11 @@ describe 'Receipts' do
       json = JSON.parse(response.body)
       expect(response).to have_http_status(422)
       expect(json["errors"]["receipt_id"]).to include 'Receipt is already submitted'
+    end
+
+    it 'return status successful after create new store' do
+      post api_v1_customer_receipts_path, headers: customer.create_new_auth_token, params: { receipt: params3 }
+      expect(response).to have_http_status(201)
     end
 
   end
