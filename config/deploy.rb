@@ -1,4 +1,4 @@
-lock "3.9.0"
+lock "3.9.1"
 
 
 set :application, 'customer-layalty'
