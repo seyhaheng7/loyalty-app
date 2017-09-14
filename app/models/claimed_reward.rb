@@ -1,6 +1,10 @@
 class ClaimedReward < ApplicationRecord
   include AASM
 
+  # before_validation do
+  #   binding.pry
+  # end
+
   aasm :column => 'status' do
     state :submitted, :initial => true
     state :rejected

@@ -20,4 +20,6 @@ class User < ApplicationRecord
 
   validates :role, presence: true
   validates :name, presence: true
+
+  scope :name_like, ->(value){ where("#{table_name}.name ilike ?", value) }
 end

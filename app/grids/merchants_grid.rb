@@ -6,7 +6,7 @@ class MerchantsGrid
     Merchant
   end
 
-  filter(:name, :string)
+  filter(:name, :string){ |value, scope| scope.name_like(value) }
   filter(:email, :string)
 
 

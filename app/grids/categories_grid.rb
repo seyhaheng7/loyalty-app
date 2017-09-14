@@ -6,9 +6,7 @@ class CategoriesGrid
     Category
   end
 
-  # filter(:id, :integer)
-  # filter(:created_at, :date, :range => true)
-  filter(:name, :string)
+  filter(:name, :string){ |value| scope.name_like(value) }
 
   column(:id)
   column(:name)

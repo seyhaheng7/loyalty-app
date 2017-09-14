@@ -1,12 +1,12 @@
 class LocationsGrid
   include Datagrid
-  filter(:name, :string)
   scope do
     Location
   end
 
-  column(:name)
+  filter(:name, :string){ |value, scope| scope.name_like(value) }
 
+  column(:name)
   column(:actions, html:true) do |record|
     render 'locations/control', location: record
   end

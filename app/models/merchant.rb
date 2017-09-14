@@ -11,6 +11,7 @@ class Merchant < ActiveRecord::Base
 
   belongs_to :store
 
+  validates :name, presence: true
   validates :phone,:presence => true, uniqueness: { message: "already registered" }
   validates :phone, numericality: { message: 'Not a phone number' },
               length: { minimum: 8, maximum: 9, message: 'Not a phone number' }
@@ -28,9 +29,9 @@ class Merchant < ActiveRecord::Base
     end
   end
 
-   validates :name, presence: true
+  scope :name_like, ->(value){ where("#{table_name}.name ilike ?", value) }
 
-   delegate :name, to: :store, prefix: true, allow_nil: true
+  delegate :name, to: :store, prefix: true, allow_nil: true
 
   # Prevent Devise Validate Email Start
   # https://github.com/plataformatec/devise/wiki/How-To:-Allow-users-to-sign-in-with-something-other-than-their-email-address

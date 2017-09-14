@@ -6,8 +6,7 @@ class CompaniesGrid
     Company
   end
 
-  filter(:name, :string)
-  filter(:address, :string)
+  filter(:name, :string){ |value, scope| scope.name_like(value) }
 
   column(:name)
   column(:address)
