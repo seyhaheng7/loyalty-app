@@ -15,6 +15,7 @@
         = f.input :name
         = f.input :require_points
         = f.input :quantity
+        = f.input :price
         = f.association :store
         .pull-left
           -if policy(@reward).create? || policy(@reward).update?

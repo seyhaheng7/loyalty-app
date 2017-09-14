@@ -179,13 +179,6 @@
               "type": "float",
               "description": "Long",
               "required": false
-            },
-            {
-              "paramType": "form",
-              "name": "email",
-              "type": "string",
-              "description": "Email",
-              "required": false
             }
           ],
           "summary": "Customer Login ",

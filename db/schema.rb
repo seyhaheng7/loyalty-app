@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170912075042) do
+ActiveRecord::Schema.define(version: 20170914042753) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -84,9 +84,9 @@ ActiveRecord::Schema.define(version: 20170912075042) do
     t.datetime "verified_at"
     t.string "login_digit"
     t.datetime "digit_expired_at"
-    t.datetime "update_location_at"
     t.string "first_name"
     t.string "last_name"
+    t.datetime "update_location_at"
     t.index ["confirmation_token"], name: "index_customers_on_confirmation_token", unique: true
     t.index ["deleted_at"], name: "index_customers_on_deleted_at"
     t.index ["digit_expired_at"], name: "index_customers_on_digit_expired_at"
@@ -173,18 +173,9 @@ ActiveRecord::Schema.define(version: 20170912075042) do
     t.datetime "deleted_at"
     t.integer "approved_claimed_rewards_count", default: 0
     t.bigint "store_id"
+    t.float "price"
     t.index ["deleted_at"], name: "index_rewards_on_deleted_at"
     t.index ["store_id"], name: "index_rewards_on_store_id"
-  end
-
-  create_table "settings", force: :cascade do |t|
-    t.string "var", null: false
-    t.string "value"
-    t.integer "thing_id"
-    t.string "thing_type", limit: 30
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["thing_type", "thing_id", "var"], name: "index_settings_on_thing_type_and_thing_id_and_var", unique: true
   end
 
   create_table "sticker_groups", force: :cascade do |t|

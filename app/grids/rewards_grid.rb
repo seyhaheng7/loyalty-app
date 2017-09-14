@@ -6,7 +6,7 @@ class RewardsGrid
   end
 
   filter(:name, :string)
-  filter(:store_name, :string){ |value| scope.join(:store).merge(Reward.name_like(value)) }
+  filter(:store_name, :string){ |value| scope.join(:store).merge(Store.name_like(value)) }
 
   column(:name)
   column(:image, html: true) do |reward|

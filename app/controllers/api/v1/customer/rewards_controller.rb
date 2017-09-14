@@ -7,6 +7,9 @@ module Api::V1::Customer
     swagger_api :index do
       summary 'Fetches all rewards'
       param :query, :page, :integer, :optional, "Page number"
+      param :query, :store_name, :string, :optional, "Store name"
+      param :query, :order_by, :string, :optional, "['newly added', 'low point', 'hight point', 'vocher price']"
+
       response :unauthorized
       response :success
       response :not_acceptable, "The request you made is not acceptable"
@@ -24,7 +27,7 @@ module Api::V1::Customer
     end
 
     def index
-      @rewards = Reward.available.page(params[:page])
+      @rewards = Reward.available.filter(params).order_with(params).page(params[:page])
       render json: @rewards, status: :ok
     end
 
