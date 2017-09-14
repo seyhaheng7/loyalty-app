@@ -51,7 +51,7 @@ feature 'ClaimedReward' do
 
   end
 
-  feature 'Destroy' do
+  xfeature 'Destroy' do
     scenario 'Destroy Successfully' do
       visit claimed_reward_path(claimed_reward)
       click_link 'Delete'

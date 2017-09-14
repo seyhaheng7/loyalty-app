@@ -16,7 +16,7 @@ feature 'Receipt' do
     end
   end
 
-  feature 'Create' do
+  xfeature 'Create' do
     scenario 'Create Successfully' do
       visit receipts_path
       click_link 'New Receipt'
@@ -36,7 +36,7 @@ feature 'Receipt' do
     end
   end
 
-  feature 'Update' do
+  xfeature 'Update' do
     scenario 'Update Successfully' do
       visit receipts_path
       find("a[href='#{edit_receipt_path(receipt)}']").click
@@ -96,7 +96,7 @@ feature 'Receipt' do
 
   end
 
-  feature 'Destroy' do
+  xfeature 'Destroy' do
     scenario 'Destroy Successfully' do
       visit receipt_path(receipt)
       click_link 'Delete'

@@ -12,6 +12,22 @@ class ClaimedRewardPolicy < ApplicationPolicy
     record.submitted? and ( user.approver? || user.admin? || user.super? )
   end
 
+  def create?
+    # disable create feature
+    false
+  end
+
+
+  def destroy?
+    # disable delete feature
+    false
+  end
+
+  def update?
+    # disable edit feature
+    false
+  end
+
   def reject?
     approve?
   end
