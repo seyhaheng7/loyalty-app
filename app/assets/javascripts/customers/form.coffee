@@ -1,6 +1,12 @@
 Codingate.CustomersForm = Codingate.CustomersNew = Codingate.CustomersCreate = Codingate.CustomersEdit = Codingate.CustomersUpdate =
   init: ->
+    @_phoneMask()
     @_initCustomerMap()
+
+  _phoneMask: ->
+    $('#customer_phone').inputmask '099-999-9999'
+    $('form').submit ->
+      $('#customer_phone').inputmask('remove')
 
   _initCustomerMap: ->
     DEFAULT_LATITUDE = 11.570436366295361
@@ -28,9 +34,10 @@ Codingate.CustomersForm = Codingate.CustomersNew = Codingate.CustomersCreate = C
       position: lat_lng)
 
     google.maps.event.addListener marker, 'dragend', (event) ->
-    
+
       lat = @getPosition().lat()
       lng = @getPosition().lng()
 
       latField.val lat
       longField.val lng
+

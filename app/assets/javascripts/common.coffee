@@ -2,7 +2,6 @@ Codingate.Common =
   init: ->
     @_initImageUploader()
     @_initSelect2()
-    @_initInputMask()
     @_initDataGrid()
 
   _initDataGrid: ->
@@ -29,5 +28,3 @@ Codingate.Common =
   _initSelect2: ->
     $('select').select2 theme: 'bootstrap'
 
-  _initInputMask: ->
-    $('.inputmask').inputmask mask: '999-999-9999'
