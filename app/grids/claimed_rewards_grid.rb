@@ -6,8 +6,10 @@ class ClaimedRewardsGrid
     ClaimedReward
   end
 
-  filter(:reward_name, :string)
-  filter(:customer_name, :string)
+  filter(:reward_name, :string) { |value| joins(:reward).merge(Reward.name_like(value)) }
+  filter(:customer_name, :string) { |value| join(:customer).merge(Customer.name_like(value)) }
+  filter(:status, :enum, select: ClaimedReward.aasm.states.map(&:name))
+  filter(:created_at, :date, range: true)
 
   column(:id)
   column(:reward_name)

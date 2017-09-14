@@ -13,3 +13,13 @@ th.actions, td.actions{
 .width-auto{
   width: 100%;
 }
+
+.range-filter{
+  label {
+    display: block;
+  }
+  .form-control{
+    width: 48%;
+    display: inline-block;
+  }
+}

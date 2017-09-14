@@ -1,9 +1,8 @@
 @import 'select2';
 @import 'select2-bootstrap';
-
-@import 'globals/*';
-@import 'admin/bootstrap';
 @import 'font-awesome';
+
+@import 'admin/bootstrap';
 @import 'admin/simple-line-icons';
 @import 'admin/morris';
 @import 'admin/jqvmap';
@@ -13,6 +12,9 @@
 @import 'admin/layout';
 @import 'admin/login';
 @import 'admin/custom';
+@import 'admin/bootstrap-datepicker';
+
+@import 'globals/*';
 @import 'common/upload';
 @import 'common/alert';
 @import 'devise/sessions/new';

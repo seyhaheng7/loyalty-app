@@ -7,7 +7,10 @@ class CustomersGrid
   end
 
   filter(:name, :string)
+  filter(:email, :string)
   filter(:phone, :string)
+  filter(:current_points, :integer, range: true)
+
   column(:avatar, html: true) do |record|
     image_tag record.avatar, size: '30x30'
   end

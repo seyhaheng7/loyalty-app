@@ -12,5 +12,6 @@ class Company < ApplicationRecord
 
   scope :partners, -> { where(partner: true) }
   scope :in_category, ->(category_id){ where(category_id: category_id) }
+  scope :name_like, ->{ where("#{table_name}.name ilike '%#{value}%'") }
 
 end

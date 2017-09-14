@@ -6,8 +6,8 @@ class UsersGrid
     User
   end
 
-  filter(:name, :string)
-  filter(:role, :string)
+  filter(:name, :string){ |value, scope| scope.name_like(value) }
+  filter(:role, :enum,  select: User::ROLES)
   filter(:email, :string)
 
 

@@ -17,8 +17,8 @@ class Reward < ApplicationRecord
   delegate :name, to: :store, prefix: true, allow_nil: true
 
   scope :available, -> { where("quantity > approved_claimed_rewards_count") }
+  scope :name_like, ->(name){ where("#{table_name}.name ilike ?", name) }
 
-  
   def available?
     quantity > approved_claimed_rewards_count
   end

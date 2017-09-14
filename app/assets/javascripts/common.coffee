@@ -3,6 +3,11 @@ Codingate.Common =
     @_initImageUploader()
     @_initSelect2()
     @_initInputMask()
+    @_initDataGrid()
+
+  _initDataGrid: ->
+    $('.date_filter').datepicker
+      format: 'yyyy-mm-dd'
 
   _initImageUploader: ->
     $.each $('.image-uploader'), (index, uploader)->
