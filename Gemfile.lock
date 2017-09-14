@@ -241,6 +241,10 @@ GEM
       rack (>= 1.6.2, < 3)
     omniauth-facebook (1.4.0)
       omniauth-oauth2 (~> 1.0.2)
+    omniauth-google-oauth2 (0.2.2)
+      oauth2 (~> 0.6.0)
+      omniauth (~> 1.0)
+      omniauth-oauth2
     omniauth-oauth2 (1.0.2)
       oauth2 (~> 0.6.0)
       omniauth (~> 1.0)
@@ -431,6 +435,7 @@ DEPENDENCIES
   nexmo (~> 4.7.0)
   omniauth (~> 1.6.1)
   omniauth-facebook (~> 1.4.0)
+  omniauth-google-oauth2
   paranoia (~> 2.2)
   pg (~> 0.18)
   pry
