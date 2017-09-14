@@ -159,6 +159,8 @@ GEM
     factory_girl_rails (4.8.0)
       factory_girl (~> 4.8.0)
       railties (>= 3.0.0)
+    faraday (0.13.1)
+      multipart-post (>= 1.2, < 3)
     ffaker (2.6.0)
     ffi (1.9.18)
     font-awesome-rails (4.7.0.2)
@@ -180,6 +182,7 @@ GEM
       haml (>= 4.0, < 6)
       nokogiri (>= 1.6.0)
       ruby_parser (~> 3.5)
+    httpauth (0.2.1)
     i18n (0.8.6)
     jquery-rails (4.3.1)
       rails-dom-testing (>= 1, < 3)
@@ -219,6 +222,8 @@ GEM
     mini_mime (0.1.4)
     mini_portile2 (2.2.0)
     minitest (5.10.3)
+    multi_json (1.12.2)
+    multipart-post (2.0.0)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-ssh (4.2.0)
@@ -227,9 +232,18 @@ GEM
     nio4r (2.1.0)
     nokogiri (1.8.0)
       mini_portile2 (~> 2.2.0)
+    oauth2 (0.6.1)
+      faraday (~> 0.7)
+      httpauth (~> 0.1)
+      multi_json (~> 1.3)
     omniauth (1.6.1)
       hashie (>= 3.4.6, < 3.6.0)
       rack (>= 1.6.2, < 3)
+    omniauth-facebook (1.4.0)
+      omniauth-oauth2 (~> 1.0.2)
+    omniauth-oauth2 (1.0.2)
+      oauth2 (~> 0.6.0)
+      omniauth (~> 1.0)
     orm_adapter (0.5.0)
     parallel (1.12.0)
     paranoia (2.3.1)
@@ -416,6 +430,7 @@ DEPENDENCIES
   lunchy
   nexmo (~> 4.7.0)
   omniauth (~> 1.6.1)
+  omniauth-facebook (~> 1.4.0)
   paranoia (~> 2.2)
   pg (~> 0.18)
   pry
@@ -442,4 +457,4 @@ RUBY VERSION
    ruby 2.4.1p111
 
 BUNDLED WITH
-   1.15.4
+   1.16.0.pre.2

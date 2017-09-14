@@ -71,3 +71,5 @@ gem 'aasm', '~> 4.12.2'
 gem 'geocoder', "~> 1.4.4"
 gem 'draper', "~> 3.0.0"
 gem "select2-rails", "~> 4.0.3"
+
+gem 'omniauth-facebook', '~> 1.4.0'
