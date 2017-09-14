@@ -11,7 +11,7 @@ class Store < ApplicationRecord
 
   reverse_geocoded_by :lat, :long
 
-  scope :name_like, ->(name){ where("#{table_name}.name ilike ?", name) }
+  scope :name_like, ->(name){ where("#{table_name}.name ilike ?", "%#{name}%") }
 
   def self.filter(params)
 

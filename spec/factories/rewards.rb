@@ -5,5 +5,11 @@ FactoryGirl.define do
     require_points 1
     quantity 4
     association :store
+
+
+    trait :available do
+      quantity 4
+      approved_claimed_rewards_count 2
+    end
   end
 end

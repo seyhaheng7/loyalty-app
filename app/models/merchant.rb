@@ -29,7 +29,7 @@ class Merchant < ActiveRecord::Base
     end
   end
 
-  scope :name_like, ->(value){ where("#{table_name}.name ilike ?", value) }
+  scope :name_like, ->(name){ where("#{table_name}.name ilike ?", "%#{name}%") }
 
   delegate :name, to: :store, prefix: true, allow_nil: true
 

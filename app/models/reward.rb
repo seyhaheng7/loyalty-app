@@ -17,7 +17,32 @@ class Reward < ApplicationRecord
   delegate :name, to: :store, prefix: true, allow_nil: true
 
   scope :available, -> { where("quantity > approved_claimed_rewards_count") }
-  scope :name_like, ->(name){ where("#{table_name}.name ilike ?", name) }
+  scope :name_like, ->(name){ where("#{table_name}.name ilike ?", "%#{name}%") }
+
+  def self.filter(params)
+    records = all
+
+    if params[:store_name].present?
+      records = records.joins(:store).merge(Store.name_like(params[:store_name]))
+    end
+
+    records
+  end
+
+  def self.order_with(params)
+    records = all
+    case params[:order_by]
+    when 'newly added'
+      records = records.order(created_at: :desc)
+    when 'low point'
+      records = records.order(require_points: :asc)
+    when 'hight point'
+      records = records.order(require_points: :desc)
+    when 'vocher price'
+      records = records.order(price: :desc)
+    end
+    records
+  end
 
   def available?
     quantity > approved_claimed_rewards_count
