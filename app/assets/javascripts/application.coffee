@@ -4,13 +4,11 @@
 #= require select2
 #= require cable
 
-#= require admin/dashboard
 #= require admin/app
 #= require admin/layout
 #= require admin/demo
 #= require admin/bootstrap-datepicker
-#= require jasny-bootstrap
-
+#= require admin/jquery-inputmask.min
 
 #= require namespace
 #= require common
