@@ -9,11 +9,6 @@
         /   %i.icon-bar-chart
         /   %span.title Dashboard
 
-
-
-
-
-
         - if policy(:receipt).index?
           %li.nav-item{:class => ( "active" if sidebar_active?('receipts') )}
             = link_to receipts_url do
@@ -89,3 +84,11 @@
             = link_to customer_locations_url do
               %i.icon-pointer
               %span.title Customer Locations
+              
+        - if policy(:setting).index?
+          %li.nav-item{:class => ( "active" if sidebar_active?('settings') )}
+            = link_to settings_url do
+              %i.icon-settings
+              %span.title Settings
+
+  / END SIDEBAR MENU

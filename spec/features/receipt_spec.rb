@@ -71,7 +71,6 @@ feature 'Receipt' do
 
     scenario 'Add points to receipt' do
       visit receipt_path(receipt)
-      fill_in 'Earned points', with: 15
       click_on 'Approve'
       expect(page).to have_content (receipt.earned_points)
     end

@@ -34,9 +34,14 @@ class Receipt < ApplicationRecord
     self.store = new_store
   end
 
+  def calculate_earned_points
+    self.earned_points = total.to_i / Setting.rating.to_i
+  end
+
   private
 
   def add_points_to_user
     customer.add_points earned_points.to_i
   end
+
 end
