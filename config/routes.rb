@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   resources :rewards
   resources :stickers
   resources :sticker_groups
+  resources :settings
 
   namespace :api, defaults: { format: :json } do
     namespace :v1 do

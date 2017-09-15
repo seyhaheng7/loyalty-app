@@ -1,0 +1,11 @@
+.portlet.light.bordered
+
+  .portlet-title
+    .caption
+      Editing Setting
+
+  .portlet-body.form
+    = simple_form_for(@setting, url: setting_path(@setting.var), method: 'patch') do |f|
+      = f.error_notification
+      = f.input :value, as: :string, label: @setting.var, input_html:{ value: Setting[@setting.var] }
+      = f.button :submit, class: 'btn btn-primary'
