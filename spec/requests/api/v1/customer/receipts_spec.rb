@@ -1,7 +1,9 @@
 describe 'Receipts' do
   let!(:customer){ create(:customer) }
-  let!(:receipts){ create_list(:receipt, 10) }
-  let!(:receipt){ create(:receipt) }
+  let!(:customer2){ create(:customer) }
+  let!(:receipt){ create(:receipt, customer_id: customer.id) }
+  let!(:receipts){ create_list(:receipt, 10, customer_id: customer.id) }
+  let!(:receipts2){ create_list(:receipt, 10, customer_id: customer2.id) }
 
   describe 'GET  api/v1/customer/receipts' do
 
@@ -17,6 +19,18 @@ describe 'Receipts' do
       json = JSON.parse(response.body)
       names = json.map{ |j| j['receipt_id'] }
       expect(names).to include receipt.receipt_id
+    end
+
+    it 'include owner receipt' do
+      json = JSON.parse(response.body)
+      owner = json.map{ |j| j['customer']['id'] }
+      expect(owner).to include customer.id
+    end
+
+    it "can't include others receipt" do
+      json = JSON.parse(response.body)
+      owner = json.map{ |j| j['customer']['id'] }
+      expect(owner).not_to include customer2.id
     end
 
     it 'has pagination' do
@@ -40,6 +54,12 @@ describe 'Receipts' do
       name = json['receipt_id']
       expect(name).to include receipt.receipt_id
     end
+
+    it 'return owner receipt' do
+      json = JSON.parse(response.body)
+      expect(json['customer']['id']).to eq customer.id
+    end
+
   end
 
   describe 'POST api/v1/customer/receipts' do

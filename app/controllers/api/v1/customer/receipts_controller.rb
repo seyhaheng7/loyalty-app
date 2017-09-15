@@ -38,7 +38,7 @@ module Api::V1::Customer
     end
 
     def index
-      @receipts = Receipt.all.page(params[:page])
+      @receipts = current_customer.receipts.page(params[:page])
       render json: @receipts, status: :ok
     end
 
@@ -58,7 +58,7 @@ module Api::V1::Customer
     private
 
       def set_receipt
-        @receipt = Receipt.find(params[:id])
+        @receipt = current_customer.receipts.find(params[:id])
       end
 
       def receipt_params
