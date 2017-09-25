@@ -17,6 +17,7 @@ class Customer < ActiveRecord::Base
   has_many :receipts, dependent: :destroy
   has_many :claimed_rewards, dependent: :destroy
   has_many :operating_systems, dependent: :destroy
+  has_many :contact_forms, dependent: :destroy
 
   scope :able_to_verify, ->{ where('verification_expired_at > ?', DateTime.now) }
   scope :digit_not_yet_expired, ->{ where('digit_expired_at > ?', DateTime.now) }

@@ -5,10 +5,6 @@
     %ul.page-sidebar-menu{"data-auto-scroll" => "true", "data-keep-expanded" => "false", "data-slide-speed" => "200"}
 
       %li.nav-item.start{:class => ( "active" if sidebar_active?('home') )}
-        / = link_to root_path do
-        /   %i.icon-bar-chart
-        /   %span.title Dashboard
-
         - if policy(:receipt).index?
           %li.nav-item{:class => ( "active" if sidebar_active?('receipts') )}
             = link_to receipts_url do
@@ -89,6 +85,12 @@
             = link_to customer_locations_url do
               %i.icon-pointer
               %span.title Customer Locations
+
+        - if policy(:contact_form).index?
+          %li.nav-item{:class => ( "active" if sidebar_active?('stickers') )}
+            = link_to contact_forms_url do
+              %i.icon-envelope
+              %span.title Contact Forms
               
         - if policy(:setting).index?
           %li.nav-item{:class => ( "active" if sidebar_active?('settings') )}

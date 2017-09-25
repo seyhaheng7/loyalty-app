@@ -1,0 +1,8 @@
+-if policy(contact_form).show?
+  = link_to contact_form, class: 'btn btn-info' do
+    = fa_icon 'eye'
+    Show
+-if policy(contact_form).destroy?
+  = link_to contact_form, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-danger' do
+    = fa_icon 'trash'
+    Delete
