@@ -10,10 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170925013759) do
+ActiveRecord::Schema.define(version: 20170925064553) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "advertisements", force: :cascade do |t|
+    t.string "name"
+    t.string "banner"
+    t.boolean "active"
+    t.string "for_page"
+    t.string "lat"
+    t.string "long"
+    t.string "address"
+    t.string "phone"
+    t.string "web_site"
+    t.date "start_date"
+    t.date "end_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_advertisements_on_deleted_at"
+  end
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
@@ -45,6 +63,17 @@ ActiveRecord::Schema.define(version: 20170925013759) do
     t.boolean "partner", default: false
     t.index ["category_id"], name: "index_companies_on_category_id"
     t.index ["deleted_at"], name: "index_companies_on_deleted_at"
+  end
+
+  create_table "contact_forms", force: :cascade do |t|
+    t.string "subject"
+    t.text "message"
+    t.bigint "customer_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["customer_id"], name: "index_contact_forms_on_customer_id"
+    t.index ["deleted_at"], name: "index_contact_forms_on_deleted_at"
   end
 
   create_table "customers", force: :cascade do |t|
@@ -103,6 +132,8 @@ ActiveRecord::Schema.define(version: 20170925013759) do
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_faqs_on_deleted_at"
   end
 
   create_table "locations", force: :cascade do |t|
@@ -272,6 +303,7 @@ ActiveRecord::Schema.define(version: 20170925013759) do
   add_foreign_key "claimed_rewards", "customers"
   add_foreign_key "claimed_rewards", "rewards"
   add_foreign_key "companies", "categories"
+  add_foreign_key "contact_forms", "customers"
   add_foreign_key "operating_systems", "customers"
   add_foreign_key "receipts", "customers"
   add_foreign_key "receipts", "stores"

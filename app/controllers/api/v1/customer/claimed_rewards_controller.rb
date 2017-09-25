@@ -4,7 +4,7 @@ module Api::V1::Customer
     swagger_controller :claimed_rewards, 'ClaimedRewards'
 
     def self.add_common_params(api)
-      api.param :form, 'claimed_reward[reward_id]', :integer, :optional, 'Reward'
+      api.param :form, 'claimed_reward[reward_id]', :integer, :required, 'Reward'
     end
 
     swagger_api :create do |api|

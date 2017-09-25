@@ -1,0 +1,15 @@
+= render 'partials/page-head', title: 'Listing Contact Forms'
+
+.m-heading-1.border-green.m-bordered
+  = datagrid_form_for @grid, :method => :get, :url => contact_forms_path
+
+.portlet.light.bordered
+  .portlet-title
+    .caption
+      %i.icon-envelope
+      Contact Forms
+  .portlet-body
+    .table-scrollable
+      = datagrid_table @grid
+    .text-center
+      = paginate(@grid.assets)
