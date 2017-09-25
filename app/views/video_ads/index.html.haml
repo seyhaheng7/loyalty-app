@@ -1,0 +1,21 @@
+= render 'partials/page-head', title: 'Listing Video Ads'
+
+.m-heading-1.border-green.m-bordered
+  = datagrid_form_for @grid, :method => :get, :url => video_ads_path
+
+.portlet.light.bordered
+  .portlet-title
+    .caption
+      %i.icon-user
+      Video Ads
+    .pull-right
+      -if policy(@grid.assets).new?
+        = link_to new_video_ad_path, class: 'btn btn-primary' do
+          = fa_icon 'plus'
+          Add New Video
+  .portlet-body
+    .table-scrollable
+      = datagrid_table @grid
+    .text-center
+      = paginate(@grid.assets)
+  
