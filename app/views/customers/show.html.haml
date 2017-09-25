@@ -1,61 +1,92 @@
-= render 'partials/page-head', title: 'Show Customer'
 .portlet.light.bordered
   .portlet-title
     .caption
-      = @customer.name
+      Customer Profile
 
   .portlet-body
     .row
       .col-xs-12.col-md-5
-        %table.table
-          %tr
-            %th Logo:
-            %td= image_tag @customer.avatar_url, size: '50x50'
-          %tr
-            %th Name:
-            %td= @customer.name
+        .text-center
+          = image_tag @customer.avatar_url, size: '150x150', class: 'img-circle'
+          %h2
+            %b
+              = @customer.name
+          %hr
+        .row
+          .col-md-5
+            %h5
+              %b
+                Email:
+          .col-md-7
+            %h5
+              %b
+                = @customer.email
+        .row
+          .col-md-5
+            %h5
+              %b
+                Phone:
+          .col-md-7
+            %h5
+              %b
+                = @customer.phone
+        .row
+          .col-md-5
+            %h5
+              %b
+                Address:
+          .col-md-7
+            %h5
+              %b
+                = @customer.address
 
-          %tr
-            %th Email:
-            %td= @customer.email
-          %tr
-
-          %tr
-            %th Phone:
-            %td= @customer.phone
-          %tr
-
-          %tr
-            %th Address:
-            %td= @customer.address
-          %tr
-
-          %tr
-            %th Gender:
-            %td= @customer.gender
-
-          %tr
-            %th Current Points:
-            %td= @customer.current_points
-
-          %tr
-            %th Current Sign In IP:
-            %td= @customer.current_sign_in_ip
+        .row
+          .col-md-5
+            %h5
+              %b
+                Gender:
+          .col-md-7
+            %h5
+              %b
+                = @customer.gender
+        .row
+          .col-md-5
+            %h5
+              %b
+                Current Points:
+          .col-md-7
+            %h5
+              %b
+                = @customer.current_points
+        .row
+          .col-md-5
+            %h5
+              %b
+                Current Sign In IP:
+          .col-md-7
+            %h5
+              %b
+                = @customer.current_sign_in_ip
       .col-xs-12.col-md-7
         #show-customer-map
         %input{type: 'hidden', value: @customer.lat, id: 'lat_value'}
         %input{type: 'hidden', value: @customer.long, id: 'long_value'}
 
-    %br
-    -if policy(@customer).index?
-      = link_to customers_path, class: 'btn btn-default' do
-        = fa_icon 'chevron-left'
-        Back
-    -if policy(@customer).edit?
-      = link_to [:edit, @customer], class: 'btn btn-primary' do
-        = fa_icon 'pencil'
-        Edit
-    -if policy(@customer).destroy?
-      = link_to @customer, method: :delete, data: {confirm: 'Are you sure?'} ,class: 'btn btn-danger' do
-        = fa_icon 'trash'
-        Delete
+  .row
+    .col-md-12
+      .row.wrap-pad
+        .pull-left
+          -if policy(@customer).index?
+            = link_to customers_path, class: 'btn btn-default' do
+              = fa_icon 'chevron-left'
+              Back
+        .pull-right
+          -if policy(@customer).edit?
+            = link_to [:edit, @customer], class: 'btn btn-primary' do
+              = fa_icon 'pencil'
+              Edit
+          -if policy(@customer).destroy?
+            = link_to @customer, method: :delete, data: {confirm: 'Are you sure?'} ,class: 'btn btn-danger' do
+              = fa_icon 'trash'
+              Delete
+
