@@ -35,6 +35,7 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
       namespace :merchant do
+        resources :rewards, only: [:index]
       end
 
       namespace :customer do
