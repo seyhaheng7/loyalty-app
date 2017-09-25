@@ -85,7 +85,13 @@
             = link_to customer_locations_url do
               %i.icon-pointer
               %span.title Customer Locations
-
+        
+        - if policy(:advertisement).index?
+          %li.nav-item{:class => ("active" if sidebar_active?('advertisement'))}
+            = link_to advertisements_url do
+              %i.icon-pointer
+              %span.title Advertisements
+                            
         - if policy(:contact_form).index?
           %li.nav-item{:class => ( "active" if sidebar_active?('stickers') )}
             = link_to contact_forms_url do
