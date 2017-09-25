@@ -13,7 +13,6 @@ Codingate.Initializer =
     pageName
 
   init: ->
-    console.log @currentPage()
     Codingate.Initializer.exec('Common')
     if @currentPage()
       Codingate.Initializer.exec(@currentPage())

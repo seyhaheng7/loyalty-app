@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable, :lockable,
          :authentication_keys => [:email]
 
+  has_many :devices, as: :deviceable
 
   mount_uploader :avatar, ImageUploader
 

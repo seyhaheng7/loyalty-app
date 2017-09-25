@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   mount ActionCable.server => '/cable'
   mount Sidekiq::Web => '/sidekiq'
-  
+
   resources :claimed_rewards do
     member do
       patch :reject
@@ -58,7 +58,9 @@ Rails.application.routes.draw do
   end
 
   scope :auth do
-    devise_for :users
+    devise_for :users, controllers: {
+      sessions:  'overrides/devise/sessions'
+    }
   end
 
   mount_devise_token_auth_for 'Customer', at: 'api/v1/customer/auth', controllers: {

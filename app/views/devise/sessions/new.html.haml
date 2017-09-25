@@ -5,7 +5,7 @@
   .form-inputs
     = f.input :email, required: false, autofocus: true
     = f.input :password, required: false
-
+    %input{ type: :hidden, name: 'device_id', id: 'device_id' }
   .form-actions
 
     / Submit Form [Button]
@@ -16,3 +16,4 @@
       = f.check_box :remember_me, as: :boolean if devise_mapping.rememberable?
       Remember
       %span
+= render 'one_signal'
