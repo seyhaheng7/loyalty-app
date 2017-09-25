@@ -1,0 +1,2 @@
+class VideoAdPolicy < ApplicationPolicy
+end
