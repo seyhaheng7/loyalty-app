@@ -7,6 +7,7 @@ Overrides::DeviseTokenAuth::Merchant::SessionsController.class_eval do
     notes 'user login with phone and password'
     param :form, 'phone', :string, :optional, 'Phone Number'
     param :form, 'password', :string, :optional, 'Password'
+    param :form, 'device_id', :string, :optional, 'One signal device id'
     response :ok, "Success", :User
     response :not_acceptable
   end
@@ -17,6 +18,7 @@ Overrides::DeviseTokenAuth::Merchant::SessionsController.class_eval do
     param :form, 'uid', :string, :optional, 'Uid'
     param :form, 'access-token', :string, :optional, 'Access-Token'
     param :form, 'client', :string, :optional, 'Client'
+    param :form, 'device_id', :string, :optional, 'One signal device id'
     response :not_found
     response :ok, "Success", :User
     response :not_acceptable

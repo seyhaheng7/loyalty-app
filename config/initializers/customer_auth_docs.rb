@@ -7,8 +7,9 @@ Overrides::DeviseTokenAuth::Customer::SessionsController.class_eval do
     summary 'Customer Login '
     notes 'user login with phone and password'
     param :form, 'phone', :string, :required, 'Phone Number'
+
     param :form, 'digit', :string, :required, 'Login Digit'
-    # param :form, 'password', :string, :optional, 'Password'
+    param :form, 'device_id', :string, :optional, 'One signal device id'
     response :ok, "Success", :User
     response :not_acceptable
   end
@@ -19,6 +20,7 @@ Overrides::DeviseTokenAuth::Customer::SessionsController.class_eval do
     param :form, 'uid', :string, :optional, 'Uid'
     param :form, 'access-token', :string, :optional, 'Access-Token'
     param :form, 'client', :string, :optional, 'Client'
+    param :form, 'device_id', :string, :optional, 'One signal device id'
     response :not_found
     response :ok, "Success", :User
     response :not_acceptable
