@@ -6,5 +6,5 @@ class Notification < ApplicationRecord
 
   validates :text,              presence: true
   validates :notification_type, presence: true
-  validates :notification_type, inclusion: { TYPES }
+  validates :notification_type, inclusion: TYPES
 end

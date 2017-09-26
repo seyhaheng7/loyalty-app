@@ -10,10 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170915090541) do
+ActiveRecord::Schema.define(version: 20170926025246) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "advertisements", force: :cascade do |t|
+    t.string "name"
+    t.string "banner"
+    t.boolean "active"
+    t.string "for_page"
+    t.string "lat"
+    t.string "long"
+    t.string "address"
+    t.string "phone"
+    t.string "web_site"
+    t.date "start_date"
+    t.date "end_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_advertisements_on_deleted_at"
+  end
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
@@ -47,6 +65,17 @@ ActiveRecord::Schema.define(version: 20170915090541) do
     t.index ["deleted_at"], name: "index_companies_on_deleted_at"
   end
 
+  create_table "contact_forms", force: :cascade do |t|
+    t.string "subject"
+    t.text "message"
+    t.bigint "customer_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["customer_id"], name: "index_contact_forms_on_customer_id"
+    t.index ["deleted_at"], name: "index_contact_forms_on_deleted_at"
+  end
+
   create_table "customers", force: :cascade do |t|
     t.string "provider", default: "phone", null: false
     t.string "uid", default: "", null: false
@@ -63,7 +92,8 @@ ActiveRecord::Schema.define(version: 20170915090541) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string "unconfirmed_email"
-    t.string "avatar"
+    t.string "nickname"
+    t.string "image"
     t.string "email"
     t.json "tokens"
     t.datetime "created_at", null: false
@@ -104,6 +134,15 @@ ActiveRecord::Schema.define(version: 20170915090541) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["deviceable_type", "deviceable_id"], name: "index_devices_on_deviceable_type_and_deviceable_id"
+  end
+
+  create_table "faqs", force: :cascade do |t|
+    t.string "title"
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_faqs_on_deleted_at"
   end
 
   create_table "locations", force: :cascade do |t|
@@ -165,6 +204,25 @@ ActiveRecord::Schema.define(version: 20170915090541) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["customer_id"], name: "index_operating_systems_on_customer_id"
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.string "name"
+    t.string "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "promotions", force: :cascade do |t|
+    t.string "title"
+    t.string "image"
+    t.text "body"
+    t.date "start_date"
+    t.date "end_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_promotions_on_deleted_at"
   end
 
   create_table "receipts", force: :cascade do |t|
@@ -264,9 +322,22 @@ ActiveRecord::Schema.define(version: 20170915090541) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "video_ads", force: :cascade do |t|
+    t.string "title"
+    t.string "video"
+    t.date "start_date"
+    t.date "end_date"
+    t.integer "earned_points"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_video_ads_on_deleted_at"
+  end
+
   add_foreign_key "claimed_rewards", "customers"
   add_foreign_key "claimed_rewards", "rewards"
   add_foreign_key "companies", "categories"
+  add_foreign_key "contact_forms", "customers"
   add_foreign_key "operating_systems", "customers"
   add_foreign_key "receipts", "customers"
   add_foreign_key "receipts", "stores"
