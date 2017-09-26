@@ -2,6 +2,10 @@ module Overrides::DeviseTokenAuth::Customer
   class SessionsController < DeviseTokenAuth::SessionsController
     before_action :configure_permitted_parameters, only: [:create]
 
+    # handle User devices for notifications
+    after_action :add_device, only: :create
+    after_action :destroy_device, only: :destroy
+
     def create
       # Check
       field = (resource_params.keys.map(&:to_sym) & resource_class.authentication_keys).first
@@ -58,6 +62,28 @@ module Overrides::DeviseTokenAuth::Customer
 
     def valid_params?(key, val)
       resource_params[:digit] && key && val
+    end
+
+
+    private
+
+    def destroy_device
+      device.destroy if device.present?
+    end
+
+    def add_device
+      if params[:device_id].present?
+        if device.present?
+          device.update(deviceable: current_user)
+        else
+          current_user.devices.create(device_id: params[:device_id])
+        end
+        session[:device_id] = params[:device_id]
+      end
+    end
+
+    def device
+      @device ||= Device.find_by(device_id: params[:device_id])
     end
   end
 end
