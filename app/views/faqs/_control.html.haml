@@ -1,0 +1,12 @@
+-if policy(faq).show?
+  = link_to faq, class: 'btn btn-info' do
+    = fa_icon 'eye'
+    Show
+-if policy(faq).edit?
+  = link_to [:edit, faq], class: 'btn btn-default' do
+    = fa_icon 'pencil'
+    Edit
+-if policy(faq).destroy?
+  = link_to faq, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-danger' do
+    = fa_icon 'trash'
+    Delete
