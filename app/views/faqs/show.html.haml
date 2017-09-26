@@ -1,0 +1,19 @@
+.container
+  .row
+    .col-md-12.col-xs-12
+      .portlet.light.bordered
+        .portlet-title
+          .caption
+            %span.caption-subject.font-dark.sbold.uppercase 
+              Show faq
+          .actions
+            .btn-group.btn-group-devided
+              = link_to edit_faq_path(@faq), class: 'btn btn-transparent dark btn-outline btn-circle btn-sm active' do
+                Edit
+              = link_to faqs_path, class: 'btn btn-transparent dark btn-outline btn-circle btn-sm' do
+                Back
+        .portlet-body.form
+          %dt Title:
+          %dd= @faq.title
+          %dt Content:
+          %dd= @faq.content
