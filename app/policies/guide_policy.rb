@@ -1,0 +1,2 @@
+class GuidePolicy <ApplicationPolicy
+end

@@ -136,6 +136,15 @@ ActiveRecord::Schema.define(version: 20170927020748) do
     t.index ["deleted_at"], name: "index_faqs_on_deleted_at"
   end
 
+  create_table "guides", force: :cascade do |t|
+    t.string "title"
+    t.string "youtube_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_guides_on_deleted_at"
+  end
+
   create_table "locations", force: :cascade do |t|
     t.string "name"
     t.text "description"
