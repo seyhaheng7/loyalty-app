@@ -14,7 +14,7 @@ class ClaimedReward < ApplicationRecord
       transitions :from => :submitted, :to => :rejected
     end
 
-    event :approving, after: :decrease_points do
+    event :approving, after: [:decrease_points, :generate_qr_token] do
       transitions :from => :submitted, :to => :approved
     end
 
@@ -45,6 +45,10 @@ class ClaimedReward < ApplicationRecord
 
   def decrease_points
     customer.sub_points reward.require_points.to_i
+  end
+
+  def generate_qr_token
+    update(qr_token: Devise.friendly_token(20))
   end
 
 end
