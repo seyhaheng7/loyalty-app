@@ -3,6 +3,12 @@ Codingate.Common =
     @_initImageUploader()
     @_initSelect2()
     @_initDataGrid()
+    @_handleNotificationsToggleClicked()
+
+  _handleNotificationsToggleClicked: ->
+    $('#notifications-toggle').click ->
+      $('#pending-notifications-count').hide()
+      $.getScript('/notifications/top_nav.js')
 
   _initDataGrid: ->
     $('.date_filter').datepicker

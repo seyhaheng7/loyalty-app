@@ -1,0 +1,8 @@
+- current_user.notifications.each do |notification|
+  %li
+    %a{:href => "javascript:;"}
+      %span.time 
+        = time_ago_in_words(notification.created_at)
+      %span.details
+        %span.label.label-sm
+          = notification.text

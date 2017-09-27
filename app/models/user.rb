@@ -6,6 +6,7 @@ class User < ApplicationRecord
          :authentication_keys => [:email]
 
   has_many :devices, as: :deviceable
+  has_many :notifications, as: :notifyable
 
   mount_uploader :avatar, ImageUploader
 
@@ -23,5 +24,10 @@ class User < ApplicationRecord
   validates :name, presence: true
 
   scope :name_like, ->(name){ where("#{table_name}.name ilike ?", "%#{name}%") }
+
+  def increase_pending_notifications
+    self.pending_notifications_count += 1
+    save(validate: false)
+  end
 
 end

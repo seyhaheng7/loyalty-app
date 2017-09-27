@@ -32,6 +32,10 @@ Rails.application.routes.draw do
   resources :sticker_groups
   resources :settings
 
+  resources :notifications do 
+    get :top_nav, on: :collection
+  end
+
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
       namespace :merchant do

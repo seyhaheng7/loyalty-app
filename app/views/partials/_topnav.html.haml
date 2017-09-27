@@ -6,8 +6,11 @@
       .menu-toggler.sidebar-toggler
 
     %a.menu-toggler.responsive-toggler{"data-target" => ".navbar-collapse", "data-toggle" => "collapse", :href => "javascript:;"}
+    
     .page-top
       .top-menu
+        -# %li#header_notification_bar.dropdown.dropdown-extended.dropdown-notification.dropdown-dark
+
         %ul.nav.navbar-nav.pull-right
           %li.dropdown.dropdown-user.dropdown-dark
             %a.dropdown-toggle{"data-close-others" => "true", "data-hover" => "dropdown", "data-toggle" => "dropdown", :href => "javascript:;"}
@@ -31,3 +34,23 @@
                 = link_to destroy_user_session_path(device_id: session[:device_id]), method: :delete do
                   %i.icon-key
                   Log Out
+        %ul.nav.navbar-nav.pull-right
+          %li.separator.hide
+      
+          %li#header_notification_bar.dropdown.dropdown-extended.dropdown-notification.dropdown-dark
+
+            %a.dropdown-toggle#notifications-toggle{"data-close-others" => "true", "data-hover" => "dropdown", "data-toggle" => "dropdown", :href => "javascript:;"}
+              %i.icon-bell
+              
+              %span.badge.badge-success#pending-notifications-count
+                = current_user.pending_notifications_count
+
+            %ul.dropdown-menu
+              %li.external
+                %h3
+                  %span.bold Notifications
+                %a{:href => "page_user_profile_1.html"} View All
+              %li
+                %ul.dropdown-menu-list.scroller#notifications-list{"data-handle-color" => "#637283", :style => "height: 250px; overflow: auto"}
+                  = render 'partials/notifications_list'
+
