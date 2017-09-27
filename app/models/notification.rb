@@ -8,10 +8,13 @@ class Notification < ApplicationRecord
   validates :notification_type, presence: true
   validates :notification_type, inclusion: TYPES
   
-  after_create :increase_notifyable_notifications_pending
   #only create
-  after_commit { NotificationsWorker.perform_async(id) }
-  #work both create and update
+  after_create :increase_notifyable_notifications_pending
+  #work after commit when create
+  after_commit :broadcast_notification_increment, on: :create
+  after_commit :push_notification, on: :create
+
+  private
 
   def increase_notifyable_notifications_pending
     if notifyable_type == 'User'
@@ -19,6 +22,12 @@ class Notification < ApplicationRecord
     end
   end
 
+  def broadcast_notification_increment
+    NotificationsWorker.perform_async(id)
+  end
 
+  def push_notification
+    PushNotificationWorker.perform_async
+  end
 
 end

@@ -1,7 +1,6 @@
 <script>
   var OneSignal = window.OneSignal || [];
   OneSignal.push(["getUserId", function (userId) {
-    console.log(userId)
     $('#device_id').val(userId)
   }]);
 </script>
