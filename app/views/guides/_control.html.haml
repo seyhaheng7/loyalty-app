@@ -1,0 +1,12 @@
+-if policy(guide).show?
+  = link_to guide, class: 'btn btn-info' do
+    = fa_icon 'eye'
+    Show
+-if policy(guide).edit?
+  = link_to [:edit, guide], class: 'btn btn-default' do
+    = fa_icon 'pencil'
+    Edit
+-if policy(guide).destroy?
+  = link_to guide, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-danger' do
+    = fa_icon 'trash'
+    Delete

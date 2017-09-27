@@ -104,6 +104,12 @@
             = link_to contact_forms_url do
               %i.icon-envelope
               %span.title Contact Forms
+
+        - if policy(:guide).index?
+          %li.nav-item{:class => (" active" if sidebar_active?('guide'))}
+            = link_to guides_url do
+              %i.icon-envelope
+              %span.title Watch and Earn Guides
               
         - if policy(:setting).index?
           %li.nav-item{:class => ( "active" if sidebar_active?('settings') )}

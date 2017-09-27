@@ -1,0 +1,14 @@
+= simple_form_for(@guide) do |f|
+  = f.error_notification
+
+  .form-body
+    .form-group
+      = f.input :title
+      = f.input :youtube_url
+
+      = f.button :submit, class: 'btn btn-primary'
+      .pull-right
+        = link_to guides_path, class: 'btn btn-success' do
+          Back
+        = link_to @guide, class: 'btn btn-primary' do
+          Show
