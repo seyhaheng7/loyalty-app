@@ -16,10 +16,10 @@ class ReceiptPolicy < ApplicationPolicy
     approve?
   end
 
-  def create?
-    # disable create feature
-    false
-  end
+  # def create?
+  #   # disable create feature
+  #   false
+  # end
 
   def destroy?
     # disable delete feature
