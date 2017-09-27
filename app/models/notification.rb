@@ -9,12 +9,16 @@ class Notification < ApplicationRecord
   validates :notification_type, inclusion: TYPES
   
   after_create :increase_notifyable_notifications_pending
-
+  #only create
+  after_commit { NotificationsWorker.perform_async(id) }
+  #work both create and update
 
   def increase_notifyable_notifications_pending
     if notifyable_type == 'User'
       notifyable.increase_pending_notifications
     end
   end
+
+
 
 end
