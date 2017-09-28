@@ -1,0 +1,20 @@
+= render 'partials/page-head', title: 'List Merchant Chat Support'
+
+.m-heading-1.border-green.m-bordered
+  = datagrid_form_for @grid, :method => :get, :url => merchant_chat_supports_path
+
+.portlet.light.bordered
+  .portlet-title
+    .caption
+      %i.icon-envelope
+      Merchant Chat Support
+    .pull-right
+      -if policy(@grid.assets).new?
+        = link_to new_merchant_chat_support_path, class: 'btn btn-primary' do
+          = fa_icon 'plus'
+          Add Merchant Chat Support
+  .portlet-body
+    .table-scrollable
+      = datagrid_table @grid
+    .text-center
+      = paginate(@grid.assets)

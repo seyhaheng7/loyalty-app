@@ -110,6 +110,12 @@
               %i.icon-envelope
               %span.title Contact Forms
 
+        - if policy(:merchant_chat_support).index?
+          %li.nav-item{:class => ( "active" if sidebar_active?('stickers') )}
+            = link_to merchant_chat_supports_url do
+              %i.icon-envelope
+              %span.title Merchant Chat Supports
+              
         - if policy(:customer_chat_support).index?
           %li.nav-item{:class => ( "active" if sidebar_active?('settings') )}
             = link_to customer_chat_supports_url do

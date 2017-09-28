@@ -1,6 +1,9 @@
 class Merchant < ActiveRecord::Base
   acts_as_paranoid
 
+  has_many :merchant_chat_supports
+  has_many :merchant_chat_support_data, as: :supportable
+
   # Include default devise modules.
   devise :database_authenticatable, :recoverable,
     :rememberable, :trackable, :validatable, :authentication_keys => [:phone]
@@ -18,6 +21,8 @@ class Merchant < ActiveRecord::Base
 
 
   before_validation :generate_uid_from_phone, if: :phone_provider?, on: :create
+
+  after_create :create_merchant_chat_support
 
   PROVIDERS = ['email', 'phone', 'facebook', 'google']
 
@@ -48,5 +53,9 @@ class Merchant < ActiveRecord::Base
 
   def generate_uid_from_phone
     self.uid = phone
+  end
+
+  def create_merchant_chat_support
+    MerchantChatSupport.create!(merchant_id: id)
   end
 end

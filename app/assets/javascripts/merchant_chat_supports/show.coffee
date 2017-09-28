@@ -1,14 +1,14 @@
-Codingate.CustomerChatSupportsMessageForm = Codingate.CustomerChatSupportsShow =
+Codingate.MerchantChatSupportsMessageForm = Codingate.MerchantChatSupportsShow =
   init: ->
-    @_initCustomerChatSupportRoomID()
-    @_getCustomerChatSupportData()
-    @_subcribedChannelCustomerChatSupport()
+    @_initMerchantChatSupportRoomID()
+    @_getMerchantChatSupportData()
+    @_subcribedChannelMerchantChatSupport()
     @_handleMessageFormSubmitted()
 
-  _initCustomerChatSupportRoomID: ->
+  _initMerchantChatSupportRoomID: ->
     @room_id = $('#chat-data').data('room-id')
 
-  _getCustomerChatSupportData: ->
+  _getMerchantChatSupportData: ->
     self = @
     $.ajax
       url: window.location.href + '.json'
@@ -31,28 +31,28 @@ Codingate.CustomerChatSupportsMessageForm = Codingate.CustomerChatSupportsShow =
     $('#chat-data').append element_to_append
 
     height = $('#chat-data')[0].scrollHeight;
-    $('#customer-chat-supports-list').scrollTop(height);
+    $('#merchant-chat-supports-list').scrollTop(height);
 
-  _subcribedChannelCustomerChatSupport: ->
+  _subcribedChannelMerchantChatSupport: ->
     self = @
-    AppCable.customer_chat_support = AppCable.cable.subscriptions.create {channel: "CustomerChatSupportChannel", room_id: @room_id} ,
+    AppCable.merchant_chat_support = AppCable.cable.subscriptions.create {channel: "MerchantChatSupportChannel", room_id: @room_id} ,
       connected: ->
-        console.log "Connected To Customer Chat Support Channel"
+        console.log "Connected To Merchant Chat Support Channel"
 
       disconnected: ->
-        console.log "Disconnected From Customer Chat Support Channel"
+        console.log "Disconnected From Merchant Chat Support Channel"
 
       received: (data) ->
         self._appendChatSupportData(data["chat_datum"])
 
       speak: (data)->
-        @perform 'speak', text: data["text"], customer_chat_support_id: data["customer_chat_support_id"]
+        @perform 'speak', text: data["text"], merchant_chat_support_id: data["merchant_chat_support_id"]
 
   _handleMessageFormSubmitted: ->
     $('#message-form').submit (e) ->
       e.preventDefault()
       text = $('#text').val()
-      customer_chat_support_id = $('#customer_chat_support_id').val()
-      data = {text: text, customer_chat_support_id: customer_chat_support_id}
-      AppCable.customer_chat_support.speak data
+      merchant_chat_support_id = $('#merchant_chat_support_id').val()
+      data = {text: text, merchant_chat_support_id: merchant_chat_support_id}
+      AppCable.merchant_chat_support.speak data
       $(this).trigger 'reset'
