@@ -1,0 +1,13 @@
+= simple_form_for(@merchant_chat_support) do |f|
+  = f.error_notification
+
+  .form-body
+    .form-group
+      = f.association :merchant
+
+      = f.button :submit
+      .pull-right
+        = link_to merchant_chat_supports_path, class: 'btn btn-success' do
+          Back
+        = link_to @merchant_chat_support, class: 'btn btn-primary' do
+          Show

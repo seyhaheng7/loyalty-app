@@ -1,0 +1,13 @@
+= render 'partials/page-head', title: 'Chat Support'
+.portlet.light.bordered
+  .portlet-title
+    .caption
+      %i.icon-user
+      = @merchant_chat_support.merchant.name
+
+  .portlet-body
+    #merchant-chat-supports-list
+      %ul#chat-data{'data-room-id' => @merchant_chat_support.id}
+      
+    %hr
+    = render 'message_form'
