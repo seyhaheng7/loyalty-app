@@ -48,13 +48,13 @@
             = link_to merchants_url do
               %i.icon-user-following
               %span.title Merchants
-        
+
         - if policy(:faq).index?
           %li.nav-item{:class => ("active" if sidebar_active?('faqs'))}
             = link_to faqs_url do
               %i.icon-user-following
               %span.title Faqs
-          
+
         -if policy(:video_ad).index?
           %li.nav-item{:class => ("active" if sidebar_active?('video_ads'))}
             = link_to video_ads_url do
@@ -64,17 +64,17 @@
 
 
 
-        / - if policy(:sticker_group).index?
-        /   %li.nav-item{:class => ( "active" if sidebar_active?('sticker_groups') )}
-        /     = link_to sticker_groups_url do
-        /       %i.icon-layers
-        /       %span.title StickerGroups
+        - if policy(:sticker_group).index?
+          %li.nav-item{:class => ( "active" if sidebar_active?('sticker_groups') )}
+            = link_to sticker_groups_url do
+              %i.icon-layers
+              %span.title StickerGroups
 
-        / - if policy(:sticker).index?
-        /   %li.nav-item{:class => ( "active" if sidebar_active?('stickers') )}
-        /     = link_to stickers_url do
-        /       %i.icon-bulb
-        /       %span.title Stickers
+        - if policy(:sticker).index?
+          %li.nav-item{:class => ( "active" if sidebar_active?('stickers') )}
+            = link_to stickers_url do
+              %i.icon-bulb
+              %span.title Stickers
         - if policy(:customer).index?
           %li.nav-item{:class => ( "active" if sidebar_active?('customers') )}
             = link_to customers_url do
@@ -92,7 +92,7 @@
             = link_to customer_locations_url do
               %i.icon-pointer
               %span.title Customer Locations
-        
+
         - if policy(:advertisement).index?
           %li.nav-item{:class => ("active" if sidebar_active?('advertisement'))}
             = link_to advertisements_url do
@@ -103,7 +103,7 @@
             = link_to promotions_url do
               %i.icon-pointer
               %span.title Promotions
-                            
+
         - if policy(:contact_form).index?
           %li.nav-item{:class => ( "active" if sidebar_active?('stickers') )}
             = link_to contact_forms_url do
@@ -121,7 +121,7 @@
             = link_to guides_url do
               %i.icon-envelope
               %span.title Watch and Earn Guides
-              
+
         - if policy(:setting).index?
           %li.nav-item{:class => ( "active" if sidebar_active?('settings') )}
             = link_to settings_url do
