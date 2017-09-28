@@ -3,13 +3,15 @@ Codingate.Common =
     @_initImageUploader()
     @_initSelect2()
     @_initDataGrid()
+    @_initDatePicker()
     @_handleNotificationsToggleClicked()
+
 
   _handleNotificationsToggleClicked: ->
     $('#notifications-toggle').click ->
       $('#pending-notifications-count').hide()
       $.getScript('/notifications/top_nav.js')
-
+    
   _initDataGrid: ->
     $('.date_filter').datepicker
       format: 'yyyy-mm-dd'
@@ -33,4 +35,8 @@ Codingate.Common =
 
   _initSelect2: ->
     $('select').select2 theme: 'bootstrap'
+
+  _initDatePicker: ->
+    $('.date-picker').datepicker
+      format: 'yyyy-mm-dd'
 

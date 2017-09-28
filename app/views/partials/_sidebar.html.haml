@@ -5,10 +5,6 @@
     %ul.page-sidebar-menu{"data-auto-scroll" => "true", "data-keep-expanded" => "false", "data-slide-speed" => "200"}
 
       %li.nav-item.start{:class => ( "active" if sidebar_active?('home') )}
-        / = link_to root_path do
-        /   %i.icon-bar-chart
-        /   %span.title Dashboard
-
         - if policy(:receipt).index?
           %li.nav-item{:class => ( "active" if sidebar_active?('receipts') )}
             = link_to receipts_url do
@@ -52,6 +48,18 @@
             = link_to merchants_url do
               %i.icon-user-following
               %span.title Merchants
+        
+        - if policy(:faq).index?
+          %li.nav-item{:class => ("active" if sidebar_active?('faqs'))}
+            = link_to faqs_url do
+              %i.icon-user-following
+              %span.title Faqs
+          
+        -if policy(:video_ad).index?
+          %li.nav-item{:class => ("active" if sidebar_active?('video_ads'))}
+            = link_to video_ads_url do
+              %i.icon-user-following
+              %span.title Video Ads
 
 
 
@@ -84,6 +92,35 @@
             = link_to customer_locations_url do
               %i.icon-pointer
               %span.title Customer Locations
+        
+        - if policy(:advertisement).index?
+          %li.nav-item{:class => ("active" if sidebar_active?('advertisement'))}
+            = link_to advertisements_url do
+              %i.icon-pointer
+              %span.title Advertisements
+        - if policy(:promotion).index?
+          %li.nav-item{:class => ("active" if sidebar_active?('promotion'))}
+            = link_to promotions_url do
+              %i.icon-pointer
+              %span.title Promotions
+                            
+        - if policy(:contact_form).index?
+          %li.nav-item{:class => ( "active" if sidebar_active?('stickers') )}
+            = link_to contact_forms_url do
+              %i.icon-envelope
+              %span.title Contact Forms
+
+        - if policy(:customer_chat_support).index?
+          %li.nav-item{:class => ( "active" if sidebar_active?('settings') )}
+            = link_to customer_chat_supports_url do
+              %i.icon-envelope
+              %span.title Customer Chat Supports
+
+        - if policy(:guide).index?
+          %li.nav-item{:class => (" active" if sidebar_active?('guide'))}
+            = link_to guides_url do
+              %i.icon-envelope
+              %span.title Watch and Earn Guides
               
         - if policy(:setting).index?
           %li.nav-item{:class => ( "active" if sidebar_active?('settings') )}

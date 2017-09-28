@@ -47,6 +47,7 @@ group :development, :test do
   gem 'capistrano-passenger'
   gem 'capistrano-rvm'
   gem 'capistrano-sidekiq'
+  gem 'pry-rails'
 end
 
 group :development do
@@ -75,3 +76,5 @@ gem "select2-rails", "~> 4.0.3"
 
 gem 'omniauth-facebook', '~> 1.4.0'
 gem 'omniauth-google-oauth2'
+gem 'ckeditor', '~> 4.2'
+gem 'youtube_id', '~> 0.0.3'

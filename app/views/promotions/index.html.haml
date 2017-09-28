@@ -1,0 +1,20 @@
+= render 'partials/page-head', title: 'Listing Promotions'
+
+.m-heading-1.border-green.m-bordered
+  = datagrid_form_for @grid, :method => :get, :url => promotions_path
+
+.portlet.light.bordered
+  .portlet-title
+    .caption
+      %i.icon-wallet
+      Promotion
+    .pull-right
+      -if policy(@grid.assets).new?
+        = link_to new_promotion_path, class: 'btn btn-primary' do
+          = fa_icon 'plus'
+          Add New Promotion
+  .portlet-body
+    .table-scrollable
+      = datagrid_table @grid
+    .text-center
+      = paginate(@grid.assets)

@@ -4,7 +4,18 @@ module Api::V1::Customer
     swagger_controller :claimed_rewards, 'ClaimedRewards'
 
     def self.add_common_params(api)
-      api.param :form, 'claimed_reward[reward_id]', :integer, :optional, 'Reward'
+      api.param :form, 'claimed_reward[reward_id]', :integer, :required, 'Reward'
+    end
+
+    swagger_api :index do
+      summary 'Fetches all claimed_reward'
+      param :query, :page, :integer, :optional, "Page number"
+      param :query, :status, :string, :optional, "Filter by approved, rejected, submitted"
+
+      response :unauthorized
+      response :success
+      response :not_acceptable, "The request you made is not acceptable"
+      response :requested_range_not_satisfiable
     end
 
     swagger_api :create do |api|
@@ -12,6 +23,11 @@ module Api::V1::Customer
       notes 'make sure you pass parameters in claimed_reward'
       Api::V1::Customer::ClaimedRewardsController::add_common_params(api)
       response :ok
+    end
+
+    def index
+      @claimed_reward = ClaimedReward.filter(params).page(params[:page])
+      render json: @claimed_reward, status: :ok
     end
 
     def create

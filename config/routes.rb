@@ -1,8 +1,6 @@
 require 'sidekiq/web'
 Rails.application.routes.draw do
 
-  resources :customer_locations, only: :index
-
   mount ActionCable.server => '/cable'
   mount Sidekiq::Web => '/sidekiq'
 
@@ -31,6 +29,14 @@ Rails.application.routes.draw do
   resources :stickers
   resources :sticker_groups
   resources :settings
+  resources :promotions
+  resources :guides
+  resources :faqs
+  resources :advertisements
+  resources :contact_forms, only: [:index, :show, :destroy]
+  resources :video_ads
+  resources :customer_locations, only: :index
+  resources :customer_chat_supports
 
   resources :notifications do 
     get :top_nav, on: :collection
@@ -39,6 +45,7 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
       namespace :merchant do
+        resources :rewards, only: [:index]
       end
 
       namespace :customer do
@@ -51,11 +58,17 @@ Rails.application.routes.draw do
         resources :receipts, only: [:index, :show, :create]
         resources :categories, only: [:index, :show]
         resources :stores, only: [:index, :show]
-        resources :claimed_rewards, only: [:create]
+        resources :claimed_rewards, only: [:index, :create]
         resources :rewards, only: [:index, :show]
         resources :sticker_groups, only: [:index, :show]
         resources :near_by_customers, only: [:index]
         resources :operating_systems, only: [:create]
+        resources :faqs, only: [:index, :show]
+        resources :advertisements, only: [:index, :show]
+        resources :contact_forms, only: [:create]
+        resources :video_ads, only: [:index, :show]
+        resources :promotions, only: [:index, :show]
+        resources :guides, only: [:index, :show]
       end
 
     end

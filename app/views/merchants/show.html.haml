@@ -4,34 +4,54 @@
       Merchant Profile
 
   .portlet-body
-    %table.table
-      %col{width: '10'}
-      %col{width: '350'}
-      %tr
-        %th Avatar:
-        %td= image_tag @merchant.avatar_url, size: '50x50'
-      %tr
-        %th Name:
-        %td= @merchant.name
-      %tr
-        %th Email:
-        %td= @merchant.email
-      %tr
-        %th Phone:
-        %td= @merchant.phone
-      %tr
-        %th Store:
-        %td= @merchant.store_name
-
-    .row.wrap-pad
-      .pull-left
-        = link_to merchants_path, class: 'btn btn-default' do
-          = fa_icon 'chevron-left'
-          Back
-      .pull-right
-        = link_to [:edit, @merchant], class: 'btn btn-primary' do
-          = fa_icon 'pencil'
-          Edit
-        = link_to @merchant, method: :delete, data: {confirm: 'Are you sure?'} ,class: 'btn btn-danger' do
-          = fa_icon 'trash'
-          Delete
+  .text-center
+    = image_tag @merchant.avatar_url, size: '150x150', class: "img-circle"
+    
+  %h2.text-center
+    %b
+      = @merchant.name
+    %hr
+  .mcontrol
+    .row
+      .col-md-4
+        %h5
+          %b
+            E-mail:
+      .col-md-6
+        %h5
+          %b
+            = @merchant.email
+    .row
+      .col-md-4
+        %h5
+          %b
+            Phone:
+      .col-md-6
+        %h5
+          %b
+            = @merchant.phone
+    .row
+      .col-md-4
+        %h5
+          %b
+            Store Name:
+      .col-md-6
+        %h5
+          %b
+            = @merchant.store_name
+  %br
+  %br
+  .row
+    .col-md-12
+      .row.wrap-pad
+        .pull-left
+          = link_to merchants_path, class: 'btn btn-default' do
+            = fa_icon 'chevron-left'
+            Back
+        .pull-right
+          = link_to [:edit, @merchant], class: 'btn btn-primary' do
+            = fa_icon 'pencil'
+            Edit
+          = link_to @merchant, method: :delete, data: {confirm: 'Are you sure?'} ,class: 'btn btn-danger' do
+            = fa_icon 'trash'
+            Delete

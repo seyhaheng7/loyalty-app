@@ -3,6 +3,7 @@
 #= require bootstrap
 #= require select2
 #= require cable
+#= require ckeditor/init
 
 #= require admin/app
 #= require admin/layout
@@ -22,3 +23,5 @@
 
 #= require customers/form
 #= require customers/show
+
+#= require customer_chat_supports/show

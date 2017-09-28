@@ -1,0 +1,12 @@
+-if policy(advertisement).show?
+  = link_to advertisement, class: 'btn btn-info' do
+    = fa_icon 'eye'
+    Show
+-if policy(advertisement).edit?
+  = link_to [:edit, advertisement], class: 'btn btn-default' do
+    = fa_icon 'pencil'
+    Edit
+-if policy(advertisement).destroy?
+  = link_to advertisement, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-danger' do
+    = fa_icon 'trash'
+    Delete

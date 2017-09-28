@@ -1,0 +1,22 @@
+= simple_form_for(@promotion) do |f|
+  = f.error_notification
+
+  .form-body
+    .form-group
+      = f.input :title
+      .image-uploader
+        %a{:href => "#!"}
+          = image_tag f.object.image, class: 'img-responsive', size: '150x150'
+        = f.input :image, as: :file, label: 'Upload Image',
+          :label_html => { class: 'btn btn-default'}
+        = f.hidden_field :image_cache
+      = f.input :body, as: :ckeditor
+      = f.input :start_date, as: :string, input_html: {class: 'date-picker'}
+      = f.input :end_date, as: :string, input_html: {class: 'date-picker'}
+
+      = f.button :submit, class: 'btn btn-primary'
+      .pull-right
+        = link_to promotions_path, class: 'btn btn-success' do
+          Back
+        = link_to @promotion, class: 'btn btn-primary' do
+          Show

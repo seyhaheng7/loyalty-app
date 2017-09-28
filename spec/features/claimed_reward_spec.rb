@@ -1,5 +1,5 @@
 feature 'ClaimedReward' do
-  given!(:customer) { create(:customer, current_points: 15, first_name: 'Code', last_name: 'Gate') }
+  given!(:customer) { create(:customer, current_points: 150, first_name: 'Code', last_name: 'Gate') }
   given!(:admin) { create(:user, name: 'test') }
   given!(:reward) { create(:reward, require_points: 14) }
   given!(:claimed_reward) { create(:claimed_reward, customer: customer, reward: reward ) }
@@ -47,6 +47,13 @@ feature 'ClaimedReward' do
 
       expect(claimed_reward).to transition_from(:submitted).to(:rejected).on_event(:rejecting)
       expect(page).to have_content 'Claimed Reward was successfully rejected.'
+    end
+
+    scenario 'Generate QrToken after Approved' do
+       visit claimed_reward_path(claimed_reward)
+       click_on 'Approve'
+       claimed_reward.reload
+       expect(claimed_reward.qr_token).not_to be_nil
     end
 
   end

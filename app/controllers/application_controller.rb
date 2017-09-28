@@ -25,6 +25,9 @@ class ApplicationController < ActionController::Base
   def customer_api?
     params[:controller].include? 'api/v1/customer'
   end
+  def merchant_api?
+    params[:controller].include? 'api/v1/merchant'
+  end
 
   def devise_token_controller?
     params[:controller].include? 'devise_token_auth'

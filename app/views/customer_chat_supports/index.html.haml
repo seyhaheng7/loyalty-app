@@ -1,0 +1,20 @@
+= render 'partials/page-head', title: 'Listing Customer Chat Supports'
+
+.m-heading-1.border-green.m-bordered
+  = datagrid_form_for @grid, :method => :get, :url => customer_chat_supports_path
+
+.portlet.light.bordered
+  .portlet-title
+    .caption
+      %i.icon-users
+      Customer Chat Support
+    .pull-right
+      -if policy(@grid.assets).new?
+        = link_to new_customer_chat_support_path, class: 'btn btn-primary' do
+          = fa_icon 'comments'
+          New Customer Chat Support
+  .portlet-body
+    .table-scrollable
+      = datagrid_table @grid
+    .text-center
+      = paginate(@grid.assets)

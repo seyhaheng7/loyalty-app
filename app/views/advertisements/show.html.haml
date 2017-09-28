@@ -1,0 +1,37 @@
+.container
+  .row
+    .col-md-12
+      .portlet.light.bordered
+        .portlet-title
+          .caption
+            %span.caption-subject.font-dark.sbold.uppercase 
+              Show advertisement
+          .actions
+            .btn-group.btn-group-devided
+              = link_to edit_advertisement_path(@advertisement), class: 'btn btn-transparent dark btn-outline btn-circle btn-sm active' do
+                Edit
+              = link_to advertisements_path, class: 'btn btn-transparent dark btn-outline btn-circle btn-sm' do
+                Back
+        .portlet-body.form
+          %dt Name:
+          %dd= @advertisement.name
+          %dt Banner:
+          %dd= @advertisement.banner
+          %dt Active:
+          %dd= @advertisement.active
+          %dt For page:
+          %dd= @advertisement.for_page
+          %dt Lat:
+          %dd= @advertisement.lat
+          %dt Long:
+          %dd= @advertisement.long
+          %dt Address:
+          %dd= @advertisement.address
+          %dt Phone:
+          %dd= @advertisement.phone
+          %dt Web site:
+          %dd= @advertisement.web_site
+          %dt Start date:
+          %dd= @advertisement.start_date
+          %dt End date:
+          %dd= @advertisement.end_date

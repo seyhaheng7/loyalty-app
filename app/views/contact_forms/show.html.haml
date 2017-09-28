@@ -1,0 +1,30 @@
+= render 'partials/page-head', title: 'Show Contact Form'
+.portlet.light.bordered
+  .portlet-title
+    .caption
+      = @contact_form.subject
+
+  .portlet-body
+
+    %table.table
+      %tr
+        %th Subject:
+        %td= @contact_form.subject
+      %tr
+        %th Message:
+        %td= @contact_form.message
+
+      %tr
+        %th Customer:
+        %td= @contact_form.customer.name
+      %tr
+
+    %br
+    -if policy(@contact_form).index?
+      = link_to contact_forms_path, class: 'btn btn-default' do
+        = fa_icon 'chevron-left'
+        Back
+    -if policy(@contact_form).destroy?
+      = link_to @contact_form, method: :delete, data: {confirm: 'Are you sure?'} ,class: 'btn btn-danger' do
+        = fa_icon 'trash'
+        Delete

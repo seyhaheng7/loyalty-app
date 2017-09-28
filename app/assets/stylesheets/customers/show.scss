@@ -1,8 +1,17 @@
-body[id='customers_show']
-{
+body[id='customers_show'] {
   #show-customer-map {
     height: 500px;
     margin-top: 15px;
     margin-bottom: 15px;
+  }
+  .col-md-5 {
+    h5 {
+      float: right;
+    }
+  }
+  .col-md-7 {
+    h5 {
+      float: left;
+    }
   }
 }
