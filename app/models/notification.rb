@@ -11,7 +11,6 @@ class Notification < ApplicationRecord
   #only create
   after_create :increase_notifyable_notifications_pending
   #work after commit when create
-  after_commit :broadcast_notification_increment, on: :create
   after_commit :push_notification, on: :create
 
   private
@@ -22,12 +21,8 @@ class Notification < ApplicationRecord
     end
   end
 
-  def broadcast_notification_increment
-    NotificationsWorker.perform_async(id)
-  end
-
   def push_notification
-    PushNotificationWorker.perform_async
+    PushNotificationWorker.perform_async(id)
   end
 
 end
