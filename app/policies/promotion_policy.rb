@@ -1,0 +1,2 @@
+class PromotionPolicy < ApplicationPolicy
+end

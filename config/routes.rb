@@ -1,6 +1,7 @@
 require 'sidekiq/web'
 Rails.application.routes.draw do
 
+  resources :promotions
   resources :guides
   resources :faqs
   resources :advertisements
@@ -62,6 +63,7 @@ Rails.application.routes.draw do
         resources :advertisements, only: [:index, :show]
         resources :contact_forms, only: [:create]
         resources :video_ads, only: [:index, :show]
+        resources :promotions, only: [:index, :show]
         resources :guides, only: [:index, :show]
       end
 

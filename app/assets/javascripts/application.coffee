@@ -3,6 +3,7 @@
 #= require bootstrap
 #= require select2
 #= require cable
+#= require ckeditor/init
 
 #= require admin/app
 #= require admin/layout

@@ -118,6 +118,12 @@ GEM
       activesupport
     childprocess (0.7.1)
       ffi (~> 1.0, >= 1.0.11)
+    ckeditor (4.2.3)
+      cocaine
+      orm_adapter (~> 0.5.0)
+    climate_control (0.2.0)
+    cocaine (0.5.8)
+      climate_control (>= 0.0.3, < 1.0)
     coderay (1.1.2)
     coffee-rails (4.2.2)
       coffee-script (>= 2.2.0)
@@ -417,6 +423,7 @@ DEPENDENCIES
   capybara (~> 2.15)
   carrierwave (~> 1.1.0)
   carrierwave-base64 (~> 2.3.5)
+  ckeditor (~> 4.2)
   coffee-rails (~> 4.2)
   database_cleaner (~> 1.6.1)
   datagrid (~> 1.5)
