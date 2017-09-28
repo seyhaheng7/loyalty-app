@@ -21,12 +21,15 @@ class Receipt < ApplicationRecord
   belongs_to :customer
   belongs_to :managed_by, :class_name => "User", optional: true
 
+  has_many :notifications, as: :objectable
   mount_base64_uploader :capture, ImageUploader
 
   validates :receipt_id, presence: true
   validates :total, presence: true
-  validates :capture, presence: true
+  # validates :capture, presence: true
   validates :receipt_id, :uniqueness => {:scope => :store_id, message: "Receipt is already submitted"}
+
+  after_create :create_notification
 
   def new_store=(params)
     new_store = Store.new params
@@ -42,6 +45,17 @@ class Receipt < ApplicationRecord
 
   def add_points_to_user
     customer.add_points earned_points.to_i
+  end
+
+  def create_notification
+    User.admin.each do |user|
+      notification = Notification.new
+      notification.text = "New receipt was submitted!"
+      notification.notifyable = user
+      notification.objectable = self
+      notification.notification_type = "SubmittedReceipt"
+      notification.save
+    end
   end
 
 end

@@ -38,6 +38,10 @@ Rails.application.routes.draw do
   resources :customer_locations, only: :index
   resources :customer_chat_supports
 
+  resources :notifications do 
+    get :top_nav, on: :collection
+  end
+
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
       namespace :merchant do
@@ -71,7 +75,9 @@ Rails.application.routes.draw do
   end
 
   scope :auth do
-    devise_for :users
+    devise_for :users, controllers: {
+      sessions:  'overrides/devise/sessions'
+    }
   end
 
   mount_devise_token_auth_for 'Customer', at: 'api/v1/customer/auth', controllers: {
