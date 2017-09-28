@@ -24,6 +24,7 @@ class User < ApplicationRecord
   validates :name, presence: true
   
   has_many :customer_chat_support_data, as: :supportable
+  has_many :merchant_chat_support_data, as: :supportable
 
   scope :name_like, ->(name){ where("#{table_name}.name ilike ?", "%#{name}%") }
 

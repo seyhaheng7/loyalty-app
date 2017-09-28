@@ -1,5 +1,5 @@
 require 'sidekiq/web'
-Rails.application.routes.draw do
+Rails.application.routes.draw do  
 
   mount ActionCable.server => '/cable'
   mount Sidekiq::Web => '/sidekiq'
@@ -37,6 +37,7 @@ Rails.application.routes.draw do
   resources :video_ads
   resources :customer_locations, only: :index
   resources :customer_chat_supports
+  resources :merchant_chat_supports
 
   resources :notifications do 
     get :top_nav, on: :collection
