@@ -18,7 +18,7 @@ class PushNotificationWorker
   def push_notification(notification)
     notifyable = notification.notifyable
     paramsnotification = {"app_id" => ENV['ONE_SIGNAL_APP_ID'], 
-        "contents" => {"en" => "New notification!"},
+        "contents" => {"en" => "#{notification.text}"},
         "include_player_ids" => notifyable.devices.pluck(:device_id)
       }
     uri = URI.parse('https://onesignal.com/api/v1/notifications')

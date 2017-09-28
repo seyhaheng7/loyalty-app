@@ -48,11 +48,12 @@ class Receipt < ApplicationRecord
   end
 
   def create_notification
-    User.approver.each do |user|
+    User.admin.each do |user|
       notification = Notification.new
       notification.text = "New receipt was submitted!"
       notification.notifyable = user
       notification.objectable = self
+      notification.notification_type = "SubmittedReceipt"
       notification.save
     end
   end
