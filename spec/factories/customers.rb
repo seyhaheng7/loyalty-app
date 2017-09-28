@@ -6,7 +6,7 @@ FactoryGirl.define do
     verified_at { DateTime.now }
     password 'Codingate@2017'
     password_confirmation 'Codingate@2017'
-
+    current_points 1000
     trait :unverified do
       verified_at nil
     end

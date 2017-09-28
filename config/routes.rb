@@ -11,7 +11,7 @@ Rails.application.routes.draw do
 
   mount ActionCable.server => '/cable'
   mount Sidekiq::Web => '/sidekiq'
-  
+
   resources :claimed_rewards do
     member do
       patch :reject
@@ -54,7 +54,7 @@ Rails.application.routes.draw do
         resources :receipts, only: [:index, :show, :create]
         resources :categories, only: [:index, :show]
         resources :stores, only: [:index, :show]
-        resources :claimed_rewards, only: [:create]
+        resources :claimed_rewards, only: [:index, :create]
         resources :rewards, only: [:index, :show]
         resources :sticker_groups, only: [:index, :show]
         resources :near_by_customers, only: [:index]

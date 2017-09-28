@@ -30,6 +30,17 @@ class ClaimedReward < ApplicationRecord
   delegate :name, to: :customer, prefix: true, allow_nil: true
   delegate :name, to: :reward, prefix: true, allow_nil: true
 
+
+  def self.filter(params)
+    records = all
+
+    if params[:status].present?
+      records = records.where(status: params[:status])
+    end
+
+    records
+  end
+
   private
 
   def customer_points
@@ -41,7 +52,6 @@ class ClaimedReward < ApplicationRecord
   def reward_available
     errors.add(:reward, 'not available in stock') if reward.unavailable?
   end
-
 
   def decrease_points
     customer.sub_points reward.require_points.to_i
