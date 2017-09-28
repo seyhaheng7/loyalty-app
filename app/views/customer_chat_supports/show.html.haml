@@ -1,0 +1,13 @@
+= render 'partials/page-head', title: 'Chat Support'
+.portlet.light.bordered
+  .portlet-title
+    .caption
+      %i.icon-user
+      = @customer_chat_support.customer.name
+
+  .portlet-body
+    #customer-chat-supports-list
+      %ul#chat-data
+      
+    %hr
+    = render 'message_form'

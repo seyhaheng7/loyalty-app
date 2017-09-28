@@ -23,3 +23,5 @@
 
 #= require customers/form
 #= require customers/show
+
+#= require customer_chat_supports/show

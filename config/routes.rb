@@ -1,14 +1,6 @@
 require 'sidekiq/web'
 Rails.application.routes.draw do
 
-  resources :promotions
-  resources :guides
-  resources :faqs
-  resources :advertisements
-  resources :contact_forms, only: [:index, :show, :destroy]
-  resources :video_ads
-  resources :customer_locations, only: :index
-
   mount ActionCable.server => '/cable'
   mount Sidekiq::Web => '/sidekiq'
 
@@ -37,6 +29,14 @@ Rails.application.routes.draw do
   resources :stickers
   resources :sticker_groups
   resources :settings
+  resources :promotions
+  resources :guides
+  resources :faqs
+  resources :advertisements
+  resources :contact_forms, only: [:index, :show, :destroy]
+  resources :video_ads
+  resources :customer_locations, only: :index
+  resources :customer_chat_supports
 
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
