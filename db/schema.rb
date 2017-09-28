@@ -10,18 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170928031520) do
+ActiveRecord::Schema.define(version: 20170927032617) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "admin_messages", force: :cascade do |t|
-    t.text "message"
-    t.bigint "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_admin_messages_on_user_id"
-  end
 
   create_table "advertisements", force: :cascade do |t|
     t.string "name"
@@ -140,9 +132,9 @@ ActiveRecord::Schema.define(version: 20170928031520) do
     t.datetime "verified_at"
     t.string "login_digit"
     t.datetime "digit_expired_at"
-    t.datetime "update_location_at"
     t.string "first_name"
     t.string "last_name"
+    t.datetime "update_location_at"
     t.index ["confirmation_token"], name: "index_customers_on_confirmation_token", unique: true
     t.index ["deleted_at"], name: "index_customers_on_deleted_at"
     t.index ["digit_expired_at"], name: "index_customers_on_digit_expired_at"
@@ -151,6 +143,15 @@ ActiveRecord::Schema.define(version: 20170928031520) do
     t.index ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true
     t.index ["uid", "provider"], name: "index_customers_on_uid_and_provider", unique: true
     t.index ["unlock_token"], name: "index_customers_on_unlock_token", unique: true
+  end
+
+  create_table "devices", force: :cascade do |t|
+    t.string "device_id"
+    t.string "deviceable_type"
+    t.bigint "deviceable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["deviceable_type", "deviceable_id"], name: "index_devices_on_deviceable_type_and_deviceable_id"
   end
 
   create_table "faqs", force: :cascade do |t|
@@ -176,13 +177,6 @@ ActiveRecord::Schema.define(version: 20170928031520) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "merchant_chat_supports", force: :cascade do |t|
-    t.bigint "merchant_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["merchant_id"], name: "index_merchant_chat_supports_on_merchant_id"
   end
 
   create_table "merchants", force: :cascade do |t|
@@ -216,6 +210,19 @@ ActiveRecord::Schema.define(version: 20170928031520) do
     t.index ["reset_password_token"], name: "index_merchants_on_reset_password_token", unique: true
     t.index ["store_id"], name: "index_merchants_on_store_id"
     t.index ["uid", "provider"], name: "index_merchants_on_uid_and_provider", unique: true
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.string "notification_type"
+    t.string "text"
+    t.string "notifyable_type"
+    t.bigint "notifyable_id"
+    t.string "objectable_type"
+    t.bigint "objectable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["notifyable_type", "notifyable_id"], name: "index_notifications_on_notifyable_type_and_notifyable_id"
+    t.index ["objectable_type", "objectable_id"], name: "index_notifications_on_objectable_type_and_objectable_id"
   end
 
   create_table "operating_systems", force: :cascade do |t|
@@ -273,7 +280,7 @@ ActiveRecord::Schema.define(version: 20170928031520) do
 
   create_table "settings", force: :cascade do |t|
     t.string "var", null: false
-    t.text "value"
+    t.string "value"
     t.integer "thing_id"
     t.string "thing_type", limit: 30
     t.datetime "created_at", null: false
@@ -347,14 +354,12 @@ ActiveRecord::Schema.define(version: 20170928031520) do
     t.index ["deleted_at"], name: "index_video_ads_on_deleted_at"
   end
 
-  add_foreign_key "admin_messages", "users"
   add_foreign_key "claimed_rewards", "customers"
   add_foreign_key "claimed_rewards", "rewards"
   add_foreign_key "companies", "categories"
   add_foreign_key "contact_forms", "customers"
   add_foreign_key "customer_chat_support_data", "customer_chat_supports"
   add_foreign_key "customer_chat_supports", "customers"
-  add_foreign_key "merchant_chat_supports", "merchants"
   add_foreign_key "operating_systems", "customers"
   add_foreign_key "receipts", "customers"
   add_foreign_key "receipts", "stores"
