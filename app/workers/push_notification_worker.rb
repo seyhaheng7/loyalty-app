@@ -12,14 +12,14 @@ class PushNotificationWorker
   def notifications_worker(notification)
     sleep 1
     user = notification.notifyable
-    ActionCable.server.broadcast "notifications_channel_#{notification.notifyable_id}", pending_notifications_count: user.pending_notifications_count
+    ActionCable.server.broadcast "notifications_channel_#{user.id}", pending_notifications_count: user.pending_notifications_count
   end
 
   def push_notification(notification)
-    set_notifyable = notification.notifyable
+    notifyable = notification.notifyable
     paramsnotification = {"app_id" => ENV['ONE_SIGNAL_APP_ID'], 
-        "contents" => {"en" => "English Message"},
-        "include_player_ids" => set_notifyable.devices.pluck(:device_id)
+        "contents" => {"en" => "New notification!"},
+        "include_player_ids" => notifyable.devices.pluck(:device_id)
       }
     uri = URI.parse('https://onesignal.com/api/v1/notifications')
     http = Net::HTTP.new(uri.host, uri.port)
