@@ -110,6 +110,12 @@
               %i.icon-envelope
               %span.title Contact Forms
 
+        - if policy(:customer_chat_support).index?
+          %li.nav-item{:class => ( "active" if sidebar_active?('settings') )}
+            = link_to customer_chat_supports_url do
+              %i.icon-envelope
+              %span.title Customer Chat Supports
+
         - if policy(:guide).index?
           %li.nav-item{:class => (" active" if sidebar_active?('guide'))}
             = link_to guides_url do

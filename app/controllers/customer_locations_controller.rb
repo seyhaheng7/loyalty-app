@@ -3,6 +3,6 @@ class CustomerLocationsController < ApplicationController
     respond_to do |format|
       format.html
       format.json { render json: Customer.active }
-     end
+    end
   end
 end

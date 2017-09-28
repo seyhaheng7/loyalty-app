@@ -18,6 +18,8 @@ class Customer < ActiveRecord::Base
   has_many :claimed_rewards, dependent: :destroy
   has_many :operating_systems, dependent: :destroy
   has_many :contact_forms, dependent: :destroy
+  has_many :customer_chat_supports
+  has_many :customer_chat_support_data, as: :supportable
 
   scope :able_to_verify, ->{ where('verification_expired_at > ?', DateTime.now) }
   scope :digit_not_yet_expired, ->{ where('digit_expired_at > ?', DateTime.now) }
@@ -42,6 +44,7 @@ class Customer < ActiveRecord::Base
   before_save :generate_verification_code, unless: :verified?, if: :phone_changed?
   before_save :change_update_location_at, if: :location_changed?
 
+  after_create :create_customer_chat_support
   after_commit :broadcast_location, if: :saved_change_to_location?
   after_save :send_comfirmation_code, unless: :verified?, if: :saved_change_to_phone?
 
@@ -117,6 +120,10 @@ class Customer < ActiveRecord::Base
 
   def generate_uid_from_phone
     self.uid = phone
+  end
+
+  def create_customer_chat_support
+    CustomerChatSupport.create!(customer_id: id)
   end
 
   def broadcast_location
