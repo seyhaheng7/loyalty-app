@@ -3,6 +3,7 @@ Codingate.Common =
     @_initImageUploader()
     @_initSelect2()
     @_initDataGrid()
+    @_initDatePicker()
 
   _initDataGrid: ->
     $('.date_filter').datepicker
@@ -27,4 +28,8 @@ Codingate.Common =
 
   _initSelect2: ->
     $('select').select2 theme: 'bootstrap'
+
+  _initDatePicker: ->
+    $('.date-picker').datepicker
+      format: 'yyyy-mm-dd'
 

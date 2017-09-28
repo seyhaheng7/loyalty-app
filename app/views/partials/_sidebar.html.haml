@@ -98,6 +98,11 @@
             = link_to advertisements_url do
               %i.icon-pointer
               %span.title Advertisements
+        - if policy(:promotion).index?
+          %li.nav-item{:class => ("active" if sidebar_active?('promotion'))}
+            = link_to promotions_url do
+              %i.icon-pointer
+              %span.title Promotions
                             
         - if policy(:contact_form).index?
           %li.nav-item{:class => ( "active" if sidebar_active?('stickers') )}

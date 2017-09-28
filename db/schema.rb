@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170927020748) do
+ActiveRecord::Schema.define(version: 20170927034919) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -93,7 +93,8 @@ ActiveRecord::Schema.define(version: 20170927020748) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string "unconfirmed_email"
-    t.string "avatar"
+    t.string "nickname"
+    t.string "image"
     t.string "email"
     t.json "tokens"
     t.datetime "created_at", null: false
@@ -125,6 +126,15 @@ ActiveRecord::Schema.define(version: 20170927020748) do
     t.index ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true
     t.index ["uid", "provider"], name: "index_customers_on_uid_and_provider", unique: true
     t.index ["unlock_token"], name: "index_customers_on_unlock_token", unique: true
+  end
+
+  create_table "devices", force: :cascade do |t|
+    t.string "device_id"
+    t.string "deviceable_type"
+    t.bigint "deviceable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["deviceable_type", "deviceable_id"], name: "index_devices_on_deviceable_type_and_deviceable_id"
   end
 
   create_table "faqs", force: :cascade do |t|
@@ -185,12 +195,44 @@ ActiveRecord::Schema.define(version: 20170927020748) do
     t.index ["uid", "provider"], name: "index_merchants_on_uid_and_provider", unique: true
   end
 
+  create_table "notifications", force: :cascade do |t|
+    t.string "notification_type"
+    t.string "text"
+    t.string "notifyable_type"
+    t.bigint "notifyable_id"
+    t.string "objectable_type"
+    t.bigint "objectable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["notifyable_type", "notifyable_id"], name: "index_notifications_on_notifyable_type_and_notifyable_id"
+    t.index ["objectable_type", "objectable_id"], name: "index_notifications_on_objectable_type_and_objectable_id"
+  end
+
   create_table "operating_systems", force: :cascade do |t|
     t.string "name"
     t.bigint "customer_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["customer_id"], name: "index_operating_systems_on_customer_id"
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.string "name"
+    t.string "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "promotions", force: :cascade do |t|
+    t.string "title"
+    t.string "image"
+    t.text "body"
+    t.date "start_date"
+    t.date "end_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_promotions_on_deleted_at"
   end
 
   create_table "receipts", force: :cascade do |t|
@@ -286,6 +328,7 @@ ActiveRecord::Schema.define(version: 20170927020748) do
     t.string "role", default: "Admin"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "pending_notifications_count", default: 0
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
