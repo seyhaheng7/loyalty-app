@@ -1,0 +1,15 @@
+= render 'partials/page-head', title: 'Listing All Notifications'
+
+.portlet.light.bordered
+  .portlet-title
+    .caption
+      %i.icon-user
+      Notifications
+  .portlet-body
+    .mt-element-list
+      .mt-list-head.list-news.font-white.bg-blue
+        .list-head-title-container
+          %span.badge.badge-primary.pull-right
+            = Notification.count
+          %h3.list-title All Notifications
+    .mt-element-list#notifications
