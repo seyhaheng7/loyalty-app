@@ -32,10 +32,11 @@ Overrides::DeviseTokenAuth::Customer::RegistrationsController.class_eval do
   swagger_controller :registrations, 'Customer Registrations'
 
   swagger_api :create do
-    summary 'Customer Login '
+    summary 'Customer Registrations '
     notes 'user login with phone and password'
     param :form, 'phone', :string, :required, 'Phone Number'
-    param :form, 'name', :string, :optional, 'Name'
+    param :form, 'first_name', :string, :optional, 'First Name'
+    param :form, 'last_name', :string, :optional, 'Last Name'
     param :form, 'email', :string, :optional, 'email'
     param :form, 'gender', :string, :optional, 'Gender'
     param :form, 'avatar', :base64, :optional, 'Avatar'
@@ -47,14 +48,15 @@ Overrides::DeviseTokenAuth::Customer::RegistrationsController.class_eval do
   end
 
   swagger_api :update do
-    summary 'edit User Profile'
+    summary 'Edit Customer Profile'
     param :header, 'access-token', :string, :required, 'Authentication token'
     param :header, 'token-type', :string, :required, 'Bearer'
     param :header, 'client', :string, :required, 'Simultaneous sessions on different clients'
     param :header, 'expiry', :string, :required, 'The date at which the current session will expire'
     param :header, 'uid', :string, :required, 'A unique value that is used to identify the user'
     param :form, 'phone', :string, :required, 'Phone Number'
-    param :form, 'name', :string, :optional, 'Name'
+    param :form, 'first_name', :string, :optional, 'First Name'
+    param :form, 'last_name', :string, :optional, 'Last Name'
     param :form, 'gender', :string, :optional, 'Gender'
     param :form, 'avatar', :string, :optional, 'Avatar'
     param :form, 'address', :string, :optional, 'Address'
