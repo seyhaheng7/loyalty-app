@@ -1,5 +1,5 @@
 require 'sidekiq/web'
-Rails.application.routes.draw do  
+Rails.application.routes.draw do
 
   mount ActionCable.server => '/cable'
   mount Sidekiq::Web => '/sidekiq'
@@ -39,7 +39,7 @@ Rails.application.routes.draw do
   resources :customer_chat_supports
   resources :merchant_chat_supports
 
-  resources :notifications do 
+  resources :notifications do
     get :top_nav, on: :collection
   end
 
@@ -47,7 +47,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       namespace :merchant do
         resources :rewards, only: [:index]
-        resources :claimed_rewards, only: [] do
+        resources :claimed_rewards, only: [:index] do
           put :given, on: :collection
         end
       end
@@ -94,6 +94,6 @@ Rails.application.routes.draw do
     registrations:  'overrides/devise_token_auth/merchant/registrations'
   }
 
- 
+
   root 'home#index'
 end
