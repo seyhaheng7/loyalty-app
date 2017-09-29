@@ -47,6 +47,9 @@ Rails.application.routes.draw do
     namespace :v1 do
       namespace :merchant do
         resources :rewards, only: [:index]
+        resources :claimed_rewards, only: [] do
+          put :given, on: :collection
+        end
       end
 
       namespace :customer do
@@ -85,10 +88,12 @@ Rails.application.routes.draw do
     sessions:  'overrides/devise_token_auth/customer/sessions',
     registrations:  'overrides/devise_token_auth/customer/registrations'
   }
+
   mount_devise_token_auth_for 'Merchant', at: 'api/v1/merchant/auth', controllers: {
     sessions:  'overrides/devise_token_auth/merchant/sessions',
     registrations:  'overrides/devise_token_auth/merchant/registrations'
   }
 
+ 
   root 'home#index'
 end
