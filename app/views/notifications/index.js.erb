@@ -1,0 +1,5 @@
+$('#notifications').append("<%= escape_javascript(render partial: 'notifications/notifications') %>");
+
+<% if @notifications.next_page.blank? %>
+    $(window).unbind('scroll');
+<% end %>
