@@ -1,0 +1,2 @@
+class MerchantChatSupportPolicy < ApplicationPolicy
+end
