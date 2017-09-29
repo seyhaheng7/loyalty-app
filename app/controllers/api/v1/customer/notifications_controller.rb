@@ -5,12 +5,13 @@ module Api::V1::Customer
 
     swagger_api :index do
       summary 'Fetches all notifications'
+      param :query, :page, :integer, :optional, "Page number"
       response :unauthorized
       response :not_acceptable
     end
 
     def index
-      @notifications = Notification.all
+      @notifications = current_customer.notifications.page(params[:page])
       render json: @notifications, status: :ok
     end
   end
