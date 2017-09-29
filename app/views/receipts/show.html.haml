@@ -20,7 +20,9 @@
             %td= @receipt.total
           %tr
             %th Earned Points:
-            %td= @receipt.earned_points
+            %td
+              %code
+                = @receipt.earned_points
           %tr
             %th Status:
             %td= @receipt.status
@@ -33,7 +35,7 @@
       .col-xs-12.col-md-7
         %p.text-center Capture Receipt:
         .text-center
-          = image_tag @receipt.capture_url
+          = image_tag @receipt.capture_url, class: "img-responsive"
 
 
         %br

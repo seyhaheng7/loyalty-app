@@ -1,0 +1,22 @@
+#tab_1_2.tab-pane
+  .slimScrollDiv
+    %ul.feeds
+      - @customer.claimed_rewards.each do |claimed_reward|
+        %li
+          = link_to claimed_reward do
+            .col1
+              .cont
+                .cont-col1
+                  .label.label-sm.label-success{class: "#{claimed_reward.status}"}
+                    - if claimed_reward.status == 'submitted'
+                      %i.fa.fa-info
+                    - if claimed_reward.status == 'approved'
+                      %i.fa.fa-check
+                    - if claimed_reward.status == 'rejected'
+                      %i.fa.fa-close
+                .cont-col2
+                  .desc
+                    = claimed_reward.status
+            .col2
+              .date
+                = time_ago_in_words(claimed_reward.created_at)

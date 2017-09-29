@@ -1,0 +1,21 @@
+#tab_1_3.tab-pane
+  .slimScrollDiv
+    %ul.feeds
+      - @customer.operating_systems.each do |operating_system|
+        %li
+          .col1
+            .cont
+              .cont-col1
+                .label.label-sm.label-success{class: "#{operating_system.name}"}
+                  - if operating_system.name == 'ios'
+                    %i.fa.fa-apple
+                  - elsif operating_system.name == 'android'
+                    %i.fa.fa-android
+                  - else
+                    %i.fa.fa-info-circle
+              .cont-col2
+                .desc
+                  = operating_system.name
+          .col2
+            .date
+              = time_ago_in_words(operating_system.created_at)
