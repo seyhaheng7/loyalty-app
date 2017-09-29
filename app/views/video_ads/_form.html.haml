@@ -5,11 +5,12 @@
     .form-group
       = f.input :title
       = f.input :video
-      = f.input :start_date
-      = f.input :end_date
+      = f.input :start_date, as: :string, input_html: {class: 'date-picker'}
+      = f.input :end_date, as: :string, input_html: {class: 'date-picker'}
       = f.input :earned_points
+      = f.input :max_view_per_day
 
-      = f.button :submit
+      = f.button :submit, class: 'btn btn-primary'
       .pull-right
         = link_to video_ads_path, class: 'btn btn-success' do
           Back
