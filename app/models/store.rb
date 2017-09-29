@@ -5,6 +5,7 @@ class Store < ApplicationRecord
   belongs_to :location
   has_many :receipts
   has_many :rewards
+  has_many :claimed_rewards, through: :rewards
 
   validates :name, presence: true, uniqueness: {scope: :company_id}
   validates :address, presence: true

@@ -1,5 +1,7 @@
 module Api::V1::Merchant
   class BaseController < ActionController::API
+    rescue_from ActiveRecord::RecordNotFound, with: :not_found
+
     # set up swagger docs
     include Swagger::Docs::ImpotentMethods
     Swagger::Docs::Generator::set_real_methods
@@ -59,6 +61,10 @@ module Api::V1::Merchant
     end
 
     private
+
+    def not_found
+      render json: { error: "record not found" }, status: :not_found
+    end
 
     def check_merchant_verification!
       unless current_merchant.active_for_authentication?

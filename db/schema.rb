@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(version: 20170928041627) do
     t.datetime "updated_at", null: false
     t.bigint "managed_by_id"
     t.string "qr_token"
+    t.boolean "given", default: false
     t.index ["customer_id"], name: "index_claimed_rewards_on_customer_id"
     t.index ["managed_by_id"], name: "index_claimed_rewards_on_managed_by_id"
     t.index ["reward_id"], name: "index_claimed_rewards_on_reward_id"

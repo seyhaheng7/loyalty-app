@@ -60,5 +60,4 @@ class ClaimedReward < ApplicationRecord
   def generate_qr_token
     update(qr_token: Devise.friendly_token(20))
   end
-
 end
