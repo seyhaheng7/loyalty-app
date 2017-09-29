@@ -53,9 +53,16 @@
             },
             {
               "paramType": "form",
-              "name": "name",
+              "name": "first_name",
               "type": "string",
-              "description": "Name",
+              "description": "First Name",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "last_name",
+              "type": "string",
+              "description": "Last Name",
               "required": false
             },
             {
@@ -101,7 +108,7 @@
               "required": false
             }
           ],
-          "summary": "edit User Profile",
+          "summary": "Edit Customer Profile",
           "responseMessages": [
             {
               "code": 200,
@@ -133,9 +140,16 @@
             },
             {
               "paramType": "form",
-              "name": "name",
+              "name": "first_name",
               "type": "string",
-              "description": "Name",
+              "description": "First Name",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "last_name",
+              "type": "string",
+              "description": "Last Name",
               "required": false
             },
             {
@@ -181,7 +195,7 @@
               "required": false
             }
           ],
-          "summary": "Customer Login ",
+          "summary": "Customer Registrations ",
           "responseMessages": [
             {
               "code": 200,

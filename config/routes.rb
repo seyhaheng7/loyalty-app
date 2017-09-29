@@ -74,6 +74,7 @@ Rails.application.routes.draw do
         resources :video_ads, only: [:index, :show]
         resources :promotions, only: [:index, :show]
         resources :guides, only: [:index, :show]
+        resources :notifications, only: [:index]
         resources :privacy_policies, only: [:index]
       end
 
