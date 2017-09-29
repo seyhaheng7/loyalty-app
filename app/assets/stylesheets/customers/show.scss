@@ -1,17 +1,61 @@
 body[id='customers_show'] {
   #show-customer-map {
     height: 500px;
-    margin-top: 15px;
     margin-bottom: 15px;
   }
-  .col-md-5 {
+  .simple-control {
     h5 {
       float: right;
     }
   }
-  .col-md-7 {
+  .simple-width {
     h5 {
       float: left;
     }
+  }
+  .feeds li .col2 {
+    width: 120px;
+    margin-left: -120px;
+  }
+  .feeds li a {
+    color: #82949a;
+  }
+  .slimScrollDiv {
+    position: relative;
+    overflow: scroll;
+    width: auto;
+    height: 405px;
+  }
+  .cont-col1 {
+    .submitted {
+      background: #518cf1;
+    }
+    .approved {
+      background: #58b970;
+    }
+    .rejected {
+      background: #d32d3a;
+    }
+    .ios {
+      background: #f2f5fb;
+      color: #dcdcdb;
+    }
+    .android {
+      background: #7cc47c;
+      color: #fff;
+    }
+    .window {
+      background: #167db3;
+      color: #fff;
+    }
+  }
+  .cont-col2 .desc {
+    text-transform: uppercase;
+  }
+  .feeds li .col1>.cont>.cont-col1>.label {
+    display: inline-block;
+    padding: 8px 4px 6px 5px;
+    vertical-align: middle;
+    text-align: center;
   }
 }
