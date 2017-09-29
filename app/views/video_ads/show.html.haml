@@ -15,13 +15,13 @@
         .portlet-body.form
           %dt Title:
           %dd= @video_ad.title
-          %dt Video:
-          %dd
-            =video_tag @video_ad.video, size: "160x120", controls: "true" 
           %dt Start date:
           %dd= @video_ad.start_date
           %dt End date:
           %dd= @video_ad.end_date
           %dt Earned points:
           %dd= @video_ad.earned_points
+          
+          %iframe{:align => "center", :name => "window", :src => "#{@video_ad.embed_url}", :height => "150px;", :width => "250px;", :style => "float:left;margin-top:30px;"}
+
 
