@@ -1,0 +1,11 @@
+= simple_form_for(@privacy_policy) do |f|
+  = f.error_notification
+
+  .form-body
+    .form-group
+      = f.input :body, as: :ckeditor
+
+      = f.button :submit
+      .pull-right
+        = link_to privacy_policies_path, class: 'btn btn-success' do
+          Back
