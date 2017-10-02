@@ -1,7 +1,7 @@
-describe 'Notification' do
+describe 'notification' do
+  
   let!(:customer){ create(:customer) }
   let!(:notification){create(:notification, notifyable: customer)}
-
   describe 'GET api/v1/customer/notifications' do
     before do
       get api_v1_customer_notifications_path, headers: customer.create_new_auth_token
@@ -16,7 +16,6 @@ describe 'Notification' do
       ids = json.map{ |j| j['id'] }
       expect(ids).to include notification.id
     end
-
   end
 
 end
