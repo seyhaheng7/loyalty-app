@@ -1,7 +1,7 @@
 module Overrides::Devise
   class SessionsController < Devise::SessionsController
     after_action :add_device, only: :create
-    after_action :destroy_device, only: :destroy
+    before_action :destroy_device, only: :destroy
 
     private
 
