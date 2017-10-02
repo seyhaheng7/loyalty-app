@@ -20,6 +20,7 @@ class Customer < ActiveRecord::Base
   has_many :contact_forms, dependent: :destroy
   has_many :customer_chat_supports
   has_many :customer_chat_support_data, as: :supportable
+  has_many :devices, as: :deviceable
 
   scope :able_to_verify, ->{ where('verification_expired_at > ?', DateTime.now) }
   scope :digit_not_yet_expired, ->{ where('digit_expired_at > ?', DateTime.now) }

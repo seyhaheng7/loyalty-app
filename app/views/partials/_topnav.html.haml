@@ -6,11 +6,9 @@
       .menu-toggler.sidebar-toggler
 
     %a.menu-toggler.responsive-toggler{"data-target" => ".navbar-collapse", "data-toggle" => "collapse", :href => "javascript:;"}
-    
+
     .page-top
       .top-menu
-        -# %li#header_notification_bar.dropdown.dropdown-extended.dropdown-notification.dropdown-dark
-
         %ul.nav.navbar-nav.pull-right
           %li.dropdown.dropdown-user.dropdown-dark
             %a.dropdown-toggle{"data-close-others" => "true", "data-hover" => "dropdown", "data-toggle" => "dropdown", :href => "javascript:;"}
@@ -27,23 +25,20 @@
                   %i.icon-key
                   Change Password
               %li
-                %a{:href => "app_calendar.html"}
-                  %i.icon-calendar
-                  My Calendar
-              %li
                 = link_to destroy_user_session_path(device_id: session[:device_id]), method: :delete do
                   %i.icon-key
                   Log Out
         %ul.nav.navbar-nav.pull-right
           %li.separator.hide
-      
+
           %li#header_notification_bar.dropdown.dropdown-extended.dropdown-notification.dropdown-dark
 
             %a.dropdown-toggle#notifications-toggle{"data-close-others" => "true", "data-hover" => "dropdown", "data-toggle" => "dropdown", :href => "javascript:;"}
               %i.icon-bell
-              
-              %span.badge.badge-success#pending-notifications-count
+
+              %span.badge.badge-success#pending-notifications-count{ style: ('display: none' if current_user.pending_notifications_count < 1) }
                 = current_user.pending_notifications_count
+
 
             %ul.dropdown-menu
               %li.external

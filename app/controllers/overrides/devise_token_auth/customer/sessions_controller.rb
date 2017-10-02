@@ -2,10 +2,6 @@ module Overrides::DeviseTokenAuth::Customer
   class SessionsController < DeviseTokenAuth::SessionsController
     before_action :configure_permitted_parameters, only: [:create]
 
-    # handle User devices for notifications
-    after_action :add_device, only: :create
-    after_action :destroy_device, only: :destroy
-
     def create
       # Check
       field = (resource_params.keys.map(&:to_sym) & resource_class.authentication_keys).first
@@ -41,6 +37,9 @@ module Overrides::DeviseTokenAuth::Customer
 
         sign_in(:user, @resource, store: false, bypass: false)
 
+        # Add new device for new user
+        add_device
+
         yield @resource if block_given?
 
         # update auth header manaully
@@ -52,6 +51,11 @@ module Overrides::DeviseTokenAuth::Customer
       else
         render_create_error_bad_credentials
       end
+    end
+
+    def destroy
+      destroy_device
+      super
     end
 
     protected
@@ -74,16 +78,16 @@ module Overrides::DeviseTokenAuth::Customer
     def add_device
       if params[:device_id].present?
         if device.present?
-          device.update(deviceable: current_user)
+          device.update(deviceable: @resource)
         else
-          current_user.devices.create(device_id: params[:device_id])
+          @resource.devices.create(device_id: params[:device_id])
         end
         session[:device_id] = params[:device_id]
       end
     end
 
     def device
-      @device ||= Device.find_by(device_id: params[:device_id])
+      @device ||= @resource.devices.find_by(device_id: params[:device_id])
     end
   end
 end

@@ -21,7 +21,7 @@ module Overrides::Devise
     end
 
     def device
-      @device ||= Device.find_by(device_id: params[:device_id])
+      @device ||= current_user.devices.find_by(device_id: params[:device_id])
     end
   end
 end
