@@ -37,6 +37,7 @@ class Merchant < ActiveRecord::Base
   scope :name_like, ->(name){ where("#{table_name}.name ilike ?", "%#{name}%") }
 
   delegate :name, to: :store, prefix: true, allow_nil: true
+  delegate :claimed_rewards, to: :store, allow_nil: true
 
   # Prevent Devise Validate Email Start
   # https://github.com/plataformatec/devise/wiki/How-To:-Allow-users-to-sign-in-with-something-other-than-their-email-address

@@ -1,0 +1,22 @@
+#tab_1_1.tab-pane.active
+  .slimScrollDiv
+    %ul.feeds
+      - @customer.receipts.each do |receipt|
+        %li
+          = link_to receipt do
+            .col1
+              .cont
+                .cont-col1
+                  .label.label-sm.label-success{class: "#{receipt.status}"}
+                    - if receipt.status == 'submitted'
+                      %i.fa.fa-info
+                    - if receipt.status == 'approved'
+                      %i.fa.fa-check
+                    - if receipt.status == 'rejected'
+                      %i.fa.fa-close
+                .cont-col2
+                  .desc
+                    = receipt.receipt_id
+            .col2
+              .date
+                = time_ago_in_words(receipt.created_at)

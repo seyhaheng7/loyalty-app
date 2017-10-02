@@ -1,0 +1,2 @@
+class PrivacyPolicyPolicy < ApplicationPolicy
+end

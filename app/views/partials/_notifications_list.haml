@@ -1,4 +1,4 @@
-- current_user.notifications.order('created_at DESC').each do |notification|
+- current_user.notifications.limit(10).each do |notification|
   %li
     %a{:href => "javascript:;"}
       %span.time 

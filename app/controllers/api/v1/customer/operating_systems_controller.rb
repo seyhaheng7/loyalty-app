@@ -16,7 +16,8 @@ module Api::V1::Customer
     end
 
     def create
-      @operating_system = current_customer.operating_systems.new(operating_system_params)
+      name = operating_system_params[:name]
+      @operating_system = current_customer.operating_systems.where(name: name).first_or_create
       if @operating_system.save
          head :ok
       else

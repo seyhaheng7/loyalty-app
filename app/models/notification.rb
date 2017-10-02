@@ -13,6 +13,8 @@ class Notification < ApplicationRecord
   #work after commit when create
   after_commit :push_notification, on: :create
 
+  default_scope { order(created_at: :desc) }
+
   private
 
   def increase_notifyable_notifications_pending

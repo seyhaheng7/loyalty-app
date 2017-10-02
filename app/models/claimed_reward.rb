@@ -1,10 +1,6 @@
 class ClaimedReward < ApplicationRecord
   include AASM
 
-  # before_validation do
-  #   binding.pry
-  # end
-
   aasm :column => 'status' do
     state :submitted, :initial => true
     state :rejected
@@ -30,6 +26,7 @@ class ClaimedReward < ApplicationRecord
   delegate :name, to: :customer, prefix: true, allow_nil: true
   delegate :name, to: :reward, prefix: true, allow_nil: true
 
+  delegate :claimed_rewards, to: :store, prefix: true, allow_nil: true
 
   def self.filter(params)
     records = all
@@ -38,8 +35,15 @@ class ClaimedReward < ApplicationRecord
       records = records.where(status: params[:status])
     end
 
+    if params[:given].present?
+      given = params[:given] == '1' || params[:given] == 'true'
+      records = records.where(given: given)
+    end
+
     records
   end
+
+  scope :filter_given, -> { where(given: true) }
 
   private
 
@@ -60,5 +64,4 @@ class ClaimedReward < ApplicationRecord
   def generate_qr_token
     update(qr_token: Devise.friendly_token(20))
   end
-
 end

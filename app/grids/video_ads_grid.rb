@@ -9,7 +9,9 @@ class VideoAdsGrid
   filter(:title, :string)
 
   column(:title)
-  # column(:video)
+  column(:max_view_per_day)
+  column(:start_date)
+  column(:end_date)
   column(:actions, html:true) do |record|
     render 'video_ads/control', video_ad: record
   end

@@ -9,7 +9,7 @@
 
 set :stage, :production
 # server 'mekonghomes.codingate.com', user: 'deployer', roles: %w{app web db}
-server 'givangels.codingate.com', user: 'deployer', roles: %w{app web db}
+server '13.229.44.244', user: 'deployer', roles: %w{app web db}
 
 
 # role-based syntax

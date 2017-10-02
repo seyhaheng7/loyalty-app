@@ -1,0 +1,13 @@
+.mt-list-container.list-news
+  %ul
+    - @notifications.each do |notification|
+      %li.mt-list-item
+        .list-icon-container
+          %a{:href => "javascript:;"}
+            %i.fa.fa-angle-right
+        .list-datetime.bold.uppercase.font-green
+          = time_ago_in_words(notification.created_at)
+        .list-item-content
+          %a{:href => "javascript:;"}
+            = notification.text
+            
