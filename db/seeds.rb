@@ -2,7 +2,7 @@ ActiveRecord::Base.transaction do
   email = 'info@codingate.com'
   user = User.find_by email: email
   if user.present?
-    user = User.new email: 'info@codingate.com', password: 'Codingate@2017'
+    user = User.new email: 'info@codingate.com', password: 'Codingate@2017', role: "Admin"
     user.save
   end
   User.create!(name: "Admin",email: "admin@example.com", password: "password", role: "Admin")

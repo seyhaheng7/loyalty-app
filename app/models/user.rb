@@ -21,7 +21,6 @@ class User < ApplicationRecord
   end
 
   validates :role, presence: true
-  validates :name, presence: true
 
   has_many :customer_chat_support_data, as: :supportable
   has_many :merchant_chat_support_data, as: :supportable
