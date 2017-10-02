@@ -4,6 +4,7 @@
   OneSignal.push(["init", {
     appId: '<%= ENV['ONE_SIGNAL_APP_ID'] %>',
     autoRegister: false, /* Set to true to automatically prompt visitors */
+    safari_web_id: '<%= ENV['SAFARI_WEB_ID'] %>',
     httpPermissionRequest: {
       enable: true
     },
