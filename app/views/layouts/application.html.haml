@@ -2,8 +2,6 @@
 %html
 
   %head
-    %script{:async => "", :defer => "defer", :src => "https://maps.googleapis.com/maps/api/js?key=#{ENV['MAP_KEY']}"}
-
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}
     %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}
     %meta{:charset => "UTF-8"}
@@ -11,6 +9,7 @@
     %title GivAngel
     = csrf_meta_tags
     = action_cable_meta_tag
+    %script{ src: "https://maps.googleapis.com/maps/api/js?key=#{ENV['MAP_KEY']}"}
     = stylesheet_link_tag 'application'
     = javascript_include_tag 'application'
     = render 'partials/onesignal'
