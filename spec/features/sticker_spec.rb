@@ -1,4 +1,4 @@
-xfeature 'Sticker' do
+feature 'Sticker' do
   given!(:user)    { create(:user) }
   given!(:sticker) { create(:sticker) }
 
