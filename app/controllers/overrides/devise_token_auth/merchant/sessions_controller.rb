@@ -1,8 +1,5 @@
 module Overrides::DeviseTokenAuth::Merchant
   class SessionsController < DeviseTokenAuth::SessionsController
-    # handle User devices for notifications
-    after_action :add_device, only: :create
-    after_action :destroy_device, only: :destroy
 
     def create
       # Check
@@ -39,6 +36,9 @@ module Overrides::DeviseTokenAuth::Merchant
 
         sign_in(:user, @resource, store: false, bypass: false)
 
+        # Add new device for new user
+        add_device
+
         yield @resource if block_given?
 
         # update auth header manaully
@@ -52,20 +52,31 @@ module Overrides::DeviseTokenAuth::Merchant
       end
     end
 
+    def destroy
+      destroy_device
+      super
+    end
+
+
+    private
+
+    def destroy_device
+      device.destroy if device.present?
+    end
 
     def add_device
       if params[:device_id].present?
         if device.present?
-          device.update(deviceable: current_user)
+          device.update(deviceable: @resource)
         else
-          current_user.devices.create(device_id: params[:device_id])
+          @resource.devices.create(device_id: params[:device_id])
         end
         session[:device_id] = params[:device_id]
       end
     end
 
     def device
-      @device ||= Device.find_by(device_id: params[:device_id])
+      @device ||= @resource.devices.find_by(device_id: params[:device_id])
     end
   end
 end
