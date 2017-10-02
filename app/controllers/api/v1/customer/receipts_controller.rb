@@ -10,7 +10,7 @@ module Api::V1::Customer
       api.param :form, 'receipt[store][location_id]', :string, :optional, 'Receipt_id'
       api.param :form, 'receipt[total]', :float, :required, 'Total'
       api.param :form, 'receipt[capture]', :file, :required, 'Capture'
-      api.param :form, 'receipt[store_id]', :integer, :required, 'Status'
+      api.param :form, 'receipt[store_id]', :integer, :optional, 'Status'
     end
 
     swagger_api :index do
