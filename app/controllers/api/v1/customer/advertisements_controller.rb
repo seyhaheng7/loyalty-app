@@ -5,6 +5,10 @@ module Api::V1::Customer
 
     swagger_controller :advertisements, 'Advertisements'
 
+    def self.add_common_params(api)
+      api.param :for_page
+    end
+
     swagger_api :index do
       summary 'Fetches all advertisements'
       response :unauthorized
@@ -19,8 +23,8 @@ module Api::V1::Customer
       response :not_found
     end
 
-    def index
-      @advertisements = Advertisement.all
+    def index      
+      @advertisements = Advertisement.active.filter(params)
       render json: @advertisements, status: :ok
     end
 
