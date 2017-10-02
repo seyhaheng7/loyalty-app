@@ -22,11 +22,13 @@ class User < ApplicationRecord
 
   validates :role, presence: true
   validates :name, presence: true
-  
+
   has_many :customer_chat_support_data, as: :supportable
   has_many :merchant_chat_support_data, as: :supportable
 
   scope :name_like, ->(name){ where("#{table_name}.name ilike ?", "%#{name}%") }
+  scope :admin_or_approver, ->{ admin.or(approver) }
+
 
   def increase_pending_notifications
     self.pending_notifications_count += 1
