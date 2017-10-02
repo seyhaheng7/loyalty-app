@@ -29,7 +29,7 @@ class Receipt < ApplicationRecord
   # validates :capture, presence: true
   validates :receipt_id, :uniqueness => {:scope => :store_id, message: "Receipt is already submitted"}
 
-  after_create :create_notification
+  after_create :create_notifications
 
   def new_store=(params)
     new_store = Store.new params
@@ -47,15 +47,8 @@ class Receipt < ApplicationRecord
     customer.add_points earned_points.to_i
   end
 
-  def create_notification
-    User.admin.each do |user|
-      notification = Notification.new
-      notification.text = "New receipt was submitted!"
-      notification.notifyable = user
-      notification.objectable = self
-      notification.notification_type = "SubmittedReceipt"
-      notification.save
-    end
+  def create_notifications
+    SubmittedReceiptNotificationsWorker.perform_async(id)
   end
 
 end
