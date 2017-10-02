@@ -4,6 +4,7 @@ class Merchant < ActiveRecord::Base
   has_many :merchant_chat_supports
   has_many :merchant_chat_support_data, as: :supportable
   has_many :devices, as: :deviceable
+  has_many :notifications, as: :notifyable
 
   # Include default devise modules.
   devise :database_authenticatable, :recoverable,

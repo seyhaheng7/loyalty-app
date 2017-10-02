@@ -8,6 +8,7 @@ module Api::V1::Customer
       response :unauthorized
       response :not_acceptable
     end
+
     def index
       @customers = Customer.near([current_customer.lat, current_customer.long], 1, units: :km).page(params[:page])
       render json: @customers, status: :ok

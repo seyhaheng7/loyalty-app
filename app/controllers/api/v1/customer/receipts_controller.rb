@@ -5,12 +5,12 @@ module Api::V1::Customer
     swagger_controller :receipts, 'Receipts'
 
     def self.add_common_params(api)
-      api.param :form, 'receipt[receipt_id]', :string, :optional, 'Receipt_id'
-      api.param :form, 'receipt[store][name]', :string, :optional, 'Receipt_id'
-      api.param :form, 'receipt[store][location_id]', :string, :optional, 'Receipt_id'
+      api.param :form, 'receipt[receipt_id]', :string, :required, 'Receipt_id'
       api.param :form, 'receipt[total]', :float, :required, 'Total'
       api.param :form, 'receipt[capture]', :file, :required, 'Capture'
-      api.param :form, 'receipt[store_id]', :integer, :required, 'Status'
+      api.param :form, 'receipt[store][name]', :string, :optional, 'New Store Name'
+      api.param :form, 'receipt[store][location_id]', :string, :optional, 'New Store Location Id'
+      api.param :form, 'receipt[store_id]', :integer, :optional, 'Status'
     end
 
     swagger_api :index do
