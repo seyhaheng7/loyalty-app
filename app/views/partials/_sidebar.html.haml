@@ -92,7 +92,7 @@
               %span.title Users
 
         - if policy(:customer_location).index?
-          %li.nav-item{:class => ( "active" if sidebar_active?('stickers') )}
+          %li.nav-item{:class => ( "active" if sidebar_active?('customer_locations') )}
             = link_to customer_locations_url do
               %i.icon-pointer
               %span.title Customer Locations
@@ -109,13 +109,13 @@
               %span.title Promotions
 
         - if policy(:contact_form).index?
-          %li.nav-item{:class => ( "active" if sidebar_active?('stickers') )}
+          %li.nav-item{:class => ( "active" if sidebar_active?('contact_forms') )}
             = link_to contact_forms_url do
               %i.icon-envelope
               %span.title Contact Forms
 
         - if policy(:merchant_chat_support).index?
-          %li.nav-item{:class => ( "active" if sidebar_active?('stickers') )}
+          %li.nav-item{:class => ( "active" if sidebar_active?('merchant_chat_supports') )}
             = link_to merchant_chat_supports_url do
               %i.icon-envelope
               %span.title Merchant Chat Supports
