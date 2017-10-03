@@ -13,7 +13,6 @@ class Customer < ActiveRecord::Base
   validates :phone, numericality: { message: 'Not a phone number' },
               length: { minimum: 8, maximum: 9, message: 'Not a phone number' }
 
-
   has_many :receipts, dependent: :destroy
   has_many :claimed_rewards, dependent: :destroy
   has_many :operating_systems, dependent: :destroy
@@ -22,13 +21,18 @@ class Customer < ActiveRecord::Base
   has_many :customer_chat_support_data, as: :supportable
   has_many :devices, as: :deviceable
   has_many :notifications, as: :notifyable
+  has_many :view_video_ads, dependent: :destroy
+  has_many :max_view_video_ads, -> { reach_max_views }, class_name: 'ViewVideoAd'
+  has_many :max_video_ads, through: :max_view_video_ads, class_name: 'VideoAd', source: :video_ad
   has_many :chat_members
   has_many :chat_rooms, through: :chat_members
 
-  scope :able_to_verify, ->{ where('verification_expired_at > ?', DateTime.now) }
+
+  scope :able_to_verify,        ->{ where('verification_expired_at > ?', DateTime.now) }
   scope :digit_not_yet_expired, ->{ where('digit_expired_at > ?', DateTime.now) }
-  scope :verified, ->{ where.not(verified_at: nil) }
-  scope :name_like, ->(name){ where("#{table_name}.first_name || #{table_name}.last_name ilike ?", "%#{name}%") }
+  scope :verified,              ->{ where.not(verified_at: nil) }
+  scope :name_like,             ->(name){ where("#{table_name}.first_name || #{table_name}.last_name ilike ?", "%#{name}%") }
+  scope :active,                ->{ where("update_location_at > ?", DateTime.now - 30.minutes) }
 
   reverse_geocoded_by :lat, :long
 
@@ -42,7 +46,7 @@ class Customer < ActiveRecord::Base
       self.provider == provider_name
     end
   end
-  scope :active, ->{ where("update_location_at > ?", DateTime.now - 30.minutes) }
+
 
   before_validation :generate_uid_from_phone, if: :phone_provider?, on: :create
   before_save :generate_verification_code, unless: :verified?, if: :phone_changed?

@@ -39,7 +39,7 @@ Rails.application.routes.draw do
   resources :customer_locations, only: :index
   resources :customer_chat_supports, only: [:index, :show]
   resources :merchant_chat_supports, only: [:index, :show]
-  
+
 
   resources :notifications do
     get :top_nav, on: :collection
@@ -80,6 +80,7 @@ Rails.application.routes.draw do
         resources :guides, only: [:index, :show]
         resources :notifications, only: [:index]
         resources :privacy_policies, only: [:index]
+        resources :view_video_ads, only: [:index, :create]
 
         resources :customer_chat_supports, only: [:index] do
           resources :customer_chat_support_data, only: [:index]

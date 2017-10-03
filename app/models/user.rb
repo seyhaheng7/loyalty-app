@@ -7,6 +7,8 @@ class User < ApplicationRecord
 
   has_many :devices, as: :deviceable
   has_many :notifications, as: :notifyable
+  has_many :customer_chat_support_data, as: :supportable
+  has_many :merchant_chat_support_data, as: :supportable
 
   mount_uploader :avatar, ImageUploader
 
@@ -21,9 +23,6 @@ class User < ApplicationRecord
   end
 
   validates :role, presence: true
-
-  has_many :customer_chat_support_data, as: :supportable
-  has_many :merchant_chat_support_data, as: :supportable
 
   scope :name_like, ->(name){ where("#{table_name}.name ilike ?", "%#{name}%") }
   scope :admin_or_approver, ->{ admin.or(approver) }
