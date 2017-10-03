@@ -18,10 +18,12 @@ class Customer < ActiveRecord::Base
   has_many :claimed_rewards, dependent: :destroy
   has_many :operating_systems, dependent: :destroy
   has_many :contact_forms, dependent: :destroy
-  has_many :customer_chat_supports
+  has_one :customer_chat_support
   has_many :customer_chat_support_data, as: :supportable
   has_many :devices, as: :deviceable
   has_many :notifications, as: :notifyable
+  has_many :chat_members
+  has_many :chat_rooms, through: :chat_members
 
   scope :able_to_verify, ->{ where('verification_expired_at > ?', DateTime.now) }
   scope :digit_not_yet_expired, ->{ where('digit_expired_at > ?', DateTime.now) }
