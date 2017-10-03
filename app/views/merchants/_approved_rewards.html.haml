@@ -1,0 +1,17 @@
+#tab_1_2.tab-pane
+  .slimScrollDiv
+    %ul.feeds
+      - @merchant.claimed_rewards.approved.each do |claimed_reward|
+        %li
+          = link_to claimed_reward do
+            .col1
+              .cont
+                .cont-col1
+                  .label.label-sm.label-warning
+                    %i.fa.fa-info
+                .cont-col2
+                  .desc
+                    = claimed_reward.reward.name
+            .col2
+              .date
+                = time_ago_in_words(claimed_reward.created_at)

@@ -4,54 +4,78 @@
       Merchant Profile
 
   .portlet-body
-  .text-center
-    = image_tag @merchant.avatar_url, size: '150x150', class: "img-circle"
-    
-  %h2.text-center
-    %b
-      = @merchant.name
-    %hr
-  .mcontrol
     .row
-      .col-md-4
-        %h5
-          %b
-            E-mail:
-      .col-md-6
-        %h5
-          %b
-            = @merchant.email
-    .row
-      .col-md-4
-        %h5
-          %b
-            Phone:
-      .col-md-6
-        %h5
-          %b
-            = @merchant.phone
-    .row
-      .col-md-4
-        %h5
-          %b
-            Store Name:
-      .col-md-6
-        %h5
-          %b
-            = @merchant.store_name
-  %br
-  %br
+      .col-xs-12.col-md-12
+        .text-center
+          = image_tag @merchant.avatar_url, size: '150x150', class: "img-circle"
+          %h2
+            %b
+              = @merchant.name
+          %hr
+        .row
+          .col-md-5.simple-control
+            %h5
+              %b
+                Email:
+          .col-md-7.simple-width
+            %h5
+              %b
+                = @merchant.email
+        .row
+          .col-md-5.simple-control
+            %h5
+              %b
+                Phone:
+          .col-md-7.simple-width
+            %h5
+              %b
+                = @merchant.phone
+        .row
+          .col-md-5.simple-control
+            %h5
+              %b
+                Store Name:
+          .col-md-7.simple-width
+            %h5
+              %b
+                = @merchant.store_name
+
+        %br
+        %br
+      .col-xs-12.col-md-12
+        .portlet.light.bordered
+          .portlet-title.tabbable-line
+            .caption
+              %i.icon-globe.font-dark.hide
+              %span.caption-subject.font-dark.bold.uppercase List of
+            %ul.nav.nav-tabs
+              %li.active
+                %a.active{"aria-expanded" => "true", "data-toggle" => "tab", :href => "#tab_1_1"} Available Reward
+              %li
+                %a{"aria-expanded" => "false", "data-toggle" => "tab", :href => "#tab_1_2"} Approved Reward
+              %li
+                %a{"aria-expanded" => "false", "data-toggle" => "tab", :href => "#tab_1_3"} Given Reward
+          .portlet-body
+            .tab-content
+              = render 'available_rewards'
+              = render 'approved_rewards'
+              = render 'given_reward'
+
   .row
     .col-md-12
       .row.wrap-pad
         .pull-left
-          = link_to merchants_path, class: 'btn btn-default' do
-            = fa_icon 'chevron-left'
-            Back
+          -if policy(@merchant).index?
+            = link_to merchants_path, class: 'btn btn-default' do
+              = fa_icon 'chevron-left'
+              Back
         .pull-right
-          = link_to [:edit, @merchant], class: 'btn btn-primary' do
-            = fa_icon 'pencil'
-            Edit
-          = link_to @merchant, method: :delete, data: {confirm: 'Are you sure?'} ,class: 'btn btn-danger' do
-            = fa_icon 'trash'
-            Delete
+          -if policy(@merchant).edit?
+            = link_to [:edit, @merchant], class: 'btn btn-primary' do
+              = fa_icon 'pencil'
+              Edit
+          -if policy(@merchant).destroy?
+            = link_to @merchant, method: :delete, data: {confirm: 'Are you sure?'} ,class: 'btn btn-danger' do
+              = fa_icon 'trash'
+              Delete
+
