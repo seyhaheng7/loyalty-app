@@ -1,7 +1,7 @@
 class Merchant < ActiveRecord::Base
   acts_as_paranoid
 
-  has_many :merchant_chat_supports
+  has_one :merchant_chat_support
   has_many :merchant_chat_support_data, as: :supportable
   has_many :devices, as: :deviceable
   has_many :notifications, as: :notifyable

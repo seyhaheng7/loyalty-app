@@ -1,5 +1,6 @@
 FactoryGirl.define do
-  factory :customer_chat_support do
+  factory :chat_member do
     association :customer
+    association :chat_room
   end
 end

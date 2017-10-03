@@ -10,10 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171002071610) do
+ActiveRecord::Schema.define(version: 20170929083126) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "admin_messages", force: :cascade do |t|
+    t.text "message"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_admin_messages_on_user_id"
+  end
 
   create_table "advertisements", force: :cascade do |t|
     t.string "name"
@@ -36,6 +44,31 @@ ActiveRecord::Schema.define(version: 20171002071610) do
   create_table "categories", force: :cascade do |t|
     t.string "name"
     t.string "icon"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "chat_data", force: :cascade do |t|
+    t.text "text"
+    t.boolean "all_recieved"
+    t.bigint "chat_room_id"
+    t.bigint "customer_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["chat_room_id"], name: "index_chat_data_on_chat_room_id"
+    t.index ["customer_id"], name: "index_chat_data_on_customer_id"
+  end
+
+  create_table "chat_members", force: :cascade do |t|
+    t.bigint "customer_id"
+    t.bigint "chat_room_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["chat_room_id"], name: "index_chat_members_on_chat_room_id"
+    t.index ["customer_id"], name: "index_chat_members_on_customer_id"
+  end
+
+  create_table "chat_rooms", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -112,8 +145,7 @@ ActiveRecord::Schema.define(version: 20171002071610) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string "unconfirmed_email"
-    t.string "nickname"
-    t.string "image"
+    t.string "avatar"
     t.string "email"
     t.json "tokens"
     t.datetime "created_at", null: false
@@ -134,9 +166,9 @@ ActiveRecord::Schema.define(version: 20171002071610) do
     t.datetime "verified_at"
     t.string "login_digit"
     t.datetime "digit_expired_at"
+    t.datetime "update_location_at"
     t.string "first_name"
     t.string "last_name"
-    t.datetime "update_location_at"
     t.index ["confirmation_token"], name: "index_customers_on_confirmation_token", unique: true
     t.index ["deleted_at"], name: "index_customers_on_deleted_at"
     t.index ["digit_expired_at"], name: "index_customers_on_digit_expired_at"
@@ -259,13 +291,6 @@ ActiveRecord::Schema.define(version: 20171002071610) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "products", force: :cascade do |t|
-    t.string "name"
-    t.string "price"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "promotions", force: :cascade do |t|
     t.string "title"
     t.string "image"
@@ -296,6 +321,15 @@ ActiveRecord::Schema.define(version: 20171002071610) do
     t.index ["store_id"], name: "index_receipts_on_store_id"
   end
 
+  create_table "recieved_members", force: :cascade do |t|
+    t.bigint "chat_datum_id"
+    t.bigint "chat_member_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["chat_datum_id"], name: "index_recieved_members_on_chat_datum_id"
+    t.index ["chat_member_id"], name: "index_recieved_members_on_chat_member_id"
+  end
+
   create_table "rewards", force: :cascade do |t|
     t.string "name"
     t.string "image"
@@ -313,7 +347,7 @@ ActiveRecord::Schema.define(version: 20171002071610) do
 
   create_table "settings", force: :cascade do |t|
     t.string "var", null: false
-    t.string "value"
+    t.text "value"
     t.integer "thing_id"
     t.string "thing_type", limit: 30
     t.datetime "created_at", null: false
@@ -389,17 +423,11 @@ ActiveRecord::Schema.define(version: 20171002071610) do
     t.index ["deleted_at"], name: "index_video_ads_on_deleted_at"
   end
 
-  create_table "view_video_ads", force: :cascade do |t|
-    t.date "date"
-    t.integer "view_count"
-    t.bigint "video_ad_id"
-    t.bigint "customer_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["customer_id"], name: "index_view_video_ads_on_customer_id"
-    t.index ["video_ad_id"], name: "index_view_video_ads_on_video_ad_id"
-  end
-
+  add_foreign_key "admin_messages", "users"
+  add_foreign_key "chat_data", "chat_rooms"
+  add_foreign_key "chat_data", "customers"
+  add_foreign_key "chat_members", "chat_rooms"
+  add_foreign_key "chat_members", "customers"
   add_foreign_key "claimed_rewards", "customers"
   add_foreign_key "claimed_rewards", "rewards"
   add_foreign_key "companies", "categories"
@@ -411,10 +439,10 @@ ActiveRecord::Schema.define(version: 20171002071610) do
   add_foreign_key "operating_systems", "customers"
   add_foreign_key "receipts", "customers"
   add_foreign_key "receipts", "stores"
+  add_foreign_key "recieved_members", "chat_data"
+  add_foreign_key "recieved_members", "chat_members"
   add_foreign_key "rewards", "stores"
   add_foreign_key "stickers", "sticker_groups"
   add_foreign_key "stores", "companies"
   add_foreign_key "stores", "locations"
-  add_foreign_key "view_video_ads", "customers"
-  add_foreign_key "view_video_ads", "video_ads"
 end

@@ -3,6 +3,6 @@ FactoryGirl.define do
     text "MyText"
     supportable_id 1
     supportable_type "MyString"
-    customer_chat_support nil
+    association :customer_chat_support
   end
 end

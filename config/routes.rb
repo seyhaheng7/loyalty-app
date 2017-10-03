@@ -37,8 +37,9 @@ Rails.application.routes.draw do
   resources :contact_forms, only: [:index, :show, :destroy]
   resources :video_ads
   resources :customer_locations, only: :index
-  resources :customer_chat_supports
-  resources :merchant_chat_supports
+  resources :customer_chat_supports, only: [:index, :show]
+  resources :merchant_chat_supports, only: [:index, :show]
+  
 
   resources :notifications do
     get :top_nav, on: :collection
@@ -48,6 +49,9 @@ Rails.application.routes.draw do
     namespace :v1 do
       namespace :merchant do
         resources :rewards, only: [:index]
+        resources :merchant_chat_supports, only: [:index] do
+          resources :merchant_chat_support_data, only: [:index]
+        end
         resources :claimed_rewards, only: [:index] do
           put :given, on: :collection
         end
@@ -76,6 +80,15 @@ Rails.application.routes.draw do
         resources :guides, only: [:index, :show]
         resources :notifications, only: [:index]
         resources :privacy_policies, only: [:index]
+
+        resources :customer_chat_supports, only: [:index] do
+          resources :customer_chat_support_data, only: [:index]
+        end
+
+        resources :chat_rooms, only: [:index, :create] do
+          resources :chat_data, only: [:index]
+        end
+
       end
 
     end
