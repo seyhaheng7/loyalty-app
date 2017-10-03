@@ -13,13 +13,14 @@ module Api::V1::Customer
     swagger_api :show do
       summary 'Get a video_ad'
       notes 'get information of video_ad by passing his video_ad id'
-      param :path, :id, :integer, :required, 'ID of Video_ad'
+      param :path, :id, :integer, :required, 'ID of Video Ad'
       response :ok
       response :not_found
     end
 
     def index
-      @video_ads = VideoAd.all
+      max_video_ad_ids = current_customer.max_video_ads.ids
+      @video_ads = VideoAd.active.where.not(id: max_video_ad_ids).page(params[:page])
       render json: @video_ads, status: :ok
     end
 

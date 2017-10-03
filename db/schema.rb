@@ -10,18 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170929083126) do
+ActiveRecord::Schema.define(version: 20171002071610) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "admin_messages", force: :cascade do |t|
-    t.text "message"
-    t.bigint "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_admin_messages_on_user_id"
-  end
 
   create_table "advertisements", force: :cascade do |t|
     t.string "name"
@@ -166,9 +158,9 @@ ActiveRecord::Schema.define(version: 20170929083126) do
     t.datetime "verified_at"
     t.string "login_digit"
     t.datetime "digit_expired_at"
-    t.datetime "update_location_at"
     t.string "first_name"
     t.string "last_name"
+    t.datetime "update_location_at"
     t.index ["confirmation_token"], name: "index_customers_on_confirmation_token", unique: true
     t.index ["deleted_at"], name: "index_customers_on_deleted_at"
     t.index ["digit_expired_at"], name: "index_customers_on_digit_expired_at"
@@ -347,7 +339,7 @@ ActiveRecord::Schema.define(version: 20170929083126) do
 
   create_table "settings", force: :cascade do |t|
     t.string "var", null: false
-    t.text "value"
+    t.string "value"
     t.integer "thing_id"
     t.string "thing_type", limit: 30
     t.datetime "created_at", null: false
@@ -423,7 +415,17 @@ ActiveRecord::Schema.define(version: 20170929083126) do
     t.index ["deleted_at"], name: "index_video_ads_on_deleted_at"
   end
 
-  add_foreign_key "admin_messages", "users"
+  create_table "view_video_ads", force: :cascade do |t|
+    t.date "date"
+    t.integer "view_count", default: 0
+    t.bigint "video_ad_id"
+    t.bigint "customer_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["customer_id"], name: "index_view_video_ads_on_customer_id"
+    t.index ["video_ad_id"], name: "index_view_video_ads_on_video_ad_id"
+  end
+
   add_foreign_key "chat_data", "chat_rooms"
   add_foreign_key "chat_data", "customers"
   add_foreign_key "chat_members", "chat_rooms"
@@ -445,4 +447,6 @@ ActiveRecord::Schema.define(version: 20170929083126) do
   add_foreign_key "stickers", "sticker_groups"
   add_foreign_key "stores", "companies"
   add_foreign_key "stores", "locations"
+  add_foreign_key "view_video_ads", "customers"
+  add_foreign_key "view_video_ads", "video_ads"
 end

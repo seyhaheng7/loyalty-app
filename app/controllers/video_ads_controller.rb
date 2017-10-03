@@ -61,6 +61,6 @@ class VideoAdsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def video_ad_params
-      params.require(:video_ad).permit(:title, :youtube_url, :start_date, :end_date, :earned_points)
+      params.require(:video_ad).permit(:title, :youtube_url, :start_date, :end_date, :earned_points, :max_view_per_day)
     end
 end
