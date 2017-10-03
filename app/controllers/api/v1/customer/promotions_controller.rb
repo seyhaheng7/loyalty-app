@@ -19,7 +19,7 @@ module Api::V1::Customer
     end
 
     def index
-      @promotions = Promotion.all
+      @promotions = Promotion.active
       render json: @promotions, status: :ok
     end
 

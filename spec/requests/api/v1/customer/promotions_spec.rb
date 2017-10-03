@@ -1,6 +1,7 @@
 describe 'promotions' do
   let!(:customer){ create(:customer) }
   let!(:promotion){ create(:promotion) }
+  let!(:promotion_inactive){create(:promotion, start_date: '2017-10-01', end_date: '2017-10-01')}
   let!(:promotions){ create_list(:promotion, 10) }
 
   describe 'GET api/v1/customer/promotions' do
@@ -23,6 +24,14 @@ describe 'promotions' do
       expect(json.size).to eq(11)
     end
 
+    it 'return active promotion' do 
+      expect(Date.today).to be_between(promotion.start_date, promotion.end_date)
+    end
+
+    it 'does not return inactive promotion' do
+      expect(Date.today).not_to be_between(promotion_inactive.start_date, promotion_inactive.end_date)
+    end
+
   end
   describe 'GET api/v1/customer/promotions/:id' do
     before do
@@ -37,7 +46,6 @@ describe 'promotions' do
       json = JSON.parse(response.body)
       title = json['title'.to_i]
       expect(title.to_s).to include promotion.title
-      # title.should include video_ad.title
     end
   end
 
