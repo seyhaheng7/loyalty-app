@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170929083126) do
+ActiveRecord::Schema.define(version: 20171002071610) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -112,7 +112,8 @@ ActiveRecord::Schema.define(version: 20170929083126) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string "unconfirmed_email"
-    t.string "avatar"
+    t.string "nickname"
+    t.string "image"
     t.string "email"
     t.json "tokens"
     t.datetime "created_at", null: false
@@ -258,6 +259,13 @@ ActiveRecord::Schema.define(version: 20170929083126) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "products", force: :cascade do |t|
+    t.string "name"
+    t.string "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "promotions", force: :cascade do |t|
     t.string "title"
     t.string "image"
@@ -381,6 +389,17 @@ ActiveRecord::Schema.define(version: 20170929083126) do
     t.index ["deleted_at"], name: "index_video_ads_on_deleted_at"
   end
 
+  create_table "view_video_ads", force: :cascade do |t|
+    t.date "date"
+    t.integer "view_count"
+    t.bigint "video_ad_id"
+    t.bigint "customer_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["customer_id"], name: "index_view_video_ads_on_customer_id"
+    t.index ["video_ad_id"], name: "index_view_video_ads_on_video_ad_id"
+  end
+
   add_foreign_key "claimed_rewards", "customers"
   add_foreign_key "claimed_rewards", "rewards"
   add_foreign_key "companies", "categories"
@@ -396,4 +415,6 @@ ActiveRecord::Schema.define(version: 20170929083126) do
   add_foreign_key "stickers", "sticker_groups"
   add_foreign_key "stores", "companies"
   add_foreign_key "stores", "locations"
+  add_foreign_key "view_video_ads", "customers"
+  add_foreign_key "view_video_ads", "video_ads"
 end
