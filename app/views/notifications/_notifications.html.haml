@@ -1,12 +1,15 @@
-.mt-list-container.list-news
-  %ul
-    - @notifications.each do |notification|
-      %li.mt-list-item
-        .list-icon-container
-          %a{:href => "javascript:;"}
-            %i.fa.fa-angle-right
-        .list-datetime.bold.uppercase.font-green
-          = time_ago_in_words(notification.created_at)
-        .list-item-content
-          %a{:href => "javascript:;"}
-            = notification.text
+.slimScrollDiv{:style => "position: relative; overflow: hidden; width: auto; height: 339px;"}
+  .scroller{"data-always-visible" => "1", "data-initialized" => "1", "data-rail-visible" => "0", :style => "height: 339px; overflow: hidden; width: auto;"}
+    %ul.feeds
+      - @notifications.each do |notification|
+        %li
+          .col1
+            .cont
+              .cont-col1
+                .label.label-sm.label-info
+                  %i.fa.fa-info
+              .cont-col2
+                .desc
+                  = notification.text
+                .date
+                  = time_ago_in_words(notification.created_at)
