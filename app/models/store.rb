@@ -1,8 +1,8 @@
 class Store < ApplicationRecord
   acts_as_paranoid
 
-  belongs_to :company
-  belongs_to :location
+  belongs_to :company, optional: true
+  belongs_to :location, optional: true
 
   has_many :receipts
   has_many :rewards
@@ -10,6 +10,9 @@ class Store < ApplicationRecord
 
   validates :name, presence: true, uniqueness: {scope: :company_id}
   validates :address, presence: true
+
+  delegate :name, to: :company, prefix: true, allow_nil: true
+  delegate :name, to: :location, prefix: true, allow_nil: true
 
   reverse_geocoded_by :lat, :long
 
