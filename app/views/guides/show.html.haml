@@ -1,21 +1,34 @@
-.container
-  .row
-    .col-md-12
-      .portlet.light.bordered
-        .portlet-title
-          .caption
-            %span.caption-subject.font-dark.sbold.uppercase 
-              Show guide
-          .actions
-            .btn-group.btn-group-devided
-              = link_to edit_guide_path(@guide), class: 'btn btn-transparent dark btn-outline btn-circle btn-sm active' do
-                Edit
-              = link_to guides_path, class: 'btn btn-transparent dark btn-outline btn-circle btn-sm' do
-                Back
-        .portlet-body.form
-          %dt Title:
-          %dd= @guide.title
-          %iframe{:align => "center", :name => "window", :src => "#{@guide.embed_url}", :height => "150px;", :width => "250px;", :style => "float:left;margin-top:30px;"}
+.row
+  .col-md-12
+    .portlet.light.bordered
+      .portlet-title
+        .caption
+          %span.caption-subject.font-dark.sbold.uppercase
+            Show guide
+        .col-md-12
+          .portlet-body.form
+            .the-title.text-center
+              = @guide.title
+            %br
+
+            %iframe{:align => "center", :name => "window", :src => "#{@guide.embed_url}", :height => "550px;", :width => "100%;", :style => "float:left;margin-top:-15px;margin-bottom:30px;"}
 
 
-
+        .row
+          %br
+          %br
+          .col-md-12.col-xs-12
+            .pull-left
+              -if policy(@guide).index?
+                = link_to guides_path, class: 'btn btn-default' do
+                  = fa_icon 'chevron-left'
+                  Back
+            .pull-right
+              -if policy(@guide).edit?
+                = link_to [:edit, @guide], class: 'btn btn-primary' do
+                  = fa_icon 'pencil'
+                  Edit
+              -if policy(@guide).destroy?
+                = link_to @guide, method: :delete, data: {confirm: 'Are you sure?'} ,class: 'btn btn-danger' do
+                  = fa_icon 'trash'
+                  Delete

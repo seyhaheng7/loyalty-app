@@ -1,27 +1,43 @@
-.container
-  .row
-    .col-md-12
-      .portlet.light.bordered
-        .portlet-title
-          .caption
-            %span.caption-subject.font-dark.sbold.uppercase 
-              Show promotion
-          .actions
-            .btn-group.btn-group-devided
-              = link_to edit_promotion_path(@promotion), class: 'btn btn-transparent dark btn-outline btn-circle btn-sm active' do
-                Edit
-              = link_to promotions_path, class: 'btn btn-transparent dark btn-outline btn-circle btn-sm' do
-                Back
-        .portlet-body.form
-          %dt Title:
-          %dd= @promotion.title
-          %dt Body:
-          %dd= @promotion.body.html_safe
-          %dt Start date:
-          %dd= @promotion.start_date
-          %dt End date:
-          %dd= @promotion.end_date
-          %dt Image:
-          %dd
-            = image_tag @promotion.image_url, class: 'img-responsive'
-          
+
+.portlet.light.bordered
+  .portlet-title
+    .caption
+      %span.caption-subject.font-dark.sbold.uppercase
+        Show promotion
+        
+  .portlet-body
+    %table.table
+      %col{width: '10'}
+      %col{width: '350'}
+      %tr
+        %th Logo:
+        %td= image_tag @promotion.image, size: '50x50'
+      %tr
+        %th Title:
+        %td= @promotion.title
+
+      %tr
+        %th Body:
+        %td= @promotion.body.html_safe
+      %tr
+        %th Start date:
+        %td= @promotion.start_date
+      %tr
+        %th End date:
+        %td= @promotion.end_date
+
+    .row.wrap-pad
+      .pull-left
+        -if policy(@promotion).index?
+          = link_to companies_path, class: 'btn btn-default' do
+            = fa_icon 'chevron-left'
+            Back
+      .pull-right
+        -if policy(@promotion).edit?
+          = link_to [:edit, @promotion], class: 'btn btn-primary' do
+            = fa_icon 'pencil'
+            Edit
+        -if policy(@promotion).destroy?
+          = link_to @promotion, method: :delete, data: {confirm: 'Are you sure?'} ,class: 'btn btn-danger' do
+            = fa_icon 'trash'
+            Delete
