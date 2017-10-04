@@ -5,7 +5,12 @@ Codingate.CustomerLocationsIndex =
     @_subcribedChannelLocation()
 
   _initMap: ->
-    mapOptions = mapTypeId: 'roadmap'
+    lat_lng = new (google.maps.LatLng)(11.5449, 104.8922)
+    mapOptions =
+      zoom: 10
+      center: lat_lng
+      mapTypeId: 'roadmap'
+
     mapElement = $('#map_canvas').get(0)
     @map = new (google.maps.Map)(mapElement, mapOptions)
     @map.setTilt 45
@@ -18,15 +23,18 @@ Codingate.CustomerLocationsIndex =
       url: '/customer_locations.json'
       dataType: 'json'
       success: (customers) ->
-        self._addMarkers(customers)
-        self._fitBonds(customers)
+        if customers.length
+          self._addMarkers(customers)
+          self._fitBonds(customers)
 
   _fitBonds: (customers)->
     bounds = new (google.maps.LatLngBounds)
     for customer in customers
       position = new (google.maps.LatLng)(customer.lat, customer.long)
       bounds.extend position
-    @map.fitBounds bounds
+
+      @map.fitBounds bounds
+
 
   _addMarkers: (customers)->
     for customer in customers
