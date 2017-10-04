@@ -11,7 +11,9 @@ class AdvertisementsGrid
   filter(:address, :string)
 
   column(:name)
-  column(:banner)
+  column(:banner, html: true) do |record|
+    image_tag record.banner, size: '30x30'
+  end
   column(:active)
   column(:address)
   column(:phone)
