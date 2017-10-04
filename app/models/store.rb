@@ -15,9 +15,23 @@ class Store < ApplicationRecord
 
   scope :name_like, ->(name){ where("#{table_name}.name ilike ?", "%#{name}%") }
 
+  def self.order_by(params)
+    records = all
+    params ||= {}
+    if params[:name].present?
+      records = records.order(name: params[:name])
+    end
+
+    records
+  end
+
   def self.filter(params)
 
     records = all
+
+    if params[:name].present?
+      records = records.name_like(params[:name])
+    end
 
     if params[:lat].present? && params[:long].present?
       records = records.near([params[:lat], params[:long]], 5, units: :km)

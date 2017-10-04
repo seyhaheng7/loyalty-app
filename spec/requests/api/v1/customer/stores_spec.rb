@@ -24,6 +24,34 @@ describe 'stores' do
     end
   end
 
+  describe 'Get api/v1/customer/stores?' do
+
+    it 'return list of asc' do
+
+      Store.destroy_all
+      create(:store, name: 'ABC')
+      create(:store, name: 'BCA')
+      get api_v1_customer_stores_path(order: { name: 'asc' }), headers: customer.create_new_auth_token
+
+      json = JSON.parse(response.body)
+      names = json.map{ |j| j['name'] }
+      expect(names).to eq ['ABC', 'BCA']
+    end
+
+    it 'return list of desc' do
+
+      Store.destroy_all
+      create(:store, name: 'ABC')
+      create(:store, name: 'BCA')
+      get api_v1_customer_stores_path(order: { name: 'desc' }), headers: customer.create_new_auth_token
+
+      json = JSON.parse(response.body)
+      names = json.map{ |j| j['name'] }
+      expect(names).to eq ['BCA', 'ABC']
+    end
+
+  end
+
   describe 'GET api/v1/customer/stores?lat=lat&long=long' do
     let!(:store1){ create(:store, lat: 13.095730, long: 103.202205) }
     let!(:store2){ create(:store, lat: 13.082966, long: 103.145485) }
