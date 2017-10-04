@@ -13,12 +13,16 @@
       %tr
         %th Address:
         %td= @store.address
-      %tr
-        %th Company:
-        %td= @store.company.name
-      %tr
-        %th Location:
-        %td= @store.location.name
+      
+      - if @store.company.present?
+        %tr
+          %th Company:
+          %td= @store.company.name
+
+      - if @store.location.present?  
+        %tr
+          %th Location:
+          %td= @store.location.name
 
     %input{type: 'hidden', value: @store.lat, id: 'lat_value'}
     %input{type: 'hidden', value: @store.long, id: 'long_value'}

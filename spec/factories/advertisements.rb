@@ -8,13 +8,8 @@ FactoryGirl.define do
     long "MyString"
     address "MyString"
     phone "MyString"
-    web_site "MyString"
+    website "MyString"
     start_date Date.today
     end_date Date.tomorrow
-
-
-
-    # email { FFaker::Internet.email }
-    # name { FFaker::Name.name }
   end
 end

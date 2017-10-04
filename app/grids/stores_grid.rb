@@ -8,10 +8,15 @@ class StoresGrid
 
   filter(:name, :string)
 
-  column(:id)
   column(:name)
-  column(:created_at) do |model|
-    model.created_at.to_date
+  column(:address)
+  
+  column(:company) do |record|
+    record.company_name
+  end
+
+  column(:location) do |record|
+    record.location_name
   end
 
   column(:actions, html:true) do |record|

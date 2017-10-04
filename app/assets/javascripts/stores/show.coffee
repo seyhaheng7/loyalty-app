@@ -12,7 +12,7 @@ Codingate.StoresShow =
     lat_lng = new (google.maps.LatLng)(latValue, longValue)
 
     map = new (google.maps.Map)(mapElement,
-      zoom: 13
+      zoom: 16
       center: lat_lng)
 
     marker = new (google.maps.Marker)(
