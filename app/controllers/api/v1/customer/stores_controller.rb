@@ -8,6 +8,7 @@ module Api::V1::Customer
       summary 'Fetches all stores'
       notes "This lists all the active stores"
       param :query, :page, :integer, :optional, "Page number"
+			param :query, 'order[name]', :string, :optional, '[desc, asc]'
       param :query, :lat, :float, :optional
       param :query, :long, :float, :optional
       param :query, :category_id, :integer, :optional
@@ -29,7 +30,7 @@ module Api::V1::Customer
     end
 
     def index
-      @stores = Store.filter(params).page(params[:page])
+      @stores = Store.filter(params).order_by(params[:order]).page(params[:page])
       render json: @stores, status: :ok
     end
 
