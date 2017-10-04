@@ -6,14 +6,16 @@ class CustomerChatSupportsGrid
     CustomerChatSupport
   end
 
-  filter(:id, :integer)
-  filter(:created_at, :date, :range => true)
+  filter(:customer_id, :enum,:select => lambda {Customer.all.map {|p| [p.name, p.id]}})
 
-  column(:id)
-  column(:customer_id)
+  column(:avatar, html: true) do |record|
+    image_tag record.customer_avatar, size: '30x30'
+  end
 
-  column(:created_at) do |model|
-    model.created_at.to_date
+  column(:customer, html: true) do |record|
+    link_to record.customer do
+      record.customer_name
+    end
   end
 
   column(:actions, html:true) do |record|
