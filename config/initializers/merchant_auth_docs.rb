@@ -5,8 +5,8 @@ Overrides::DeviseTokenAuth::Merchant::SessionsController.class_eval do
   swagger_api :create do
     summary 'Merchant Login '
     notes 'user login with phone and password'
-    param :form, 'phone', :string, :optional, 'Phone Number'
-    param :form, 'password', :string, :optional, 'Password'
+    param :form, 'phone', :string, :required, 'Phone Number'
+    param :form, 'password', :string, :required, 'Password'
     param :form, 'device_id', :string, :optional, 'One signal device id'
     response :ok, "Success", :User
     response :not_acceptable
@@ -15,9 +15,11 @@ Overrides::DeviseTokenAuth::Merchant::SessionsController.class_eval do
   swagger_api :destroy do
     summary 'Destroy merchant session'
     notes 'merchant sign out'
-    param :form, 'uid', :string, :optional, 'Uid'
-    param :form, 'access-token', :string, :optional, 'Access-Token'
-    param :form, 'client', :string, :optional, 'Client'
+    param :form, 'uid', :string, :required, 'Uid'
+    param :form, 'access-token', :string, :required, 'Access-Token'
+    param :form, 'client', :string, :required, 'Client'
+    param :form, 'expiry', :string, :required, 'Expiry'
+    param :form, 'token-type', :string, :required, 'Token Type'
     param :form, 'device_id', :string, :optional, 'One signal device id'
     response :not_found
     response :ok, "Success", :User

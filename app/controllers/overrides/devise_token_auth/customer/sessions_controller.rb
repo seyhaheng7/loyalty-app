@@ -1,6 +1,8 @@
 module Overrides::DeviseTokenAuth::Customer
   class SessionsController < DeviseTokenAuth::SessionsController
     before_action :configure_permitted_parameters, only: [:create]
+    around_action :destroy_device, only: :destroy
+    around_action :add_device, only: :create
 
     def create
       # Check
@@ -14,7 +16,7 @@ module Overrides::DeviseTokenAuth::Customer
         end
 
         # merchant use phone provider
-        q = "#{field.to_s} = ? AND provider='phone'"
+        q = "#{field.to_s} = ? AND provider='#{provider}'"
 
         if ActiveRecord::Base.connection.adapter_name.downcase.starts_with? 'mysql'
           q = "BINARY " + q
@@ -37,9 +39,6 @@ module Overrides::DeviseTokenAuth::Customer
 
         sign_in(:user, @resource, store: false, bypass: false)
 
-        # Add new device for new user
-        add_device
-
         yield @resource if block_given?
 
         # update auth header manaully
@@ -53,11 +52,6 @@ module Overrides::DeviseTokenAuth::Customer
       end
     end
 
-    def destroy
-      destroy_device
-      super
-    end
-
     protected
 
     def configure_permitted_parameters
@@ -68,6 +62,9 @@ module Overrides::DeviseTokenAuth::Customer
       resource_params[:digit] && key && val
     end
 
+    def provider
+      'phone'
+    end
 
     private
 
@@ -87,6 +84,7 @@ module Overrides::DeviseTokenAuth::Customer
     end
 
     def device
+      return if @resource.blank?
       @device ||= @resource.devices.find_by(device_id: params[:device_id])
     end
   end
