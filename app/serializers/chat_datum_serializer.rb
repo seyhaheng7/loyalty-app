@@ -1,5 +1,4 @@
 class ChatDatumSerializer < ActiveModel::Serializer
-  attributes :id, :text
-  belongs_to :chat_room
+  attributes :id, :text, :sticker, :data_type
   belongs_to :customer
 end
