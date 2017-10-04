@@ -1,18 +1,30 @@
-= simple_form_for(@video_ad) do |f|
-  = f.error_notification
+.row
+  .col-xs-12.col-md-6
+    = simple_form_for(@video_ad) do |f|
+      = f.error_notification
 
-  .form-body
-    .form-group
-      = f.input :title
-      = f.input :youtube_url
-      = f.input :start_date, as: :string, input_html: {class: 'date-picker'}
-      = f.input :end_date, as: :string, input_html: {class: 'date-picker'}
-      = f.input :earned_points
-      = f.input :max_view_per_day
+      .form-body
+        .form-group
+          
+          = f.input :title
+          = f.input :video_file
+          = f.input :start_date, as: :string, input_html: {class: 'date-picker'}
+          = f.input :end_date, as: :string, input_html: {class: 'date-picker'}
+          = f.input :earned_points
+          = f.input :max_view_per_day
 
-      = f.button :submit, class: 'btn btn-primary'
-      .pull-right
-        = link_to video_ads_path, class: 'btn btn-success' do
-          Back
-        = link_to @video_ad, class: 'btn btn-primary' do
-          Show
+          = f.button :submit, class: 'btn btn-primary'
+
+          
+          .pull-right
+            = link_to video_ads_path, class: 'btn btn-success' do
+              Back
+            = link_to @video_ad, class: 'btn btn-primary' do
+              Show
+  .col-xs-12.col-md-6
+    %div.video-position{:align => "center"}
+      - if @video_ad.video_file.present?
+        %video{ controls: "", name: "media", :height => "250px;", :width => "400px;"}
+          %source{src: "#{@video_ad.video_file}", type: "video/mp4"}
+
+       

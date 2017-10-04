@@ -14,14 +14,14 @@
               "name": "phone",
               "type": "string",
               "description": "Phone Number",
-              "required": false
+              "required": true
             },
             {
               "paramType": "form",
               "name": "password",
               "type": "string",
               "description": "Password",
-              "required": false
+              "required": true
             },
             {
               "paramType": "form",
@@ -60,21 +60,28 @@
               "name": "uid",
               "type": "string",
               "description": "Uid",
-              "required": false
+              "required": true
             },
             {
               "paramType": "form",
               "name": "access-token",
               "type": "string",
               "description": "Access-Token",
-              "required": false
+              "required": true
             },
             {
               "paramType": "form",
               "name": "client",
               "type": "string",
               "description": "Client",
-              "required": false
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "expiry",
+              "type": "string",
+              "description": "expiry",
+              "required": true
             },
             {
               "paramType": "form",

@@ -13,7 +13,7 @@ module Overrides::DeviseTokenAuth::Merchant
           q_value.downcase!
         end
         # merchant use phone provider
-        q = "#{field.to_s} = ? AND provider='phone'"
+        q = "#{field.to_s} = ? AND provider='#{provider}'"
 
         if ActiveRecord::Base.connection.adapter_name.downcase.starts_with? 'mysql'
           q = "BINARY " + q
@@ -36,10 +36,9 @@ module Overrides::DeviseTokenAuth::Merchant
 
         sign_in(:user, @resource, store: false, bypass: false)
 
-        # Add new device for new user
-        add_device
-
         yield @resource if block_given?
+
+        add_device
 
         # update auth header manaully
         update_auth_header
@@ -53,10 +52,29 @@ module Overrides::DeviseTokenAuth::Merchant
     end
 
     def destroy
-      destroy_device
-      super
+      # remove auth instance variables so that after_action does not run
+      user = remove_instance_variable(:@resource) if @resource
+      client_id = remove_instance_variable(:@client_id) if @client_id
+      remove_instance_variable(:@token) if @token
+
+      if user && client_id && user.tokens[client_id]
+        user.tokens.delete(client_id)
+        user.save!
+
+        yield user if block_given?
+        destroy_device
+
+        render_destroy_success
+      else
+        render_destroy_error
+      end
     end
 
+    protected
+
+    def provider
+      'phone'
+    end
 
     private
 
@@ -76,6 +94,7 @@ module Overrides::DeviseTokenAuth::Merchant
     end
 
     def device
+      return if @resource.blank?
       @device ||= @resource.devices.find_by(device_id: params[:device_id])
     end
   end

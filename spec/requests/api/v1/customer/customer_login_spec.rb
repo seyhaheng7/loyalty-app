@@ -5,7 +5,7 @@ describe 'Customer Login' do
     put send_digit_api_v1_customer_digits_path, params: { phone: customer.phone }
     expect(response.status).to eq(200)
     customer.reload
-    post customer_session_path, params: { phone: customer.phone, digit: customer.login_digit }
+    post customer_session_path, params: { phone: customer.phone, digit: customer.login_digit, device_id: 'abc' }
     expect(response.status).to eq(200)
     expect(response.headers).to have_key('access-token')
     expect(response.headers).to have_key('token-type')
