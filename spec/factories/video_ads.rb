@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :video_ad do
     title "MyString"
-    youtube_url "MyString"
+    video_file "MyString"
     start_date { Date.today - 10.days }
     end_date { Date.today + 10.days }
     earned_points 1

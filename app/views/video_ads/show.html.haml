@@ -1,27 +1,40 @@
-.container
-  .row
-    .col-md-12
-      .portlet.light.bordered
-        .portlet-title
-          .caption
-            %span.caption-subject.font-dark.sbold.uppercase 
-              Show video_ad
-          .actions
-            .btn-group.btn-group-devided
-              = link_to edit_video_ad_path(@video_ad), class: 'btn btn-transparent dark btn-outline btn-circle btn-sm active' do
-                Edit
-              = link_to video_ads_path, class: 'btn btn-transparent dark btn-outline btn-circle btn-sm' do
-                Back
-        .portlet-body.form
-          %dt Title:
-          %dd= @video_ad.title
-          %dt Start date:
-          %dd= @video_ad.start_date
-          %dt End date:
-          %dd= @video_ad.end_date
-          %dt Earned points:
-          %dd= @video_ad.earned_points
+.portlet.light.bordered
+  .portlet-title
+    .caption
+      Show Video Ad
           
-          %iframe{:align => "center", :name => "window", :src => "#{@video_ad.embed_url}", :height => "150px;", :width => "250px;", :style => "float:left;margin-top:30px;"}
+  .portlet-body
+    %table.table
+      %col{width: '10'}
+      %col{width: '350'}
+      %tr
+        %th Title:
+        %td= @video_ad.title
+      %tr
+        %th Start date:
+        %td= @video_ad.start_date
+      %tr
+        %th End date:
+        %td= @video_ad.end_date
+      %tr
+        %th Earned points:
+        %td= @video_ad.earned_points
+
+      %tr
+        %th Video ad:
+        %td
+          %video{ controls: "", name: "media", :height => "350px;", :width => "500px;"}
+            %source{src: "#{@video_ad.video_file}", type: "video/mp4"}
 
 
+    .row.wrap-pad
+      .pull-left
+        -if policy(@video_ad).index?
+          = link_to video_ads_path, class: 'btn btn-default' do
+            = fa_icon 'chevron-left'
+            Back
+      .pull-right
+        -if policy(@video_ad).edit?
+          = link_to [:edit, @video_ad], class: 'btn btn-primary' do
+            = fa_icon 'pencil'
+            Edit
