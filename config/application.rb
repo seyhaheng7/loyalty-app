@@ -33,3 +33,4 @@ module CodingateProject
     config.time_zone = 'Bangkok'
   end
 end
+
