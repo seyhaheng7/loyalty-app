@@ -60,21 +60,28 @@
               "name": "uid",
               "type": "string",
               "description": "Uid",
-              "required": false
+              "required": true
             },
             {
               "paramType": "form",
               "name": "access-token",
               "type": "string",
               "description": "Access-Token",
-              "required": false
+              "required": true
             },
             {
               "paramType": "form",
               "name": "client",
               "type": "string",
               "description": "Client",
-              "required": false
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "expiry",
+              "type": "string",
+              "description": "Expiry",
+              "required": true
             },
             {
               "paramType": "form",

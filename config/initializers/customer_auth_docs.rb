@@ -7,7 +7,6 @@ Overrides::DeviseTokenAuth::Customer::SessionsController.class_eval do
     summary 'Customer Login '
     notes 'user login with phone and password'
     param :form, 'phone', :string, :required, 'Phone Number'
-
     param :form, 'digit', :string, :required, 'Login Digit'
     param :form, 'device_id', :string, :optional, 'One signal device id'
     response :ok, "Success", :User
@@ -17,9 +16,10 @@ Overrides::DeviseTokenAuth::Customer::SessionsController.class_eval do
   swagger_api :destroy do
     summary 'Destroy customer session'
     notes 'merchant sign out'
-    param :form, 'uid', :string, :optional, 'Uid'
-    param :form, 'access-token', :string, :optional, 'Access-Token'
-    param :form, 'client', :string, :optional, 'Client'
+    param :form, 'uid', :string, :required, 'Uid'
+    param :form, 'access-token', :string, :required, 'Access-Token'
+    param :form, 'client', :string, :required, 'Client'
+    param :form, 'expiry', :string, :required, 'Expiry'
     param :form, 'device_id', :string, :optional, 'One signal device id'
     response :not_found
     response :ok, "Success", :User
