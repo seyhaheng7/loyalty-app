@@ -30,10 +30,19 @@ module ApplicationCable
         current_user
       else
         user = Customer.find_by phone: phone
-        if user && user.valid_token?(access_token, client_id)
-          user
+        if user.present?
+          if user && user.valid_token?(access_token, client_id)
+            user
+          else
+            reject_unauthorized_connection
+          end
         else
-          reject_unauthorized_connection
+          user = Merchant.find_by phone: phone
+          if user && user.valid_token?(access_token, client_id)
+            user
+          else
+            reject_unauthorized_connection
+          end
         end
       end
     end

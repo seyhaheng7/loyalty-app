@@ -1,0 +1,17 @@
+#tab_1_1.tab-pane.active
+  .slimScrollDiv
+    %ul.feeds
+      - @merchant.store.rewards.available.each do |reward|
+        %li
+          = link_to reward do
+            .col1
+              .cont
+                .cont-col1
+                  .label.label-sm.label-warning
+                    %i.fa.fa-info
+                .cont-col2
+                  .desc
+                    = reward.name
+            .col2
+              .date
+                = time_ago_in_words(reward.created_at)

@@ -35,14 +35,13 @@ ActiveRecord::Base.transaction do
     Customer.create!(email: FFaker::Internet.email, phone: "1#{Random.rand(144..999)}9134", password: "password", current_points: Random.rand(800..900),verified_at: Time.now, avatar: Rails.root.join("app/assets/images/default.png").open)
   end
 
-
-
   5.times do
     status = ["approved", "rejected", "submitted"]
     Receipt.create!(receipt_id: FFaker::PhoneNumber.short_phone_number, earned_points: Random.rand(20..80), status: status.delete(status.sample), store_id: Random.rand(1..5), customer_id: Random.rand(1..5), total: Random.rand(100..500), capture: Rails.root.join("app/assets/images/default.png").open)
   end
 
   5.times do
+    status = ["approved", "rejected", "submitted"]
     ClaimedReward.create!(customer_id: Random.rand(1..5), reward_id: Random.rand(1..5), status: status.delete(status.sample), qr_token: FFaker::Internet.domain_word)
   end
 

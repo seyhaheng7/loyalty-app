@@ -8,11 +8,6 @@
     .caption
       %i.icon-users
       Customer Chat Support
-    .pull-right
-      -if policy(@grid.assets).new?
-        = link_to new_customer_chat_support_path, class: 'btn btn-primary' do
-          = fa_icon 'comments'
-          New Customer Chat Support
   .portlet-body
     .table-scrollable
       = datagrid_table @grid

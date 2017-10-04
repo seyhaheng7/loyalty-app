@@ -8,11 +8,6 @@
     .caption
       %i.icon-envelope
       Merchant Chat Support
-    .pull-right
-      -if policy(@grid.assets).new?
-        = link_to new_merchant_chat_support_path, class: 'btn btn-primary' do
-          = fa_icon 'plus'
-          Add Merchant Chat Support
   .portlet-body
     .table-scrollable
       = datagrid_table @grid

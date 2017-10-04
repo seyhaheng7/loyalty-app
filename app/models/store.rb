@@ -8,8 +8,6 @@ class Store < ApplicationRecord
   has_many :rewards
   has_many :claimed_rewards, through: :rewards
 
-  has_many :claimed_rewards, through: :rewards
-
   validates :name, presence: true, uniqueness: {scope: :company_id}
   validates :address, presence: true
 

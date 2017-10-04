@@ -25,7 +25,6 @@ class ClaimedReward < ApplicationRecord
 
   delegate :name, to: :customer, prefix: true, allow_nil: true
   delegate :name, to: :reward, prefix: true, allow_nil: true
-
   delegate :claimed_rewards, to: :store, prefix: true, allow_nil: true
 
   def self.filter(params)
