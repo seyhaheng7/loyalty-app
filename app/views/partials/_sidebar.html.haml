@@ -61,7 +61,7 @@
               %i.icon-user-following
               %span.title Video Ads
         - if policy(:privacy_policy).index?
-          %li.nav-item{:class => ("active" if sidebar_active?('privacy_policy'))}
+          %li.nav-item{:class => ("active" if sidebar_active?('privacy_policies'))}
             = link_to privacy_policies_path do
               %i.icon-user-following
               %span.title Privacy Policy
@@ -98,12 +98,12 @@
               %span.title Customer Locations
 
         - if policy(:advertisement).index?
-          %li.nav-item{:class => ("active" if sidebar_active?('advertisement'))}
+          %li.nav-item{:class => ("active" if sidebar_active?('advertisements'))}
             = link_to advertisements_url do
               %i.icon-pointer
               %span.title Advertisements
         - if policy(:promotion).index?
-          %li.nav-item{:class => ("active" if sidebar_active?('promotion'))}
+          %li.nav-item{:class => ("active" if sidebar_active?('promotions'))}
             = link_to promotions_url do
               %i.icon-pointer
               %span.title Promotions
@@ -121,13 +121,13 @@
               %span.title Merchant Chat Supports
 
         - if policy(:customer_chat_support).index?
-          %li.nav-item{:class => ( "active" if sidebar_active?('settings') )}
+          %li.nav-item{:class => ( "active" if sidebar_active?('customer_chat_supports') )}
             = link_to customer_chat_supports_url do
               %i.icon-envelope
               %span.title Customer Chat Supports
 
         - if policy(:guide).index?
-          %li.nav-item{:class => (" active" if sidebar_active?('guide'))}
+          %li.nav-item{:class => (" active" if sidebar_active?('guides'))}
             = link_to guides_url do
               %i.icon-envelope
               %span.title Watch and Earn Guides
