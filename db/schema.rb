@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171002071610) do
+ActiveRecord::Schema.define(version: 20171003064046) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -137,7 +137,8 @@ ActiveRecord::Schema.define(version: 20171002071610) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string "unconfirmed_email"
-    t.string "avatar"
+    t.string "nickname"
+    t.string "image"
     t.string "email"
     t.json "tokens"
     t.datetime "created_at", null: false
@@ -283,6 +284,13 @@ ActiveRecord::Schema.define(version: 20171002071610) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "products", force: :cascade do |t|
+    t.string "name"
+    t.string "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "promotions", force: :cascade do |t|
     t.string "title"
     t.string "image"
@@ -404,7 +412,7 @@ ActiveRecord::Schema.define(version: 20171002071610) do
 
   create_table "video_ads", force: :cascade do |t|
     t.string "title"
-    t.string "youtube_url"
+    t.string "video_file"
     t.date "start_date"
     t.date "end_date"
     t.integer "earned_points"
