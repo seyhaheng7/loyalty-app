@@ -1,0 +1,2 @@
+class TermConditionPolicy < ApplicationPolicy
+end
