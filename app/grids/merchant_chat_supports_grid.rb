@@ -6,13 +6,17 @@ class MerchantChatSupportsGrid
     MerchantChatSupport
   end
 
-  filter(:id, :integer)
-  filter(:created_at, :date, :range => true)
+  filter(:merchant_id, :enum, :select => lambda {Merchant.all.map {|m| [m.name, m.id]}})
 
-  column(:id)
 
-  column(:created_at) do |model|
-    model.created_at.to_date
+  column(:avatar, html: true) do |record|
+    image_tag record.merchant_avatar, size: '30x30'
+  end
+
+  column(:merchant, html: true) do |record|
+    link_to record.merchant do
+      record.merchant_name
+    end
   end
 
   column(:actions, html:true) do |record|

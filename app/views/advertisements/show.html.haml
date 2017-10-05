@@ -1,37 +1,53 @@
-.container
-  .row
-    .col-md-12
-      .portlet.light.bordered
-        .portlet-title
-          .caption
-            %span.caption-subject.font-dark.sbold.uppercase 
-              Show advertisement
-          .actions
-            .btn-group.btn-group-devided
-              = link_to edit_advertisement_path(@advertisement), class: 'btn btn-transparent dark btn-outline btn-circle btn-sm active' do
-                Edit
-              = link_to advertisements_path, class: 'btn btn-transparent dark btn-outline btn-circle btn-sm' do
-                Back
-        .portlet-body.form
-          %dt Name:
-          %dd= @advertisement.name
-          %dt Banner:
-          %dd= @advertisement.banner
-          %dt Active:
-          %dd= @advertisement.active
-          %dt For page:
-          %dd= @advertisement.for_page
-          %dt Lat:
-          %dd= @advertisement.lat
-          %dt Long:
-          %dd= @advertisement.long
-          %dt Address:
-          %dd= @advertisement.address
-          %dt Phone:
-          %dd= @advertisement.phone
-          %dt Web site:
-          %dd= @advertisement.web_site
-          %dt Start date:
-          %dd= @advertisement.start_date
-          %dt End date:
-          %dd= @advertisement.end_date
+.portlet.light.bordered
+  .portlet-title
+    .caption
+      Show advertisement
+
+  .portlet-body
+    %table.table
+      %col{width: '10'}
+      %col{width: '350'}
+      %tr
+        %th Logo:
+        %td= image_tag @advertisement.banner, size: '50x50'
+      %tr
+        %th Name:
+        %td= @advertisement.name
+
+      %tr
+        %th Active:
+        %td= @advertisement.active
+      %tr
+        %th For page:
+        %td= @advertisement.for_page
+      %tr
+        %th Address:
+        %td= @advertisement.address
+      %tr
+        %th Phone:
+        %td= @advertisement.phone
+      %tr
+        %th Website:
+        %td= @advertisement.website
+      %tr
+        %th Start date:
+        %td= @advertisement.start_date
+      %tr
+        %th End date:
+        %td= @advertisement.end_date
+
+    .row.wrap-pad
+      .pull-left
+        -if policy(@advertisement).index?
+          = link_to companies_path, class: 'btn btn-default' do
+            = fa_icon 'chevron-left'
+            Back
+      .pull-right
+        -if policy(@advertisement).edit?
+          = link_to [:edit, @advertisement], class: 'btn btn-primary' do
+            = fa_icon 'pencil'
+            Edit
+        -if policy(@advertisement).destroy?
+          = link_to @advertisement, method: :delete, data: {confirm: 'Are you sure?'} ,class: 'btn btn-danger' do
+            = fa_icon 'trash'
+            Delete

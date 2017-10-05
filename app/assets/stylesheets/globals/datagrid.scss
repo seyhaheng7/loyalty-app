@@ -19,7 +19,11 @@ th.actions, td.actions{
     display: block;
   }
   .form-control{
-    width: 48%;
+    width: 47%;
     display: inline-block;
   }
+}
+
+.datagrid-filter .separator{
+  padding: 0 9px;
 }

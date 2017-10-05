@@ -62,6 +62,6 @@ class AdvertisementsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def advertisement_params
-      params.require(:advertisement).permit(:name, :banner, :banner_cache, :active, :for_page, :lat, :long, :address, :phone, :web_site, :start_date, :end_date)
+      params.require(:advertisement).permit(:name, :banner, :banner_cache, :active, :for_page, :lat, :long, :address, :phone, :website, :start_date, :end_date)
     end
 end

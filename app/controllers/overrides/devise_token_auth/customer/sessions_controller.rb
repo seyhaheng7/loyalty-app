@@ -1,7 +1,6 @@
 module Overrides::DeviseTokenAuth::Customer
   class SessionsController < DeviseTokenAuth::SessionsController
     before_action :configure_permitted_parameters, only: [:create]
-    around_action :destroy_device, only: :destroy
 
     def create
       # Check

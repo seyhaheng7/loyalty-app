@@ -1,6 +1,12 @@
 Codingate.StoresForm = Codingate.StoresNew = Codingate.StoresCreate = Codingate.StoresEdit = Codingate.StoresUpdate =
   init: ->
     @_initMap()
+    @_phoneMask()
+
+  _phoneMask: ->
+    $('#store_phone').inputmask '099-999-9999'
+    $('form').submit ->
+      $('#store_phone').inputmask('remove')
 
   _initMap: ->
     DEFAULT_LATITUDE = 11.570436366295361
@@ -18,7 +24,7 @@ Codingate.StoresForm = Codingate.StoresNew = Codingate.StoresCreate = Codingate.
     lat_lng = new (google.maps.LatLng)(latField.val(), longField.val())
 
     map = new (google.maps.Map)(mapElement,
-    zoom: 13
+    zoom: 16
     center: lat_lng)
 
     marker = new (google.maps.Marker)(

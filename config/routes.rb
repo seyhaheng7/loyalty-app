@@ -1,7 +1,6 @@
 require 'sidekiq/web'
 Rails.application.routes.draw do
 
-  resources :privacy_policies, only: [:index, :update]
   mount ActionCable.server => '/cable'
   mount Sidekiq::Web => '/sidekiq'
 
@@ -27,6 +26,8 @@ Rails.application.routes.draw do
   resources :users
   resources :merchants
   resources :rewards
+  resources :term_conditions, only: [:index, :update]
+  resources :privacy_policies, only: [:index, :update]
   resources :stickers
   resources :sticker_groups
   resources :settings
@@ -80,6 +81,7 @@ Rails.application.routes.draw do
         resources :guides, only: [:index, :show]
         resources :notifications, only: [:index]
         resources :privacy_policies, only: [:index]
+        resources :term_conditions, only: [:index]
         resources :view_video_ads, only: [:index, :create]
 
         resources :customer_chat_supports, only: [:index] do

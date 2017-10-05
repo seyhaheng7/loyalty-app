@@ -1,5 +1,5 @@
 class Notification < ApplicationRecord
-  TYPES = ['SubmittedReceipt']
+  TYPES = ['SubmittedReceipt', 'RejectedReceipt', 'ApprovedReceipt']
 
   belongs_to :notifyable, polymorphic: true
   belongs_to :objectable, polymorphic: true
