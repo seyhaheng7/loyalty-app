@@ -38,7 +38,7 @@
     .row.wrap-pad
       .pull-left
         -if policy(@advertisement).index?
-          = link_to companies_path, class: 'btn btn-default' do
+          = link_to advertisements_path, class: 'btn btn-default' do
             = fa_icon 'chevron-left'
             Back
       .pull-right
@@ -50,3 +50,7 @@
           = link_to @advertisement, method: :delete, data: {confirm: 'Are you sure?'} ,class: 'btn btn-danger' do
             = fa_icon 'trash'
             Delete
+    
+    #show-advertisement-map
+    %input{type: 'hidden', value: @advertisement.lat, id: 'lat_value'}
+    %input{type: 'hidden', value: @advertisement.long, id: 'long_value'}
