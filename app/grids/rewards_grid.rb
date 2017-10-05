@@ -14,7 +14,7 @@ class RewardsGrid
 
   column(:name)
   column(:image, html: true) do |reward|
-    image_tag reward.image, size: '30x30'
+    image_tag reward.image, size: '50x50'
   end
   column(:require_points)
   column(:quantity)

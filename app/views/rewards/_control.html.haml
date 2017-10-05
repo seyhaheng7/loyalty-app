@@ -1,3 +1,7 @@
+-if policy(reward).show?
+  = link_to reward, class: 'btn btn-info' do
+    = fa_icon 'eye'
+    Show
 -if policy(reward).edit?
   = link_to [:edit, reward], class: 'btn btn-primary' do
     = fa_icon 'pencil'
@@ -6,7 +10,4 @@
   = link_to reward, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-danger' do
     = fa_icon 'trash'
     Delete
--if policy(reward).show?
-  = link_to reward, class: 'btn btn-info' do
-    = fa_icon 'eye'
-    Show
+

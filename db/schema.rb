@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171004080935) do
+ActiveRecord::Schema.define(version: 20171004020154) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,16 +20,16 @@ ActiveRecord::Schema.define(version: 20171004080935) do
     t.string "banner"
     t.boolean "active"
     t.string "for_page"
+    t.string "lat"
+    t.string "long"
     t.string "address"
     t.string "phone"
-    t.string "website"
+    t.string "web_site"
     t.date "start_date"
     t.date "end_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
-    t.float "lat"
-    t.float "long"
     t.index ["deleted_at"], name: "index_advertisements_on_deleted_at"
   end
 
@@ -139,8 +139,7 @@ ActiveRecord::Schema.define(version: 20171004080935) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string "unconfirmed_email"
-    t.string "nickname"
-    t.string "image"
+    t.string "avatar"
     t.string "email"
     t.json "tokens"
     t.datetime "created_at", null: false
@@ -286,13 +285,6 @@ ActiveRecord::Schema.define(version: 20171004080935) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "products", force: :cascade do |t|
-    t.string "name"
-    t.string "price"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "promotions", force: :cascade do |t|
     t.string "title"
     t.string "image"
@@ -383,8 +375,6 @@ ActiveRecord::Schema.define(version: 20171004080935) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
-    t.string "website"
-    t.string "phone"
     t.index ["company_id"], name: "index_stores_on_company_id"
     t.index ["deleted_at"], name: "index_stores_on_deleted_at"
     t.index ["location_id"], name: "index_stores_on_location_id"
@@ -416,7 +406,7 @@ ActiveRecord::Schema.define(version: 20171004080935) do
 
   create_table "video_ads", force: :cascade do |t|
     t.string "title"
-    t.string "video_file"
+    t.string "youtube_url"
     t.date "start_date"
     t.date "end_date"
     t.integer "earned_points"

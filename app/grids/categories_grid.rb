@@ -8,7 +8,6 @@ class CategoriesGrid
 
   filter(:name, :string){ |value| scope.name_like(value) }
 
-  column(:id)
   column(:name)
   column(:created_at) do |model|
     model.created_at.to_date

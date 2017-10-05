@@ -12,7 +12,7 @@ class PromotionsGrid
 
   column(:title)
   column(:image, html: true) do |promotion|
-    image_tag promotion.image, size: '30x30'
+    image_tag promotion.image, size: '50x50'
   end
   column(:start_date)
   column(:end_date)

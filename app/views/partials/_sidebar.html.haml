@@ -100,18 +100,18 @@
         - if policy(:advertisement).index?
           %li.nav-item{:class => ("active" if sidebar_active?('advertisements'))}
             = link_to advertisements_url do
-              %i.icon-pointer
+              %i.icon-bulb
               %span.title Advertisements
         - if policy(:promotion).index?
           %li.nav-item{:class => ("active" if sidebar_active?('promotions'))}
             = link_to promotions_url do
-              %i.icon-pointer
+              %i.icon-diamond
               %span.title Promotions
 
         - if policy(:contact_form).index?
           %li.nav-item{:class => ( "active" if sidebar_active?('contact_forms') )}
             = link_to contact_forms_url do
-              %i.icon-envelope
+              %i.icon-notebook
               %span.title Contact Forms
 
         - if policy(:merchant_chat_support).index?

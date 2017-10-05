@@ -1,0 +1,25 @@
+.navbar-nav > li > a {
+    line-height: 21px;
+}
+.page-header.navbar {
+  background: #e43a45;
+  border-bottom: 1px solid #e9ecf3;
+}
+.border-green{
+  border-color: #E4364F !important;
+}
+.page-header.navbar .top-menu .navbar-nav > li.dropdown .dropdown-toggle:hover {
+  background-color: #FFF;
+  i {
+    color: #E4364F;
+  }    
+  span{
+    color: #E4364F;
+  }
+}
+.page-header.navbar .top-menu .navbar-nav > li.dropdown .dropdown-toggle > .username {
+    color: #fff;
+}
+.page-header.navbar .top-menu .navbar-nav > li.dropdown .dropdown-toggle > i {
+    color: #fff;
+}
