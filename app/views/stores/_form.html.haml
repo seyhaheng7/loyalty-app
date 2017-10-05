@@ -9,8 +9,11 @@
       = f.input :long, as: :hidden, input_html: {id: 'place_longitude'}
 
       = f.input :address
+      = f.input :website
+      = f.input :phone, input_html: { class: 'inputmask' }
       = f.association :company
       = f.association :location
+
 
       #map  
       .pull-left

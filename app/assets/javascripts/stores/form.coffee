@@ -1,6 +1,12 @@
 Codingate.StoresForm = Codingate.StoresNew = Codingate.StoresCreate = Codingate.StoresEdit = Codingate.StoresUpdate =
   init: ->
     @_initMap()
+    @_phoneMask()
+
+  _phoneMask: ->
+    $('#store_phone').inputmask '099-999-9999'
+    $('form').submit ->
+      $('#store_phone').inputmask('remove')
 
   _initMap: ->
     DEFAULT_LATITUDE = 11.570436366295361
