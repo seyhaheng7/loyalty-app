@@ -18,6 +18,9 @@ class Store < ApplicationRecord
 
   scope :name_like, ->(name){ where("#{table_name}.name ilike ?", "%#{name}%") }
 
+  delegate :name, to: :company, prefix: true, allow_nil: true
+  delegate :name, to: :location, prefix: true, allow_nil: true
+
   def self.order_by(params)
     records = all
     params ||= {}
