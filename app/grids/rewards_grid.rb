@@ -9,7 +9,7 @@ class RewardsGrid
 	filter(:store_id, :enum,
 					 :select => lambda {Store.pluck(:name, :id)})
 	filter(:quantity, :integer, range: true)
-	filter(:require_points, :integer, range: true)
+  filter(:require_points, :integer, range: true)
 	filter(:price, :integer, rangenge: true)
 	filter(:reward_id, :enum, select: ["available", "unvailable"])
 
