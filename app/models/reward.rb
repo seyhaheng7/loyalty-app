@@ -22,6 +22,10 @@ class Reward < ApplicationRecord
   def self.filter(params)
     records = all
 
+    if params[:name].present?
+      records = records.name_like(params[:name])
+    end
+
     if params[:store_name].present?
       records = records.joins(:store).merge(Store.name_like(params[:store_name]))
     end
