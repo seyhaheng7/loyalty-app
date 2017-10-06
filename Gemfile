@@ -31,6 +31,7 @@ gem 'brakeman', '>= 3.7.2'
 gem 'datagrid', '~> 1.5'
 gem 'nexmo', '~> 4.7.0'
 gem 'sidekiq', '~> 5.0.4'
+gem 'ffaker',             '~> 2.6.0'
 
 group :development, :test do
   gem 'lunchy'
@@ -39,7 +40,6 @@ group :development, :test do
   gem 'selenium-webdriver'
   gem 'pry'
   gem 'rspec-rails',        '~> 3.5'
-  gem 'ffaker',             '~> 2.6.0'
   gem 'database_cleaner',   '~> 1.6.1'
   gem 'factory_girl_rails', '~> 4.8.0'
   gem 'shoulda-matchers',   '~> 3.1'
