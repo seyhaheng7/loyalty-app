@@ -8,7 +8,6 @@ module Api::V1::Customer
       summary 'Fetches all rewards'
       param :query, :page, :integer, :optional, "Page number"
       param :query, :store_name, :string, :optional, "Store name"
-      param :query, :order_by, :string, :optional, "['newly added', 'low point', 'hight point', 'vocher price']"
 
       response :unauthorized
       response :success
