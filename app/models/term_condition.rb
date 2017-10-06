@@ -1,0 +1,2 @@
+class TermCondition < ApplicationRecord
+end

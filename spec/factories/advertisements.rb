@@ -4,8 +4,6 @@ FactoryGirl.define do
     banner File.open('spec/support/default.png')
     active false
     for_page "MyString"
-    lat "MyString"
-    long "MyString"
     address "MyString"
     phone "MyString"
     website "MyString"

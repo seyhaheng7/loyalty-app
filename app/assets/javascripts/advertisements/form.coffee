@@ -1,21 +1,15 @@
-Codingate.StoresForm = Codingate.StoresNew = Codingate.StoresCreate = Codingate.StoresEdit = Codingate.StoresUpdate =
+Codingate.AdvertisementsForm = Codingate.AdvertisementsNew = Codingate.AdvertisementsCreate = Codingate.AdvertisementsEdit = Codingate.AdvertisementsUpdate =
   init: ->
-    @_initMap()
-    @_phoneMask()
+    @_initAdvertisementMap()
 
-  _phoneMask: ->
-    $('#store_phone').inputmask '099-999-9999'
-    $('form').submit ->
-      $('#store_phone').inputmask('remove')
-
-  _initMap: ->
+  _initAdvertisementMap: ->
     DEFAULT_LATITUDE = 11.570436366295361
     DEFAULT_LONGITUDE = 104.87980718085987
 
-    mapElement = $('#map').get(0)
+    mapElement = $('#map-advertisement').get(0)
 
-    latField = $('#place_latitude')
-    longField = $('#place_longitude')
+    latField = $('#advertisement_lat')
+    longField = $('#advertisement_long')
 
     if latField.val() == '' || longField.val() == ''
       latField.val DEFAULT_LATITUDE
@@ -24,7 +18,7 @@ Codingate.StoresForm = Codingate.StoresNew = Codingate.StoresCreate = Codingate.
     lat_lng = new (google.maps.LatLng)(latField.val(), longField.val())
 
     map = new (google.maps.Map)(mapElement,
-    zoom: 16
+    zoom: 13
     center: lat_lng)
 
     marker = new (google.maps.Marker)(
@@ -34,9 +28,10 @@ Codingate.StoresForm = Codingate.StoresNew = Codingate.StoresCreate = Codingate.
       position: lat_lng)
 
     google.maps.event.addListener marker, 'dragend', (event) ->
-    
+
       lat = @getPosition().lat()
       lng = @getPosition().lng()
 
       latField.val lat
       longField.val lng
+

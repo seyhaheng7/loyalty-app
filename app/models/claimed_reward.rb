@@ -6,15 +6,19 @@ class ClaimedReward < ApplicationRecord
     state :rejected
     state :approved
 
-    event :rejecting do
+    event :rejecting, after: :create_rejected_claimed_reward_notifications do
       transitions :from => :submitted, :to => :rejected
     end
 
-    event :approving, after: [:decrease_points, :generate_qr_token] do
+    event :approving, after: [:decrease_points, :generate_qr_token, :create_approved_claimed_reward_notifications] do
       transitions :from => :submitted, :to => :approved
+      
     end
 
   end
+
+  
+  
 
   belongs_to :customer
   belongs_to :managed_by, :class_name => "User", optional: true
@@ -44,6 +48,9 @@ class ClaimedReward < ApplicationRecord
 
   scope :filter_given, -> { where(given: true) }
 
+  after_create :create_submitted_claimed_reward_notifications
+
+
   private
 
   def customer_points
@@ -63,4 +70,17 @@ class ClaimedReward < ApplicationRecord
   def generate_qr_token
     update(qr_token: Devise.friendly_token(20))
   end
+
+  def create_submitted_claimed_reward_notifications
+    SubmittedClaimedRewardNotificationsWorker.perform_async(id)
+  end
+
+  def create_approved_claimed_reward_notifications
+    ApprovedClaimedRewardNotificationsWorker.perform_async(id)
+  end
+
+  def create_rejected_claimed_reward_notifications
+    RejectedClaimedRewardNotificationsWorker.perform_async(id)
+  end
+
 end

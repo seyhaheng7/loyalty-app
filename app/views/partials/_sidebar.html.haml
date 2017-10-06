@@ -66,7 +66,11 @@
               %i.icon-user-following
               %span.title Privacy Policy
 
-
+        - if policy(:term_condition).index?
+          %li.nav-item{:class => ("active" if sidebar_active?('term_conditions'))}
+            = link_to term_conditions_path do
+              %i.icon-user-following
+              %span.title Term and Condtion
 
         - if policy(:sticker_group).index?
           %li.nav-item{:class => ( "active" if sidebar_active?('sticker_groups') )}
