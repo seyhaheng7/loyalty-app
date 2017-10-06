@@ -26,7 +26,6 @@
                 .slimScrollDiv{:style => "position: relative; overflow: hidden; width: auto; height: 250px;"}
                   %ul.dropdown-menu-list.scroller#notifications-list{"data-handle-color" => "#637283", :style => "height: 250px; overflow: auto"}
                     = render 'partials/notifications_list'
-
           %li.dropdown.dropdown-user.dropdown-dark
             %a.dropdown-toggle{"data-close-others" => "true", "data-hover" => "dropdown", "data-toggle" => "dropdown", :href => "javascript:;"}
               %span.username.username-hide-on-mobile= current_user.name

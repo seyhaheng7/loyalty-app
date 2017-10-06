@@ -17,8 +17,7 @@ class ClaimedReward < ApplicationRecord
 
   end
 
-  
-  
+  has_many :notifications, as: :objectable
 
   belongs_to :customer
   belongs_to :managed_by, :class_name => "User", optional: true

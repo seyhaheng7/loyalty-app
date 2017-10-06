@@ -6,11 +6,17 @@ class StoresGrid
     Store
   end
 
-  filter(:name, :string)
+  filter(:name, :string){ |value, scope| scope.name_like(value) }
+  filter(:phone)
+  filter(:website)
+  filter(:company_id, :enum,
+   :select => lambda {Company.pluck(:name, :id)})
+  filter(:location_id, :enum,
+   :select => lambda {Location.pluck(:name, :id)})
 
   column(:name)
   column(:address)
-  
+
   column(:company) do |record|
     record.company_name
   end

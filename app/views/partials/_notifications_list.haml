@@ -1,6 +1,6 @@
 - current_user.notifications.limit(10).each do |notification|
   %li
-    %a{:href => "#"}
+    %a{:href => path_for_notification(notification)}
       .details
         %span.label.label-sm.label-icon.label-info
           %i.fa.fa-info
@@ -8,5 +8,4 @@
           = notification.text
           .timeago
             = time_ago_in_words(notification.created_at)
-
 
