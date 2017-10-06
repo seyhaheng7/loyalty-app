@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 20171005082435) do
     t.string "for_page"
     t.string "address"
     t.string "phone"
-    t.string "website"
+    t.string "web_site"
     t.date "start_date"
     t.date "end_date"
     t.datetime "created_at", null: false
@@ -414,7 +414,7 @@ ActiveRecord::Schema.define(version: 20171005082435) do
 
   create_table "video_ads", force: :cascade do |t|
     t.string "title"
-    t.string "video_file"
+    t.string "youtube_url"
     t.date "start_date"
     t.date "end_date"
     t.integer "earned_points"
