@@ -8,7 +8,7 @@ ActiveRecord::Base.transaction do
   User.create!(name: "Admin",email: "admin@example.com", password: "password", role: "Admin")
 
   5.times do |i|
-    Category.create!(id: (i+1), name: FFaker::Name.name)
+    Category.create!(name: FFaker::Name.name)
   end
 
   5.times do
@@ -23,7 +23,7 @@ ActiveRecord::Base.transaction do
     Store.create!(name: FFaker::Name.name, address: FFaker::Address.street_name, company_id: Random.rand(1..5), location_id: Random.rand(1..5))
   end
 
-  5.times do
+  100.times do
     Reward.create!(name: FFaker::Product.product_name, require_points: Random.rand(300..700), quantity: Random.rand(2..10), price: Random.rand(10**2), store_id: Random.rand(1..5), image: Rails.root.join("app/assets/images/default.png").open)
   end
 
