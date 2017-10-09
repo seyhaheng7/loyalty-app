@@ -27,6 +27,10 @@ class User < ApplicationRecord
   scope :name_like, ->(name){ where("#{table_name}.name ilike ?", "%#{name}%") }
   scope :admin_or_approver, ->{ admin.or(approver) }
 
+  def reset_pending_notifications
+    self.pending_notifications_count = 0
+    save
+  end
 
   def increase_pending_notifications
     self.pending_notifications_count += 1
