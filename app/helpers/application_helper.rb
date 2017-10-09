@@ -17,4 +17,22 @@ module ApplicationHelper
   def sidebar_active?(controller)
     controller_name == controller
   end
+
+  def path_for_notification(notification)
+    type = notification.notification_type
+    object = notification.objectable_id
+
+    case type
+
+    when 'SubmittedReceipt'
+      receipt_path(object)
+    when 'SubmittedClaimedReward'
+      claimed_reward_path(object)
+    else
+      raise "Unknown type"
+    end
+  
+  end
+
+
 end

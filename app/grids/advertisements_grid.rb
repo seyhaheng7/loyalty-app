@@ -12,7 +12,7 @@ class AdvertisementsGrid
 
   column(:name)
   column(:banner, html: true) do |record|
-    image_tag record.banner, size: '30x30'
+    image_tag record.banner, size: '50x50'
   end
   column(:active)
   column(:address)

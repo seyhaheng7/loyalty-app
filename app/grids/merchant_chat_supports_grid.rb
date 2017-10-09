@@ -10,7 +10,7 @@ class MerchantChatSupportsGrid
 
 
   column(:avatar, html: true) do |record|
-    image_tag record.merchant_avatar, size: '30x30'
+    image_tag record.merchant_avatar, size: '50x50'
   end
 
   column(:merchant, html: true) do |record|

@@ -1,5 +1,6 @@
 module Overrides::DeviseTokenAuth::Merchant
   class SessionsController < DeviseTokenAuth::SessionsController
+    around_action :destroy_device, only: :destroy
 
     def create
       # Check
@@ -51,25 +52,6 @@ module Overrides::DeviseTokenAuth::Merchant
       end
     end
 
-    def destroy
-      # remove auth instance variables so that after_action does not run
-      user = remove_instance_variable(:@resource) if @resource
-      client_id = remove_instance_variable(:@client_id) if @client_id
-      remove_instance_variable(:@token) if @token
-
-      if user && client_id && user.tokens[client_id]
-        user.tokens.delete(client_id)
-        user.save!
-
-        yield user if block_given?
-        destroy_device
-
-        render_destroy_success
-      else
-        render_destroy_error
-      end
-    end
-
     protected
 
     def provider
@@ -79,7 +61,8 @@ module Overrides::DeviseTokenAuth::Merchant
     private
 
     def destroy_device
-      device.destroy if device.present?
+      @device ||= @resource.devices.find_by(device_id: params[:device_id])
+      @device.destroy if @device.present?
     end
 
     def add_device

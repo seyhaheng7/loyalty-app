@@ -8,10 +8,9 @@ class StickersGrid
 
   filter(:name, :string)
 
-  column(:id)
   column(:name)
   column(:image, html: true) do |sticker|
-    image_tag sticker.image, size: '30x30'
+    image_tag sticker.image, size: '50x50'
   end
 
   column(:actions, html:true) do |record|

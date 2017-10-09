@@ -12,7 +12,7 @@ class UsersGrid
 
 
   column(:avatar, html: true) do |record|
-    image_tag record.avatar, size: '30x30'
+    image_tag record.avatar, size: '50x50'
   end
 
   column(:name)

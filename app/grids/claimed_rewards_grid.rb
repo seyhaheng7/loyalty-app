@@ -11,7 +11,7 @@ class ClaimedRewardsGrid
   filter(:status, :enum, select: ClaimedReward.aasm.states.map(&:name))
   filter(:created_at, :date, range: true)
 
-  column(:id)
+
   column(:reward_name)
   column(:customer_name)
   column(:status)

@@ -1,5 +1,6 @@
 module Overrides::DeviseTokenAuth::Customer
   class RegistrationsController < DeviseTokenAuth::RegistrationsController
+
     def create
       @resource            = resource_class.new(sign_up_params)
       @resource.password   = Devise.friendly_token
@@ -65,6 +66,21 @@ module Overrides::DeviseTokenAuth::Customer
         clean_up_passwords @resource
         render_create_error_email_already_exists
       end
+
     end
+
+    protected
+
+    # Trick to make token auth work start
+    def authenticate_user!
+      authenticate_customer!
+    end
+
+    def current_user
+      current_customer
+    end
+    # Trick to make token auth work end
+
+
   end
 end

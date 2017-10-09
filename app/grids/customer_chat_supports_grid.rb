@@ -9,7 +9,7 @@ class CustomerChatSupportsGrid
   filter(:customer_id, :enum,:select => lambda {Customer.all.map {|p| [p.name, p.id]}})
 
   column(:avatar, html: true) do |record|
-    image_tag record.customer_avatar, size: '30x30'
+    image_tag record.customer_avatar, size: '50x50'
   end
 
   column(:customer, html: true) do |record|

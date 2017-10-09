@@ -1,6 +1,7 @@
 module Overrides::DeviseTokenAuth::Customer
   class SessionsController < DeviseTokenAuth::SessionsController
     before_action :configure_permitted_parameters, only: [:create]
+    around_action :destroy_device, only: :destroy
 
     def create
       # Check
@@ -51,27 +52,6 @@ module Overrides::DeviseTokenAuth::Customer
       end
     end
 
-
-    def destroy
-      # remove auth instance variables so that after_action does not run
-      user = remove_instance_variable(:@resource) if @resource
-      client_id = remove_instance_variable(:@client_id) if @client_id
-      remove_instance_variable(:@token) if @token
-
-      if user && client_id && user.tokens[client_id]
-        user.tokens.delete(client_id)
-        user.save!
-
-        yield user if block_given?
-        destroy_device
-
-        render_destroy_success
-      else
-        render_destroy_error
-      end
-    end
-
-
     protected
 
     def configure_permitted_parameters
@@ -89,7 +69,6 @@ module Overrides::DeviseTokenAuth::Customer
     private
 
     def destroy_device
-      return if @resource.blank?
       @device ||= @resource.devices.find_by(device_id: params[:device_id])
       @device.destroy if @device.present?
     end
