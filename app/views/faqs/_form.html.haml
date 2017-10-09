@@ -4,7 +4,7 @@
   .form-body
     .form-group
       = f.input :title
-      = f.input :content
+      = f.input :content, as: :ckeditor
 
       = f.button :submit
       .pull-right

@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 20171005082435) do
     t.string "for_page"
     t.string "address"
     t.string "phone"
-    t.string "web_site"
+    t.string "website"
     t.date "start_date"
     t.date "end_date"
     t.datetime "created_at", null: false
