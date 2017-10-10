@@ -3,7 +3,11 @@ class PushNotificationWorker
 
   def perform(notification_id)
     notification = Notification.find notification_id
-    notifications_worker(notification)
+    
+    if notification.notifyable_type == 'User'
+      notifications_worker(notification)
+    end
+    
     push_notification(notification)
   end
 
