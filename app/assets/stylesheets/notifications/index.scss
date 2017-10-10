@@ -31,7 +31,6 @@ body[id='notifications_index'] {
     padding: 0px;
     margin: 0px;
     padding-right: 0px;
-    overflow: hidden;
   }
   .feeds li .col2>.date {
     padding: 6px 9px 5px 4px;
@@ -44,5 +43,6 @@ body[id='notifications_index'] {
   }
   .feeds li {
     background: #575D77;
+    margin-top: 10px;
   }
 }
