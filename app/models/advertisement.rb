@@ -4,6 +4,9 @@ class Advertisement < ApplicationRecord
   validates :name, presence: true
   validates :banner, presence:true
 
+  PAGES = ['Home', 'Shop & Earn', 'Category detail', 'Rewards', 'Snap']
+  validates :for_page, inclusion: PAGES
+
   mount_uploader :banner, BannerUploader
 
   def self.filter(params)
@@ -17,6 +20,6 @@ class Advertisement < ApplicationRecord
   end
 
   scope :active, -> {where(":today >= start_date AND :today <= end_date", today: Date.today)}
-
+  scope :for_page, ->(page){where(for_page: page)}
 
 end

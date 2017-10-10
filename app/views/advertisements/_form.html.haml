@@ -11,7 +11,7 @@
             :label_html => { class: 'btn btn-default'}
           = f.hidden_field :banner_cache
         = f.input :active
-        = f.input :for_page
+        = f.input :for_page, collection: Advertisement::PAGES
         = f.input :lat, as: :hidden
         = f.input :long, as: :hidden
         = f.input :address
