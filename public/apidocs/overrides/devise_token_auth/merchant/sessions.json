@@ -80,7 +80,14 @@
               "paramType": "form",
               "name": "expiry",
               "type": "string",
-              "description": "expiry",
+              "description": "Expiry",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "token-type",
+              "type": "string",
+              "description": "Token Type",
               "required": true
             },
             {
