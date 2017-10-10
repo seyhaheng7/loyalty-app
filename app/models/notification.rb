@@ -8,7 +8,7 @@ class Notification < ApplicationRecord
   validates :text,              presence: true
   validates :notification_type, presence: true
   validates :notification_type, inclusion: TYPES
-  
+
   #only create
   after_create :increase_notifyable_notifications_pending
   #work after commit when create
@@ -25,6 +25,7 @@ class Notification < ApplicationRecord
   end
 
   def push_notification
+    sleep 1
     PushNotificationWorker.perform_async(id)
   end
 
