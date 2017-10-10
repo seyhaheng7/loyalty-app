@@ -1,29 +1,40 @@
-th.actions, td.actions{
-  border:none;
+th.actions,
+td.actions {
+  border: none;
   float: right;
   width: 100%;
   text-align: right;
 }
-.filter-actions{
+
+.filter-actions {
   margin-top: 24px;
 }
-.datagrid-submit{
+
+.datagrid-submit {
   margin-right: 5px;
 }
-.width-auto{
+
+.width-auto {
   width: 100%;
 }
 
-.range-filter{
-  label {
-    display: block;
-  }
-  .form-control{
-    width: 47%;
+.datagrid-filter {
+  .form-control {
+    width: 100%;
     display: inline-block;
   }
 }
 
-.datagrid-filter .separator{
-  padding: 0 9px;
+.datagrid-filter .separator {
+  // padding: 0 9px;
+}
+
+.datagrid-filter.range-filter {
+  label {
+    display: block;
+  }
+  .form-control {
+    width: 47%;
+    display: inline-block;
+  }
 }

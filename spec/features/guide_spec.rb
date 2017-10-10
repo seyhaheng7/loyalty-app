@@ -9,7 +9,7 @@ feature 'Guide' do
   feature 'Listing' do
     scenario 'see all guide' do
       visit root_path
-      click_link 'Watch and Earn Guides'
+      click_link 'Snap & Earn Guide'
       expect(page).to have_content(guide.title)
     end
   end

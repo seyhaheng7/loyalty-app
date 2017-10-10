@@ -1,7 +1,58 @@
 .page-head
   .page-title
     %h1
-      %i.icon-bar-chart 
+      %i.icon-bar-chart
       Admin Dashboard
 
-
+.row
+  .col-lg-3.col-md-3.col-sm-6.col-xs-12
+    = link_to rewards_path do
+      .dashboard-stat2.bordered
+        .display
+          .number
+            %h3.font-green-sharp
+              %span
+                = @rewards
+            %small TOTAL Rewards
+          .icon
+            %i.icon-puzzle
+        .progress-info
+          .progress
+            %span.progress-bar.progress-bar-success.green-sharp{:style => "width: #{@rewards}%;"}
+              %span.sr-only
+                = @rewards
+                progress
+  .col-lg-3.col-md-3.col-sm-6.col-xs-12
+    = link_to stores_path do
+      .dashboard-stat2.bordered
+        .display
+          .number
+            %h3.font-red-haze
+              %span
+                = @stores
+            %small TOTAL Stores
+          .icon
+            %i.icon-basket
+        .progress-info
+          .progress
+            %span.progress-bar.progress-bar-success.red-haze{:style => "width: #{@stores}%;"}
+              %span.sr-only
+                = @stores
+                progress
+  .col-lg-3.col-md-3.col-sm-6.col-xs-12
+    = link_to customers_path do
+      .dashboard-stat2.bordered
+        .display
+          .number
+            %h3.font-blue-sharp
+              %span
+                = @customers
+            %small TOTAL customers
+          .icon
+            %i.icon-users
+        .progress-info
+          .progress
+            %span.progress-bar.progress-bar-success.blue-sharp{:style => "width: #{@customers}%;"}
+              %span.sr-only
+                = @customers
+                progress

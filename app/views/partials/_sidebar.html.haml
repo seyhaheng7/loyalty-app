@@ -5,17 +5,36 @@
     %ul.page-sidebar-menu{"data-auto-scroll" => "true", "data-keep-expanded" => "false", "data-slide-speed" => "200"}
 
       %li.nav-item.start{:class => ( "active" if sidebar_active?('home') )}
+        
+        - if policy(:company).index?
+          %li.nav-item{:class => ( "active" if sidebar_active?('companies') )}
+            = link_to companies_url do
+              %i.icon-briefcase
+              %span.title Company
+        
+        - if policy(:store).index?
+          %li.nav-item{:class => ( "active" if sidebar_active?('stores') )}
+            = link_to stores_url do
+              %i.icon-basket
+              %span.title Store
+        
+        - if policy(:location).index?
+          %li.nav-item{:class => ( "active" if sidebar_active?('locations') )}
+            = link_to locations_url do
+              %i.icon-map
+              %span.title Location
+        
+        - if policy(:customer).index?
+          %li.nav-item{:class => ( "active" if sidebar_active?('customers') )}
+            = link_to customers_url do
+              %i.icon-users
+              %span.title Customer
+
         - if policy(:receipt).index?
           %li.nav-item{:class => ( "active" if sidebar_active?('receipts') )}
             = link_to receipts_url do
               %i.icon-wallet
-              %span.title Receipts
-
-        - if policy(:claimed_reward).index?
-          %li.nav-item{:class => ( "active" if sidebar_active?('claimed_rewards') )}
-            = link_to claimed_rewards_url do
-              %i.icon-diamond
-              %span.title Claimed Rewards
+              %span.title Receipt
 
         - if policy(:reward).index?
           %li.nav-item{:class => ( "active" if sidebar_active?('rewards') )}
@@ -23,95 +42,60 @@
               %i.icon-puzzle
               %span.title Rewards
 
-        - if policy(:company).index?
-          %li.nav-item{:class => ( "active" if sidebar_active?('companies') )}
-            = link_to companies_url do
-              %i.icon-briefcase
-              %span.title Companies
-        - if policy(:store).index?
-          %li.nav-item{:class => ( "active" if sidebar_active?('stores') )}
-            = link_to stores_url do
-              %i.icon-basket
-              %span.title Stores
-        - if policy(:location).index?
-          %li.nav-item{:class => ( "active" if sidebar_active?('locations') )}
-            = link_to locations_url do
-              %i.icon-map
-              %span.title Locations
-        - if policy(:category).index?
-          %li.nav-item{:class => ( "active" if sidebar_active?('categories') )}
-            = link_to categories_url do
-              %i.icon-pie-chart
-              %span.title Categories
-        - if policy(:merchant).index?
-          %li.nav-item{:class => ( "active" if sidebar_active?('merchants') )}
-            = link_to merchants_url do
-              %i.icon-user-following
-              %span.title Merchants
-
-        - if policy(:faq).index?
-          %li.nav-item{:class => ("active" if sidebar_active?('faqs'))}
-            = link_to faqs_url do
-              %i.icon-user-following
-              %span.title Faqs
-
-        -if policy(:video_ad).index?
-          %li.nav-item{:class => ("active" if sidebar_active?('video_ads'))}
-            = link_to video_ads_url do
-              %i.icon-user-following
-              %span.title Video Ads
-        - if policy(:privacy_policy).index?
-          %li.nav-item{:class => ("active" if sidebar_active?('privacy_policies'))}
-            = link_to privacy_policies_path do
-              %i.icon-user-following
-              %span.title Privacy Policy
-
-        - if policy(:term_condition).index?
-          %li.nav-item{:class => ("active" if sidebar_active?('term_conditions'))}
-            = link_to term_conditions_path do
-              %i.icon-user-following
-              %span.title Term and Condtion
-
-        - if policy(:sticker_group).index?
-          %li.nav-item{:class => ( "active" if sidebar_active?('sticker_groups') )}
-            = link_to sticker_groups_url do
-              %i.icon-layers
-              %span.title StickerGroups
-
-        - if policy(:sticker).index?
-          %li.nav-item{:class => ( "active" if sidebar_active?('stickers') )}
-            = link_to stickers_url do
-              %i.icon-bulb
-              %span.title Stickers
-        - if policy(:customer).index?
-          %li.nav-item{:class => ( "active" if sidebar_active?('customers') )}
-            = link_to customers_url do
-              %i.icon-users
-              %span.title Customers
-
-        - if policy(:user).index?
-          %li.nav-item{:class => ( "active" if sidebar_active?('users') )}
-            = link_to users_url do
-              %i.icon-user
-              %span.title Users
-
-        - if policy(:customer_location).index?
-          %li.nav-item{:class => ( "active" if sidebar_active?('customer_locations') )}
-            = link_to customer_locations_url do
-              %i.icon-pointer
-              %span.title Customer Locations
+        - if policy(:claimed_reward).index?
+          %li.nav-item{:class => ( "active" if sidebar_active?('claimed_rewards') )}
+            = link_to claimed_rewards_url do
+              %i.icon-diamond
+              %span.title Reward Claim
 
         - if policy(:advertisement).index?
           %li.nav-item{:class => ("active" if sidebar_active?('advertisements'))}
             = link_to advertisements_url do
               %i.icon-bulb
-              %span.title Advertisements
+              %span.title Advertisement
+
         - if policy(:promotion).index?
           %li.nav-item{:class => ("active" if sidebar_active?('promotions'))}
             = link_to promotions_url do
               %i.icon-diamond
-              %span.title Promotions
+              %span.title Promotion
+        
+        - if policy(:faq).index?
+          %li.nav-item{:class => ("active" if sidebar_active?('faqs'))}
+            = link_to faqs_url do
+              %i.icon-wrench
+              %span.title FAQ
 
+        -if policy(:video_ad).index?
+          %li.nav-item{:class => ("active" if sidebar_active?('video_ads'))}
+            = link_to video_ads_url do
+              = fa_icon 'youtube-play'
+              %span.title Watch & Earn
+
+        - if policy(:guide).index?
+          %li.nav-item{:class => (" active" if sidebar_active?('guides'))}
+            = link_to guides_url do
+              %i.icon-notebook
+              %span.title Snap & Earn Guide
+        
+        - if policy(:user).index?
+          %li.nav-item{:class => ( "active" if sidebar_active?('users') )}
+            = link_to users_url do
+              %i.icon-user
+              %span.title User
+
+        - if policy(:category).index?
+          %li.nav-item{:class => ( "active" if sidebar_active?('categories') )}
+            = link_to categories_url do
+              %i.icon-pie-chart
+              %span.title Categories
+
+        - if policy(:merchant).index?
+          %li.nav-item{:class => ( "active" if sidebar_active?('merchants') )}
+            = link_to merchants_url do
+              %i.icon-user-following
+              %span.title Merchants
+        
         - if policy(:contact_form).index?
           %li.nav-item{:class => ( "active" if sidebar_active?('contact_forms') )}
             = link_to contact_forms_url do
@@ -130,16 +114,45 @@
               %i.icon-envelope
               %span.title Customer Chat Supports
 
-        - if policy(:guide).index?
-          %li.nav-item{:class => (" active" if sidebar_active?('guides'))}
-            = link_to guides_url do
-              %i.icon-envelope
-              %span.title Watch and Earn Guides
+        %li.nav-item{:class => ( "active" if sidebar_active?('settings') ) || ("active" if sidebar_active?('term_conditions')) || ("active" if sidebar_active?('privacy_policies')) || ( "active" if sidebar_active?('customer_locations')) || ( "active" if sidebar_active?('stickers')) || ( "active" if sidebar_active?('sticker_groups') )}
+          %a.nav-link.nav-toggle
+            %i.icon-settings
+            %span.title Setting
+            %span.arrow
+          %ul.sub-menu
+            - if policy(:setting).index?
+              %li.nav-item{:class => ( "active" if sidebar_active?('settings') )}
+                = link_to settings_url do
+                  %span.title Rate Setting
 
-        - if policy(:setting).index?
-          %li.nav-item{:class => ( "active" if sidebar_active?('settings') )}
-            = link_to settings_url do
-              %i.icon-settings
-              %span.title Settings
+            - if policy(:term_condition).index?
+              %li.nav-item{:class => ("active" if sidebar_active?('term_conditions'))}
+                = link_to term_conditions_path do
+                  %span.title Term & Condtion
+            
+            - if policy(:privacy_policy).index?
+              %li.nav-item{:class => ("active" if sidebar_active?('privacy_policies'))}
+                = link_to privacy_policies_path do
+                  %span.title Privacy Policy
+            - if policy(:customer_location).index?
+              %li.nav-item{:class => ( "active" if sidebar_active?('customer_locations') )}
+                = link_to customer_locations_url do
+                  %span.title User Online
+
+            - if policy(:sticker).index?
+              %li.nav-item{:class => ( "active" if sidebar_active?('stickers') )}
+                = link_to stickers_url do
+                  %span.title Stickers
+
+            - if policy(:sticker_group).index?
+              %li.nav-item{:class => ( "active" if sidebar_active?('sticker_groups') )}
+                = link_to sticker_groups_url do
+                  %span.title StickerGroups
+
+        
+
+        
+
+        
 
   / END SIDEBAR MENU
