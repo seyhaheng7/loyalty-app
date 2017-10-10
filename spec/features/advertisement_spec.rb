@@ -19,6 +19,7 @@ feature 'Advertisement' do
       visit advertisements_path
       click_link 'New Advertisement'
       fill_in 'Name', with: 'Coffee Shop'
+      select 'Home', from: 'For page'
       attach_file('advertisement[banner]', File.join(Rails.root, 'spec/support/default.png'))
       click_on 'Create Advertisement'
       expect(page).to have_content 'Advertisement was successfully created'
@@ -37,6 +38,7 @@ feature 'Advertisement' do
       visit advertisements_path
       find("a[href='#{edit_advertisement_path(advertisement)}']").click
       fill_in 'Name', with: 'Coffee Shop'
+      select 'Home', from: 'For page'
       click_on 'Update Advertisement'
       expect(page).to have_content 'Advertisement was successfully updated'
     end
