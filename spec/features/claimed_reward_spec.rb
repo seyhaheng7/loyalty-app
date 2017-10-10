@@ -11,7 +11,7 @@ feature 'ClaimedReward' do
   feature 'Listing' do
     scenario 'see all claimed_reward' do
       visit root_path
-      click_link 'Claimed Rewards'
+      click_link 'Reward Claim'
       expect(page).to have_content(claimed_reward.customer_name)
       expect(page).to have_content(claimed_reward.reward_name)
     end

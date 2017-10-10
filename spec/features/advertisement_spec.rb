@@ -9,7 +9,7 @@ feature 'Advertisement' do
   feature 'Listing' do
     scenario 'see all advertisement' do
       visit root_path
-      click_link 'Advertisements'
+      click_link 'Advertisement'
       expect(page).to have_content(advertisement.name)
     end
   end
