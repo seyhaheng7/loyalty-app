@@ -3,7 +3,10 @@ FactoryGirl.define do
     name "MyString"
     banner File.open('spec/support/default.png')
     active false
-    for_page "MyString"
+    for_page 'Home'
+    trait :home do
+      for_page 'Home'
+    end
     address "MyString"
     phone "MyString"
     website "MyString"

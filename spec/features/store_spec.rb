@@ -11,7 +11,7 @@ feature 'Store' do
   feature 'Listing' do
     scenario 'see all store' do
       visit root_path
-      click_link 'Stores'
+      click_link 'Store'
       expect(page).to have_content(store.name)
     end
   end

@@ -26,6 +26,7 @@ class ClaimedReward < ApplicationRecord
   validate :customer_points
   validate :reward_available, on: :create
 
+  delegate :store, :store_location, to: :reward, allow_nil: true
   delegate :name, to: :customer, prefix: true, allow_nil: true
   delegate :name, to: :reward, prefix: true, allow_nil: true
   delegate :claimed_rewards, to: :store, prefix: true, allow_nil: true

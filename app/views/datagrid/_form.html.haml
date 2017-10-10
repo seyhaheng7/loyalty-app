@@ -2,7 +2,7 @@
   .row
     - grid.filters.each do |filter|
       - if filter.options[:range] == true
-        .col-xs-12.col-sm-6
+        .col-xs-12.col-sm-6.col-md-3
           .datagrid-filter.range-filter.filter.form-group
             = f.datagrid_label filter
             = f.datagrid_filter filter, partials: options[:partials], class: 'form-control'

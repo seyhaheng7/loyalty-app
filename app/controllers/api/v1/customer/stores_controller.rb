@@ -9,6 +9,7 @@ module Api::V1::Customer
       notes "This lists all the active stores"
       param :query, :page, :integer, :optional, "Page number"
 			param :query, 'order[name]', :string, :optional, '[desc, asc]'
+      param :query, :name, :string, :optional
       param :query, :lat, :float, :optional
       param :query, :long, :float, :optional
       param :query, :category_id, :integer, :optional

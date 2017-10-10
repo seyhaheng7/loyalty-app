@@ -12,7 +12,7 @@ feature 'Company' do
   feature 'Listing' do
     scenario 'see all company' do
       visit root_path
-      click_link 'Companies'
+      click_link 'Company'
       expect(page).to have_content(company.name)
     end
   end

@@ -10,7 +10,7 @@ feature 'Faq' do
   feature 'Listing' do
     scenario 'see all faq' do
       visit root_path
-      click_link 'Faqs'
+      click_link 'FAQ'
       expect(page).to have_content(faq.title)
     end
   end
