@@ -12,7 +12,7 @@ class ClaimedReward < ApplicationRecord
 
     event :approving, after: [:decrease_points, :generate_qr_token, :create_approved_claimed_reward_notifications] do
       transitions :from => :submitted, :to => :approved
-      
+
     end
 
   end
@@ -26,6 +26,7 @@ class ClaimedReward < ApplicationRecord
   validate :customer_points
   validate :reward_available, on: :create
 
+  delegate :store, :store_location, to: :reward, allow_nil: true
   delegate :name, to: :customer, prefix: true, allow_nil: true
   delegate :name, to: :reward, prefix: true, allow_nil: true
   delegate :claimed_rewards, to: :store, prefix: true, allow_nil: true

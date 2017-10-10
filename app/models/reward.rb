@@ -14,7 +14,7 @@ class Reward < ApplicationRecord
 
   mount_uploader :image, ImageUploader
 
-  delegate :name, to: :store, prefix: true, allow_nil: true
+  delegate :name, :location, to: :store, prefix: true, allow_nil: true
 
   scope :available, -> { where("quantity > approved_claimed_rewards_count") }
   scope :unavailable, -> { where("quantity <= approved_claimed_rewards_count") }
