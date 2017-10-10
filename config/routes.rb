@@ -1,6 +1,8 @@
 require 'sidekiq/web'
 Rails.application.routes.draw do
 
+  get 'report/reward'
+
   mount ActionCable.server => '/cable'
   mount Sidekiq::Web => '/sidekiq'
 

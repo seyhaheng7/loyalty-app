@@ -12,7 +12,7 @@ class ClaimedReward < ApplicationRecord
 
     event :approving, after: [:decrease_points, :generate_qr_token, :create_approved_claimed_reward_notifications] do
       transitions :from => :submitted, :to => :approved
-      
+
     end
 
   end
@@ -45,7 +45,8 @@ class ClaimedReward < ApplicationRecord
     records
   end
 
-  scope :filter_given, -> { where(given: true) }
+  scope :given, -> { where(given: true) }
+  scope :not_give, -> { where.not(given) }
 
   after_create :create_submitted_claimed_reward_notifications
 

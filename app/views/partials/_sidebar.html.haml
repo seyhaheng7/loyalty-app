@@ -139,7 +139,15 @@
         - if policy(:setting).index?
           %li.nav-item{:class => ( "active" if sidebar_active?('settings') )}
             = link_to settings_url do
-              %i.icon-settings
+              %i.icon-layers
               %span.title Settings
+        - if policy(:report)
+          %li.nav-item{:class => ( "active" if sidebar_active?('report') )}
+            %a.nav-link.nav-toggle
+              %i.icon-notebook
+              %span.title Reports
+              %span.arrow
+            %ul.sub-menu
+              %li.nav-item
+                = link_to "Rewards", report_reward_path, class: 'nav-link'
 
-  / END SIDEBAR MENU
