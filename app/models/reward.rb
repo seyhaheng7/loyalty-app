@@ -57,4 +57,8 @@ class Reward < ApplicationRecord
     !available?
   end
 
+  def quantity_remain
+    quantity - claimed_rewards.given.count.to_i
+  end
+
 end

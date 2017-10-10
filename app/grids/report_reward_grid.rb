@@ -7,9 +7,6 @@ class ReportRewardGrid
 
   filter(:name, :string){ |value, scope| scope.name_like(value) }
   filter(:store_id, :enum, :select => lambda {Store.pluck(:name, :id)})
-  filter(:start_date, :date)
-  filter(:end_date, :date)
-
 
   column :name
 
@@ -39,7 +36,7 @@ class ReportRewardGrid
     record.claimed_rewards.rejected.count
   end
   column(:remain) do |record|
-    record.quantity.to_i - record.claimed_rewards.given.count.to_i
+    record.quantity_remain
   end
 
 end
