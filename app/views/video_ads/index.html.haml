@@ -6,8 +6,8 @@
 .portlet.light.bordered
   .portlet-title
     .caption
-      %i.icon-user
-      Video Ads
+      = fa_icon 'youtube-play'
+      Watch & Earn
     .pull-right
       -if policy(@grid.assets).new?
         = link_to new_video_ad_path, class: 'btn btn-primary' do

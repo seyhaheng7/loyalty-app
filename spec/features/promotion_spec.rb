@@ -9,7 +9,7 @@ feature 'Promotion' do
   feature 'Listing' do
     scenario 'see all promotion' do
       visit root_path
-      click_link 'Promotions'
+      click_link 'Promotion'
       expect(page).to have_content(promotion.title)
     end
   end

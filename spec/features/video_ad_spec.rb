@@ -9,7 +9,7 @@ feature 'Video ad' do
   feature 'Listing' do
     scenario 'see all video' do
       visit root_path
-      click_link 'Video Ads'
+      click_link 'Watch & Earn'
       expect(page).to have_content(video_ad.title)
     end
   end

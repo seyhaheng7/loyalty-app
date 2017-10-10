@@ -11,7 +11,7 @@ feature 'Receipt' do
   feature 'Listing' do
     scenario 'see all receipt' do
       visit root_path
-      click_link 'Receipts'
+      click_link 'Receipt'
       expect(page).to have_content(receipt.receipt_id)
     end
   end

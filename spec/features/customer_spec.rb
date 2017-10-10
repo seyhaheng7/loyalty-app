@@ -9,7 +9,7 @@ feature 'Customer' do
   feature 'Listing' do
     scenario 'see all customer' do
       visit root_path
-      click_link 'Customers'
+      click_link 'Customer'
       expect(page).to have_content(user.name)
     end
   end
