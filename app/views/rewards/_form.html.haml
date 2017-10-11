@@ -17,6 +17,7 @@
         = f.input :quantity
         = f.input :price
         = f.association :store
+        = f.input :description
         .pull-left
           -if policy(@reward).create? || policy(@reward).update?
             = f.button :submit, class: "btn btn-primary"
