@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171011015744) do
+ActiveRecord::Schema.define(version: 20171011075241) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 20171011015744) do
     t.float "lat"
     t.float "long"
     t.index ["deleted_at"], name: "index_advertisements_on_deleted_at"
+    t.index ["for_page"], name: "index_advertisements_on_for_page"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -77,8 +78,10 @@ ActiveRecord::Schema.define(version: 20171011015744) do
     t.string "qr_token"
     t.boolean "given", default: false
     t.index ["customer_id"], name: "index_claimed_rewards_on_customer_id"
+    t.index ["given"], name: "index_claimed_rewards_on_given"
     t.index ["managed_by_id"], name: "index_claimed_rewards_on_managed_by_id"
     t.index ["reward_id"], name: "index_claimed_rewards_on_reward_id"
+    t.index ["status"], name: "index_claimed_rewards_on_status"
   end
 
   create_table "companies", force: :cascade do |t|
@@ -92,6 +95,7 @@ ActiveRecord::Schema.define(version: 20171011015744) do
     t.boolean "partner", default: false
     t.index ["category_id"], name: "index_companies_on_category_id"
     t.index ["deleted_at"], name: "index_companies_on_deleted_at"
+    t.index ["name"], name: "index_companies_on_name"
   end
 
   create_table "contact_forms", force: :cascade do |t|
@@ -167,10 +171,15 @@ ActiveRecord::Schema.define(version: 20171011015744) do
     t.index ["deleted_at"], name: "index_customers_on_deleted_at"
     t.index ["digit_expired_at"], name: "index_customers_on_digit_expired_at"
     t.index ["email"], name: "index_customers_on_email", unique: true
+    t.index ["first_name", "last_name"], name: "index_customers_on_first_name_and_last_name"
+    t.index ["lat", "long"], name: "index_customers_on_lat_and_long"
     t.index ["login_digit"], name: "index_customers_on_login_digit"
     t.index ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true
     t.index ["uid", "provider"], name: "index_customers_on_uid_and_provider", unique: true
     t.index ["unlock_token"], name: "index_customers_on_unlock_token", unique: true
+    t.index ["update_location_at"], name: "index_customers_on_update_location_at"
+    t.index ["verification_expired_at"], name: "index_customers_on_verification_expired_at"
+    t.index ["verified_at"], name: "index_customers_on_verified_at"
   end
 
   create_table "devices", force: :cascade do |t|
@@ -179,6 +188,7 @@ ActiveRecord::Schema.define(version: 20171011015744) do
     t.bigint "deviceable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["device_id"], name: "index_devices_on_device_id"
     t.index ["deviceable_type", "deviceable_id"], name: "index_devices_on_deviceable_type_and_deviceable_id"
   end
 
@@ -206,6 +216,7 @@ ActiveRecord::Schema.define(version: 20171011015744) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_locations_on_name"
   end
 
   create_table "merchant_chat_support_data", force: :cascade do |t|
@@ -296,6 +307,8 @@ ActiveRecord::Schema.define(version: 20171011015744) do
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
     t.index ["deleted_at"], name: "index_promotions_on_deleted_at"
+    t.index ["start_date", "end_date"], name: "index_promotions_on_start_date_and_end_date"
+    t.index ["start_date"], name: "index_promotions_on_start_date"
   end
 
   create_table "receipts", force: :cascade do |t|
@@ -313,6 +326,7 @@ ActiveRecord::Schema.define(version: 20171011015744) do
     t.index ["customer_id"], name: "index_receipts_on_customer_id"
     t.index ["deleted_at"], name: "index_receipts_on_deleted_at"
     t.index ["managed_by_id"], name: "index_receipts_on_managed_by_id"
+    t.index ["status"], name: "index_receipts_on_status"
     t.index ["store_id"], name: "index_receipts_on_store_id"
   end
 
@@ -338,6 +352,8 @@ ActiveRecord::Schema.define(version: 20171011015744) do
     t.float "price"
     t.text "description"
     t.index ["deleted_at"], name: "index_rewards_on_deleted_at"
+    t.index ["name"], name: "index_rewards_on_name"
+    t.index ["quantity", "approved_claimed_rewards_count"], name: "index_rewards_on_quantity_and_approved_claimed_rewards_count"
     t.index ["store_id"], name: "index_rewards_on_store_id"
   end
 
@@ -381,7 +397,9 @@ ActiveRecord::Schema.define(version: 20171011015744) do
     t.string "phone"
     t.index ["company_id"], name: "index_stores_on_company_id"
     t.index ["deleted_at"], name: "index_stores_on_deleted_at"
+    t.index ["lat", "long"], name: "index_stores_on_lat_and_long"
     t.index ["location_id"], name: "index_stores_on_location_id"
+    t.index ["name"], name: "index_stores_on_name"
   end
 
   create_table "term_conditions", force: :cascade do |t|
@@ -416,7 +434,7 @@ ActiveRecord::Schema.define(version: 20171011015744) do
 
   create_table "video_ads", force: :cascade do |t|
     t.string "title"
-    t.string "video_file"
+    t.string "youtube_url"
     t.date "start_date"
     t.date "end_date"
     t.integer "earned_points"
@@ -425,6 +443,7 @@ ActiveRecord::Schema.define(version: 20171011015744) do
     t.datetime "deleted_at"
     t.integer "max_view_per_day"
     t.index ["deleted_at"], name: "index_video_ads_on_deleted_at"
+    t.index ["max_view_per_day"], name: "index_video_ads_on_max_view_per_day"
   end
 
   create_table "view_video_ads", force: :cascade do |t|
@@ -436,6 +455,7 @@ ActiveRecord::Schema.define(version: 20171011015744) do
     t.datetime "updated_at", null: false
     t.index ["customer_id"], name: "index_view_video_ads_on_customer_id"
     t.index ["video_ad_id"], name: "index_view_video_ads_on_video_ad_id"
+    t.index ["view_count"], name: "index_view_video_ads_on_view_count"
   end
 
   add_foreign_key "chat_data", "chat_rooms"
