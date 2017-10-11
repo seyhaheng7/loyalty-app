@@ -38,7 +38,7 @@ module Api::V1::Customer
     end
 
     def index
-      @receipts = current_customer.receipts.page(params[:page])
+      @receipts = current_customer.receipts.page(params[:page]).includes(:store, :customer)
       render json: @receipts, status: :ok
     end
 

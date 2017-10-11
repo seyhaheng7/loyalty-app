@@ -3,7 +3,7 @@ class MerchantChatSupportsGrid
   include Datagrid
 
   scope do
-    MerchantChatSupport
+    MerchantChatSupport.includes(:merchant)
   end
 
   filter(:merchant_id, :enum, :select => lambda {Merchant.all.map {|m| [m.name, m.id]}})

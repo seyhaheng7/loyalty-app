@@ -15,8 +15,8 @@ module Api::V1::Customer
     def index
 
       @home_ads = Advertisement.active.for_page("Home")
-      @stores = Store.limit(3)
-      @rewards = Reward.available.limit(3)
+      @stores = Store.limit(3).includes(:company, :location)
+      @rewards = Reward.available.limit(3).includes(:store)
 
       render json: {
         advertisements: ActiveModelSerializers::SerializableResource.new(@home_ads),

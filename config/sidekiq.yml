@@ -5,9 +5,8 @@ staging:
 production:
   :concurrency: 10
 :queues:
-
-  - ["notification", 4]
+  - ["notification", 2]
   - ["chat", 4]
-  - ["default", 2]
-  
-  
+  - ["default", 4]
+
+
