@@ -26,12 +26,13 @@ gem 'devise_security_extension', git: "https://github.com/phatworx/devise_securi
 # gem 'rails_email_validator'
 gem 'haml-rails',         '~> 0.9'
 gem 'swagger-docs'
-gem 'rubocop', '~> 0.49.1'
-gem 'brakeman', '>= 3.7.2'
-gem 'datagrid', '~> 1.5'
-gem 'nexmo', '~> 4.7.0'
-gem 'sidekiq', '~> 5.0.4'
+gem 'rubocop',            '~> 0.49.1'
+gem 'brakeman',           '>= 3.7.2'
+gem 'datagrid',           '~> 1.5'
+gem 'nexmo',              '~> 4.7.0'
+gem 'sidekiq',            '~> 5.0.4'
 gem 'ffaker',             '~> 2.6.0'
+gem 'bullet',             '~> 5.6.1'
 
 group :development, :test do
   gem 'lunchy'

@@ -2,7 +2,7 @@ class RewardsGrid
   include Datagrid
 
   scope do
-    Reward
+    Reward.includes(:store)
   end
 
   filter(:name, :string){ |value, scope| scope.name_like(value) }

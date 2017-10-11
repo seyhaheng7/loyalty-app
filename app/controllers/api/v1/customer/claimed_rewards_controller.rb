@@ -26,7 +26,7 @@ module Api::V1::Customer
     end
 
     def index
-      @claimed_rewards = current_user.claimed_rewards.filter(params).page(params[:page])
+      @claimed_rewards = current_user.claimed_rewards.filter(params).page(params[:page]).includes(:customer, reward: [{store: :location}])
       render json: @claimed_rewards, status: :ok
     end
 
