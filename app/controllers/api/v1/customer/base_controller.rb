@@ -62,7 +62,7 @@ module Api::V1::Customer
 
     def check_customer_verification!
       unless current_customer.active_for_authentication?
-        error = { errors: ['Unverified account'] }
+        error = { errors: ['Unverified account'], user: ActiveModelSerializers::SerializableResource.new(current_customer) }
         render json: error, status: 401
       end
     end
