@@ -7,7 +7,7 @@ class Merchant < ActiveRecord::Base
   has_many :notifications, as: :notifyable
 
   # Include default devise modules.
-  devise :database_authenticatable, :recoverable,
+  devise :database_authenticatable, :recoverable, :registerable,
     :rememberable, :trackable, :validatable, :authentication_keys => [:phone]
 
   include DeviseTokenAuth::Concerns::User

@@ -30,7 +30,7 @@ end
 
 Overrides::DeviseTokenAuth::Merchant::RegistrationsController.class_eval do
   Swagger::Docs::Generator::set_real_methods
-  swagger_controller :registrations, 'Customer Registrations'
+  swagger_controller :registrations, 'Merchant Registrations'
 
   swagger_api :update do
     summary 'edit User Profile'
@@ -39,10 +39,10 @@ Overrides::DeviseTokenAuth::Merchant::RegistrationsController.class_eval do
     param :header, 'client', :string, :required, 'Simultaneous sessions on different clients'
     param :header, 'expiry', :string, :required, 'The date at which the current session will expire'
     param :header, 'uid', :string, :required, 'A unique value that is used to identify the user'
-    param :form, 'phone', :string, :required, 'Phone Number'
     param :form, 'name', :string, :optional, 'Name'
-    param :form, 'avatar', :base64, :optional, 'Avatar'
+    param :form, 'avatar', :string, :optional, 'Avatar (Base64)'
     param :form, 'email', :string, :optional, 'Email'
+    param :form, 'password', :string, :optional, 'Password'
     response :ok, "Success", :User
     response :not_acceptable
   end
