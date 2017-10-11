@@ -31,6 +31,9 @@ class Receipt < ApplicationRecord
 
   after_create :create_notifications
 
+  delegate :name, to: :store, prefix: true, allow_nil: true
+  delegate :name, to: :customer, prefix: true, allow_nil: true
+
   def new_store=(params)
     new_store = Store.new params
     new_store.save(validate: false)

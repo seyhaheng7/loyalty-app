@@ -3,7 +3,7 @@ class ClaimedRewardsGrid
   include Datagrid
 
   scope do
-    ClaimedReward
+    ClaimedReward.includes(:customer, :reward)
   end
 
   filter(:reward_name, :string) { |value| joins(:reward).merge(Reward.name_like(value)) }

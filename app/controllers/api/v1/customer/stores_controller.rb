@@ -31,7 +31,7 @@ module Api::V1::Customer
     end
 
     def index
-      @stores = Store.filter(params).order_by(params[:order]).page(params[:page])
+      @stores = Store.filter(params).order_by(params[:order]).page(params[:page]).includes(:company)
       render json: @stores, status: :ok
     end
 

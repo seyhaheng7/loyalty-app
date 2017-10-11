@@ -3,7 +3,7 @@ class ContactFormsGrid
   include Datagrid
 
   scope do
-    ContactForm
+    ContactForm.includes(:customer)
   end
 
   filter(:subject, :string){ |value, scope| scope.subject_like(value) }
@@ -13,5 +13,5 @@ class ContactFormsGrid
   column(:customer_name)
   column(:subject)
   column(:message)
-  
+
 end

@@ -1,6 +1,6 @@
 module Api::V1::Customer
   class AdvertisementsController < BaseController
-    
+
     before_action :set_advertisement, only: [:show]
 
     swagger_controller :advertisements, 'Advertisements'
@@ -11,6 +11,7 @@ module Api::V1::Customer
 
     swagger_api :index do
       summary 'Fetches all advertisements'
+      param :query, :for_page, :string, :optional, "['Home', 'Shop & Earn', 'Category detail', 'Rewards', 'Snap']"
       response :unauthorized
       response :not_acceptable
     end
@@ -23,7 +24,7 @@ module Api::V1::Customer
       response :not_found
     end
 
-    def index      
+    def index
       @advertisements = Advertisement.active.filter(params)
       render json: @advertisements, status: :ok
     end

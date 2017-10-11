@@ -14,7 +14,7 @@ module Api::V1::Customer
 
     def index
       chat_room = current_customer.chat_rooms.find(params[:chat_room_id])
-      @chat_data = chat_room.chat_data.page(params[:page])
+      @chat_data = chat_room.chat_data.page(params[:page]).includes(:customer)
       render json: @chat_data
     end
 
