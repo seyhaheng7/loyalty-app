@@ -62,6 +62,6 @@ class GuidesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def guide_params
-      params.require(:guide).permit(:title, :youtube_url)
+      params.require(:guide).permit(:title, :youtube_url, :thumbnail, :thumbnail_cache)
     end
 end
