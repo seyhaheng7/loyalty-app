@@ -3,7 +3,7 @@ class StoresGrid
   include Datagrid
 
   scope do
-    Store
+    Store.includes(:company, :location)
   end
 
   filter(:name, :string){ |value, scope| scope.name_like(value) }

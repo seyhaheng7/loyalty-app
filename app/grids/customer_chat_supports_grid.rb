@@ -3,7 +3,7 @@ class CustomerChatSupportsGrid
   include Datagrid
 
   scope do
-    CustomerChatSupport
+    CustomerChatSupport.includes(:customer)
   end
 
   filter(:customer_id, :enum,:select => lambda {Customer.all.map {|p| [p.name, p.id]}})

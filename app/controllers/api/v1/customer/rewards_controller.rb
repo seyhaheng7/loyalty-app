@@ -26,7 +26,7 @@ module Api::V1::Customer
     end
 
     def index
-      @rewards = Reward.available.filter(params).order_with(params).page(params[:page])
+      @rewards = Reward.available.filter(params).order_with(params).page(params[:page]).includes(:store)
       render json: @rewards, status: :ok
     end
 

@@ -31,6 +31,15 @@ module CodingateProject
     config.assets.precompile += %w( .svg .eot .woff .ttf)
     config.active_record.default_timezone = :local
     config.time_zone = 'Bangkok'
+
+    config.after_initialize do
+      Bullet.enable = true
+      Bullet.alert = false
+      Bullet.bullet_logger = true
+      Bullet.console = false
+      Bullet.growl = false
+      Bullet.rails_logger = false
+    end
   end
 end
 

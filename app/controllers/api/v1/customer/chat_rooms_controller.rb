@@ -20,7 +20,7 @@ module Api::V1::Customer
     end
 
     def index
-      @chat_rooms = current_customer.chat_rooms
+      @chat_rooms = current_customer.chat_rooms.includes(:customers)
       render json: @chat_rooms
     end
 
