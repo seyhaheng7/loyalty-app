@@ -19,9 +19,9 @@ module Api::V1::Customer
       @rewards = Reward.available.limit(3)
 
       render json: {
-        advertisements: @home_ads,
-        stores: @stores,
-        rewards: @rewards
+        advertisements: ActiveModelSerializers::SerializableResource.new(@home_ads),
+        stores: ActiveModelSerializers::SerializableResource.new(@stores),
+        rewards: ActiveModelSerializers::SerializableResource.new(@rewards)
       }, status: :ok
 
     end
