@@ -120,7 +120,7 @@
               %i.icon-envelope
               %span.title Watch and Earn Guides
 
-        - if policy(:report)
+        - if policy(:report).rewards?
           %li.nav-item{:class => ( "active" if sidebar_active?('report') )}
             %a.nav-link.nav-toggle
               %i.icon-notebook
@@ -128,7 +128,7 @@
               %span.arrow
             %ul.sub-menu
               %li.nav-item
-                = link_to "Rewards", report_reward_path, class: 'nav-link'
+                = link_to "Rewards", rewards_reports_path, class: 'nav-link'
 
         %li.nav-item{:class => ( "active" if sidebar_active?('settings') ) || ("active" if sidebar_active?('term_conditions')) || ("active" if sidebar_active?('privacy_policies')) || ( "active" if sidebar_active?('customer_locations')) || ( "active" if sidebar_active?('stickers')) || ( "active" if sidebar_active?('sticker_groups') )}
           %a.nav-link.nav-toggle

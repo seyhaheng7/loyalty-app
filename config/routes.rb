@@ -1,10 +1,14 @@
 require 'sidekiq/web'
 Rails.application.routes.draw do
 
-  get 'report/reward'
-
   mount ActionCable.server => '/cable'
   mount Sidekiq::Web => '/sidekiq'
+
+  resource :reports, only: [] do
+    member do
+    get :rewards
+    end
+  end
 
   resources :claimed_rewards do
     member do
