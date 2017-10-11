@@ -7,62 +7,150 @@ ActiveRecord::Base.transaction do
   end
   User.create!(name: "Admin",email: "admin@example.com", password: "password", role: "Admin")
 
-  5.times do |i|
+  2.times do
+    User.create!(name: FFaker::Name.name, email: FFaker::Internet.email, password: "password", role: "Approver")
+  end
+
+  2.times do
+    User.create!(name: FFaker::Name.name, email: FFaker::Internet.email, password: "password", role: "Receptionist")
+  end
+
+  10.times do |i|
     Category.create!(name: FFaker::Name.name)
   end
 
-  5.times do
-    Company.create!(name: FFaker::Company.name, address: FFaker::Address.street_address, category_id: Random.rand(1..5))
+  20.times do
+    Faq.create!(title: FFaker::Lorem.sentence , content: FFaker::Lorem.paragraph)
+  end
+
+  20.times do
+    Guide.create!(title: FFaker::Book.title, youtube_url: FFaker::Youtube.video_id)
+  end
+
+  
+  # 3 Advertisements per page
+  
+  3.times do
+    Advertisement.create!(name: FFaker::Name.name, banner: Rails.root.join("app/assets/images/default.png").open, for_page: "Home", address: FFaker::Address, phone: "1#{Random.rand(144..999)}9134", website: FFaker::Internet.http_url, start_date: Random.rand(5..15).days.ago, end_date: Random.rand(10..15).days.ago)
+  end
+
+  3.times do
+    Advertisement.create!(name: FFaker::Name.name, banner: Rails.root.join("app/assets/images/default.png").open, for_page: "Shop & Earn", address: FFaker::Address, phone: "1#{Random.rand(144..999)}9134", website: FFaker::Internet.http_url, start_date: Random.rand(5..15).days.ago, end_date: Random.rand(10..15).days.ago)
+  end
+
+  3.times do
+    Advertisement.create!(name: FFaker::Name.name, banner: Rails.root.join("app/assets/images/default.png").open, for_page: "Category detail", address: FFaker::Address, phone: "1#{Random.rand(144..999)}9134", website: FFaker::Internet.http_url, start_date: Random.rand(5..15).days.ago, end_date: Random.rand(10..15).days.ago)
+  end
+
+  3.times do
+    Advertisement.create!(name: FFaker::Name.name, banner: Rails.root.join("app/assets/images/default.png").open, for_page: "Rewards", address: FFaker::Address, phone: "1#{Random.rand(144..999)}9134", website: FFaker::Internet.http_url, start_date: Random.rand(5..15).days.ago, end_date: Random.rand(10..15).days.ago)
+  end
+
+  3.times do
+    Advertisement.create!(name: FFaker::Name.name, banner: Rails.root.join("app/assets/images/default.png").open, for_page: "Snap", address: FFaker::Address, phone: "1#{Random.rand(144..999)}9134", website: FFaker::Internet.http_url, start_date: Random.rand(5..15).days.ago, end_date: Random.rand(10..15).days.ago)
+  end
+
+  50.times do
+    Reward.create!(name: FFaker::Name.name, image: Rails.root.join("app/assets/images/default.png").open, require_points: Random.rand(1..5) , quantity: Random.rand(10..30) , price: Random.rand(2..10))
   end
 
   5.times do
     Location.create!(name: FFaker::Address.city)
   end
 
-  5.times do
-    Store.create!(name: FFaker::Name.name, address: FFaker::Address.street_name, company_id: Random.rand(1..5), location_id: Random.rand(1..5))
-  end
 
-  100.times do
-    Reward.create!(name: FFaker::Product.product_name, require_points: Random.rand(300..700), quantity: Random.rand(2..10), price: Random.rand(10**2), store_id: Random.rand(1..5), image: Rails.root.join("app/assets/images/default.png").open)
-  end
+  # create customers 
+  6.times do
+    email       = FFaker::Internet.email
+    phone       = "#{Random.rand(1000..3000)}#{Random.rand(3000..9000)}"
+    password    = "password"
+    current_points    = Random.rand(800..900)
+    verified_at = Time.now
+    avatar      = Rails.root.join("app/assets/images/default.png").open
 
-  5.times do
-    Merchant.create!(name: FFaker::Name.name, email: FFaker::Internet.email, phone: "1733#{Random.rand(50..99)}14", password: "password", store_id: Random.rand(1..5), avatar: Rails.root.join("app/assets/images/default.png").open)
-  end
-
-  5.times do
-    Customer.create!(email: FFaker::Internet.email, phone: "1#{Random.rand(144..999)}9134", password: "password", current_points: Random.rand(800..900),verified_at: Time.now, avatar: Rails.root.join("app/assets/images/default.png").open)
-  end
-
-  5.times do
+    platform = ["ios", "android", "window"]
+    operating_system_name        = platform.delete(platform.sample)
+    
     status = ["approved", "rejected", "submitted"]
-    Receipt.create!(receipt_id: FFaker::PhoneNumber.short_phone_number, earned_points: Random.rand(20..80), status: status.delete(status.sample), store_id: Random.rand(1..5), customer_id: Random.rand(1..5), total: Random.rand(100..500), capture: Rails.root.join("app/assets/images/default.png").open)
-  end
+    receipt_id   = FFaker::PhoneNumber.short_phone_number
+    earned_points = Random.rand(20..80)
+    receipt_status =status.delete(status.sample)
+    store_id =Random.rand(1..5)
+    total = Random.rand(100..500)
+    capture = Rails.root.join("app/assets/images/default.png").open
 
-  5.times do
-    status = ["approved", "rejected", "submitted"]
-    ClaimedReward.create!(customer_id: Random.rand(1..5), reward_id: Random.rand(1..5), status: status.delete(status.sample), qr_token: FFaker::Internet.domain_word)
-  end
+    reward_id = Random.rand(1..50)
+    claimed_reward_status = status.delete(status.sample)
+    qr_token = FFaker::Internet.domain_word
 
-  5.times do
-    Faq.create!(title: FFaker::Lorem.sentence , content: FFaker::Lorem.paragraph)
-  end
+    customer = Customer.create!(
+      email:              email,
+      phone:              phone,
+      password:           password, 
+      current_points:     current_points,
+      verified_at:        verified_at,
+      avatar:             avatar,
+    )
+    
+    customer.operating_systems.create(
+      name: operating_system_name,
+      customer: customer[rand(1..6000)]
+    )
 
-  5.times do
-    VideoAd.create!(title: FFaker::Lorem.sentence , start_date: Random.rand(5..15).days.ago, end_date: Random.rand(10..15).days.ago, earned_points: Random.rand(18..30) )
-  end
+    customer.receipts.create(
+      receipt_id:  receipt_id,
+      earned_points:  earned_points,
+      status:  receipt_status,
+      store_id: store_id,
+      total:  total,
+      capture: capture,
+      customer: customer[rand(1..100)]
+    )
 
-  5.times do
-    Advertisement.create!(name: FFaker::Name.name,  start_date: Random.rand(5..15).days.ago, end_date: Random.rand(10..15).days.ago, address: FFaker::Address.street_name, phone: "1#{Random.rand(144..999)}9134", banner: Rails.root.join("app/assets/images/default.png").open )
-  end
+    customer.claimed_rewards.create(
+      reward_id: reward_id, 
+      status: claimed_reward_status, 
+      qr_token: qr_token,
+      customer: customer[rand(1..50)],
+    )
 
-  5.times do
-    ContactForm.create!(subject: FFaker::Lorem.sentence , message: FFaker::Lorem.paragraph, customer_id: Random.rand(1..5))
   end
 
   50.times do
-    platform = ["ios", "android", "window"]
-    OperatingSystem.create!(name: platform.delete(platform.sample), customer_id: Random.rand(1..5))
+    company_name = FFaker::Name.name
+    logo = Rails.root.join("app/assets/images/default.png").open
+    address = FFaker::Address.street_address
+    
+    store_name = FFaker::Name.name
+    reward_name = FFaker::Name.name
+    require_points = Random.rand(300..700)
+    quantity = Random.rand(2..10)
+    price = Random.rand(10**2)
+
+    company = Company.create(
+      name: company_name,
+      logo: logo,
+      address: address,
+      category_id: Random.rand(1..5),
+
+    )
+    
+    store = company.stores.create(
+      name: store_name, 
+      address: address, 
+      company: company[rand(1..10)],
+      location_id: Random.rand(1..5),
+    )
+
+    store.rewards.create(
+      name: reward_name, 
+      require_points: require_points, 
+      quantity: quantity, 
+      price: price, 
+      store: store[rand()],
+      image: logo,
+    )
+
   end
+
 end
