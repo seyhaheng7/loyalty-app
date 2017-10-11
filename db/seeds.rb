@@ -60,7 +60,7 @@ ActiveRecord::Base.transaction do
 
 
   # create customers 
-  6.times do
+  6000.times do
     email       = FFaker::Internet.email
     phone       = "#{Random.rand(1000..3000)}#{Random.rand(3000..9000)}"
     password    = "password"
@@ -82,6 +82,7 @@ ActiveRecord::Base.transaction do
     reward_id = Random.rand(1..50)
     claimed_reward_status = status.delete(status.sample)
     qr_token = FFaker::Internet.domain_word
+    given = ["true", "false"]
 
     customer = Customer.create!(
       email:              email,
@@ -110,6 +111,7 @@ ActiveRecord::Base.transaction do
     customer.claimed_rewards.create(
       reward_id: reward_id, 
       status: claimed_reward_status, 
+      given: given,
       qr_token: qr_token,
       customer: customer[rand(1..50)],
     )
