@@ -61,8 +61,15 @@ module Api::V1::Customer
     private
 
     def check_customer_verification!
-      unless current_customer.active_for_authentication?
-        error = { errors: ['Unverified account'], user: ActiveModelSerializers::SerializableResource.new(current_customer) }
+      unless current_customer.verified?
+        error = { errors: ['Unverified account'] }
+        render json: error, status: 401
+      end
+
+      unless current_user.completed_profile?
+
+
+        error = { errors: ['profile not completed'], user: ActiveModelSerializers::SerializableResource.new(current_customer) }
         render json: error, status: 401
       end
     end

@@ -72,8 +72,8 @@ class Customer < ActiveRecord::Base
     update(verified_at: DateTime.now)
   end
 
-  def active_for_authentication?
-    verified? and first_name.present? and last_name.present?
+  def completed_profile?
+    phone.present? and first_name.present? and last_name.present?
   end
 
   def send_login_digit

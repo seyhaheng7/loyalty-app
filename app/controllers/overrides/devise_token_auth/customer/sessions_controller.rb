@@ -25,7 +25,7 @@ module Overrides::DeviseTokenAuth::Customer
       end
 
       # change to use login digit
-      if @resource and valid_params?(field, q_value) and @resource.valid_digit?(resource_params[:digit]) and (!@resource.respond_to?(:active_for_authentication?) or @resource.active_for_authentication?)
+      if @resource and valid_params?(field, q_value) and @resource.valid_digit?(resource_params[:digit]) and (!@resource.respond_to?(:verified?) or @resource.verified?)
         # create client id
         @client_id = SecureRandom.urlsafe_base64(nil, false)
         @token     = SecureRandom.urlsafe_base64(nil, false)
