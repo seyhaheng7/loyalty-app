@@ -3,6 +3,8 @@ class Guide < ApplicationRecord
 
   validates :title, presence: true
   
+  mount_uploader :thumbnail, ThumbnailUploader
+
   def youtube_id
     YoutubeID.from(youtube_url)
   end
