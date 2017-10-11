@@ -10,18 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171005083318) do
+ActiveRecord::Schema.define(version: 20171011015744) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "admin_messages", force: :cascade do |t|
-    t.text "message"
-    t.bigint "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_admin_messages_on_user_id"
-  end
 
   create_table "advertisements", force: :cascade do |t|
     t.string "name"
@@ -57,7 +49,6 @@ ActiveRecord::Schema.define(version: 20171005083318) do
     t.datetime "updated_at", null: false
     t.string "data_type"
     t.string "sticker"
-    t.text "audio"
     t.index ["chat_room_id"], name: "index_chat_data_on_chat_room_id"
     t.index ["customer_id"], name: "index_chat_data_on_customer_id"
   end
@@ -148,7 +139,8 @@ ActiveRecord::Schema.define(version: 20171005083318) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string "unconfirmed_email"
-    t.string "avatar"
+    t.string "nickname"
+    t.string "image"
     t.string "email"
     t.json "tokens"
     t.datetime "created_at", null: false
@@ -169,9 +161,9 @@ ActiveRecord::Schema.define(version: 20171005083318) do
     t.datetime "verified_at"
     t.string "login_digit"
     t.datetime "digit_expired_at"
-    t.datetime "update_location_at"
     t.string "first_name"
     t.string "last_name"
+    t.datetime "update_location_at"
     t.index ["confirmation_token"], name: "index_customers_on_confirmation_token", unique: true
     t.index ["deleted_at"], name: "index_customers_on_deleted_at"
     t.index ["digit_expired_at"], name: "index_customers_on_digit_expired_at"
@@ -206,6 +198,7 @@ ActiveRecord::Schema.define(version: 20171005083318) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
+    t.string "thumbnail"
     t.index ["deleted_at"], name: "index_guides_on_deleted_at"
   end
 
@@ -294,6 +287,13 @@ ActiveRecord::Schema.define(version: 20171005083318) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "products", force: :cascade do |t|
+    t.string "name"
+    t.string "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "promotions", force: :cascade do |t|
     t.string "title"
     t.string "image"
@@ -350,7 +350,7 @@ ActiveRecord::Schema.define(version: 20171005083318) do
 
   create_table "settings", force: :cascade do |t|
     t.string "var", null: false
-    t.text "value"
+    t.string "value"
     t.integer "thing_id"
     t.string "thing_type", limit: 30
     t.datetime "created_at", null: false
@@ -445,7 +445,6 @@ ActiveRecord::Schema.define(version: 20171005083318) do
     t.index ["video_ad_id"], name: "index_view_video_ads_on_video_ad_id"
   end
 
-  add_foreign_key "admin_messages", "users"
   add_foreign_key "chat_data", "chat_rooms"
   add_foreign_key "chat_data", "customers"
   add_foreign_key "chat_members", "chat_rooms"

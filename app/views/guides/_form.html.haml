@@ -5,7 +5,12 @@
     .form-group
       = f.input :title
       = f.input :youtube_url
-
+      .image-uploader
+        %a{:href => "#!"}
+          = image_tag f.object.thumbnail, class: 'img-responsive', size: '150x150'
+        = f.input :thumbnail, as: :file, label: 'Upload Thumbnail',
+          :label_html => { class: 'btn btn-default'}
+        = f.hidden_field :thumbnail_cache
       = f.button :submit, class: 'btn btn-primary'
       .pull-right
         = link_to guides_path, class: 'btn btn-success' do
