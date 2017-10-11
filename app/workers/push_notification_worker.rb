@@ -1,5 +1,6 @@
 class PushNotificationWorker
   include Sidekiq::Worker
+  sidekiq_options queue: 'notification'
 
   def perform(notification_id)
     notification = Notification.find notification_id

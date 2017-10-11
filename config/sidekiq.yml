@@ -1,0 +1,13 @@
+---
+:concurrency: 10
+staging:
+  :concurrency: 10
+production:
+  :concurrency: 10
+:queues:
+
+  - ["notification", 4]
+  - ["chat", 4]
+  - ["default", 2]
+  
+  

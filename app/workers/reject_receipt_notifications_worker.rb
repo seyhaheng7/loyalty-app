@@ -1,5 +1,6 @@
 class RejectReceiptNotificationsWorker
   include Sidekiq::Worker
+  sidekiq_options queue: 'notification'
 
   def perform(receipt_id)
     receipt = Receipt.find receipt_id
