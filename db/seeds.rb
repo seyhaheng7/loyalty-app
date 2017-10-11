@@ -31,27 +31,28 @@ ActiveRecord::Base.transaction do
   # 3 Advertisements per page
   
   3.times do
-    Advertisement.create!(name: FFaker::Name.name, banner: Rails.root.join("app/assets/images/default.png").open, for_page: "Home", address: FFaker::Address, phone: "1#{Random.rand(144..999)}9134", website: FFaker::Internet.http_url, start_date: Random.rand(5..15).days.ago, end_date: Random.rand(10..15).days.ago)
+    Advertisement.create!(name: FFaker::Name.name, banner: Rails.root.join("vendor/assets/images/admin/a1.jpg").open, for_page: "Home", address: FFaker::Address, phone: "1#{Random.rand(144..999)}9134", website: FFaker::Internet.http_url, start_date: Random.rand(5..15).days.ago, end_date: Random.rand(10..15).days.ago)
   end
 
   3.times do
-    Advertisement.create!(name: FFaker::Name.name, banner: Rails.root.join("app/assets/images/default.png").open, for_page: "Shop & Earn", address: FFaker::Address, phone: "1#{Random.rand(144..999)}9134", website: FFaker::Internet.http_url, start_date: Random.rand(5..15).days.ago, end_date: Random.rand(10..15).days.ago)
+    Advertisement.create!(name: FFaker::Name.name, banner: Rails.root.join("vendor/assets/images/admin/a2.jpg").open, for_page: "Shop & Earn", address: FFaker::Address, phone: "1#{Random.rand(144..999)}9134", website: FFaker::Internet.http_url, start_date: Random.rand(5..15).days.ago, end_date: Random.rand(10..15).days.ago)
   end
 
   3.times do
-    Advertisement.create!(name: FFaker::Name.name, banner: Rails.root.join("app/assets/images/default.png").open, for_page: "Category detail", address: FFaker::Address, phone: "1#{Random.rand(144..999)}9134", website: FFaker::Internet.http_url, start_date: Random.rand(5..15).days.ago, end_date: Random.rand(10..15).days.ago)
+    Advertisement.create!(name: FFaker::Name.name, banner: Rails.root.join("vendor/assets/images/admin/a3.jpg").open, for_page: "Category detail", address: FFaker::Address, phone: "1#{Random.rand(144..999)}9134", website: FFaker::Internet.http_url, start_date: Random.rand(5..15).days.ago, end_date: Random.rand(10..15).days.ago)
   end
 
   3.times do
-    Advertisement.create!(name: FFaker::Name.name, banner: Rails.root.join("app/assets/images/default.png").open, for_page: "Rewards", address: FFaker::Address, phone: "1#{Random.rand(144..999)}9134", website: FFaker::Internet.http_url, start_date: Random.rand(5..15).days.ago, end_date: Random.rand(10..15).days.ago)
+    Advertisement.create!(name: FFaker::Name.name, banner: Rails.root.join("vendor/assets/images/admin/a4.jpg").open, for_page: "Rewards", address: FFaker::Address, phone: "1#{Random.rand(144..999)}9134", website: FFaker::Internet.http_url, start_date: Random.rand(5..15).days.ago, end_date: Random.rand(10..15).days.ago)
   end
 
   3.times do
-    Advertisement.create!(name: FFaker::Name.name, banner: Rails.root.join("app/assets/images/default.png").open, for_page: "Snap", address: FFaker::Address, phone: "1#{Random.rand(144..999)}9134", website: FFaker::Internet.http_url, start_date: Random.rand(5..15).days.ago, end_date: Random.rand(10..15).days.ago)
+    Advertisement.create!(name: FFaker::Name.name, banner: Rails.root.join("vendor/assets/images/admin/a5.jpg").open, for_page: "Snap", address: FFaker::Address, phone: "1#{Random.rand(144..999)}9134", website: FFaker::Internet.http_url, start_date: Random.rand(5..15).days.ago, end_date: Random.rand(10..15).days.ago)
   end
 
   50.times do
-    Reward.create!(name: FFaker::Name.name, image: Rails.root.join("app/assets/images/default.png").open, require_points: Random.rand(1..5) , quantity: Random.rand(10..30) , price: Random.rand(2..10))
+    images = ["r6.jpg", "r7.png", "r8.png"]
+    Reward.create!(name: FFaker::Name.name, image: Rails.root.join("vendor/assets/images/admin/#{images.delete(images.sample)}").open, require_points: Random.rand(1..5) , quantity: Random.rand(10..30) , price: Random.rand(2..10))
   end
 
   5.times do
@@ -66,7 +67,8 @@ ActiveRecord::Base.transaction do
     password    = "password"
     current_points    = Random.rand(800..900)
     verified_at = Time.now
-    avatar      = Rails.root.join("app/assets/images/default.png").open
+    avatar_file = ["d1.png", "d2.png", "d3.jpg"]
+    avatar      = Rails.root.join("vendor/assets/images/admin/#{avatar_file.delete(avatar_file.sample)}").open
 
     platform = ["ios", "android", "window"]
     operating_system_name        = platform.delete(platform.sample)
@@ -77,7 +79,9 @@ ActiveRecord::Base.transaction do
     receipt_status =status.delete(status.sample)
     store_id =Random.rand(1..5)
     total = Random.rand(100..500)
-    capture = Rails.root.join("app/assets/images/default.png").open
+
+    capture_image = ["r1.jpg", "r2.jpg", "r3.png", "r4.jpg"]
+    capture = Rails.root.join("vendor/assets/images/admin/#{capture_image.delete(capture_image.sample)}").open
 
     reward_id = Random.rand(1..50)
     claimed_reward_status = status.delete(status.sample)
@@ -120,7 +124,8 @@ ActiveRecord::Base.transaction do
 
   50.times do
     company_name = FFaker::Name.name
-    logo = Rails.root.join("app/assets/images/default.png").open
+    file = ["l1.png", "l2.jpg", "l3.jpg"]
+    images = Rails.root.join("vendor/assets/images/admin/#{file.delete(file.sample)}").open
     address = FFaker::Address.street_address
     
     store_name = FFaker::Name.name
@@ -131,7 +136,7 @@ ActiveRecord::Base.transaction do
 
     company = Company.create(
       name: company_name,
-      logo: logo,
+      logo: images,
       address: address,
       category_id: Random.rand(1..5),
 
@@ -150,7 +155,7 @@ ActiveRecord::Base.transaction do
       quantity: quantity, 
       price: price, 
       store: store[rand()],
-      image: logo,
+      image: images,
     )
 
   end
