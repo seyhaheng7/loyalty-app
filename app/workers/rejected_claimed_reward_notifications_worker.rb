@@ -1,5 +1,6 @@
 class RejectedClaimedRewardNotificationsWorker
   include Sidekiq::Worker
+  sidekiq_options queue: 'notification'
 
   def perform(claimed_reward_id)
     claimed_reward = ClaimedReward.find claimed_reward_id
