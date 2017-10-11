@@ -73,7 +73,7 @@ class Customer < ActiveRecord::Base
   end
 
   def active_for_authentication?
-    verified?
+    verified? and first_name.present? and last_name.present?
   end
 
   def send_login_digit
