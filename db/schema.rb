@@ -143,8 +143,7 @@ ActiveRecord::Schema.define(version: 20171011075241) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string "unconfirmed_email"
-    t.string "nickname"
-    t.string "image"
+    t.string "avatar"
     t.string "email"
     t.json "tokens"
     t.datetime "created_at", null: false
@@ -298,13 +297,6 @@ ActiveRecord::Schema.define(version: 20171011075241) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "products", force: :cascade do |t|
-    t.string "name"
-    t.string "price"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "promotions", force: :cascade do |t|
     t.string "title"
     t.string "image"
@@ -442,7 +434,7 @@ ActiveRecord::Schema.define(version: 20171011075241) do
 
   create_table "video_ads", force: :cascade do |t|
     t.string "title"
-    t.string "youtube_url"
+    t.string "video_file"
     t.date "start_date"
     t.date "end_date"
     t.integer "earned_points"
@@ -450,6 +442,7 @@ ActiveRecord::Schema.define(version: 20171011075241) do
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
     t.integer "max_view_per_day"
+    t.string "thumbnail"
     t.index ["deleted_at"], name: "index_video_ads_on_deleted_at"
     t.index ["max_view_per_day"], name: "index_video_ads_on_max_view_per_day"
   end

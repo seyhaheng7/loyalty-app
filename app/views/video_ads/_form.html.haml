@@ -2,7 +2,13 @@
   = f.error_notification
   .form-body
     .form-group
-
+      .text-center
+        .image-uploader{align: 'center'}
+          %a{:href => "#!"}
+            = image_tag f.object.thumbnail, class: 'img-responsive', size: '150x150'
+          = f.input :thumbnail, as: :file, label: 'Upload Thumbnail',
+            :label_html => { class: 'btn btn-default'}
+          = f.hidden_field :thumbnail_cache
       = f.input :title
       = f.input :video_file
       = f.input :start_date, as: :string, input_html: {class: 'date-picker'}
