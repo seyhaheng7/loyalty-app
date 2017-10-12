@@ -1,10 +1,10 @@
 ActiveRecord::Base.transaction do
-  email = 'info@codingate.com'
-  user = User.find_by email: email
-  if user.present?
-    user = User.new email: 'info@codingate.com', password: 'Codingate@2017', role: "Admin"
-    user.save
-  end
+  # email = 'info@codingate.com'
+  # user = User.find_by email: email
+  # if user.present?
+  #   user = User.new email: 'info@codingate.com', password: 'Codingate@2017', role: "Admin"
+  #   user.save
+  # end
 #   User.create!(name: "Admin",email: "admin@example.com", password: "password", role: "Admin")
 
 #   5.times do |i|
@@ -43,10 +43,10 @@ ActiveRecord::Base.transaction do
 #     Receipt.create!(receipt_id: FFaker::PhoneNumber.short_phone_number, earned_points: Random.rand(20..80), status: status.delete(status.sample), store_id: Random.rand(1..5), customer_id: Random.rand(1..5), total: Random.rand(100..500), capture: Rails.root.join("app/assets/images/default.png").open)
 #   end
 
-#   5.times do
-#     status = ["approved", "rejected", "submitted"]
-#     ClaimedReward.create!(customer_id: Random.rand(1..5), reward_id: Random.rand(1..5), status: status.delete(status.sample), qr_token: FFaker::Internet.domain_word)
-#   end
+  5.times do
+    status = ["approved", "rejected", "submitted"]
+    ClaimedReward.create!(customer_id: Random.rand(1..5), reward_id: Random.rand(1..5), status: status.delete(status.sample), qr_token: FFaker::Internet.domain_word)
+  end
 
 #   5.times do
 #     Faq.create!(title: FFaker::Lorem.sentence , content: FFaker::Lorem.paragraph)

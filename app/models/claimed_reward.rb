@@ -6,11 +6,11 @@ class ClaimedReward < ApplicationRecord
     state :rejected
     state :approved
 
-    event :rejecting, after: :create_rejected_claimed_reward_notifications do
+    event :rejecting, after: [:create_rejected_claimed_reward_notifications, :broadcast_claimed_reward_status] do
       transitions :from => :submitted, :to => :rejected
     end
 
-    event :approving, after: [:decrease_points, :generate_qr_token, :create_approved_claimed_reward_notifications] do
+    event :approving, after: [:decrease_points, :generate_qr_token, :create_approved_claimed_reward_notifications, :broadcast_claimed_reward_status] do
       transitions :from => :submitted, :to => :approved
 
     end
@@ -50,6 +50,9 @@ class ClaimedReward < ApplicationRecord
 
   after_create :create_submitted_claimed_reward_notifications
 
+  def broadcast_claimed_reward_status(id, status)
+    ClaimedRewardApprovalWorker.perform_async(id, status)
+  end
 
   private
 
@@ -81,6 +84,11 @@ class ClaimedReward < ApplicationRecord
 
   def create_rejected_claimed_reward_notifications
     RejectedClaimedRewardNotificationsWorker.perform_async(id)
+  end
+
+
+  def broadcast_claimed_reward_status
+    ClaimedRewardApprovalWorker.perform_async(self.id, self.status)
   end
 
 end
