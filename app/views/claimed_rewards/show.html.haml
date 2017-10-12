@@ -8,11 +8,11 @@
       %h5= @claimed_reward.manage_climed_reward.html_safe
   .portlet-body
     .row
-      .col-xs-12.col-md-6
+      .col-xs-12.col-md-7
         %h4.text-center Reward
         %table.table
           .width-auto.text-center.wrap-mar
-            = image_tag @claimed_reward.reward.image, size: '50x50', class: "text-center"
+            = image_tag @claimed_reward.reward.image, size: '150x150', class: "text-center"
           %tr
             %th Name
             %td= @claimed_reward.reward.name
@@ -23,11 +23,11 @@
             %th Quantity
             %td= @claimed_reward.reward.quantity
 
-      .col-xs-12.col-md-6
+      .col-xs-12.col-md-5
         %h4.text-center User
         %table.table
           .width-auto.text-center.wrap-mar
-            = image_tag @claimed_reward.customer.avatar, size: '50x50', class: "text-center"
+            = image_tag @claimed_reward.customer.avatar, size: '150x150', class: "text-center"
           %tr
             %th Name
             %td= @claimed_reward.customer.name
@@ -47,14 +47,17 @@
             %th Current Points
             %td= @claimed_reward.customer.current_points
 
+        .pull-right
+          #claimed-reward-data{'data-claimed-reward-id' => @claimed_reward.id}
+            - if policy(@claimed_reward).approve?
+              = link_to approve_claimed_reward_path(@claimed_reward.id), method: :patch, class: 'btn btn-success' do
+                = fa_icon "check"
+                Approve
+            - if policy(@claimed_reward).reject?
+              = link_to reject_claimed_reward_path(@claimed_reward.id), method: :patch, class: 'btn btn-danger' do
+                = fa_icon "close"
+                Reject
 
-
-  - if policy(@claimed_reward).approve?
-    = link_to approve_claimed_reward_path(@claimed_reward.id), method: :patch, class: 'btn btn-primary' do
-      Approve
-  - if policy(@claimed_reward).reject?
-    = link_to reject_claimed_reward_path(@claimed_reward.id), method: :patch, class: 'btn btn-danger' do
-      Reject
 
   .row.wrap-pad
     .pull-left

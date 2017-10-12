@@ -10,10 +10,12 @@ class ClaimedRewardDecorator < ApplicationDecorator
   end
 
   def managed_by_status
-    if approved?
-      '<b>Approved By </b>' + managed_by.name
+    if model.approved?
+      '<b>Approved by</b> ' + managed_by.name
+    elsif model.rejected?
+      '<b>Rejected by</b> ' + managed_by.name
     else
-      '<b>Rejected By </b>' + managed_by.name
+      '<b>Sumitted</b> '
     end
   end
 
