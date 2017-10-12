@@ -6,11 +6,11 @@ class Receipt < ApplicationRecord
     state :rejected
     state :approved
 
-    event :rejecting, after: :create_rejected_notifications do
+    event :rejecting, after: [:create_rejected_notifications, :broadcast_receipt_status] do
       transitions :from => :submitted, :to => :rejected
     end
 
-    event :approving, after: [:add_points_to_user, :create_approved_notifications] do
+    event :approving, after: [:add_points_to_user, :create_approved_notifications, :broadcast_receipt_status] do
       transitions :from => :submitted, :to => :approved
     end
   end
@@ -60,6 +60,10 @@ class Receipt < ApplicationRecord
 
   def create_approved_notifications
     ApprovedReceiptNotificationsWorker.perform_async(id)
+  end
+
+  def broadcast_receipt_status
+    ReceiptApprovalWorker.perform_async(self.id, self.status)
   end
 
 end
