@@ -1,15 +1,17 @@
 class PushNotificationWorker
   include Sidekiq::Worker
+  include Rails.application.routes.url_helpers
   sidekiq_options queue: 'notification'
 
   def perform(notification_id)
     notification = Notification.find notification_id
-    
+
     if notification.notifyable_type == 'User'
       notifications_worker(notification)
     end
-    
+
     push_notification(notification)
+
   end
 
   private
@@ -20,11 +22,18 @@ class PushNotificationWorker
   end
 
   def push_notification(notification)
+    sleep 1
     notifyable = notification.notifyable
     paramsnotification = {"app_id" => ENV['ONE_SIGNAL_APP_ID'],
-        "contents" => {"en" => "#{notification.text}"},
-        "include_player_ids" => notifyable.devices.pluck(:device_id)
-      }
+      "contents" => {"en" => "#{notification.text}"},
+      "include_player_ids" => notifyable.devices.pluck(:device_id)
+    }
+
+    if notification.notifyable_type == 'User'
+      paramsnotification['url'] = path_for_notification(notification)
+    end
+
+
     uri = URI.parse('https://onesignal.com/api/v1/notifications')
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true
@@ -37,5 +46,20 @@ class PushNotificationWorker
     response = http.request(request)
   end
 
+  def path_for_notification(notification)
+    type = notification.notification_type
+    object = notification.objectable_id
+
+    case type
+
+    when 'SubmittedReceipt'
+      receipt_path(object)
+    when 'SubmittedClaimedReward'
+      claimed_reward_path(object)
+    else
+      raise "Unknown type"
+    end
+
+  end
 
 end
