@@ -12,7 +12,7 @@ class Merchant < ActiveRecord::Base
 
   include DeviseTokenAuth::Concerns::User
 
-  mount_uploader :avatar, ImageUploader
+  mount_base64_uploader :avatar, ImageUploader
 
   belongs_to :store
 
