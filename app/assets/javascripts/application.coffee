@@ -29,3 +29,4 @@
 #= require notifications/index
 #= require advertisements/form
 #= require advertisements/show
+#= require receipts/show
