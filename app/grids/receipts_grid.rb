@@ -16,7 +16,6 @@ class ReceiptsGrid
   filter(:earn_points, :integer, range: true)
   filter(:managed_by_id, :enum, :select => lambda {User.all.map {|p| [p.name, p.id]}})
 
-
   column(:receipt_id)
   column(:status)
   column(:total)

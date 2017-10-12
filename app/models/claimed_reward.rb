@@ -46,7 +46,8 @@ class ClaimedReward < ApplicationRecord
     records
   end
 
-  scope :filter_given, -> { where(given: true) }
+  scope :given, -> { where(given: true) }
+  scope :not_give, -> { where.not(given) }
 
   after_create :create_submitted_claimed_reward_notifications
 

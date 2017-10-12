@@ -5,25 +5,25 @@
     %ul.page-sidebar-menu{"data-auto-scroll" => "true", "data-keep-expanded" => "false", "data-slide-speed" => "200"}
 
       %li.nav-item.start{:class => ( "active" if sidebar_active?('home') )}
-        
+
         - if policy(:company).index?
           %li.nav-item{:class => ( "active" if sidebar_active?('companies') )}
             = link_to companies_url do
               %i.icon-briefcase
               %span.title Company
-        
+
         - if policy(:store).index?
           %li.nav-item{:class => ( "active" if sidebar_active?('stores') )}
             = link_to stores_url do
               %i.icon-basket
               %span.title Store
-        
+
         - if policy(:location).index?
           %li.nav-item{:class => ( "active" if sidebar_active?('locations') )}
             = link_to locations_url do
               %i.icon-map
               %span.title Location
-        
+
         - if policy(:customer).index?
           %li.nav-item{:class => ( "active" if sidebar_active?('customers') )}
             = link_to customers_url do
@@ -59,7 +59,7 @@
             = link_to promotions_url do
               %i.icon-diamond
               %span.title Promotion
-        
+
         - if policy(:faq).index?
           %li.nav-item{:class => ("active" if sidebar_active?('faqs'))}
             = link_to faqs_url do
@@ -77,7 +77,7 @@
             = link_to guides_url do
               %i.icon-notebook
               %span.title Snap & Earn Guide
-        
+
         - if policy(:user).index?
           %li.nav-item{:class => ( "active" if sidebar_active?('users') )}
             = link_to users_url do
@@ -95,7 +95,7 @@
             = link_to merchants_url do
               %i.icon-user-following
               %span.title Merchants
-        
+
         - if policy(:contact_form).index?
           %li.nav-item{:class => ( "active" if sidebar_active?('contact_forms') )}
             = link_to contact_forms_url do
@@ -114,7 +114,23 @@
               %i.icon-envelope
               %span.title Customer Chat Supports
 
-        %li.nav-item{:class => ( "active" if sidebar_active?('settings') ) || ("active" if sidebar_active?('term_conditions')) || ("active" if sidebar_active?('privacy_policies')) || ( "active" if sidebar_active?('customer_locations')) || ( "active" if sidebar_active?('stickers')) || ( "active" if sidebar_active?('sticker_groups') )}
+        - if policy(:guide).index?
+          %li.nav-item{:class => (" active" if sidebar_active?('guides'))}
+            = link_to guides_url do
+              %i.icon-envelope
+              %span.title Watch and Earn Guides
+
+        - if policy(:report).rewards?
+          %li.nav-item{:class => ( "active" if sidebar_active?('reports') )}
+            %a.nav-link.nav-toggle
+              %i.icon-notebook
+              %span.title Reports
+              %span.arrow
+            %ul.sub-menu
+              %li.nav-item
+                = link_to "Rewards Report", rewards_reports_path, class: 'nav-link'
+
+        %li.nav-item{ class: ( "active" if sidebar_active?('settings') || sidebar_active?('term_conditions') || sidebar_active?('privacy_policies') || sidebar_active?('customer_locations') ||sidebar_active?('stickers') || sidebar_active?('sticker_groups'))}
           %a.nav-link.nav-toggle
             %i.icon-settings
             %span.title Setting
@@ -129,7 +145,7 @@
               %li.nav-item{:class => ("active" if sidebar_active?('term_conditions'))}
                 = link_to term_conditions_path do
                   %span.title Term & Condtion
-            
+
             - if policy(:privacy_policy).index?
               %li.nav-item{:class => ("active" if sidebar_active?('privacy_policies'))}
                 = link_to privacy_policies_path do
@@ -149,10 +165,3 @@
                 = link_to sticker_groups_url do
                   %span.title StickerGroups
 
-        
-
-        
-
-        
-
-  / END SIDEBAR MENU

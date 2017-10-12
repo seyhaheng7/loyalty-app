@@ -4,6 +4,12 @@ Rails.application.routes.draw do
   mount ActionCable.server => '/cable'
   mount Sidekiq::Web => '/sidekiq'
 
+  resource :reports, only: [] do
+    member do
+    get :rewards
+    end
+  end
+
   resources :claimed_rewards do
     member do
       patch :reject
