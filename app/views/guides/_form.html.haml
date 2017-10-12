@@ -3,17 +3,26 @@
 
   .form-body
     .form-group
-      = f.input :title
-      = f.input :youtube_url
-      .image-uploader
+      .image-uploader{align: 'center'}
         %a{:href => "#!"}
           = image_tag f.object.thumbnail, class: 'img-responsive', size: '150x150'
         = f.input :thumbnail, as: :file, label: 'Upload Thumbnail',
           :label_html => { class: 'btn btn-default'}
         = f.hidden_field :thumbnail_cache
-      = f.button :submit, class: 'btn btn-primary'
+      = f.input :title
+      = f.input :youtube_url
+
+      %br
+      .pull-left
+        -if policy(@guide).create? || policy(@guide).updates?
+          = f.button :submit, class: 'btn btn-primary'
+
       .pull-right
-        = link_to guides_path, class: 'btn btn-success' do
-          Back
-        = link_to @guide, class: 'btn btn-primary' do
-          Show
+        -if policy(@guide).index?
+          = link_to guides_path, class: 'btn btn-default' do
+            = fa_icon 'chevron-left'
+            Back
+        -if params[:action] == "edit" && policy(@guide).show?
+          = link_to @guide, class: 'btn btn-primary' do
+            = fa_icon 'eye'
+            Show
