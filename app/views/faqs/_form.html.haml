@@ -5,10 +5,17 @@
     .form-group
       = f.input :title
       = f.input :content, as: :ckeditor
+      %br
+      .pull-left
+        -if policy(@faq).create? || policy(@faq).updates?
+          = f.button :submit, class: 'btn btn-primary'
 
-      = f.button :submit
       .pull-right
-        = link_to faqs_path, class: 'btn btn-success' do
-          Back
-        = link_to @faq, class: 'btn btn-primary' do
-          Show
+        -if policy(@faq).index?
+          = link_to faqs_path, class: 'btn btn-default' do
+            = fa_icon 'chevron-left'
+            Back
+        -if params[:action] == "edit" && policy(@faq).show?
+          = link_to @faq, class: 'btn btn-primary' do
+            = fa_icon 'eye'
+            Show
