@@ -7,7 +7,7 @@ class Customer < ActiveRecord::Base
           :lockable, :authentication_keys => [:phone]
 
   include DeviseTokenAuth::Concerns::User
-  mount_uploader :avatar, ImageUploader
+  mount_base64_uploader :avatar, ImageUploader
 
   validates :phone,:presence => true, uniqueness: { message: "already registered" }
   validates :phone, numericality: { message: 'Not a phone number' },
