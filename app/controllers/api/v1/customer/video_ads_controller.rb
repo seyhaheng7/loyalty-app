@@ -4,10 +4,16 @@ module Api::V1::Customer
 
     swagger_controller :video_ads, 'Video Ads'
 
-     swagger_api :index do
-      summary 'Fetches all video_ads'
+    swagger_api :index do
+      summary 'Fetches all video ads'
+      notes "This lists all the active video ads that max view not reach yet"
+      param :query, :page, :integer, :optional, "Page number"
+      param :query, 'order[title]', :string, :optional, '[desc, asc]'
+      param :query, :title, :string, :optional
       response :unauthorized
-      response :not_acceptable
+      response :success
+      response :not_acceptable, "The request you made is not acceptable"
+      response :requested_range_not_satisfiable
     end
 
     swagger_api :show do
@@ -20,7 +26,7 @@ module Api::V1::Customer
 
     def index
       max_video_ad_ids = current_customer.max_video_ads.ids
-      @video_ads = VideoAd.active.where.not(id: max_video_ad_ids).page(params[:page])
+      @video_ads = VideoAd.active.where.not(id: max_video_ad_ids).order_by(params[:order]).filter(params).page(params[:page])
       render json: @video_ads, status: :ok
     end
 

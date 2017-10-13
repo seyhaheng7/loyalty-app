@@ -57,4 +57,32 @@ describe 'video ad' do
     end
   end
 
+  describe 'Get api/v1/customer/video_ads?' do
+
+    it 'return list of asc' do
+
+      VideoAd.destroy_all
+      create(:video_ad, title: 'ABC')
+      create(:video_ad, title: 'BCA')
+      get api_v1_customer_video_ads_path(order: { title: 'asc' }), headers: customer.create_new_auth_token
+
+      json = JSON.parse(response.body)
+      titles = json.map{ |j| j['title'] }
+      expect(titles).to eq ['ABC', 'BCA']
+    end
+
+    it 'return list of desc' do
+
+      VideoAd.destroy_all
+      create(:video_ad, title: 'ABC')
+      create(:video_ad, title: 'BCA')
+      get api_v1_customer_video_ads_path(order: { title: 'desc' }), headers: customer.create_new_auth_token
+
+      json = JSON.parse(response.body)
+      titles = json.map{ |j| j['title'] }
+      expect(titles).to eq ['BCA', 'ABC']
+    end
+
+  end
+
 end
