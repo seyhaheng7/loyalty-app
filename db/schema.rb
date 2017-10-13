@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171011075241) do
+ActiveRecord::Schema.define(version: 20171012092100) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,8 @@ ActiveRecord::Schema.define(version: 20171011075241) do
     t.datetime "deleted_at"
     t.float "lat"
     t.float "long"
+    t.float "price"
+    t.integer "view"
     t.index ["deleted_at"], name: "index_advertisements_on_deleted_at"
     t.index ["for_page"], name: "index_advertisements_on_for_page"
   end
@@ -395,6 +397,9 @@ ActiveRecord::Schema.define(version: 20171011075241) do
     t.datetime "deleted_at"
     t.string "website"
     t.string "phone"
+    t.string "email"
+    t.string "facebook"
+    t.string "open_and_close"
     t.index ["company_id"], name: "index_stores_on_company_id"
     t.index ["deleted_at"], name: "index_stores_on_deleted_at"
     t.index ["lat", "long"], name: "index_stores_on_lat_and_long"

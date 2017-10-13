@@ -51,7 +51,7 @@ class StoresController < ApplicationController
   # DELETE /stores/1
   def destroy
     authorize @store
-    
+
     @store.destroy
     redirect_to stores_url, notice: 'Store was successfully deleted.'
   end
@@ -64,6 +64,6 @@ class StoresController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def store_params
-      params.require(:store).permit(:name, :lat, :long, :address, :company_id, :location_id, :website, :phone)
+      params.require(:store).permit(:name, :lat, :long, :address, :company_id, :location_id, :website, :phone, :open_and_close, :email, :facebook)
     end
 end
