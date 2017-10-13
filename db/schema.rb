@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171012092100) do
+ActiveRecord::Schema.define(version: 20171013013600) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,8 +30,6 @@ ActiveRecord::Schema.define(version: 20171012092100) do
     t.datetime "deleted_at"
     t.float "lat"
     t.float "long"
-    t.float "price"
-    t.integer "view"
     t.index ["deleted_at"], name: "index_advertisements_on_deleted_at"
     t.index ["for_page"], name: "index_advertisements_on_for_page"
   end
@@ -41,6 +39,8 @@ ActiveRecord::Schema.define(version: 20171012092100) do
     t.string "icon"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_categories_on_deleted_at"
   end
 
   create_table "chat_data", force: :cascade do |t|
@@ -218,6 +218,8 @@ ActiveRecord::Schema.define(version: 20171012092100) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_locations_on_deleted_at"
     t.index ["name"], name: "index_locations_on_name"
   end
 
@@ -308,6 +310,7 @@ ActiveRecord::Schema.define(version: 20171012092100) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
+    t.boolean "sent"
     t.index ["deleted_at"], name: "index_promotions_on_deleted_at"
     t.index ["start_date", "end_date"], name: "index_promotions_on_start_date_and_end_date"
     t.index ["start_date"], name: "index_promotions_on_start_date"
@@ -374,6 +377,8 @@ ActiveRecord::Schema.define(version: 20171012092100) do
     t.string "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_sticker_groups_on_deleted_at"
   end
 
   create_table "stickers", force: :cascade do |t|
@@ -382,6 +387,8 @@ ActiveRecord::Schema.define(version: 20171012092100) do
     t.bigint "sticker_group_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_stickers_on_deleted_at"
     t.index ["sticker_group_id"], name: "index_stickers_on_sticker_group_id"
   end
 
@@ -433,6 +440,8 @@ ActiveRecord::Schema.define(version: 20171012092100) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "pending_notifications_count", default: 0
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_users_on_deleted_at"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
