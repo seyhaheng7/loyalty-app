@@ -10,10 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171013013600) do
+ActiveRecord::Schema.define(version: 20171012094107) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "admin_messages", force: :cascade do |t|
+    t.text "message"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_admin_messages_on_user_id"
+  end
 
   create_table "advertisements", force: :cascade do |t|
     t.string "name"
@@ -39,8 +47,6 @@ ActiveRecord::Schema.define(version: 20171013013600) do
     t.string "icon"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
-    t.index ["deleted_at"], name: "index_categories_on_deleted_at"
   end
 
   create_table "chat_data", force: :cascade do |t|
@@ -52,6 +58,7 @@ ActiveRecord::Schema.define(version: 20171013013600) do
     t.datetime "updated_at", null: false
     t.string "data_type"
     t.string "sticker"
+    t.text "audio"
     t.index ["chat_room_id"], name: "index_chat_data_on_chat_room_id"
     t.index ["customer_id"], name: "index_chat_data_on_customer_id"
   end
@@ -126,6 +133,7 @@ ActiveRecord::Schema.define(version: 20171013013600) do
     t.bigint "customer_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "seen_at"
     t.index ["customer_id"], name: "index_customer_chat_supports_on_customer_id"
   end
 
@@ -166,9 +174,9 @@ ActiveRecord::Schema.define(version: 20171013013600) do
     t.datetime "verified_at"
     t.string "login_digit"
     t.datetime "digit_expired_at"
+    t.datetime "update_location_at"
     t.string "first_name"
     t.string "last_name"
-    t.datetime "update_location_at"
     t.index ["confirmation_token"], name: "index_customers_on_confirmation_token", unique: true
     t.index ["deleted_at"], name: "index_customers_on_deleted_at"
     t.index ["digit_expired_at"], name: "index_customers_on_digit_expired_at"
@@ -218,8 +226,6 @@ ActiveRecord::Schema.define(version: 20171013013600) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
-    t.index ["deleted_at"], name: "index_locations_on_deleted_at"
     t.index ["name"], name: "index_locations_on_name"
   end
 
@@ -238,6 +244,7 @@ ActiveRecord::Schema.define(version: 20171013013600) do
     t.bigint "merchant_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "seen_at"
     t.index ["merchant_id"], name: "index_merchant_chat_supports_on_merchant_id"
   end
 
@@ -310,7 +317,6 @@ ActiveRecord::Schema.define(version: 20171013013600) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
-    t.boolean "sent"
     t.index ["deleted_at"], name: "index_promotions_on_deleted_at"
     t.index ["start_date", "end_date"], name: "index_promotions_on_start_date_and_end_date"
     t.index ["start_date"], name: "index_promotions_on_start_date"
@@ -364,7 +370,7 @@ ActiveRecord::Schema.define(version: 20171013013600) do
 
   create_table "settings", force: :cascade do |t|
     t.string "var", null: false
-    t.string "value"
+    t.text "value"
     t.integer "thing_id"
     t.string "thing_type", limit: 30
     t.datetime "created_at", null: false
@@ -377,8 +383,6 @@ ActiveRecord::Schema.define(version: 20171013013600) do
     t.string "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
-    t.index ["deleted_at"], name: "index_sticker_groups_on_deleted_at"
   end
 
   create_table "stickers", force: :cascade do |t|
@@ -387,8 +391,6 @@ ActiveRecord::Schema.define(version: 20171013013600) do
     t.bigint "sticker_group_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
-    t.index ["deleted_at"], name: "index_stickers_on_deleted_at"
     t.index ["sticker_group_id"], name: "index_stickers_on_sticker_group_id"
   end
 
@@ -440,8 +442,6 @@ ActiveRecord::Schema.define(version: 20171013013600) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "pending_notifications_count", default: 0
-    t.datetime "deleted_at"
-    t.index ["deleted_at"], name: "index_users_on_deleted_at"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -473,6 +473,13 @@ ActiveRecord::Schema.define(version: 20171013013600) do
     t.index ["view_count"], name: "index_view_video_ads_on_view_count"
   end
 
+  create_table "voice_messages", force: :cascade do |t|
+    t.string "voice_file"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "admin_messages", "users"
   add_foreign_key "chat_data", "chat_rooms"
   add_foreign_key "chat_data", "customers"
   add_foreign_key "chat_members", "chat_rooms"

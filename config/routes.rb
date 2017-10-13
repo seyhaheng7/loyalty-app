@@ -90,6 +90,10 @@ Rails.application.routes.draw do
         resources :term_conditions, only: [:index]
         resources :view_video_ads, only: [:index, :create]
         resources :homes, only: [:index]
+        
+        resources :customers, only: [] do
+          get :profile, on: :collection
+        end
 
         resources :customer_chat_supports, only: [:index] do
           resources :customer_chat_support_data, only: [:index]
