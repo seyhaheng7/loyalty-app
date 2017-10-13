@@ -15,7 +15,7 @@ class VideoAd < ApplicationRecord
     url = "http://www.youtube.com/embed/#{youtube_id}"
   end
 
-  scope :title_like, ->(title){ where("#{table_name}.title ilike ?", "%#{name}%") }
+  scope :title_like, ->(title){ where("#{table_name}.title ilike ?", "%#{title}%") }
 
 
   # order desc & filter by name
