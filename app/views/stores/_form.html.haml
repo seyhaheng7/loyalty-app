@@ -9,13 +9,16 @@
       = f.input :long, as: :hidden, input_html: {id: 'place_longitude'}
 
       = f.input :address
+      = f.input :email
+      = f.input :open_and_close
+      = f.input :facebook
       = f.input :website
       = f.input :phone, input_html: { class: 'inputmask' }
       = f.association :company
       = f.association :location
 
 
-      #map  
+      #map
       .pull-left
         -if policy(@store).create? || policy(@store).update?
           = f.button :submit, class: "btn btn-primary"
