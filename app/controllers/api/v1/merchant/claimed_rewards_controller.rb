@@ -5,11 +5,6 @@ module Api::V1::Merchant
 
     swagger_api :index do
       summary 'Fetches all approved claimed rewards'
-      param :header, 'access-token', :string, :required, 'Authentication token'
-      param :header, 'token-type', :string, :required, 'Bearer'
-      param :header, 'client', :string, :required, 'Simultaneous sessions on different clients'
-      param :header, 'expiry', :string, :required, 'The date at which the current session will expire'
-      param :header, 'uid', :string, :required, 'A unique value that is used to identify the user'
       param :query, :page, :integer, :optional, "Page number"
       param :query, :status, :string, :optional, "Filter by approved, rejected, submitted"
       param :query, :given, :string, :optional, "[true, false]"
@@ -22,6 +17,11 @@ module Api::V1::Merchant
     swagger_api :given do
       summary 'Give reward'
       notes 'get information of receipt by passing his receipt id'
+      param :header, 'access-token', :string, :required, 'Authentication token'
+      param :header, 'token-type', :string, :required, 'Bearer'
+      param :header, 'client', :string, :required, 'Simultaneous sessions on different clients'
+      param :header, 'expiry', :string, :required, 'The date at which the current session will expire'
+      param :header, 'uid', :string, :required, 'A unique value that is used to identify the user'
       param :param, :qr_token, :sting, :required, 'Token Claimed Reward'
       response :ok
       response :not_found
