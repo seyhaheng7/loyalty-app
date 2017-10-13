@@ -4,7 +4,7 @@ class VideoAd < ApplicationRecord
 
   mount_uploader :video_file, VideoAdUploader
   mount_uploader :thumbnail, ImageUploader
-  
+
   has_many :view_video_ads, dependent: :destroy
 
   def youtube_id
@@ -15,7 +15,7 @@ class VideoAd < ApplicationRecord
     url = "http://www.youtube.com/embed/#{youtube_id}"
   end
 
-  scope :name_like, ->(name){ where("#{table_name}.name ilike ?", "%#{name}%") }
+  scope :title_like, ->(title){ where("#{table_name}.title ilike ?", "%#{name}%") }
 
 
   # order desc & filter by name
@@ -26,7 +26,7 @@ class VideoAd < ApplicationRecord
     records = all
 
     if params[:title].present?
-      records = records.name_like(params[:title])
+      records = records.title_like(params[:title])
     end
     records
 
