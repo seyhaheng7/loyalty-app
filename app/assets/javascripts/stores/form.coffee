@@ -4,7 +4,7 @@ Codingate.StoresForm = Codingate.StoresNew = Codingate.StoresCreate = Codingate.
     @_phoneMask()
 
   _phoneMask: ->
-    $('#store_phone').inputmask '099-999-9999'
+    $('#store_phone').inputmask '999-999-9999'
     $('form').submit ->
       $('#store_phone').inputmask('remove')
 
@@ -34,7 +34,7 @@ Codingate.StoresForm = Codingate.StoresNew = Codingate.StoresCreate = Codingate.
       position: lat_lng)
 
     google.maps.event.addListener marker, 'dragend', (event) ->
-    
+
       lat = @getPosition().lat()
       lng = @getPosition().lng()
 

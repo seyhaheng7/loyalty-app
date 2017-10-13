@@ -3,6 +3,6 @@ Codingate.MerchantsForm = Codingate.MerchantsNew = Codingate.MerchantsCreate = C
     @_phoneMask()
 
   _phoneMask: ->
-    $('#merchant_phone').inputmask '099-999-9999'
+    $('#merchant_phone').inputmask '999-999-9999'
     $('form').submit ->
       $('#merchant_phone').inputmask('remove')

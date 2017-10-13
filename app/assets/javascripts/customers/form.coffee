@@ -4,7 +4,7 @@ Codingate.CustomersForm = Codingate.CustomersNew = Codingate.CustomersCreate = C
     @_initCustomerMap()
 
   _phoneMask: ->
-    $('#customer_phone').inputmask '099-999-9999'
+    $('#customer_phone').inputmask '999-999-9999'
     $('form').submit ->
       $('#customer_phone').inputmask('remove')
 
