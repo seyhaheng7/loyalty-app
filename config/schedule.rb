@@ -8,9 +8,14 @@
 # set :output, "/path/to/my/cron_log.log"
 #
 
-every :day, :at => '9:00am' do
+every 3.hours do
   runner "Promotion.push_daily_promotion"
 end
+
+# every 1.minutes do
+#   runner "Promotion.push_daily_promotion"
+# end
+
 
 
 #
