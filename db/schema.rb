@@ -10,6 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+
+
 ActiveRecord::Schema.define(version: 20171012092100) do
 
   # These are extensions that must be enabled in order to support this database
@@ -439,7 +441,7 @@ ActiveRecord::Schema.define(version: 20171012092100) do
 
   create_table "video_ads", force: :cascade do |t|
     t.string "title"
-    t.string "video_file"
+    t.string "youtube_url"
     t.date "start_date"
     t.date "end_date"
     t.integer "earned_points"
