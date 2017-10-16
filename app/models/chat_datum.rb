@@ -4,9 +4,9 @@ class ChatDatum < ApplicationRecord
 
   has_many :recieved_members
 
-  after_commit :show_new_message
-
   before_save :set_data_type
+
+  after_commit :show_new_message
 
   private
     def show_new_message
@@ -16,8 +16,12 @@ class ChatDatum < ApplicationRecord
     def set_data_type
       if text.present?
         self.data_type = "text"
-      else
+      elsif sticker.present?
         self.data_type = "sticker"
+      elsif audio.present?
+        self.data_type = "audio"
+      else
+        self.data_type = nil
       end
     end
 end
