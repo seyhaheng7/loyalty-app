@@ -11,6 +11,7 @@ class PromotionsGrid
   filter(:end_date, :date)
 
   column(:title)
+  column(:sent)
   column(:image, html: true) do |promotion|
     image_tag promotion.image, size: '50x50'
   end
