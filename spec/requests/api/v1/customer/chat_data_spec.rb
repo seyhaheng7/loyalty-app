@@ -1,9 +1,12 @@
 describe 'ChatDatum' do
   let!(:customer){ create(:customer) }
   let!(:chat_room){ create(:chat_room) }
+  let!(:voice_message){ create(:voice_message) }
   let!(:chat_member){ create(:chat_member, chat_room: chat_room, customer: customer) }
+
   let!(:chat_datum){ create(:chat_datum, :data_type_text, chat_room: chat_room, customer: customer) }
   let!(:chat_datum2){ create(:chat_datum, :data_type_sticker, chat_room: chat_room, customer: customer) }
+  let!(:chat_datum3){ create(:chat_datum, :data_type_audio,chat_room: chat_room, customer: customer) }
   let!(:chat_data){ create_list(:chat_datum, 10, chat_room: chat_room, customer: customer) }
 
   describe 'GET api/v1/customer/chat_rooms/:chat_room_id/chat_data' do
@@ -29,6 +32,14 @@ describe 'ChatDatum' do
       data_type = json.map{ |j| j['data_type'] }
       expect(sticker).to include chat_datum2.sticker
       expect(data_type).to include 'sticker'
+    end
+
+    it 'return customer audio with correct data type' do
+      json = JSON.parse(response.body)
+      audio = json.map{ |j| j['audio'] }
+      data_type = json.map{ |j| j['data_type'] }
+      expect(audio).to include chat_datum3.audio
+      expect(data_type).to include 'audio'
     end
 
     it 'has pagination' do
