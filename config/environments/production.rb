@@ -10,7 +10,10 @@ Rails.application.configure do
   # Rake tasks automatically ignore this option for performance.
   config.eager_load = true
   config.logger = ActiveSupport::Logger.new(config.paths['log'].first, 1, 40 * 1024 * 1024)
-
+  if ENV['ENABLE_S3'] == 'true'
+    config.action_controller.asset_host = "//#{ENV['FOG_DIRECTORY']}.s3.amazonaws.com"
+    config.assets.prefix = "/assets"
+  end
   # Full error reports are disabled and caching is turned on.
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true

@@ -1,0 +1,16 @@
+if ENV['ENABLE_S3'] == 'true'
+  CarrierWave.configure do |config|
+    config.storage = :file
+    if Rails.env.staging? || Rails.env.production?
+      config.storage = :fog
+      config.fog_credentials = {
+        aws_secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],
+        aws_access_key_id: ENV['AWS_ACCESS_KEY_ID'],
+        provider: 'AWS',
+        region: ENV['FOG_REGION']
+      }
+      config.fog_attributes = {'Cache-Control'=>'max-age=315576000'}
+      config.fog_directory = ENV['FOG_DIRECTORY']
+    end
+  end
+end

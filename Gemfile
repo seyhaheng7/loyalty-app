@@ -80,3 +80,6 @@ gem 'omniauth-google-oauth2'
 gem 'ckeditor', '~> 4.2'
 gem 'youtube_id', '~> 0.0.3'
 gem 'whenever', '~> 0.9.7'
+
+gem "asset_sync", '~> 2.2.0'
+gem "fog-aws", '~> 1.4.1'
