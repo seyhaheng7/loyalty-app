@@ -14,6 +14,7 @@ class AdvertisementsGrid
   column(:banner, html: true) do |record|
     image_tag record.banner, size: '50x50'
   end
+  column(:for_page, header: 'Page')
   column(:active)
   column(:address)
   column(:phone)
