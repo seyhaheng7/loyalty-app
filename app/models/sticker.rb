@@ -1,6 +1,7 @@
 class Sticker < ApplicationRecord
   belongs_to :sticker_group
-
+  acts_as_paranoid
+  
   validates :name, presence: true
   validates :image, presence: true
 

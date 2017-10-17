@@ -1,4 +1,5 @@
 class Location < ApplicationRecord
+  acts_as_paranoid
   validates :name, presence: true
   validates_uniqueness_of :name
 
