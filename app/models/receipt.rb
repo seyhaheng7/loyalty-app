@@ -26,13 +26,15 @@ class Receipt < ApplicationRecord
 
   validates :receipt_id, presence: true
   validates :total, presence: true
-  # validates :capture, presence: true
+  validates :capture, presence: true
   validates :receipt_id, :uniqueness => {:scope => :store_id, message: "Receipt is already submitted"}
 
   after_create :create_notifications
 
   delegate :name, to: :store, prefix: true, allow_nil: true
   delegate :name, to: :customer, prefix: true, allow_nil: true
+
+  default_scope{ order(created_at: :desc) }
 
   def new_store=(params)
     new_store = Store.new params
