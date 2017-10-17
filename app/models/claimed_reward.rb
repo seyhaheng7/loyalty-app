@@ -49,6 +49,8 @@ class ClaimedReward < ApplicationRecord
   scope :given, -> { where(given: true) }
   scope :not_give, -> { where.not(given) }
 
+  default_scope{ order(created_at: :desc) }
+
   after_create :create_submitted_claimed_reward_notifications
 
   def broadcast_claimed_reward_status(id, status)
