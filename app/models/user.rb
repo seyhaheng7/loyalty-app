@@ -5,6 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable, :lockable,
          :authentication_keys => [:email]
 
+  acts_as_paranoid
+  
   has_many :devices, as: :deviceable
   has_many :notifications, as: :notifyable
   has_many :customer_chat_support_data, as: :supportable
