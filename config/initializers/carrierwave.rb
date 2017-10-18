@@ -1,6 +1,8 @@
-if ENV['ENABLE_S3'] == 'true'
-  CarrierWave.configure do |config|
-    config.storage = :file
+
+CarrierWave.configure do |config|
+  config.storage = :file
+  config.asset_host = ActionController::Base.asset_host
+  if ENV['ENABLE_S3'] == 'true'
     if Rails.env.staging? || Rails.env.production?
       config.storage = :fog
       config.fog_credentials = {
@@ -14,3 +16,4 @@ if ENV['ENABLE_S3'] == 'true'
     end
   end
 end
+
