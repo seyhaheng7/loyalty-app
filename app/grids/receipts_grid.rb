@@ -20,10 +20,10 @@ class ReceiptsGrid
   column(:status)
   column(:total)
 
-  column(:store_name, html: true) do |record|
+  column(:store, html: true) do |record|
     link_to record.store_name, record.store
   end
-  column(:customer_name, html: true) do |record|
+  column(:customer, html: true) do |record|
     link_to record.customer_name, record.customer
   end
 

@@ -30,10 +30,12 @@
         %th= @store.email
       %tr
         %th Company:
-        %td= @store.company_name
+        %td
+          = link_to @store.company_name, @store.company
       %tr
         %th Location:
-        %td= @store.location_name
+        %td
+          = link_to @store.location_name, @store.company
 
     %input{type: 'hidden', value: @store.lat, id: 'lat_value'}
     %input{type: 'hidden', value: @store.long, id: 'long_value'}

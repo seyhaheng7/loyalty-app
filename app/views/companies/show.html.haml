@@ -20,7 +20,8 @@
         %td= @company.address
       %tr
         %th Category:
-        %td= @company.category.name
+        %td
+          = link_to @company.category_name, @company.category
       %tr
         %th Partner:
         %td= @company.partner_status

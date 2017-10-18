@@ -127,7 +127,6 @@ ActiveRecord::Schema.define(version: 20171013013600) do
     t.bigint "customer_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "seen_at"
     t.index ["customer_id"], name: "index_customer_chat_supports_on_customer_id"
   end
 
@@ -240,7 +239,6 @@ ActiveRecord::Schema.define(version: 20171013013600) do
     t.bigint "merchant_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "seen_at"
     t.index ["merchant_id"], name: "index_merchant_chat_supports_on_merchant_id"
   end
 

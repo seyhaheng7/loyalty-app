@@ -15,7 +15,8 @@
             = image_tag @claimed_reward.reward.image, size: '150x150', class: "text-center"
           %tr
             %th Name
-            %td= @claimed_reward.reward.name
+            %td
+              = link_to @claimed_reward.reward_name, @claimed_reward.reward
           %tr
             %th Required Points
             %td= @claimed_reward.reward.require_points
@@ -30,7 +31,8 @@
             = image_tag @claimed_reward.customer.avatar, size: '150x150', class: "text-center"
           %tr
             %th Name
-            %td= @claimed_reward.customer.name
+            %td
+              = link_to @claimed_reward.customer_name, @claimed_reward.customer
           %tr
             %th Email
             %td= @claimed_reward.customer.email

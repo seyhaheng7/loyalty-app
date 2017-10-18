@@ -26,7 +26,10 @@ class RewardsGrid
   end
   column(:require_points)
   column(:quantity)
-  column(:store_name)
+  column(:store, html:true) do |reward|
+    link_to reward.store_name, reward.store
+  end
+
   column(:actions, html:true) do |reward|
     render 'rewards/control', reward: reward
   end

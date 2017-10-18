@@ -13,7 +13,7 @@ class StickersGrid
     image_tag sticker.image, size: '50x50'
   end
 
-  column(:sticker_group_name)
+  column(:sticker_group)
 
   column(:actions, html:true) do |record|
     render 'stickers/control', sticker: record
