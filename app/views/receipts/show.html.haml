@@ -28,10 +28,12 @@
             %td= @receipt.status
           %tr
             %th Store:
-            %td= @receipt.store.name
+            %td
+              = link_to @receipt.store_name, @receipt.store
           %tr
             %th Customer:
-            %td= @receipt.customer.name
+            %td
+              = link_to @receipt.customer_name, @receipt.customer
         .pull-left{style: "margin-top: 110px;"}
           -if policy(@receipt).index?
             = link_to receipts_path, class: 'btn btn-default' do

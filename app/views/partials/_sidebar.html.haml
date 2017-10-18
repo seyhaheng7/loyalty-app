@@ -114,11 +114,11 @@
               %i.icon-envelope
               %span.title Customer Chat Supports
 
-        - if policy(:guide).index?
-          %li.nav-item{:class => (" active" if sidebar_active?('guides'))}
-            = link_to guides_url do
-              %i.icon-envelope
-              %span.title Watch and Earn Guides
+        -# - if policy(:guide).index?
+        -#   %li.nav-item{:class => (" active" if sidebar_active?('guides'))}
+        -#     = link_to guides_url do
+        -#       %i.icon-envelope
+        -#       %span.title Watch and Earn Guides
 
         - if policy(:report).rewards?
           %li.nav-item{:class => ( "active" if sidebar_active?('reports') )}

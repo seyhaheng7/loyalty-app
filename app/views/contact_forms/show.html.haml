@@ -16,7 +16,8 @@
 
       %tr
         %th Customer:
-        %td= @contact_form.customer.name
+        %td
+          = link_to @contact_form.customer_name, @contact_form.customer
       %tr
 
     %br

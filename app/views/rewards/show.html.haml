@@ -27,7 +27,8 @@
         %td= @reward.quantity - @reward.approved_claimed_rewards_count
       %tr
         %th Store:
-        %td= @reward.store_name
+        %td
+          = link_to @reward.store_name, @reward.store
       %tr
         %th Description:
         %td= @reward.description

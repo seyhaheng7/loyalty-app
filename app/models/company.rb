@@ -10,6 +10,8 @@ class Company < ApplicationRecord
 
   mount_uploader :logo, LogoUploader
 
+  delegate :name, to: :category, prefix: true, allow_nil: true
+
   scope :partners, -> { where(partner: true) }
   scope :in_category, ->(category_id){ where(category_id: category_id) }
   scope :name_like, ->(name){ where("#{table_name}.name ilike ?", "%#{name}%") }

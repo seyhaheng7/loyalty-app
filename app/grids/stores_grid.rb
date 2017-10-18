@@ -17,12 +17,12 @@ class StoresGrid
   column(:name)
   column(:address)
 
-  column(:company) do |record|
-    record.company_name
+  column(:company,  html: true) do |record|
+    link_to record.company_name, record.company
   end
 
-  column(:location) do |record|
-    record.location_name
+  column(:location,  html: true) do |record|
+    link_to record.location_name, record.location
   end
 
   column(:actions, html:true) do |record|
