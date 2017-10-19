@@ -83,3 +83,4 @@ gem 'whenever', '~> 0.9.7'
 
 gem "asset_sync", '~> 2.2.0'
 gem "fog-aws", '~> 1.4.1'
+gem 'jquery-ui-rails'

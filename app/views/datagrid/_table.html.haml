@@ -1,5 +1,5 @@
 - if grid.html_columns(*options[:columns]).any?
-  = content_tag :table, options[:html].merge(class: 'table table-hover') do
+  = content_tag :table, options[:html].merge(class: "table table-hover #{options.fetch(:html, {}).fetch(:class)}") do
     %thead.flip-content
       = datagrid_header(grid, options)
     %tbody

@@ -1,3 +1,3 @@
-%tr
+%tr{ data: grid.respond_to?(:row_data) ? grid.row_data(asset) : {} }
   - grid.html_columns(*options[:columns]).each do |column|
     %td{:class => "#{datagrid_column_classes(grid, column)}"}= datagrid_value(grid, column, asset)

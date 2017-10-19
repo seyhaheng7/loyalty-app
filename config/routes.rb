@@ -28,7 +28,9 @@ Rails.application.routes.draw do
   resources :locations
   resources :customers
   resources :companies
-  resources :categories
+  resources :categories do
+    put :update_order, on: :collection
+  end
   resources :users
   resources :merchants
   resources :rewards
