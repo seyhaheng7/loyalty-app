@@ -4,7 +4,7 @@ class Advertisement < ApplicationRecord
   validates :name, presence: true
   validates :banner, presence:true
 
-  PAGES = ['Home', 'Shop & Earn', 'Category detail', 'Rewards', 'Snap']
+  PAGES = ['Home', 'Watch & Earn', 'Category detail', 'Rewards', 'Snap']
   validates :for_page, inclusion: PAGES
 
   mount_uploader :banner, BannerUploader
@@ -15,7 +15,7 @@ class Advertisement < ApplicationRecord
     if params[:for_page].present?
       records = records.where(for_page: params[:for_page])
     end
-    
+
     records
   end
 
