@@ -24,8 +24,12 @@
 #= require customers/form
 #= require customers/show
 
+#= require merchant_chat_supports/index
 #= require merchant_chat_supports/show
+
+#= require customer_chat_supports/index
 #= require customer_chat_supports/show
+
 #= require notifications/index
 #= require advertisements/form
 #= require advertisements/show

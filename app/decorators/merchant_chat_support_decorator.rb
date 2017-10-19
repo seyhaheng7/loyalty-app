@@ -1,13 +1,20 @@
 class MerchantChatSupportDecorator < ApplicationDecorator
   delegate_all
 
-  # Define presentation-specific methods here. Helpers are accessed through
-  # `helpers` (aka `h`). You can override attributes, for example:
-  #
-  #   def created_at
-  #     helpers.content_tag :span, class: 'time' do
-  #       object.created_at.strftime("%a %m/%d/%y")
-  #     end
-  #   end
+  def last_message
+    if merchant_chat_support_data.present?
+      "Last Message : " + merchant_chat_support_data.last.text
+    else
+      nil
+    end
+  end
+
+  def apply_class_chat_btn
+    if seen_at.present?
+      "btn btn-primary chat-btn"
+    else
+      "btn btn-danger chat-btn"
+    end
+  end
 
 end

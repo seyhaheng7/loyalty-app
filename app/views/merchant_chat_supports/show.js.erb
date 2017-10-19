@@ -1,0 +1,5 @@
+$('#chat-data').prepend("<%= escape_javascript(render partial: 'merchant_chat_supports/merchant_chat_support_data') %>");
+
+<% if @merchant_chat_support_data.next_page.blank? %>
+  $(window).unbind('scroll');
+<% end %>

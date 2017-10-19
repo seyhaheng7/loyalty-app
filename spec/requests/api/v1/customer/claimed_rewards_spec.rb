@@ -29,9 +29,6 @@ describe 'ClaimedRewards' do
     end
   end
 
-
-
-
   describe 'POST api/v1/customer/claimed_rewards' do
 
     let!(:params1){ { reward_id: reward.id } }
@@ -44,8 +41,9 @@ describe 'ClaimedRewards' do
 
     it 'has claimed_reward status submitted' do
       post api_v1_customer_claimed_rewards_path, headers: customer1.create_new_auth_token, params: { claimed_reward: params1 }
-      claimed_reward = ClaimedReward.last
-      expect(claimed_reward).to have_attributes(status: 'submitted')
+      json = JSON.parse(response.body)
+      claimed_reward_status = json["status"]
+      expect(claimed_reward_status).to eq "submitted"
     end
 
 

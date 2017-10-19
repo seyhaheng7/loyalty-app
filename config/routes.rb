@@ -44,8 +44,18 @@ Rails.application.routes.draw do
   resources :contact_forms, only: [:index, :show, :destroy]
   resources :video_ads
   resources :customer_locations, only: :index
-  resources :customer_chat_supports, only: [:index, :show]
-  resources :merchant_chat_supports, only: [:index, :show]
+  
+  resources :customer_chat_supports, only: [:index, :show] do
+    member do
+      patch :seen_to_now
+    end
+  end
+
+  resources :merchant_chat_supports, only: [:index, :show] do
+    member do
+      patch :seen_to_now
+    end
+  end
 
 
   resources :notifications do

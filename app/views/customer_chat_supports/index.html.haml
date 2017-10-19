@@ -1,15 +1,10 @@
-= render 'partials/page-head', title: 'Listing Customer Chat Supports'
-
-.m-heading-1.border-green.m-bordered
-  = datagrid_form_for @grid, :method => :get, :url => customer_chat_supports_path
+= render 'partials/page-head', title: 'Listing All Customer Chat Supports'
 
 .portlet.light.bordered
   .portlet-title
     .caption
-      %i.icon-users
-      Customer Chat Support
+      %i.icon-bubble
+      Customer Chat Supports
+
   .portlet-body
-    .table-scrollable
-      = datagrid_table @grid
-    .text-center
-      = paginate(@grid.assets)
+    %ul.feeds#customer-chat-supports

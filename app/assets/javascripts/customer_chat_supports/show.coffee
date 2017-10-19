@@ -1,21 +1,26 @@
 Codingate.CustomerChatSupportsMessageForm = Codingate.CustomerChatSupportsShow =
   init: ->
+    @page = 1
     @_initCustomerChatSupportRoomID()
-    @_getCustomerChatSupportData()
+    @_handleInfinitScroll()
+    @_loadCustomerChatSupportData()
     @_subcribedChannelCustomerChatSupport()
     @_handleMessageFormSubmitted()
 
   _initCustomerChatSupportRoomID: ->
     @room_id = $('#chat-data').data('room-id')
 
-  _getCustomerChatSupportData: ->
+  _handleInfinitScroll: ->
     self = @
-    $.ajax
-      url: window.location.href + '.json'
-      dataType: 'json'
-      success: (chat_data) ->
-        for chat_datum in chat_data
-          self._appendChatSupportData(chat_datum)
+    list_of_chat_data = $('#customer-chat-supports-list')
+    list_of_chat_data.scroll ->
+      if list_of_chat_data.scrollTop() == 0
+        self._loadCustomerChatSupportData()
+
+  _loadCustomerChatSupportData: ->
+    self = @
+    $.getScript(window.location.href+".js?page=#{@page}").then ->
+      self.page++
 
   _appendChatSupportData: (chat_datum)->
     element_to_append = ""
@@ -43,7 +48,11 @@ Codingate.CustomerChatSupportsMessageForm = Codingate.CustomerChatSupportsShow =
         console.log "Disconnected From Customer Chat Support Channel"
 
       received: (data) ->
+        chat_datum = data["chat_datum"]
         self._appendChatSupportData(data["chat_datum"])
+
+        if chat_datum.supportable_type == "Customer"
+          setTimeout self._setSeenAtToDateNow, 100
 
       speak: (data)->
         @perform 'speak', text: data["text"], customer_chat_support_id: data["customer_chat_support_id"]
@@ -56,3 +65,10 @@ Codingate.CustomerChatSupportsMessageForm = Codingate.CustomerChatSupportsShow =
       data = {text: text, customer_chat_support_id: customer_chat_support_id}
       AppCable.customer_chat_support.speak data
       $(this).trigger 'reset'
+
+  _setSeenAtToDateNow: ->
+    self = @
+    $.ajax
+      type: 'PATCH'
+      url: window.location.href + '/seen_to_now'
+      success: ->

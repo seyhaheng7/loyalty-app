@@ -1,0 +1,5 @@
+$('#chat-data').prepend("<%= escape_javascript(render partial: 'customer_chat_supports/customer_chat_support_data') %>");
+
+<% if @customer_chat_support_data.next_page.blank? %>
+  $(window).unbind('scroll');
+<% end %>

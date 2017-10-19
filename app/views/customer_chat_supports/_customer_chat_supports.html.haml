@@ -1,0 +1,16 @@
+- @customer_chat_supports.decorate.each do |customer_chat_support|
+  %li
+    .row
+      .col-xs-6.col-md-1
+        = image_tag customer_chat_support.customer_avatar, size: '50x50', class: 'img-circle'
+
+      .col-xs-6.col-md-6.chat-title
+        = link_to customer_chat_support.customer do
+          = customer_chat_support.customer_name
+        %h6.chat-text
+          = customer_chat_support.last_message
+
+      .col-xs-12.col-md-5.text-right
+        = link_to customer_chat_support, class: customer_chat_support.apply_class_chat_btn, id: "chat-now-btn-#{customer_chat_support.id}" do
+          %i.fa.fa-comments
+          Chat Now
