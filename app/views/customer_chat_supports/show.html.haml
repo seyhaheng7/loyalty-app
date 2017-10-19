@@ -2,8 +2,8 @@
 .portlet.light.bordered
   .portlet-title
     .caption
-      %i.icon-user
-      = @customer_chat_support.customer_name
+      = image_tag @customer_chat_support.customer_avatar, size: '50x50', class: 'img-circle'
+      = @customer_chat_support.customer.name
 
   .portlet-body
     #customer-chat-supports-list

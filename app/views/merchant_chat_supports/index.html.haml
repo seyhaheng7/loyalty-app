@@ -1,15 +1,10 @@
-= render 'partials/page-head', title: 'List Merchant Chat Support'
-
-.m-heading-1.border-green.m-bordered
-  = datagrid_form_for @grid, :method => :get, :url => merchant_chat_supports_path
+= render 'partials/page-head', title: 'Listing All Merchant Chat Supports'
 
 .portlet.light.bordered
   .portlet-title
     .caption
-      %i.icon-envelope
-      Merchant Chat Support
+      %i.icon-bubble
+      Merchant Chat Supports
+
   .portlet-body
-    .table-scrollable
-      = datagrid_table @grid
-    .text-center
-      = paginate(@grid.assets)
+    %ul.feeds#merchant-chat-supports

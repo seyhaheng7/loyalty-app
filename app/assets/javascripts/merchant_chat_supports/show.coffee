@@ -1,23 +1,29 @@
 Codingate.MerchantChatSupportsMessageForm = Codingate.MerchantChatSupportsShow =
   init: ->
+    @page = 1
     @_initMerchantChatSupportRoomID()
-    @_getMerchantChatSupportData()
+    @_handleInfinitScroll()
+    @_loadMerchantChatSupportData()
     @_subcribedChannelMerchantChatSupport()
     @_handleMessageFormSubmitted()
 
   _initMerchantChatSupportRoomID: ->
     @room_id = $('#chat-data').data('room-id')
 
-  _getMerchantChatSupportData: ->
+  _handleInfinitScroll: ->
     self = @
-    $.ajax
-      url: window.location.href + '.json'
-      dataType: 'json'
-      success: (chat_data) ->
-        for chat_datum in chat_data
-          self._appendChatSupportData(chat_datum)
+    list_of_chat_data = $('#merchant-chat-supports-list')
+    list_of_chat_data.scroll ->
+      if list_of_chat_data.scrollTop() == 0
+        self._loadMerchantChatSupportData()
+
+  _loadMerchantChatSupportData: ->
+    self = @
+    $.getScript(window.location.href+".js?page=#{@page}").then ->
+      self.page++
 
   _appendChatSupportData: (chat_datum)->
+    self = @
     element_to_append = ""
     class_to_append = ""
 
@@ -30,8 +36,8 @@ Codingate.MerchantChatSupportsMessageForm = Codingate.MerchantChatSupportsShow =
 
     $('#chat-data').append element_to_append
 
-    height = $('#chat-data')[0].scrollHeight;
-    $('#merchant-chat-supports-list').scrollTop(height);
+    height = $('#chat-data')[0].scrollHeight
+    $('#merchant-chat-supports-list').scrollTop(height)
 
   _subcribedChannelMerchantChatSupport: ->
     self = @
@@ -43,7 +49,11 @@ Codingate.MerchantChatSupportsMessageForm = Codingate.MerchantChatSupportsShow =
         console.log "Disconnected From Merchant Chat Support Channel"
 
       received: (data) ->
-        self._appendChatSupportData(data["chat_datum"])
+        chat_datum = data["chat_datum"]
+        self._appendChatSupportData(chat_datum)
+
+        if chat_datum.supportable_type == "Merchant"
+          setTimeout self._setSeenAtToDateNow, 100
 
       speak: (data)->
         @perform 'speak', text: data["text"], merchant_chat_support_id: data["merchant_chat_support_id"]
@@ -56,3 +66,10 @@ Codingate.MerchantChatSupportsMessageForm = Codingate.MerchantChatSupportsShow =
       data = {text: text, merchant_chat_support_id: merchant_chat_support_id}
       AppCable.merchant_chat_support.speak data
       $(this).trigger 'reset'
+
+  _setSeenAtToDateNow: ->
+    self = @
+    $.ajax
+      type: 'PATCH'
+      url: window.location.href + '/seen_to_now'
+      success: ->

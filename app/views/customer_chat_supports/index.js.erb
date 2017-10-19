@@ -1,0 +1,5 @@
+$('#customer-chat-supports').append("<%= escape_javascript(render partial: 'customer_chat_supports/customer_chat_supports') %>");
+
+<% if @customer_chat_supports.next_page.blank? %>
+    $(window).unbind('scroll');
+<% end %>

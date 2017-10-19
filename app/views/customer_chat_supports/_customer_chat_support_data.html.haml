@@ -1,0 +1,6 @@
+- @customer_chat_support_data.decorate.reverse.each do |chat_datum|
+  %li
+    .row
+      %div{class: chat_datum.message_class}
+        = chat_datum.text
+
