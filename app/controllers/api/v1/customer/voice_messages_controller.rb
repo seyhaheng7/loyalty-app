@@ -5,7 +5,7 @@ module Api::V1::Customer
     swagger_controller :voice_messages, 'Voice Messages'
 
     def self.add_common_params(api)
-      api.param :form, 'voice_message[voice_file]', :string, :required, 'Voice File'
+      api.param :form, 'voice_message[voice_file]', :file, :required, 'Voice File'
     end
 
     swagger_api :show do

@@ -64,6 +64,13 @@
               "type": "string",
               "description": "Email",
               "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "password",
+              "type": "string",
+              "description": "Password",
+              "required": false
             }
           ],
           "summary": "edit User Profile",
