@@ -1,9 +1,11 @@
 #= require jquery
+#= require jquery-ui
 #= require jquery_ujs
 #= require bootstrap
 #= require select2
 #= require cable
 #= require ckeditor/init
+#= require jquery-ui/widgets/sortable
 
 #= require admin/app
 #= require admin/layout
@@ -20,6 +22,7 @@
 #= require stores/show
 
 #= require customer_locations/index
+#= require categories/index
 
 #= require customers/form
 #= require customers/show

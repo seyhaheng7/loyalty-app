@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171013013600) do
+ActiveRecord::Schema.define(version: 20171018083609) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(version: 20171013013600) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
+    t.integer "sort_order", default: 0
     t.index ["deleted_at"], name: "index_categories_on_deleted_at"
   end
 
@@ -163,7 +164,6 @@ ActiveRecord::Schema.define(version: 20171013013600) do
     t.integer "failed_attempts", default: 0, null: false
     t.string "unlock_token"
     t.datetime "locked_at"
-    t.datetime "deleted_at"
     t.string "phone"
     t.string "address"
     t.string "gender"
@@ -180,7 +180,6 @@ ActiveRecord::Schema.define(version: 20171013013600) do
     t.string "first_name"
     t.string "last_name"
     t.index ["confirmation_token"], name: "index_customers_on_confirmation_token", unique: true
-    t.index ["deleted_at"], name: "index_customers_on_deleted_at"
     t.index ["digit_expired_at"], name: "index_customers_on_digit_expired_at"
     t.index ["email"], name: "index_customers_on_email", unique: true
     t.index ["first_name", "last_name"], name: "index_customers_on_first_name_and_last_name"
@@ -218,9 +217,7 @@ ActiveRecord::Schema.define(version: 20171013013600) do
     t.string "youtube_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
     t.string "thumbnail"
-    t.index ["deleted_at"], name: "index_guides_on_deleted_at"
   end
 
   create_table "locations", force: :cascade do |t|
@@ -465,10 +462,8 @@ ActiveRecord::Schema.define(version: 20171013013600) do
     t.integer "earned_points"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
     t.integer "max_view_per_day"
     t.string "thumbnail"
-    t.index ["deleted_at"], name: "index_video_ads_on_deleted_at"
     t.index ["max_view_per_day"], name: "index_video_ads_on_max_view_per_day"
   end
 
