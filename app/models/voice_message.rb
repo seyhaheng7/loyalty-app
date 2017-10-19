@@ -1,3 +1,3 @@
 class VoiceMessage < ApplicationRecord
-  mount_uploader :voice_message, VoiceUploader
+  mount_uploader :voice_file, VoiceUploader
 end
