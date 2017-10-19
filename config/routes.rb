@@ -102,6 +102,7 @@ Rails.application.routes.draw do
         resources :term_conditions, only: [:index]
         resources :view_video_ads, only: [:index, :create]
         resources :homes, only: [:index]
+        resources :profiles, only: [:index]
         resources :voice_messages, only: [:show, :create]
         resources :customers, only: [] do
           get :profile, on: :collection
