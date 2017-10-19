@@ -5,8 +5,8 @@
 
       = f.input :name
 
-      = f.input :lat, as: :hidden, input_html: {id: 'place_latitude'}
-      = f.input :long, as: :hidden, input_html: {id: 'place_longitude'}
+      -# = f.input :lat, as: :hidden, input_html: {id: 'place_latitude'}
+      -# = f.input :long, as: :hidden, input_html: {id: 'place_longitude'}
 
       = f.input :address
       = f.input :email
@@ -17,6 +17,8 @@
       = f.association :company
       = f.association :location
 
+      = f.input :lat, input_html: {id: 'place_latitude'}
+      = f.input :long, input_html: {id: 'place_longitude'}
 
       #map
       .pull-left
