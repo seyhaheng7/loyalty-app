@@ -14,7 +14,7 @@
     = javascript_include_tag 'application'
     = render 'partials/onesignal'
 
-  %body.page-container-bg-solid.page-header-fixed.page-sidebar-closed-hide-logo{ id: "#{controller_name}_#{params[:action]}" }
+  %body.page-container-bg-solid.page-header-fixed.page-sidebar-closed-hide-logo{ id: "#{controller_name}_#{params[:action]}", 'data-user-signed-in' => "#{user_signed_in?}" }
 
     / BEGIN HEADER
     = render 'partials/topnav'

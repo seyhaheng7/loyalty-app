@@ -6,7 +6,6 @@ Codingate.Common =
     @_initDatePicker()
     @_handleNotificationsToggleClicked()
 
-
   _handleNotificationsToggleClicked: ->
     $('#notifications-toggle').click ->
       $('#pending-notifications-count').hide()
@@ -39,4 +38,3 @@ Codingate.Common =
   _initDatePicker: ->
     $('.date-picker').datepicker
       format: 'yyyy-mm-dd'
-
