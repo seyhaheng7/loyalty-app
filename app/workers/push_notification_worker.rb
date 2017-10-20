@@ -24,10 +24,20 @@ class PushNotificationWorker
   def push_notification(notification)
     sleep 1
     notifyable = notification.notifyable
-    paramsnotification = {"app_id" => ENV['ONE_SIGNAL_APP_ID'],
+    paramsnotification = {
+      "app_id" => ENV['ONE_SIGNAL_APP_ID'],
       "contents" => {"en" => "#{notification.text}"},
       "include_player_ids" => notifyable.devices.pluck(:device_id)
+      "data" => {
+        "type" => notification.notification_type,
+        "id" => notification.notifyable_id
+      }
     }
+
+    if notification.notification_type == 'NewPromotion'
+      promotion = notification.objectable
+      paramsnotification['big_picture'] = promotion.image.url
+    end
 
     if notification.notifyable_type == 'User'
       paramsnotification['url'] = path_for_notification(notification)
@@ -38,7 +48,7 @@ class PushNotificationWorker
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true
 
-    request = Net::HTTP::Post.new(uri.path,
+    request = Net::HTTP::Post.new(uri.path, notifyable
                                   'Content-Type'  => 'application/json;charset=utf-8',
                                   'Authorization' => "Basic #{ENV['ONE_SIGNAL_APP_KEY']}")
 
