@@ -13,7 +13,7 @@
     = javascript_include_tag 'application'
     = render 'partials/onesignal'
 
-  %body.login
+  %body.login{ id: "#{controller_name}_#{params[:action]}", 'data-user-signed-in' => "#{user_signed_in?}" }
     = render 'partials/message'
     .logo
       %a{href: "#!"}
