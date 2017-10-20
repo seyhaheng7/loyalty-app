@@ -13,8 +13,9 @@ describe 'Voice Messages' do
 
     it 'return voice message' do
       json = JSON.parse(response.body)
-      voice_file = json['voice_file']
-      expect(voice_file).to include voice_message.voice_file
+      voice_file = json['voice_file']['url']
+      binding.pry
+      expect(voice_file).to include voice_message.voice_file_url
     end
 
   end
