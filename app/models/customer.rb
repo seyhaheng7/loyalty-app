@@ -33,6 +33,7 @@ class Customer < ActiveRecord::Base
   scope :verified,              ->{ where.not(verified_at: nil) }
   scope :name_like,             ->(name){ where("#{table_name}.first_name || #{table_name}.last_name ilike ?", "%#{name}%") }
   scope :active,                ->{ where("update_location_at > ?", DateTime.now - 30.minutes) }
+  scope :unverified,            ->{ where(verified_at: nil) }
 
   reverse_geocoded_by :lat, :long
 
