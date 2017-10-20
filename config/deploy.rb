@@ -1,4 +1,3 @@
-require "whenever/capistrano"
 lock "3.9.1"
 
 
@@ -18,6 +17,8 @@ set :pty, false
 
 set :keep_releases, 5
 
+set :whenever_identifier, -> { "#{fetch(:application)}_#{fetch(:stage)}" }
+
 namespace :deploy do
 
   task :cleanup_assets do
@@ -35,5 +36,6 @@ namespace :deploy do
   before :updated, :cleanup_assets
   after :updated, :swagger_docs
 end
+
 
 
