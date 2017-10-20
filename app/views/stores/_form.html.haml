@@ -4,11 +4,12 @@
       = f.error_notification
 
       = f.input :name
-
-      -# = f.input :lat, as: :hidden, input_html: {id: 'place_latitude'}
-      -# = f.input :long, as: :hidden, input_html: {id: 'place_longitude'}
-
       = f.input :address
+
+      %span#loading
+        = image_tag 'loading.gif', size: '30x30', id: 'loading_image'
+        %b#loading_message
+        
       = f.input :email
       = f.input :open_and_close
       = f.input :facebook

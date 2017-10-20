@@ -1,5 +1,6 @@
 class Merchant < ActiveRecord::Base
   acts_as_paranoid
+  default_scope { order(created_at: :desc) }
 
   has_one :merchant_chat_support
   has_many :merchant_chat_support_data, as: :supportable

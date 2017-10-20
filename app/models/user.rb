@@ -26,6 +26,7 @@ class User < ApplicationRecord
 
   validates :role, presence: true
 
+  default_scope { order(created_at: :desc) }
   scope :name_like, ->(name){ where("#{table_name}.name ilike ?", "%#{name}%") }
   scope :admin_or_approver, ->{ admin.or(approver) }
 

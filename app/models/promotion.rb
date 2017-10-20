@@ -5,6 +5,7 @@ class Promotion < ApplicationRecord
 
   validates :title, presence: true
 
+  default_scope { order(created_at: :desc) }
   scope :active, -> {where(":today >= start_date AND :today <= end_date", today: Date.today)}
 
   has_many :notifications, as: :objectable

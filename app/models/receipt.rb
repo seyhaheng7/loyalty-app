@@ -34,7 +34,7 @@ class Receipt < ApplicationRecord
   delegate :name, to: :store, prefix: true, allow_nil: true
   delegate :name, to: :customer, prefix: true, allow_nil: true
 
-  default_scope{ order(created_at: :desc) }
+  default_scope { order(created_at: :desc) }
 
   def new_store=(params)
     new_store = Store.new params

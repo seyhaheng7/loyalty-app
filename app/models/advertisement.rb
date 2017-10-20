@@ -19,6 +19,7 @@ class Advertisement < ApplicationRecord
     records
   end
 
+  default_scope { order(created_at: :desc) }
   scope :active, -> {where(":today >= start_date AND :today <= end_date", today: Date.today)}
   scope :for_page, ->(page){where(for_page: page)}
 

@@ -21,13 +21,29 @@ describe 'Customer Login' do
   end
 
 
-
   it 'login unsuccessfully when incorrect digit' do
     put send_digit_api_v1_customer_digits_path, params: { phone: customer.phone }
     post customer_session_path, params: { phone: customer.phone, digit: 'asdfj' }
     expect(response.status).to eq(401)
   end
 end
+
+
+describe 'Customer Sign Up' do
+
+  let!(:customer){ create(:customer, :unverified) }
+
+  it 'sign up successfully' do
+    post customer_registration_path, params: { phone: '012121212', first_name: 'First Name', last_name: 'Last Name' }
+    expect(response.status).to eq(200)
+  end
+
+  it 'resend verification code' do
+    post customer_registration_path, params: { phone: customer.phone, first_name: customer.first_name, last_name: customer.last_name }
+    expect(response.status).to eq(200)
+  end
+end
+
 
 
 describe 'Customer Logout' do
