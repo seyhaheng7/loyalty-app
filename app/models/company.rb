@@ -12,6 +12,7 @@ class Company < ApplicationRecord
 
   delegate :name, to: :category, prefix: true, allow_nil: true
 
+  default_scope { order(created_at: :desc) }
   scope :partners, -> { where(partner: true) }
   scope :in_category, ->(category_id){ where(category_id: category_id) }
   scope :name_like, ->(name){ where("#{table_name}.name ilike ?", "%#{name}%") }

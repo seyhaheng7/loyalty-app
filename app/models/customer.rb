@@ -27,7 +27,7 @@ class Customer < ActiveRecord::Base
   has_many :chat_members
   has_many :chat_rooms, through: :chat_members
 
-
+  default_scope { order(created_at: :desc) }
   scope :able_to_verify,        ->{ where('verification_expired_at > ?', DateTime.now) }
   scope :digit_not_yet_expired, ->{ where('digit_expired_at > ?', DateTime.now) }
   scope :verified,              ->{ where.not(verified_at: nil) }

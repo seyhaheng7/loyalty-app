@@ -16,6 +16,7 @@ class Reward < ApplicationRecord
 
   delegate :name, :location, to: :store, prefix: true, allow_nil: true
 
+  default_scope { order(created_at: :desc) }
   scope :available, -> { where("quantity > approved_claimed_rewards_count") }
   scope :unavailable, -> { where("quantity <= approved_claimed_rewards_count") }
   scope :name_like, ->(name){ where("#{table_name}.name ilike ?", "%#{name}%") }
@@ -38,13 +39,13 @@ class Reward < ApplicationRecord
     records = all
     case params[:order_by]
     when 'newly added'
-      records = records.order(created_at: :desc)
+      records = records.reorder(created_at: :desc)
     when 'low point'
-      records = records.order(require_points: :asc)
+      records = records.reorder(require_points: :asc)
     when 'hight point'
-      records = records.order(require_points: :desc)
+      records = records.reorder(require_points: :desc)
     when 'vocher price'
-      records = records.order(price: :desc)
+      records = records.reorder(price: :desc)
     end
     records
   end

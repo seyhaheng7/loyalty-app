@@ -11,6 +11,4 @@ class ContactForm < ApplicationRecord
   scope :subject_like, ->(subject){ where("#{table_name}.subject ilike ?", "%#{subject}%") }
   scope :message_like, ->(message){ where("#{table_name}.message ilike ?", "%#{message}%") }
 
-
-
 end
