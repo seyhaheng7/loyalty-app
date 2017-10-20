@@ -17,10 +17,18 @@
       = f.input :phone, input_html: { class: 'inputmask' }
       = f.association :company
       = f.association :location
-
       = f.input :lat, input_html: {id: 'place_latitude'}
       = f.input :long, input_html: {id: 'place_longitude'}
 
+      %h5 Images
+      .row
+        .container-fluid
+          #store-images
+            = f.simple_fields_for :store_banners do |image|
+              = render 'store_banner_fields', f: image
+            .links
+              = link_to_add_association 'Add Image', f, :store_banners, class: 'btn btn-success'  
+      
       #map
       .pull-left
         -if policy(@store).create? || policy(@store).update?

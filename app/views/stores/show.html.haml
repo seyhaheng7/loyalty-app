@@ -31,11 +31,19 @@
       %tr
         %th Company:
         %td
-          = link_to @store.company_name, @store.company
+          - if @store.company_name != nil
+            = link_to @store.company_name, @store.company
       %tr
         %th Location:
         %td
-          = link_to @store.location_name, @store.company
+          - if @store.location_name != nil
+            = link_to @store.location_name, @store.company
+
+      %tr
+        %th Image:
+        %td 
+          - @store.store_banners.each do |pic|
+            = image_tag pic.image_url, size: '50x50'
       %tr
         %th Latitude:
         %td= @store.lat
@@ -43,7 +51,6 @@
         %th Longitude:
         %td= @store.long
           
-
     %input{type: 'hidden', value: @store.lat, id: 'lat_value'}
     %input{type: 'hidden', value: @store.long, id: 'long_value'}
 

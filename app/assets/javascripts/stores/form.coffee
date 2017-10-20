@@ -1,6 +1,7 @@
 Codingate.StoresForm = Codingate.StoresNew = Codingate.StoresCreate = Codingate.StoresEdit = Codingate.StoresUpdate =
   init: ->
     @_phoneMask()
+    @_handleAddedImage()
     @_initMap()
     @_changeMarkerPosition()
 
@@ -42,6 +43,24 @@ Codingate.StoresForm = Codingate.StoresNew = Codingate.StoresCreate = Codingate.
 
       latField.val lat
       longField.val lng
+
+  _handleAddedImage: ->
+    $('#store-images').on 'cocoon:after-insert', (e, added_image) ->
+      uploader = $(added_image).find('.image-uploader')
+      
+      input = $(added_image).find('input[type="file"]')
+      imageHolder = $(added_image).find('img')
+
+      input.on 'change', (e)->
+        reader = new FileReader
+        reader.onload = (e)->
+          imageHolder.attr('src', e.target.result)
+
+        file = @files[0]
+        reader.readAsDataURL file
+
+      imageHolder.click ->
+        input.click()
 
   _changeMarkerPosition: ->
     self = @

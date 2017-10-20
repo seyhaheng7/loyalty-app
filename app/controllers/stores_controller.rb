@@ -4,7 +4,8 @@ class StoresController < ApplicationController
   # GET /stores
   def index
     @grid = StoresGrid.new(params[:stores_grid]) do |scope|
-      scope.page(params[:page]).without_deleted
+      scope.page(params[:page])
+
     end
     authorize @grid.assets
   end
@@ -29,8 +30,8 @@ class StoresController < ApplicationController
   def create
     @store = Store.new(store_params)
     authorize @store
-
     if @store.save
+
       redirect_to @store, notice: 'Store was successfully created.'
     else
       render :new
@@ -44,6 +45,7 @@ class StoresController < ApplicationController
     if @store.update(store_params)
       redirect_to @store, notice: 'Store was successfully updated.'
     else
+
       render :edit
     end
   end
@@ -64,6 +66,8 @@ class StoresController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def store_params
-      params.require(:store).permit(:name, :lat, :long, :address, :company_id, :location_id, :website, :phone, :open_and_close, :email, :facebook)
+      params.require(:store).permit(:name, :lat, :long, :address, :company_id, :location_id, :website, :phone, :open_and_close, :email, :facebook, 
+        store_banners_attributes: [:id, :image, :image_cache, :_destroy]
+      )
     end
 end

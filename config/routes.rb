@@ -104,6 +104,8 @@ Rails.application.routes.draw do
         resources :homes, only: [:index]
         resources :profiles, only: [:index]
         resources :voice_messages, only: [:show, :create]
+        resources :store_images, only: [:index, :show]
+
         resources :customers, only: [] do
           get :profile, on: :collection
         end

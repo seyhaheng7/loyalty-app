@@ -5,6 +5,8 @@
 #= require select2
 #= require cable
 #= require ckeditor/init
+#= require cocoon
+
 #= require jquery-ui/widgets/sortable
 
 #= require admin/app

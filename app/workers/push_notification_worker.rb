@@ -27,7 +27,7 @@ class PushNotificationWorker
     paramsnotification = {
       "app_id" => ENV['ONE_SIGNAL_APP_ID'],
       "contents" => {"en" => "#{notification.text}"},
-      "include_player_ids" => notifyable.devices.pluck(:device_id)
+      "include_player_ids" => notifyable.devices.pluck(:device_id),
       "data" => {
         "type" => notification.notification_type,
         "id" => notification.notifyable_id
@@ -48,7 +48,7 @@ class PushNotificationWorker
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true
 
-    request = Net::HTTP::Post.new(uri.path, notifyable
+    request = Net::HTTP::Post.new(uri.path, notifyable,
                                   'Content-Type'  => 'application/json;charset=utf-8',
                                   'Authorization' => "Basic #{ENV['ONE_SIGNAL_APP_KEY']}")
 
