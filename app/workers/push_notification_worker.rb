@@ -27,7 +27,7 @@ class PushNotificationWorker
     paramsnotification = {
       "app_id" => ENV['ONE_SIGNAL_APP_ID'],
       "contents" => {"en" => "#{notification.text}"},
-      "include_player_ids" => notifyable.devices.pluck(:device_id)
+      "include_player_ids" => notifyable.devices.pluck(:device_id),
       "data" => {
         "type" => notification.notification_type,
         "id" => notification.notifyable_id

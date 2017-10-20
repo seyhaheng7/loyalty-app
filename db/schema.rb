@@ -171,11 +171,7 @@ ActiveRecord::Schema.define(version: 20171019082347) do
     t.datetime "digit_expired_at"
     t.string "first_name"
     t.string "last_name"
-<<<<<<< HEAD
     t.datetime "update_location_at"
-=======
-    t.datetime "deleted_at"
->>>>>>> 17a658daa3895be990d4c65b15a5f5a451116e43
     t.index ["confirmation_token"], name: "index_customers_on_confirmation_token", unique: true
     t.index ["deleted_at"], name: "index_customers_on_deleted_at"
     t.index ["digit_expired_at"], name: "index_customers_on_digit_expired_at"
