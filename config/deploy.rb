@@ -1,3 +1,4 @@
+require "whenever/capistrano"
 lock "3.9.1"
 
 
