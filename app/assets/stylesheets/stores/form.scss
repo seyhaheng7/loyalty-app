@@ -4,4 +4,9 @@ body[id='stores_new'], [id='stores_create'], [id='stores_edit'], [id='stores_upd
     height: 500px;
     margin-bottom: 15px;
   }
+
+  #loading{
+    display: none;
+    color: #F44336;
+  }
 }
