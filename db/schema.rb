@@ -396,6 +396,14 @@ ActiveRecord::Schema.define(version: 20171019082347) do
     t.index ["sticker_group_id"], name: "index_stickers_on_sticker_group_id"
   end
 
+  create_table "store_banners", force: :cascade do |t|
+    t.string "image"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "store_id"
+    t.index ["store_id"], name: "index_store_banners_on_store_id"
+  end
+
   create_table "stores", force: :cascade do |t|
     t.string "name"
     t.float "lat"
@@ -502,6 +510,7 @@ ActiveRecord::Schema.define(version: 20171019082347) do
   add_foreign_key "recieved_members", "chat_members"
   add_foreign_key "rewards", "stores"
   add_foreign_key "stickers", "sticker_groups"
+  add_foreign_key "store_banners", "stores"
   add_foreign_key "stores", "companies"
   add_foreign_key "stores", "locations"
   add_foreign_key "view_video_ads", "customers"

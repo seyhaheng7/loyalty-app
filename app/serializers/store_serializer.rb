@@ -3,6 +3,7 @@ class StoreSerializer < ActiveModel::Serializer
   attributes :errors
   belongs_to :company
   belongs_to :location
+  has_many   :store_banners
 
   def distance
     if object.respond_to?(:distance)

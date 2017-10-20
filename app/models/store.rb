@@ -9,6 +9,10 @@ class Store < ApplicationRecord
   has_many :claimed_rewards, through: :rewards
   has_many :merchants
 
+  has_many :store_banners, dependent: :destroy
+  accepts_nested_attributes_for :store_banners, allow_destroy: true,  reject_if: :all_blank
+
+
   validates :name, presence: true, uniqueness: {scope: :company_id}
   validates :address, presence: true
 

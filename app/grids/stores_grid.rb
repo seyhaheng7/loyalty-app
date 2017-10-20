@@ -18,11 +18,15 @@ class StoresGrid
   column(:address)
 
   column(:company,  html: true) do |record|
-    link_to record.company_name, record.company
+    if record.company_name != nil
+      link_to record.company_name, record.company
+    end
   end
 
   column(:location,  html: true) do |record|
-    link_to record.location_name, record.location
+    if record.location_name != nil
+      link_to record.location_name, record.location
+    end
   end
 
   column(:actions, html:true) do |record|
