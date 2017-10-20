@@ -8,4 +8,6 @@ class Sticker < ApplicationRecord
   mount_uploader :image, ImageUploader
 
   delegate :name, to: :sticker_group, prefix: true, allow_nil: true
+
+  default_scope { order(created_at: :desc) }
 end

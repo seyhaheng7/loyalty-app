@@ -4,6 +4,8 @@ class Guide < ApplicationRecord
   
   mount_uploader :thumbnail, ThumbnailUploader
 
+  default_scope { order(created_at: :desc) }
+  
   def youtube_id
     YoutubeID.from(youtube_url)
   end

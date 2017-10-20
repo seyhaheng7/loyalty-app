@@ -17,6 +17,7 @@ class Store < ApplicationRecord
 
   reverse_geocoded_by :lat, :long
 
+  default_scope { order(created_at: :desc) }
   scope :name_like, ->(name){ where("#{table_name}.name ilike ?", "%#{name}%") }
 
   delegate :name, to: :company, prefix: true, allow_nil: true
@@ -26,7 +27,7 @@ class Store < ApplicationRecord
     records = all
     params ||= {}
     if params[:name].present?
-      records = records.order(name: params[:name])
+      records = records.reorder(name: params[:name])
     end
 
     records
