@@ -156,7 +156,6 @@ ActiveRecord::Schema.define(version: 20171019082347) do
     t.integer "failed_attempts", default: 0, null: false
     t.string "unlock_token"
     t.datetime "locked_at"
-    t.datetime "deleted_at"
     t.string "phone"
     t.string "address"
     t.string "gender"
@@ -171,13 +170,9 @@ ActiveRecord::Schema.define(version: 20171019082347) do
     t.datetime "digit_expired_at"
     t.string "first_name"
     t.string "last_name"
-<<<<<<< HEAD
     t.datetime "update_location_at"
-=======
     t.datetime "deleted_at"
->>>>>>> 17a658daa3895be990d4c65b15a5f5a451116e43
     t.index ["confirmation_token"], name: "index_customers_on_confirmation_token", unique: true
-    t.index ["deleted_at"], name: "index_customers_on_deleted_at"
     t.index ["digit_expired_at"], name: "index_customers_on_digit_expired_at"
     t.index ["email"], name: "index_customers_on_email", unique: true
     t.index ["first_name", "last_name"], name: "index_customers_on_first_name_and_last_name"
@@ -400,6 +395,14 @@ ActiveRecord::Schema.define(version: 20171019082347) do
     t.index ["sticker_group_id"], name: "index_stickers_on_sticker_group_id"
   end
 
+  create_table "store_banners", force: :cascade do |t|
+    t.string "image"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "store_id"
+    t.index ["store_id"], name: "index_store_banners_on_store_id"
+  end
+
   create_table "stores", force: :cascade do |t|
     t.string "name"
     t.float "lat"
@@ -506,6 +509,7 @@ ActiveRecord::Schema.define(version: 20171019082347) do
   add_foreign_key "recieved_members", "chat_members"
   add_foreign_key "rewards", "stores"
   add_foreign_key "stickers", "sticker_groups"
+  add_foreign_key "store_banners", "stores"
   add_foreign_key "stores", "companies"
   add_foreign_key "stores", "locations"
   add_foreign_key "view_video_ads", "customers"

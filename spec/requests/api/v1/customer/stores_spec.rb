@@ -3,6 +3,12 @@ describe 'stores' do
   let!(:stores){ create_list(:store, 10) }
   let!(:store){ create(:store) }
 
+  let!(:store1){create(:store)}
+
+  let!(:store_banners){create_list(:store_banner, 10, store_id: store1.id)}
+
+
+
   describe 'GET api/v1/customer/stores' do
     before do
       get api_v1_customer_stores_path, headers: customer.create_new_auth_token
@@ -127,6 +133,32 @@ describe 'stores' do
       name = json['name']
       expect(name).to include store.name
     end
+
+  end
+
+  describe 'GET api/v1/customer/stores/:id' do
+    before do
+      get api_v1_customer_store_path(store1), headers: customer.create_new_auth_token
+    end
+
+    it 'return status successful' do
+      expect(response).to have_http_status(200)
+    end
+
+    it 'return store' do
+      json = JSON.parse(response.body)
+      name = json['name']
+      expect(name).to include store1.name
+    end
+
+
+    it 'include multiple image' do
+      json = JSON.parse(response.body)
+      images = json['store_banners']
+      store_ids = images.map{ |j| j['store_id'] }
+      expect(store_ids).to include store1.id
+    end
+
   end
 
 end
