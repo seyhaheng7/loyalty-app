@@ -129,6 +129,8 @@
             %ul.sub-menu
               %li.nav-item
                 = link_to "Rewards Report", rewards_reports_path, class: 'nav-link'
+              %li.nav-item
+                = link_to "Rewards Ads", ads_reports_path, class: 'nav-link'
 
         %li.nav-item{ class: ( "active" if sidebar_active?('settings') || sidebar_active?('term_conditions') || sidebar_active?('privacy_policies') || sidebar_active?('customer_locations') ||sidebar_active?('stickers') || sidebar_active?('sticker_groups'))}
           %a.nav-link.nav-toggle

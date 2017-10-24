@@ -56,3 +56,20 @@
               %span.sr-only
                 = @customers
                 progress
+  .col-lg-3.col-md-3.col-sm-6.col-xs-12
+    = link_to customers_path do
+      .dashboard-stat2.bordered
+        .display
+          .number
+            %h3.font-blue-sharp
+              %span
+                = @customers
+            %small TOTAL Users Online
+          .icon
+            %i.icon-users
+        .progress-info
+          .progress
+            %span.progress-bar.progress-bar-success.blue-sharp{:style => "width: #{@onlines}%;"}
+              %span.sr-only
+                = @onlines
+                progress

@@ -6,7 +6,8 @@ Rails.application.routes.draw do
 
   resource :reports, only: [] do
     member do
-    get :rewards
+      get :rewards
+      get :ads
     end
   end
 
@@ -46,7 +47,7 @@ Rails.application.routes.draw do
   resources :contact_forms, only: [:index, :show, :destroy]
   resources :video_ads
   resources :customer_locations, only: :index
-  
+
   resources :customer_chat_supports, only: [:index, :show] do
     member do
       patch :seen_to_now

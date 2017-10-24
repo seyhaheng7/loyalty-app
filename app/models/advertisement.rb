@@ -9,6 +9,10 @@ class Advertisement < ApplicationRecord
 
   mount_uploader :banner, BannerUploader
 
+  scope :start_between, ->(start_date, end_date){ where(start_date: start_date.beginning_of_day..end_date.end_of_day) }
+  scope :end_between, ->(start_date, end_date){ where(end_date: start_date.beginning_of_day..end_date.end_of_day) }
+  scope :active_between, ->(start_date, end_date){ start_between(start_date, end_date).or(end_between(start_date, end_date)) }
+
   def self.filter(params)
     records = all
 
