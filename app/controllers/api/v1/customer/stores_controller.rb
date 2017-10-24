@@ -30,9 +30,9 @@ module Api::V1::Customer
       response :not_acceptable
     end
 
-    def index 
-      @stores = Store.filter(params).order_by(params[:order]).page(params[:page]).includes(:company)
-      render json: @stores, include: [:company, :location], status: :ok
+    def index
+      @stores = Store.filter(params).order_by(params[:order]).page(params[:page]).includes(:company, :location, :store_banners)
+      render json: @stores, status: :ok
     end
 
     def show
