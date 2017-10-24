@@ -1,0 +1,13 @@
+.m-heading-1.border-green.m-bordered
+  = datagrid_form_for @grid, :method => :get, :url => ads_reports_path
+
+.portlet.light.bordered
+  .portlet-title
+    .caption
+      %i.icon-diamond
+      Report Adversements
+  .portlet-body
+    .table-scrollable
+      = datagrid_table @grid
+    .text-center
+      = paginate(@grid.assets)

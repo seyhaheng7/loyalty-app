@@ -5,4 +5,9 @@ class ReportsController < ApplicationController
       scope.page(params[:page])
     end
   end
+  def ads
+    @grid = ReportAdsGrid.new(params[:report_ads_grid]) do |scope|
+      scope.page(params[:page])
+    end
+  end
 end

@@ -38,6 +38,8 @@ ActiveRecord::Schema.define(version: 20171019082347) do
     t.datetime "deleted_at"
     t.float "lat"
     t.float "long"
+    t.float "price"
+    t.integer "view"
     t.index ["deleted_at"], name: "index_advertisements_on_deleted_at"
     t.index ["for_page"], name: "index_advertisements_on_for_page"
   end
@@ -179,6 +181,7 @@ ActiveRecord::Schema.define(version: 20171019082347) do
     t.datetime "update_location_at"
     t.string "first_name"
     t.string "last_name"
+    t.datetime "update_location_at"
     t.datetime "deleted_at"
     t.index ["confirmation_token"], name: "index_customers_on_confirmation_token", unique: true
     t.index ["digit_expired_at"], name: "index_customers_on_digit_expired_at"
