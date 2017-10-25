@@ -66,6 +66,17 @@ module Overrides::DeviseTokenAuth::Customer
       'phone'
     end
 
+    # Trick to make token auth work start
+    def authenticate_user!
+      authenticate_customer!
+    end
+
+    def current_user
+      current_customer
+    end
+    # Trick to make token auth work end
+
+
     private
 
     def destroy_device

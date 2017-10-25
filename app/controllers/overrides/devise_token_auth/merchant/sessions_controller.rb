@@ -58,6 +58,18 @@ module Overrides::DeviseTokenAuth::Merchant
       'phone'
     end
 
+    # Trick to make token auth work start
+    def authenticate_user!
+      authenticate_merchant!
+    end
+
+    def current_user
+      current_merchant
+    end
+    # Trick to make token auth work end
+
+
+
     private
 
     def destroy_device
