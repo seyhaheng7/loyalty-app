@@ -12,3 +12,4 @@ $(document).ready ->
       received: (notification) ->
         console.log notification
         $('#pending-notifications-count').html notification.pending_notifications_count
+        $('#pending-notifications-count').show()

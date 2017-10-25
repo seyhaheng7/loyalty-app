@@ -41,7 +41,7 @@ ActiveRecord::Base.transaction do
   end
 
   3.times do
-    Advertisement.create!(name: FFaker::Name.name, banner: Rails.root.join("vendor/assets/images/admin/a2.jpg").open, for_page: "Shop & Earn", address: FFaker::Address, phone: "1#{Random.rand(144..999)}9134", website: FFaker::Internet.http_url, start_date: Random.rand(5..15).days.ago, end_date: Random.rand(10..15).days.ago)
+    Advertisement.create!(name: FFaker::Name.name, banner: Rails.root.join("vendor/assets/images/admin/a2.jpg").open, for_page: "Watch & Earn", address: FFaker::Address, phone: "1#{Random.rand(144..999)}9134", website: FFaker::Internet.http_url, start_date: Random.rand(5..15).days.ago, end_date: Random.rand(10..15).days.ago)
   end
 
   3.times do

@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171024050009) do
+ActiveRecord::Schema.define(version: 20171025021908) do
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -93,7 +94,6 @@ ActiveRecord::Schema.define(version: 20171024050009) do
     t.bigint "managed_by_id"
     t.string "qr_token"
     t.boolean "given", default: false
-    t.date "expired_at"
     t.index ["customer_id"], name: "index_claimed_rewards_on_customer_id"
     t.index ["given"], name: "index_claimed_rewards_on_given"
     t.index ["managed_by_id"], name: "index_claimed_rewards_on_managed_by_id"
@@ -185,7 +185,6 @@ ActiveRecord::Schema.define(version: 20171024050009) do
     t.string "first_name"
     t.string "last_name"
     t.datetime "update_location_at"
-    t.datetime "deleted_at"
     t.index ["confirmation_token"], name: "index_customers_on_confirmation_token", unique: true
     t.index ["deleted_at"], name: "index_customers_on_deleted_at"
     t.index ["digit_expired_at"], name: "index_customers_on_digit_expired_at"
@@ -228,6 +227,13 @@ ActiveRecord::Schema.define(version: 20171024050009) do
     t.datetime "deleted_at"
     t.string "thumbnail"
     t.index ["deleted_at"], name: "index_guides_on_deleted_at"
+  end
+
+  create_table "land_marks", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_land_marks_on_name"
   end
 
   create_table "locations", force: :cascade do |t|
@@ -374,7 +380,6 @@ ActiveRecord::Schema.define(version: 20171024050009) do
     t.bigint "store_id"
     t.float "price"
     t.text "description"
-    t.integer "claimed_reward_expired"
     t.date "start_date"
     t.date "end_date"
     t.index ["deleted_at"], name: "index_rewards_on_deleted_at"
