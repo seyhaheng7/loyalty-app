@@ -33,6 +33,7 @@ gem 'nexmo',              '~> 4.7.0'
 gem 'sidekiq',            '~> 5.0.4'
 gem 'ffaker',             '~> 2.6.0'
 gem 'bullet',             '~> 5.6.1'
+gem 'koala',              '~> 3.0.0'
 
 group :development, :test do
   gem 'lunchy'

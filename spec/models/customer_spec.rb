@@ -13,12 +13,12 @@ describe Customer, 'Validation' do
     end
 
     it 'valid when length is 8' do
-      customer = build(:customer, phone: '98430641')
+      customer = build(:customer, phone: '098430641')
       expect(customer).to be_valid
     end
 
     it 'valid when length is 9' do
-      customer = build(:customer, phone: '984306419')
+      customer = build(:customer, phone: '0984306419')
       expect(customer).to be_valid
     end
   end
