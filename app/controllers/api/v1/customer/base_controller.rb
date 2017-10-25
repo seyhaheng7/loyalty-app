@@ -7,7 +7,7 @@ module Api::V1::Customer
     include Pundit
     include DeviseTokenAuth::Concerns::SetUserByToken
     before_action :authenticate_customer!
-    before_action :check_customer_verification!, if: ->{ customer_signed_in? }
+    before_action :check_customer_verification!, if: :customer_signed_in?
 
     # user not allow to access
     rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
@@ -61,15 +61,11 @@ module Api::V1::Customer
     private
 
     def check_customer_verification!
-      unless current_customer.verified?
-        error = { errors: ['Unverified account'] }
-        render json: error, status: 401
-      end
-
-      unless current_user.completed_profile?
-
-
+      if !current_user.completed_profile?
         error = { errors: ['profile not completed'], user: ActiveModelSerializers::SerializableResource.new(current_customer) }
+        render json: error, status: 401
+      elsif !current_customer.verified?
+        error = { errors: ['Unverified account'] }
         render json: error, status: 401
       end
     end

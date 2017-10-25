@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171025021908) do
+ActiveRecord::Schema.define(version: 20171025084425) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -145,6 +145,17 @@ ActiveRecord::Schema.define(version: 20171025021908) do
     t.index ["customer_id"], name: "index_customer_chat_supports_on_customer_id"
   end
 
+  create_table "customer_land_marks", force: :cascade do |t|
+    t.float "lat"
+    t.float "long"
+    t.bigint "land_mark_id"
+    t.bigint "customer_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["customer_id"], name: "index_customer_land_marks_on_customer_id"
+    t.index ["land_mark_id"], name: "index_customer_land_marks_on_land_mark_id"
+  end
+
   create_table "customers", force: :cascade do |t|
     t.string "provider", default: "phone", null: false
     t.string "uid", default: "", null: false
@@ -185,6 +196,7 @@ ActiveRecord::Schema.define(version: 20171025021908) do
     t.string "first_name"
     t.string "last_name"
     t.datetime "update_location_at"
+    t.string "provider_access_token"
     t.index ["confirmation_token"], name: "index_customers_on_confirmation_token", unique: true
     t.index ["deleted_at"], name: "index_customers_on_deleted_at"
     t.index ["digit_expired_at"], name: "index_customers_on_digit_expired_at"
@@ -525,6 +537,8 @@ ActiveRecord::Schema.define(version: 20171025021908) do
   add_foreign_key "contact_forms", "customers"
   add_foreign_key "customer_chat_support_data", "customer_chat_supports"
   add_foreign_key "customer_chat_supports", "customers"
+  add_foreign_key "customer_land_marks", "customers"
+  add_foreign_key "customer_land_marks", "land_marks"
   add_foreign_key "merchant_chat_support_data", "merchant_chat_supports"
   add_foreign_key "merchant_chat_supports", "merchants"
   add_foreign_key "operating_systems", "customers"

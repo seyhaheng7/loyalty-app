@@ -1,6 +1,7 @@
 module Api::V1::Customer
   class OmniauthController < BaseController
     skip_before_action :authenticate_customer!
+    skip_before_action :check_customer_verification!, if: :customer_signed_in?
 
     swagger_controller :omniauth, 'Omniauth'
 
@@ -47,12 +48,25 @@ module Api::V1::Customer
         customer = Customer.new(omniauth_params.merge(provider: 'facebook', password: Devise.friendly_token))
       end
       if customer.save
+        @resource = customer
+        @client_id = SecureRandom.urlsafe_base64(nil, false)
+        @token     = SecureRandom.urlsafe_base64(nil, false)
+
+        @resource.tokens[@client_id] = {
+          token: BCrypt::Password.create(@token),
+          expiry: (Time.now + DeviseTokenAuth.token_lifespan).to_i
+        }
+        @resource.save
+
+        sign_in(:user, @resource, store: false, bypass: false)
+
         yield @resource if block_given?
+
         add_device
         update_auth_header
-
-        render json: { data: customer }, status: :success
+        render json: customer , status: 200
       else
+        # binding.pry
         render json: {
           errors: customer.errors.full_messages
         }, status: 401
@@ -67,6 +81,18 @@ module Api::V1::Customer
         customer = Customer.new(omniauth_params.merge(provider: 'google', password: Devise.friendly_token))
       end
       if customer.save
+        @resource = customer
+        @client_id = SecureRandom.urlsafe_base64(nil, false)
+        @token     = SecureRandom.urlsafe_base64(nil, false)
+
+        @resource.tokens[@client_id] = {
+          token: BCrypt::Password.create(@token),
+          expiry: (Time.now + DeviseTokenAuth.token_lifespan).to_i
+        }
+        @resource.save
+
+        sign_in(:user, @resource, store: false, bypass: false)
+
         yield @resource if block_given?
         add_device
         update_auth_header
@@ -86,11 +112,6 @@ module Api::V1::Customer
       params.permit(
         :email, :phone, :registration, :first_name, :last_name, :gender, :avatar, :address, :lat, :long, :remote_avatar_url, :uid, :provider_access_token
       )
-    end
-
-    def destroy_device
-      @device ||= @resource.devices.find_by(device_id: params[:device_id])
-      @device.destroy if @device.present?
     end
 
     def add_device
