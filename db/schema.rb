@@ -15,14 +15,6 @@ ActiveRecord::Schema.define(version: 20171024050009) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "admin_messages", force: :cascade do |t|
-    t.text "message"
-    t.bigint "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_admin_messages_on_user_id"
-  end
-
   create_table "advertisements", force: :cascade do |t|
     t.string "name"
     t.string "banner"
@@ -42,6 +34,17 @@ ActiveRecord::Schema.define(version: 20171024050009) do
     t.integer "view"
     t.index ["deleted_at"], name: "index_advertisements_on_deleted_at"
     t.index ["for_page"], name: "index_advertisements_on_for_page"
+  end
+
+  create_table "banners", force: :cascade do |t|
+    t.string "image"
+    t.string "imageable_type"
+    t.bigint "imageable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "advertisement_id"
+    t.index ["advertisement_id"], name: "index_banners_on_advertisement_id"
+    t.index ["imageable_type", "imageable_id"], name: "index_banners_on_imageable_type_and_imageable_id"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -166,6 +169,7 @@ ActiveRecord::Schema.define(version: 20171024050009) do
     t.integer "failed_attempts", default: 0, null: false
     t.string "unlock_token"
     t.datetime "locked_at"
+    t.datetime "deleted_at"
     t.string "phone"
     t.string "address"
     t.string "gender"
@@ -178,11 +182,12 @@ ActiveRecord::Schema.define(version: 20171024050009) do
     t.datetime "verified_at"
     t.string "login_digit"
     t.datetime "digit_expired_at"
-    t.datetime "update_location_at"
     t.string "first_name"
     t.string "last_name"
+    t.datetime "update_location_at"
     t.datetime "deleted_at"
     t.index ["confirmation_token"], name: "index_customers_on_confirmation_token", unique: true
+    t.index ["deleted_at"], name: "index_customers_on_deleted_at"
     t.index ["digit_expired_at"], name: "index_customers_on_digit_expired_at"
     t.index ["email"], name: "index_customers_on_email", unique: true
     t.index ["first_name", "last_name"], name: "index_customers_on_first_name_and_last_name"
@@ -220,7 +225,9 @@ ActiveRecord::Schema.define(version: 20171024050009) do
     t.string "youtube_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
     t.string "thumbnail"
+    t.index ["deleted_at"], name: "index_guides_on_deleted_at"
   end
 
   create_table "locations", force: :cascade do |t|
@@ -375,7 +382,7 @@ ActiveRecord::Schema.define(version: 20171024050009) do
 
   create_table "settings", force: :cascade do |t|
     t.string "var", null: false
-    t.text "value"
+    t.string "value"
     t.integer "thing_id"
     t.string "thing_type", limit: 30
     t.datetime "created_at", null: false
@@ -474,8 +481,10 @@ ActiveRecord::Schema.define(version: 20171024050009) do
     t.integer "earned_points"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
     t.integer "max_view_per_day"
     t.string "thumbnail"
+    t.index ["deleted_at"], name: "index_video_ads_on_deleted_at"
     t.index ["max_view_per_day"], name: "index_video_ads_on_max_view_per_day"
   end
 
@@ -497,7 +506,7 @@ ActiveRecord::Schema.define(version: 20171024050009) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "admin_messages", "users"
+  add_foreign_key "banners", "advertisements"
   add_foreign_key "chat_data", "chat_rooms"
   add_foreign_key "chat_data", "customers"
   add_foreign_key "chat_members", "chat_rooms"
