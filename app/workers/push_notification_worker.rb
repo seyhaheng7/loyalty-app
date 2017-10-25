@@ -48,7 +48,7 @@ class PushNotificationWorker
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true
 
-    request = Net::HTTP::Post.new(uri.path, notifyable,
+    request = Net::HTTP::Post.new(uri.path,
                                   'Content-Type'  => 'application/json;charset=utf-8',
                                   'Authorization' => "Basic #{ENV['ONE_SIGNAL_APP_KEY']}")
 
