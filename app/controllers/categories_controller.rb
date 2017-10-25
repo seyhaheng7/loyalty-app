@@ -9,9 +9,9 @@ class CategoriesController < ApplicationController
     authorize @grid.assets
   end
 
-   def update_order
-      Category.update_order(params[:ids])
-    end
+  def update_order
+    Category.update_order(params[:ids])
+  end
 
   # GET /categories/1
   def show

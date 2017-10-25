@@ -25,6 +25,8 @@ class RewardsGrid
     image_tag reward.image, size: '50x50'
   end
   column(:require_points)
+  column(:start_date)
+  column(:end_date)
   column(:quantity)
   column(:store, html:true) do |reward|
     link_to reward.store_name, reward.store

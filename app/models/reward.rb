@@ -49,6 +49,11 @@ class Reward < ApplicationRecord
     records
   end
 
+  scope :start_between, ->(start_date, end_date){ where(start_date: start_date.beginning_of_day..end_date.end_of_day) }
+  scope :end_between, ->(start_date, end_date){ where(end_date: start_date.beginning_of_day..end_date.end_of_day) }
+  scope :active_between, ->(start_date, end_date){ start_between(start_date, end_date).or(end_between(start_date, end_date)) }
+  scope :active, -> {where(":today >= start_date AND :today <= end_date", today: Date.today)}
+
   def available?
     quantity > approved_claimed_rewards_count
   end

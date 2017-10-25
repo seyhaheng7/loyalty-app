@@ -8,7 +8,7 @@ module Api::V1::Customer
       summary 'Fetches all rewards'
       param :query, :page, :integer, :optional, "Page number"
       param :query, :store_name, :string, :optional, "Store name"
-      
+
       response :unauthorized
       response :success
       response :not_acceptable, "The request you made is not acceptable"
@@ -26,7 +26,7 @@ module Api::V1::Customer
     end
 
     def index
-      @rewards = Reward.available.filter(params).order_with(params).page(params[:page]).includes(:store)
+      @rewards = Reward.active.available.filter(params).order_with(params).page(params[:page]).includes(:store)
       render json: @rewards, status: :ok
     end
 
