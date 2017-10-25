@@ -10,9 +10,9 @@ class Customer < ActiveRecord::Base
   mount_base64_uploader :avatar, ImageUploader
 
   validates :phone, :presence => true, if: :phone_provider?
-  validates :phone, uniqueness: { message: "already registered", allow_nil: true }
-  validates :phone, numericality: { message: 'Not a phone number', allow_nil: true },
-              length: { minimum: 9, maximum: 10, message: 'Not a phone number' }
+  validates :phone, uniqueness: { message: "already registered" }, allow_blank: true
+  validates :phone, numericality: { message: 'Not a phone number' }, allow_blank: true
+  validates :phone, length: { minimum: 9, maximum: 10, message: 'Not a phone number' }, allow_blank: true
   validates :first_name, :last_name, presence: true, if: :omniauth_provider?
   validate :correct_facebook_uid, if: :facebook_provider?
   validate :correct_google_uid, if: :google_provider?
