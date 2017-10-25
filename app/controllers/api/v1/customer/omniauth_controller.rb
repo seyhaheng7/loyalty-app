@@ -7,7 +7,7 @@ module Api::V1::Customer
     swagger_api :facebook do
       summary 'Facebook Omniauth Registration'
       param :form, 'uid', :string, :required, 'uid'
-      param :form, 'access_token', :string, :optional, 'access token'
+      param :form, 'provider_access_token', :string, :required, 'access token'
       param :form, 'phone', :string, :optional, 'Phone Number'
       param :form, 'first_name', :string, :optional, 'First Name'
       param :form, 'last_name', :string, :optional, 'Last Name'
@@ -25,7 +25,7 @@ module Api::V1::Customer
     swagger_api :google do
       summary 'google Omniauth Registration'
       param :form, 'uid', :string, :required, 'uid'
-      param :form, 'access_token', :string, :optional, 'access token'
+      param :form, 'provider_access_token', :string, :required, 'access token'
       param :form, 'phone', :string, :optional, 'Phone Number'
       param :form, 'first_name', :string, :optional, 'First Name'
       param :form, 'last_name', :string, :optional, 'Last Name'
