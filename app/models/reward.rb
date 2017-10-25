@@ -11,7 +11,6 @@ class Reward < ApplicationRecord
   validates :image, presence: true
   validates :name, presence: true, uniqueness: {scope: :store_id}
 
-
   mount_uploader :image, ImageUploader
 
   delegate :name, :location, to: :store, prefix: true, allow_nil: true
