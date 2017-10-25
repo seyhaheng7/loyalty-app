@@ -11,7 +11,6 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema.define(version: 20171024050009) do
-
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -94,6 +93,7 @@ ActiveRecord::Schema.define(version: 20171024050009) do
     t.bigint "managed_by_id"
     t.string "qr_token"
     t.boolean "given", default: false
+    t.date "expired_at"
     t.index ["customer_id"], name: "index_claimed_rewards_on_customer_id"
     t.index ["given"], name: "index_claimed_rewards_on_given"
     t.index ["managed_by_id"], name: "index_claimed_rewards_on_managed_by_id"
@@ -374,6 +374,9 @@ ActiveRecord::Schema.define(version: 20171024050009) do
     t.bigint "store_id"
     t.float "price"
     t.text "description"
+    t.integer "claimed_reward_expired"
+    t.date "start_date"
+    t.date "end_date"
     t.index ["deleted_at"], name: "index_rewards_on_deleted_at"
     t.index ["name"], name: "index_rewards_on_name"
     t.index ["quantity", "approved_claimed_rewards_count"], name: "index_rewards_on_quantity_and_approved_claimed_rewards_count"

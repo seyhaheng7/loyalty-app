@@ -463,7 +463,7 @@ DEPENDENCIES
   carrierwave (~> 1.1.0)
   carrierwave-base64 (~> 2.3.5)
   ckeditor (~> 4.2)
-  cocoon (~> 1.2, >= 1.2.10)
+  cocoon (~> 1.2.10)
   coffee-rails (~> 4.2)
   database_cleaner (~> 1.6.1)
   datagrid (~> 1.5)
@@ -479,7 +479,7 @@ DEPENDENCIES
   geocoder (~> 1.4.4)
   haml-rails (~> 0.9)
   jquery-rails (~> 4.3.1)
-  jquery-ui-rails
+  jquery-ui-rails (~> 6.0.1)
   kaminari
   koala (~> 3.0.0)
   letter_opener (~> 1.4.1)
