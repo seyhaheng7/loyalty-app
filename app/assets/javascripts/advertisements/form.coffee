@@ -1,6 +1,7 @@
 Codingate.AdvertisementsForm = Codingate.AdvertisementsNew = Codingate.AdvertisementsCreate = Codingate.AdvertisementsEdit = Codingate.AdvertisementsUpdate =
   init: ->
     @_initAdvertisementMap()
+    @_handleAddedImage()
 
   _initAdvertisementMap: ->
     DEFAULT_LATITUDE = 11.570436366295361
@@ -35,3 +36,20 @@ Codingate.AdvertisementsForm = Codingate.AdvertisementsNew = Codingate.Advertise
       latField.val lat
       longField.val lng
 
+  _handleAddedImage: ->
+    $('#store-images').on 'cocoon:after-insert', (e, added_image) ->
+      uploader = $(added_image).find('.image-uploader')
+
+      input = $(added_image).find('input[type="file"]')
+      imageHolder = $(added_image).find('img')
+
+      input.on 'change', (e)->
+        reader = new FileReader
+        reader.onload = (e)->
+          imageHolder.attr('src', e.target.result)
+
+        file = @files[0]
+        reader.readAsDataURL file
+
+      imageHolder.click ->
+        input.click()

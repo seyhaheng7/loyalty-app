@@ -28,7 +28,15 @@
       %tr
         %th Store:
         %td
-          = link_to @reward.store_name, @reward.store
+          = link_to @reward.store_name
+      %tr
+        %th Start Date:
+        %td
+          = link_to @reward.start_date
+      %tr
+        %th Start End:
+        %td
+          = link_to @reward.end_date
       %tr
         %th Description:
         %td= @reward.description

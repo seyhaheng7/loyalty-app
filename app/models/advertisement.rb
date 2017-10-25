@@ -27,4 +27,7 @@ class Advertisement < ApplicationRecord
   scope :active, -> {where(":today >= start_date AND :today <= end_date", today: Date.today)}
   scope :for_page, ->(page){where(for_page: page)}
 
+  has_many :banners, dependent: :destroy
+  accepts_nested_attributes_for :banners, allow_destroy: true,  reject_if: :all_blank
+
 end
