@@ -1,0 +1,12 @@
+.nested-fields
+  .col-xs-6.col-sm-3.col-md-3
+    .image-uploader
+      %a{:href => "#!"}
+        = image_tag f.object.image, class: 'img-responsive', size: '150x150'
+      = f.input :image, as: :file, label: 'Upload Image',
+        :label_html => { class: 'btn btn-default'}
+      = f.hidden_field :image_cache
+
+    %div
+      = link_to_remove_association 'Remove Image', f, class: 'btn btn-warning'
+    %br
