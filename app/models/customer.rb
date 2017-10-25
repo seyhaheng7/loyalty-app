@@ -12,6 +12,10 @@ class Customer < ActiveRecord::Base
   validates :phone,:presence => true, uniqueness: { message: "already registered" }
   validates :phone, numericality: { message: 'Not a phone number' },
               length: { minimum: 9, maximum: 10, message: 'Not a phone number' }
+  validates :first_name, :last_name, presence: true, if: :omniauth_provider?
+  validate :correct_facebook_uid, if: :facebook_provider?
+  validate :correct_google_uid, if: :google_provider?
+
 
   has_many :receipts, dependent: :destroy
   has_many :claimed_rewards, dependent: :destroy
@@ -56,6 +60,10 @@ class Customer < ActiveRecord::Base
   after_create :create_customer_chat_support
   after_commit :broadcast_location, if: :saved_change_to_location?
   after_save :send_comfirmation_code, unless: :verified?, if: :saved_change_to_phone?
+
+  def omniauth_provider?
+    provider == 'facebook' || provider == 'google'
+  end
 
   def digit_expired?
     digit_expired_at < DateTime.now
@@ -111,6 +119,28 @@ class Customer < ActiveRecord::Base
   end
 
   private
+
+  def correct_facebook_uid
+    graph = Koala::Facebook::API.new(access_token)
+    facebook_hash = graph.get_object("me")
+    if facebook_hash['id'] != uid
+      errors.add(:uid, 'Not valid facebook id')
+    end
+
+    rescue
+    errors.add(:access_token, 'Not valid access_token')
+  end
+
+  def correct_google_uid
+    response = open("https://www.googleapis.com/plus/v1/people/me?access_token=#{access_token}").read
+    google_hash = JSON.parse(response)
+    if google_hash['id'] != uid
+      errors.add(:uid, 'Not valid facebook id')
+    end
+
+    rescue
+    errors.add(:access_token, 'Not valid access_token')
+  end
 
   def generate_verification_code
     self.verified_at             = nil

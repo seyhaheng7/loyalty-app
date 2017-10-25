@@ -21,7 +21,7 @@ feature 'Customer' do
       fill_in 'First name', with: 'Codingate'
       fill_in 'Last name', with: 'Google'
       fill_in 'Email', with: 'bunutu1@gmail.com'
-      fill_in 'Phone', with: '14567890'
+      fill_in 'Phone', with: '014567890'
       fill_in 'Password', with: 'Ubuntu1234!'
       click_on 'Create Customer'
 

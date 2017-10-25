@@ -78,12 +78,15 @@ Rails.application.routes.draw do
       end
 
       namespace :customer do
+        post '/omniauth/facebook', to: 'omniauth#facebook'
+        post '/omniauth/google', to: 'omniauth#google'
         resources :confirmations, only: [] do
           put :confirm, on: :collection
         end
         resources :digits, only: [] do
           put :send_digit, on: :collection
         end
+
         resources :receipts, only: [:index, :show, :create]
         resources :categories, only: [:index, :show]
         resources :stores, only: [:index, :show]
