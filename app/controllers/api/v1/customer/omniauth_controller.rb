@@ -44,7 +44,7 @@ module Api::V1::Customer
       uid = omniauth_params[:uid]
       customer = Customer.facebook_providers.find_by(uid: uid)
       if customer.blank?
-        customer = Customer.new(omniauth_params.merge(provider: 'facebook'))
+        customer = Customer.new(omniauth_params.merge(provider: 'facebook', password: Devise.friendly_token))
       end
       if customer.save
         yield @resource if block_given?
@@ -64,7 +64,7 @@ module Api::V1::Customer
       uid = omniauth_params[:uid]
       customer = Customer.google_providers.find_by(uid: uid)
       if customer.blank?
-        customer = Customer.new(omniauth_params.merge(provider: 'google'))
+        customer = Customer.new(omniauth_params.merge(provider: 'google', password: Devise.friendly_token))
       end
       if customer.save
         yield @resource if block_given?
