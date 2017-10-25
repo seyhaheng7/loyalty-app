@@ -53,7 +53,7 @@ class Receipt < ApplicationRecord
   end
 
   def create_notifications
-    SubmittedReceiptNotificationsWorker.perform_async(id)
+    SubmittedReceiptNotificationsWorker.perform_in(3.seconds, id)
   end
 
   def create_rejected_notifications
