@@ -1,9 +1,12 @@
 class StoreSerializer < ActiveModel::Serializer
-  attributes :id, :name, :lat, :long, :address, :distance, :phone, :facebook, :open_and_close, :email, :website
+  attributes :id, :name, :lat, :long, :address, :distance, :phone, :facebook, :open_and_close, :email, :website, :banners
   attributes :errors
   belongs_to :company
   belongs_to :location
-  has_many   :store_banners
+
+  def banners
+    object.store_banners
+  end
 
   def distance
     if object.respond_to?(:distance)
