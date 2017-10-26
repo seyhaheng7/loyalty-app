@@ -228,6 +228,13 @@ ActiveRecord::Schema.define(version: 20171025084425) do
     t.string "thumbnail"
   end
 
+  create_table "land_marks", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_land_marks_on_name"
+  end
+
   create_table "locations", force: :cascade do |t|
     t.string "name"
     t.text "description"
@@ -484,6 +491,7 @@ ActiveRecord::Schema.define(version: 20171025084425) do
     t.datetime "updated_at", null: false
     t.integer "max_view_per_day"
     t.string "thumbnail"
+    t.index ["deleted_at"], name: "index_video_ads_on_deleted_at"
     t.index ["max_view_per_day"], name: "index_video_ads_on_max_view_per_day"
   end
 

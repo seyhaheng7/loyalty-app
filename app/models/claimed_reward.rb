@@ -6,13 +6,28 @@ class ClaimedReward < ApplicationRecord
     state :rejected
     state :approved
 
-    event :rejecting, after: [:create_rejected_claimed_reward_notifications, :broadcast_claimed_reward_status] do
+    event :rejecting do
       transitions :from => :submitted, :to => :rejected
+
+      after do
+        create_rejected_claimed_reward_notifications
+        broadcast_claimed_reward_status
+      end
     end
 
-    event :approving, after: [:decrease_points, :generate_qr_token, :create_approved_claimed_reward_notifications, :broadcast_claimed_reward_status] do
+    event :approving do
       transitions :from => :submitted, :to => :approved
 
+      after do
+        decrease_points
+        generate_qr_token
+        create_approved_claimed_reward_notifications
+        broadcast_claimed_reward_status
+      end
+
+      before do
+        set_expired_date
+      end
     end
 
   end
@@ -53,6 +68,15 @@ class ClaimedReward < ApplicationRecord
 
   def broadcast_claimed_reward_status(id, status)
     ClaimedRewardApprovalWorker.perform_async(id, status)
+  end
+
+  def set_expired_date
+    self.expired_at = Date.today + reward.claimed_reward_expired.to_i
+  end
+
+  def expired?
+    return false if expired_at.blank?
+    expired_at > Date.today
   end
 
   private

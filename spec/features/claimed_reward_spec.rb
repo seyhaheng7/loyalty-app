@@ -1,7 +1,7 @@
 feature 'ClaimedReward' do
   given!(:customer) { create(:customer, current_points: 150, first_name: 'Code', last_name: 'Gate') }
   given!(:admin) { create(:user, name: 'test') }
-  given!(:reward) { create(:reward, require_points: 14) }
+  given!(:reward) { create(:reward, require_points: 14 ) }
   given!(:claimed_reward) { create(:claimed_reward, customer: customer, reward: reward ) }
 
   before do
@@ -65,5 +65,7 @@ feature 'ClaimedReward' do
       expect(page).to have_content 'Claimed Reward was successfully deleted.'
     end
   end
+
+
 
 end

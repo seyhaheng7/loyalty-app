@@ -8,6 +8,7 @@ ActiveRecord::Base.transaction do
   if User.find_by(email: 'admin@example.com').blank?
     User.create!(name: "Admin",email: "admin@example.com", password: "password", role: "Admin")
   end
+
   2.times do |i|
     puts "creating approver #{i}"
     User.create!(name: FFaker::Name.name, email: FFaker::Internet.email, password: "password", role: "Approver")
@@ -156,7 +157,6 @@ ActiveRecord::Base.transaction do
     capture_image = ["r1.jpg", "r2.jpg", "r3.png", "r4.jpg"]
     capture = Rails.root.join("vendor/assets/images/admin/#{capture_image.sample}").open
 
-
     claimed_reward_status = status.sample
     qr_token = FFaker::Internet.domain_word
     given = ["true", "false"]
@@ -173,8 +173,6 @@ ActiveRecord::Base.transaction do
     customer.operating_systems.create!(
       name: operating_system_name
     )
-
-
 
     rand(10).times do
       customer.receipts.create!(
@@ -198,7 +196,5 @@ ActiveRecord::Base.transaction do
       )
     end
     puts 'finish customer'
-
   end
-
 end
