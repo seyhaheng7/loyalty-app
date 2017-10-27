@@ -19,6 +19,21 @@
         %th Earned points:
         %td= @video_ad.earned_points
       %tr
+        %th Label:
+        %td= @video_ad.label
+      %tr
+        %th iOS URL:
+        %td= @video_ad.ios_url
+      %tr
+        %th Android ULR:
+        %td= @video_ad.android_url
+      %tr
+        %th Thumbnail:
+        %td= image_tag @video_ad.thumbnail, class: 'img-responsive'
+      %tr
+        %th Banner:
+        %td= image_tag @video_ad.banner, class: 'img-responsive'
+      %tr
         %th Video ad:
         %td
           %video{ controls: "", name: "media", :height => "350px;", :width => "500px;"}
