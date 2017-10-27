@@ -5,6 +5,13 @@ class ReportsController < ApplicationController
       scope.page(params[:page])
     end
   end
+
+  def video_ads
+    authorize :report
+    @grid = ReportVideoAdsGrid.new(params[:report_video_ads_grid]) do |scope|
+      scope.page(params[:page])
+    end
+  end
   def ads
     @grid = ReportAdsGrid.new(params[:report_ads_grid]) do |scope|
       scope.page(params[:page])

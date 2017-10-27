@@ -491,6 +491,9 @@ ActiveRecord::Schema.define(version: 20171025084425) do
     t.datetime "updated_at", null: false
     t.integer "max_view_per_day"
     t.string "thumbnail"
+    t.string "label"
+    t.string "ios_url"
+    t.string "android_url"
     t.index ["deleted_at"], name: "index_video_ads_on_deleted_at"
     t.index ["max_view_per_day"], name: "index_video_ads_on_max_view_per_day"
   end
