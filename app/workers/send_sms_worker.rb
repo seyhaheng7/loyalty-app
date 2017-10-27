@@ -10,6 +10,20 @@ class SendSmsWorker
       f << sms_log_text+"\n"
     end
 
-    NEXMO_CLIENT.send_message(from: 'Customer Loyalty', to: number, text: text_body)
+    username = ENV['SMS_USER']
+    password = ENV['SMS_PASSWORD_MD5']
+    if username.present? && password.present?
+      sender   = 'Codingate'
+      sms_url = "http://client.mekongsms.com/api/sendsms.aspx?username=#{username}&pass=#{password}&cd=besting&sender=#{sender}&isflash=0&smstext=#{text_body}&gsm=#{number}"
+
+      puts sms_url
+      url = URI.parse(sms_url)
+      req = Net::HTTP::Get.new(url.to_s)
+      res = Net::HTTP.start(url.host, url.port) {|http|
+        http.request(req)
+      }
+      puts res.body
+    end
+
   end
 end
