@@ -3,6 +3,7 @@ class VideoAd < ApplicationRecord
 
   mount_uploader :video_file, VideoAdUploader
   mount_uploader :thumbnail, ImageUploader
+  mount_uploader :banner, ImageUploader
 
   has_many :view_video_ads, dependent: :destroy
 

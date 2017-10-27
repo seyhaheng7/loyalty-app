@@ -2,19 +2,32 @@
   = f.error_notification
   .form-body
     .form-group
-      .text-center
-        .image-uploader{align: 'center'}
-          %a{:href => "#!"}
-            = image_tag f.object.thumbnail, class: 'img-responsive', size: '150x150'
-          = f.input :thumbnail, as: :file, label: 'Upload Thumbnail',
-            :label_html => { class: 'btn btn-default'}
-          = f.hidden_field :thumbnail_cache
+      .row
+        .col-xs-12.col-sm-6.text-center
+          .image-uploader{align: 'center'}
+            %a{:href => "#!"}
+              = image_tag f.object.thumbnail, class: 'img-responsive', size: '150x150'
+            = f.input :thumbnail, as: :file, label: 'Upload Thumbnail',
+              :label_html => { class: 'btn btn-default'}
+            = f.hidden_field :thumbnail_cache
+
+        .col-xs-12.col-sm-6.text-center
+          .image-uploader{align: 'center'}
+            %a{:href => "#!"}
+              = image_tag f.object.banner, class: 'img-responsive', size: '150x150'
+            = f.input :banner, as: :file, label: 'Upload Banner',
+              :label_html => { class: 'btn btn-default'}
+            = f.hidden_field :banner_cache
+
       = f.input :title
       = f.input :video_file
       = f.input :start_date, as: :string, input_html: {class: 'date-picker'}
       = f.input :end_date, as: :string, input_html: {class: 'date-picker'}
       = f.input :earned_points
       = f.input :max_view_per_day
+      = f.input :label
+      = f.input :ios_url
+      = f.input :android_url
 
       = f.button :submit, class: 'btn btn-primary'
 
