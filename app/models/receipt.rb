@@ -36,6 +36,24 @@ class Receipt < ApplicationRecord
 
   default_scope { order(created_at: :desc) }
 
+  scope :this_month, ->{ where(created_at: Time.now.beginning_of_month..Time.now.end_of_month) }
+  scope :last_month, ->{ where(created_at: (Time.now.beginning_of_month-1.month)..(Time.now.end_of_month-1.month)) }
+  scope :before_last_month, ->{ where('created_at < ? ', Time.now.beginning_of_month-1.month) }
+  scope :in_category, ->(category_id){ joins(:store).merge(Store.in_category(category_id)) }
+
+  def self.time_filter(time)
+    records = all
+    if time == 'bofore_last_month'
+      records = records.before_last_month
+    elsif time == 'last_month'
+      records = records.last_month
+    else
+      records = records.this_month
+    end
+    records
+  end
+
+
   def new_store=(params)
     new_store = Store.new params
     new_store.save(validate: false)

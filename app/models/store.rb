@@ -23,6 +23,7 @@ class Store < ApplicationRecord
 
   default_scope { order(created_at: :desc) }
   scope :name_like, ->(name){ where("#{table_name}.name ilike ?", "%#{name}%") }
+  scope :in_category, ->(category_id){ joins(:company).merge(Company.in_category(category_id)) }
 
   delegate :name, to: :company, prefix: true, allow_nil: true
   delegate :name, to: :location, prefix: true, allow_nil: true
