@@ -18,10 +18,31 @@
       %tr
         %th Address:
         %td= @company.address
+
+      %tr
+        %th Contact Name:
+        %td= @company.contact_name
+
+      %tr
+        %th Phone:
+        %td= @company.phone
+
+      %tr
+        %th Email:
+        %td= @company.email
+      %tr
+        %th Website:
+        %td= @company.website
+
+      %tr
+        %th Fax:
+        %td= @company.fax
+
       %tr
         %th Category:
         %td
           = link_to @company.category_name, @company.category
+
       %tr
         %th Partner:
         %td= @company.partner_status

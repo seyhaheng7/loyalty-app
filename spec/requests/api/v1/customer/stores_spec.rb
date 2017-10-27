@@ -154,7 +154,7 @@ describe 'stores' do
 
     it 'include multiple image' do
       json = JSON.parse(response.body)
-      images = json['store_banners']
+      images = json['banners']
       store_ids = images.map{ |j| j['store_id'] }
       expect(store_ids).to include store1.id
     end

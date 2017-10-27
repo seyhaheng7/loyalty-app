@@ -10,7 +10,7 @@ feature 'Reward' do
   feature 'Listing' do
     scenario 'see all reward' do
       visit root_path
-      click_link 'Rewards'
+      click_link 'Rewards', href: rewards_path
       expect(page).to have_content(reward.name)
     end
   end
