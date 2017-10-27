@@ -1,6 +1,7 @@
 ActiveRecord::Base.transaction do
   email = 'info@codingate.com'
   user = User.find_by email: email
+
   if user.blank?
     user = User.new email: 'info@codingate.com', password: 'Codingate@2017', role: "Admin"
     user.save

@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   resource :reports, only: [] do
     member do
+      get :video_ads
       get :rewards
       get :ads
     end
