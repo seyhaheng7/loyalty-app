@@ -22,14 +22,14 @@ class Customer < ActiveRecord::Base
   has_many :claimed_rewards, dependent: :destroy
   has_many :operating_systems, dependent: :destroy
   has_many :contact_forms, dependent: :destroy
-  has_one :customer_chat_support
+  has_one :customer_chat_support, dependent: :destroy
   has_many :customer_chat_support_data, as: :supportable
   has_many :devices, as: :deviceable
   has_many :notifications, as: :notifyable
   has_many :view_video_ads, dependent: :destroy
   has_many :max_view_video_ads, -> { reach_max_views }, class_name: 'ViewVideoAd'
   has_many :max_video_ads, through: :max_view_video_ads, class_name: 'VideoAd', source: :video_ad
-  has_many :chat_members
+  has_many :chat_members, dependent: :destroy
   has_many :chat_rooms, through: :chat_members
 
   default_scope { order(created_at: :desc) }
@@ -76,6 +76,10 @@ class Customer < ActiveRecord::Base
 
   def verified?
     verified_at.present?
+  end
+
+  def unverified?
+    !verified?
   end
 
   def confirm!
