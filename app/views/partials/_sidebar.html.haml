@@ -5,6 +5,12 @@
     %ul.page-sidebar-menu{"data-auto-scroll" => "true", "data-keep-expanded" => "false", "data-slide-speed" => "200"}
 
       %li.nav-item.start{:class => ( "active" if sidebar_active?('home') )}
+        %li.nav-item{:class => ( "active" if sidebar_active?('home') )}
+          = link_to root_path do
+            %i.icon-home
+            %span.title Dashboard
+
+
 
         - if policy(:company).index?
           %li.nav-item{:class => ( "active" if sidebar_active?('companies') )}
