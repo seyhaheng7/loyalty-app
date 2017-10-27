@@ -19,6 +19,7 @@ module Api::V1::Customer
       param :form, 'address', :string, :optional, 'Address'
       param :form, 'lat', :float, :optional, 'Lat'
       param :form, 'long', :float, :optional, 'Long'
+      param :form, 'device_id', :string, :optional, 'One signal device id'
       response :ok, "Success", :User
       response :not_acceptable
     end
@@ -37,6 +38,7 @@ module Api::V1::Customer
       param :form, 'address', :string, :optional, 'Address'
       param :form, 'lat', :float, :optional, 'Lat'
       param :form, 'long', :float, :optional, 'Long'
+      param :form, 'device_id', :string, :optional, 'One signal device id'
       response :ok, "Success", :User
       response :not_acceptable
     end
@@ -47,6 +49,11 @@ module Api::V1::Customer
       if customer.blank?
         customer = Customer.new(omniauth_params.merge(provider: 'facebook', password: Devise.friendly_token))
       end
+
+      if !customer.unverified?
+        customer.assign_attributes(omniauth_params.merge(provider: 'facebook', password: Devise.friendly_token))
+      end
+
       if customer.save
         @resource = customer
         @client_id = SecureRandom.urlsafe_base64(nil, false)
@@ -80,6 +87,11 @@ module Api::V1::Customer
       if customer.blank?
         customer = Customer.new(omniauth_params.merge(provider: 'google', password: Devise.friendly_token))
       end
+
+      if !customer.unverified?
+        customer.assign_attributes(omniauth_params.merge(provider: 'facebook', password: Devise.friendly_token))
+      end
+
       if customer.save
         @resource = customer
         @client_id = SecureRandom.urlsafe_base64(nil, false)
