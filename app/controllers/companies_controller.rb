@@ -1,6 +1,6 @@
 class CompaniesController < ApplicationController
   before_action :set_company, only: [:show, :edit, :update, :destroy]
-  
+
   # GET /companies
   def index
     @grid = CompaniesGrid.new(params[:companies_grid]) do |scope|
@@ -51,7 +51,7 @@ class CompaniesController < ApplicationController
   # DELETE /companies/1
   def destroy
     authorize @company
-    
+
     @company.destroy
     redirect_to companies_url, notice: 'Company was successfully deleted.'
   end
@@ -64,6 +64,9 @@ class CompaniesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def company_params
-      params.require(:company).permit(:name, :address, :point_rate, :logo, :logo_cache, :category_id, :partner)
+      params.require(:company).permit(
+        :name, :address, :point_rate, :logo, :logo_cache, :category_id, :partner,
+        :contact_name, :phone, :email, :website, :fax
+      )
     end
 end
