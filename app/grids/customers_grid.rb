@@ -6,7 +6,7 @@ class CustomersGrid
     Customer
   end
 
-  filter(:name, :string)
+  filter(:name, :string){ |value, scope| scope.name_like(value) }
   filter(:email, :string)
   filter(:phone, :string)
   filter(:current_points, :integer, range: true)
