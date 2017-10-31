@@ -89,9 +89,8 @@ module Api::V1::Customer
       end
 
       if !customer.unverified?
-        customer.assign_attributes(omniauth_params.merge(provider: 'facebook', password: Devise.friendly_token))
+        customer.assign_attributes(omniauth_params.merge(provider: 'google', password: Devise.friendly_token))
       end
-
       if customer.save
         @resource = customer
         @client_id = SecureRandom.urlsafe_base64(nil, false)
@@ -101,6 +100,7 @@ module Api::V1::Customer
           token: BCrypt::Password.create(@token),
           expiry: (Time.now + DeviseTokenAuth.token_lifespan).to_i
         }
+
         @resource.save
 
         sign_in(:user, @resource, store: false, bypass: false)
@@ -108,8 +108,7 @@ module Api::V1::Customer
         yield @resource if block_given?
         add_device
         update_auth_header
-
-        render json: { data: customer }, status: :success
+        render json: customer, status: 200
       else
         render json: {
           errors: customer.errors.full_messages

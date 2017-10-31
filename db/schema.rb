@@ -206,7 +206,7 @@ ActiveRecord::Schema.define(version: 20171027062159) do
     t.index ["confirmation_token"], name: "index_customers_on_confirmation_token", unique: true
     t.index ["deleted_at"], name: "index_customers_on_deleted_at"
     t.index ["digit_expired_at"], name: "index_customers_on_digit_expired_at"
-    t.index ["email"], name: "index_customers_on_email", unique: true
+    t.index ["email"], name: "index_customers_on_email"
     t.index ["first_name", "last_name"], name: "index_customers_on_first_name_and_last_name"
     t.index ["lat", "long"], name: "index_customers_on_lat_and_long"
     t.index ["login_digit"], name: "index_customers_on_login_digit"
