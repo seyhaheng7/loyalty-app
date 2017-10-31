@@ -9,9 +9,9 @@
       %span#loading
         = image_tag 'loading.gif', size: '30x30', id: 'loading_image'
         %b#loading_message
-        
+
       = f.input :email
-      = f.input :open_and_close
+      = f.input :open_and_close, label: 'Open and Close Time'
       = f.input :facebook
       = f.input :website
       = f.input :phone, input_html: { class: 'inputmask' }
@@ -27,8 +27,8 @@
             = f.simple_fields_for :store_banners do |image|
               = render 'store_banner_fields', f: image
             .links
-              = link_to_add_association 'Add Image', f, :store_banners, class: 'btn btn-success'  
-      
+              = link_to_add_association 'Add Image', f, :store_banners, class: 'btn btn-success'
+
       #map
       .pull-left
         -if policy(@store).create? || policy(@store).update?
