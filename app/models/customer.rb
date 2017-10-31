@@ -126,10 +126,12 @@ class Customer < ActiveRecord::Base
   private
 
   def correct_facebook_uid
-    graph = Koala::Facebook::API.new(provider_access_token)
-    facebook_hash = graph.get_object("me")
-    if facebook_hash['id'] != uid
-      errors.add(:uid, 'Not valid facebook id')
+    if provider_access_token_changed?
+      graph = Koala::Facebook::API.new(provider_access_token)
+      facebook_hash = graph.get_object("me")
+      if facebook_hash['id'] != uid
+        self.errors.add(:uid, 'Not valid facebook id')
+      end
     end
 
     rescue
@@ -137,14 +139,15 @@ class Customer < ActiveRecord::Base
   end
 
   def correct_google_uid
-    response = open("https://www.googleapis.com/plus/v1/people/me?access_token=#{provider_access_token}").read
-    google_hash = JSON.parse(response)
-    if google_hash['id'] != uid
-      errors.add(:uid, 'Not valid facebook id')
+    if provider_access_token_changed?
+      response = open("https://www.googleapis.com/plus/v1/people/me?access_token=#{provider_access_token}").read
+      google_hash = JSON.parse(response)
+      if google_hash['id'] != uid
+        self.errors.add(:uid, 'Not valid google id')
+      end
     end
-
     rescue
-    errors.add(:provider_access_token, 'Not valid access_token')
+    self.errors.add(:provider_access_token, 'Not valid access_token')
   end
 
   def generate_verification_code
