@@ -19,8 +19,9 @@ class Merchant < ActiveRecord::Base
 
   validates :name, presence: true
   validates :phone,:presence => true, uniqueness: { message: "already registered" }
-  validates :phone, numericality: { message: 'Not a phone number' },
-              length: { minimum: 8, maximum: 9, message: 'Not a phone number' }
+  validates :phone, numericality: { message: 'Not a phone number' }, allow_blank: true
+  validates :phone, length: { minimum: 9, maximum: 10, message: 'Not a phone number' }, allow_blank: true
+
 
 
   before_validation :generate_uid_from_phone, if: :phone_provider?, on: :create

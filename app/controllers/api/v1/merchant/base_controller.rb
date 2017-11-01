@@ -9,7 +9,6 @@ module Api::V1::Merchant
     include Pundit
     include DeviseTokenAuth::Concerns::SetUserByToken
     before_action :authenticate_merchant!
-    before_action :check_merchant_verification!, if: ->{ merchant_signed_in? }
 
     # user not allow to access
     rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
@@ -64,13 +63,6 @@ module Api::V1::Merchant
 
     def not_found
       render json: { error: "record not found" }, status: :not_found
-    end
-
-    def check_merchant_verification!
-      unless current_merchant.active_for_authentication?
-        error = { errors: ['Unverified account'] }
-        render json: error, status: 401
-      end
     end
   end
 end
