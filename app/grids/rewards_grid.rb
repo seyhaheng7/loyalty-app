@@ -7,7 +7,6 @@ class RewardsGrid
 
   filter(:name, :string){ |value, scope| scope.name_like(value) }
   filter(:store_id, :enum, :select => lambda {Store.pluck(:name, :id)})
-  filter(:quantity, :integer, range: true)
   filter(:require_points, :integer, range: true)
   filter(:price, :float, range: true)
   filter(:availability, :enum, include_blank: 'All', select: ["Available", "Unvailable"]) do |value, scope|
@@ -27,7 +26,6 @@ class RewardsGrid
   column(:require_points)
   column(:start_date)
   column(:end_date)
-  column(:quantity)
   column(:store, html:true) do |reward|
     link_to reward.store_name, reward.store
   end

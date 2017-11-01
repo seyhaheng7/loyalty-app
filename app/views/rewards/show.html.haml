@@ -20,14 +20,14 @@
         %th Quantity:
         %td= @reward.quantity
       %tr
+        %th Remain Quantity:
+        %td= @reward.quantity - @reward.approved_claimed_rewards_count
+      %tr
         %th ClaimedRewardExpired:
         %td= @reward.claimed_reward_expired
       %tr
         %th Approved:
         %td= @reward.approved_claimed_rewards_count
-      %tr
-        %th Remain:
-        %td= @reward.quantity - @reward.approved_claimed_rewards_count
       %tr
         %th Store:
         %td

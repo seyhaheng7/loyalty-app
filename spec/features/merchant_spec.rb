@@ -21,7 +21,7 @@ feature 'Merchant' do
       fill_in 'Name', with: 'Codingate'
       fill_in 'Email', with: 'bunutu1@gmail.com'
       select 'test', from: 'Store'
-      fill_in 'Phone', with: '14567890'
+      fill_in 'Phone', with: '014567890'
       fill_in 'Password', with: 'Ubuntu1234!'
       click_on 'Create Merchant'
 
