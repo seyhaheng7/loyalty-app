@@ -29,7 +29,7 @@ module Api::V1::Merchant
 
 
     def index
-      @claimed_rewards = current_merchant.claimed_rewards.approved.filter(params).page(params[:page])
+      @claimed_rewards = current_merchant.claimed_rewards.approved.filter(params).page(params[:page]).includes(:customer, :reward)
       render json: @claimed_rewards, status: :ok
     end
 

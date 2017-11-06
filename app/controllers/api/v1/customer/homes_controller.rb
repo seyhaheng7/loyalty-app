@@ -14,8 +14,8 @@ module Api::V1::Customer
 
     def index
 
-      @home_ads = Advertisement.active.for_page("Home")
-      @stores = Store.limit(3).includes(:company, :location)
+      @home_ads = Advertisement.active.for_page("Home").includes(:banners)
+      @stores = Store.limit(3).includes(:company, :location, :store_banners)
       @rewards = Reward.available.limit(3).includes(:store)
 
       render json: {
