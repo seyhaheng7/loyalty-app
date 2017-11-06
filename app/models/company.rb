@@ -7,6 +7,7 @@ class Company < ApplicationRecord
   validates :name, presence: true
   validates :address, presence: true
   validates_uniqueness_of :name
+  validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i }
 
   mount_uploader :logo, LogoUploader
 
