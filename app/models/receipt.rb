@@ -36,8 +36,9 @@ class Receipt < ApplicationRecord
 
   default_scope { order(created_at: :desc) }
 
-  scope :this_month, ->{ where(created_at: Time.now.beginning_of_month..Time.now.end_of_month) }
-  scope :last_month, ->{ where(created_at: (Time.now.beginning_of_month-1.month)..(Time.now.end_of_month-1.month)) }
+  scope :in_month, ->(date){ where(created_at: (date.beginning_of_month)..(date.end_of_month)) }
+  scope :this_month, ->{ in_month(Date.today) }
+  scope :last_month, ->{ in_month(Date.today-1.month) }
   scope :before_last_month, ->{ where('created_at < ? ', Time.now.beginning_of_month-1.month) }
   scope :in_category, ->(category_id){ joins(:store).merge(Store.in_category(category_id)) }
 
@@ -51,6 +52,38 @@ class Receipt < ApplicationRecord
       records = records.this_month
     end
     records
+  end
+
+
+  # {
+  #   months: ['Jun 2017', 'July 2017', 'Aug 2017'],
+  #   data: [{
+  #     name: 'Food',
+  #     data: [3000, 4000, 5000]
+  #   },{
+  #     name: 'Fashion',
+  #     data: [5000, 4000, 3000]
+  #   }]
+  # }
+  def self.dashboard_statistic
+    today = Date.today
+    months = [today-2.month, today-1.month, today ]
+    monthsFormatted = months.map{ |date| date.strftime('%b %y') }
+    statistic_data = Category.all.map do |category|
+      category_data = months.map do |month|
+        Receipt.in_month(month).in_category(category.id).sum(:total)
+      end
+
+      {
+        name: category.name,
+        data: category_data
+      }
+    end
+
+    {
+      months: months.map{ |date| date.strftime('%b %y') },
+      data: statistic_data
+    }
   end
 
 
