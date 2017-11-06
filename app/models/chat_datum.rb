@@ -2,7 +2,7 @@ class ChatDatum < ApplicationRecord
   belongs_to :chat_room
   belongs_to :customer
 
-  has_many :recieved_members, depentdent: :destroy
+  has_many :recieved_members, dependent: :destroy
 
   before_save :set_data_type
 
