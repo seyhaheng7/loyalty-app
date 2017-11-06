@@ -2,7 +2,7 @@
   .col-xs-12.col-md-12
     = simple_form_for(@store) do |f|
       = f.error_notification
-
+      = f.association :company
       = f.input :name
       = f.input :address
 
@@ -15,7 +15,6 @@
       = f.input :facebook
       = f.input :website
       = f.input :phone, input_html: { class: 'inputmask' }
-      = f.association :company
       = f.association :location
       = f.input :lat, input_html: {id: 'place_latitude'}
       = f.input :long, input_html: {id: 'place_longitude'}
