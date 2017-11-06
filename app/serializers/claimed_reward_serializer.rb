@@ -1,5 +1,5 @@
 class ClaimedRewardSerializer < ActiveModel::Serializer
-  attributes :id, :status, :reward_id, :errors, :qr_token, :given, :expired_at, :is_expired
+  attributes :id, :status, :reward_id, :errors, :qr_token, :given, :expired_at, :is_expired, :created_at
   attributes :errors
   attributes :store, :store_location
 
