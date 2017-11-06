@@ -1,14 +1,8 @@
 Codingate.StoresForm = Codingate.StoresNew = Codingate.StoresCreate = Codingate.StoresEdit = Codingate.StoresUpdate =
   init: ->
-    @_phoneMask()
     @_handleAddedImage()
     @_initMap()
     @_changeMarkerPosition()
-
-  _phoneMask: ->
-    $('#store_phone').inputmask '999-999-9999'
-    $('form').submit ->
-      $('#store_phone').inputmask('remove')
 
   _initMap: ->
     self = @
@@ -47,7 +41,7 @@ Codingate.StoresForm = Codingate.StoresNew = Codingate.StoresCreate = Codingate.
   _handleAddedImage: ->
     $('#store-images').on 'cocoon:after-insert', (e, added_image) ->
       uploader = $(added_image).find('.image-uploader')
-      
+
       input = $(added_image).find('input[type="file"]')
       imageHolder = $(added_image).find('img')
 
@@ -70,7 +64,7 @@ Codingate.StoresForm = Codingate.StoresNew = Codingate.StoresCreate = Codingate.
 
     lat.change ->
       self._handleLatLngChange(lat.val(), lng.val())
-    
+
     lng.change ->
       self._handleLatLngChange(lat.val(), lng.val())
 
@@ -78,7 +72,7 @@ Codingate.StoresForm = Codingate.StoresNew = Codingate.StoresCreate = Codingate.
       self._handleAddressChange(address.val())
 
   _handleLatLngChange: (lat, lng)->
-    lat_lng = @._latLngChange(lat, lng) 
+    lat_lng = @._latLngChange(lat, lng)
     @marker.setMap null
     @._updateMarker(lat_lng)
     @._fitBounds(lat, lng)
