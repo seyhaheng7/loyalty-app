@@ -79,4 +79,4 @@
   .portlet-title
     Customer Expense
   .portlet-body
-    #echarts_bar{ style: 'height:500px' }
+    #echarts_bar{ style: 'height:500px', data: { statistic: @statistic.to_json } }

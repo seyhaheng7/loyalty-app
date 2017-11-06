@@ -4,5 +4,7 @@ class HomeController < ApplicationController
     @stores = Store.all.count
     @customers = Customer.all.count
     @onlines = Customer.active.count
+
+    @statistic = Receipt.dashboard_statistic
   end
 end

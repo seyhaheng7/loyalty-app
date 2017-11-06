@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171027062159) do
+ActiveRecord::Schema.define(version: 20171106063429) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -370,6 +370,7 @@ ActiveRecord::Schema.define(version: 20171027062159) do
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
     t.bigint "managed_by_id"
+    t.index ["created_at"], name: "index_receipts_on_created_at"
     t.index ["customer_id"], name: "index_receipts_on_customer_id"
     t.index ["deleted_at"], name: "index_receipts_on_deleted_at"
     t.index ["managed_by_id"], name: "index_receipts_on_managed_by_id"
