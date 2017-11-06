@@ -31,6 +31,8 @@ class Customer < ActiveRecord::Base
   has_many :max_video_ads, through: :max_view_video_ads, class_name: 'VideoAd', source: :video_ad
   has_many :chat_members, dependent: :destroy
   has_many :chat_rooms, through: :chat_members
+  has_many :customer_land_marks, dependent: :destroy
+  has_many :land_marks, through: :customer_land_marks
 
   default_scope { order(created_at: :desc) }
   scope :able_to_verify,        ->{ where('verification_expired_at > ?', DateTime.now) }
@@ -133,7 +135,6 @@ class Customer < ActiveRecord::Base
         self.errors.add(:uid, 'Not valid facebook id')
       end
     end
-
     rescue
     errors.add(:provider_access_token, 'Not valid access_token')
   end

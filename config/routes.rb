@@ -26,6 +26,7 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :land_marks, only: [:index, :show]
   resources :stores
   resources :locations
   resources :customers

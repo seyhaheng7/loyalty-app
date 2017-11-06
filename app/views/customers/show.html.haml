@@ -85,11 +85,14 @@
                 %a{"aria-expanded" => "false", "data-toggle" => "tab", :href => "#tab_1_2"} Claimed Reward
               %li
                 %a{"aria-expanded" => "false", "data-toggle" => "tab", :href => "#tab_1_3"} OS
+              %li
+                %a.active{"aria-expanded" => "true", "data-toggle" => "tab", :href => "#customer-locations"} Locations
           .portlet-body
             .tab-content
               = render 'receipt'
               = render 'claimed_reward'
               = render 'operating_system'
+              = render 'locations'
 
   .row
     .col-md-12

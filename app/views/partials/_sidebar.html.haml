@@ -147,6 +147,10 @@
             %span.title Setting
             %span.arrow
           %ul.sub-menu
+            - if policy(:land_mark).index?
+              %li.nav-item{ class: ('active' if sidebar_active?('land_marks')) }
+                = link_to land_marks_url do
+                  %span.title Land Mark
             - if policy(:setting).index?
               %li.nav-item{:class => ( "active" if sidebar_active?('settings') )}
                 = link_to settings_url do
