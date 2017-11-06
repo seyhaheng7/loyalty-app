@@ -1,0 +1,17 @@
+#customer-locations.tab-pane
+  .slimScrollDiv
+    - @customer.customer_land_marks.group_by {|t| t.created_at.to_date }.each do |date, customer_land_marks|
+      %fieldset.scheduler-border
+        %legend.text-center.scheduler-border
+          = date
+        %ul.feeds
+          - customer_land_marks.each do |customer_land_mark|
+            %li
+              .col1
+                .cont
+                  .cont-col1
+                    .label.label-sm.label-success
+                      = fa_icon 'map-marker'
+                  .cont-col2
+                    .desc
+                      = customer_land_mark.land_mark.name

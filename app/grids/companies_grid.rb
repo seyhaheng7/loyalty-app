@@ -12,7 +12,8 @@ class CompaniesGrid
 
 
   column(:name)
-  column(:address)
+  column(:email)
+  column(:phone)
 
   column(:actions, html:true) do |record|
     render 'companies/control', company: record

@@ -1,6 +1,6 @@
 class Company < ApplicationRecord
   belongs_to :category
-  has_many :stores
+  has_many :stores, dependent: :destroy
 
   acts_as_paranoid
 
