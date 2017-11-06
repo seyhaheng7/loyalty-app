@@ -1,0 +1,8 @@
+.portlet.light.bordered
+  .portlet-title
+    .caption
+      %span.caption-subject.font-dark.sbold.uppercase
+        = @land_mark.name
+
+  .portlet-body
+    #echarts_bar{ data: { statistic: @data.to_json }, style: 'height:500px' }

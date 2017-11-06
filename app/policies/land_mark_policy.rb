@@ -1,0 +1,2 @@
+class LandMarkPolicy < ApplicationPolicy
+end

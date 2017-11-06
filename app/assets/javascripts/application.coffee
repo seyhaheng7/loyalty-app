@@ -9,6 +9,8 @@
 
 #= require jquery-ui/widgets/sortable
 
+#= require admin/echarts
+
 #= require admin/app
 #= require admin/layout
 #= require admin/demo
@@ -40,3 +42,6 @@
 #= require advertisements/show
 #= require claimed_rewards/show
 #= require receipts/show
+#= require home/index
+
+#= require land_marks/show
