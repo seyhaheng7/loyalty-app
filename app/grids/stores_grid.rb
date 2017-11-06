@@ -15,7 +15,6 @@ class StoresGrid
    :select => lambda {Location.pluck(:name, :id)})
 
   column(:name)
-  column(:address)
 
   column(:company,  html: true) do |record|
     if record.company_name != nil
