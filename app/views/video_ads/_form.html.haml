@@ -10,6 +10,8 @@
             = f.input :thumbnail, as: :file, label: 'Upload Thumbnail',
               :label_html => { class: 'btn btn-default'}
             = f.hidden_field :thumbnail_cache
+            %p
+              (250 x 166)
 
         .col-xs-12.col-sm-6.text-center
           .image-uploader{align: 'center'}
@@ -18,6 +20,9 @@
             = f.input :banner, as: :file, label: 'Upload Banner',
               :label_html => { class: 'btn btn-default'}
             = f.hidden_field :banner_cache
+            %p
+              (720 x 480)
+
 
       = f.input :title
       = f.input :video_file
