@@ -34,7 +34,6 @@ Codingate.CustomerLocationsIndex =
   _fitBonds: (customers)->
     bounds = new (google.maps.LatLngBounds)
     for customer in customers
-      console.log customer
       position = new (google.maps.LatLng)(customer.lat, customer.long)
       bounds.extend position
     @map.fitBounds bounds
@@ -42,15 +41,12 @@ Codingate.CustomerLocationsIndex =
   _addCustomerToMap: (customer)->
     self = @
 
-    icon_url = 'http://image.flaticon.com/icons/svg/252/252025.svg'
-    icon = self._initMarkerIcon(icon_url)
 
     position = new (google.maps.LatLng)(customer.lat, customer.long)
 
     marker = new (google.maps.Marker)(
       position: position
       map: @map
-      icon: icon
       customer: customer)
 
     @markers[customer.id] = marker
@@ -60,10 +56,6 @@ Codingate.CustomerLocationsIndex =
     self._showInfoWindowofMarker(marker, content)
     self._hideWhenCustomerInactive(customer)
 
-  _initMarkerIcon: (icon_url)->
-    icon =
-      url: icon_url
-      scaledSize: new (google.maps.Size)(50, 60)
 
   _hideWhenCustomerInactive: (customer)->
     self = @
