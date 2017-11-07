@@ -27,4 +27,3 @@ class UpdateCustomerLocationWorker
     end
   end
 end
-11.561214, 104.853016

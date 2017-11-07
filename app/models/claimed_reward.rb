@@ -111,9 +111,11 @@ class ClaimedReward < ApplicationRecord
     RejectedClaimedRewardNotificationsWorker.perform_async(id)
   end
 
-
   def broadcast_claimed_reward_status
     ClaimedRewardApprovalWorker.perform_async(self.id, self.status)
+  end
+
+  def given_reward
   end
 
 end
