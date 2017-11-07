@@ -1,7 +1,7 @@
 class MerchantChatSupportChannel < ApplicationCable::Channel
   def subscribed
-    merchant_chat_support = MerchantChatSupport.find params[:room_id]
-    if current_user.admin? || merchant_chat_support.merchant == current_user
+    merchant_chat_support = current_user.merchant_chat_support
+    if current_user.admin? || merchant_chat_support.present?
       stream_from "merchant_chat_support_channel_#{params[:room_id]}"
     else
       unsubscribed
