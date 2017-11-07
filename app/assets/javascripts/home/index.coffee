@@ -13,13 +13,7 @@ Codingate.HomeIndex =
         data: ['Cost', 'Expenses']
       },
       toolbox: {
-        show: true,
-        feature: {
-          magicType: {
-            show: true,
-            type: ['line', 'bar']
-          }
-        }
+        show: false
       },
       calculable: true,
       xAxis: [{
