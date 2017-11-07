@@ -107,7 +107,7 @@ Codingate.StoresForm = Codingate.StoresNew = Codingate.StoresCreate = Codingate.
         loading.css 'display', 'none'
 
       else if status == "ZERO_RESULTS"
-        loading["message"].text 'Address Not Found!'
+        loading["message"].text 'Lat-Long not found for Address!'
         loading["image"].css 'display', 'none'
       else
         loading["message"].text status
@@ -118,7 +118,7 @@ Codingate.StoresForm = Codingate.StoresNew = Codingate.StoresCreate = Codingate.
     loading["image"] = $("#loading_image")
     loading["image"].css 'display', 'block'
     loading["message"] = $("#loading_message")
-    loading["message"].text "Getting Lat Long!"
+    loading["message"].text "Loading..."
     loading.css 'display', 'block'
 
     return loading
