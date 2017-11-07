@@ -77,6 +77,7 @@ Rails.application.routes.draw do
         resources :claimed_rewards, only: [:index] do
           put :given, on: :collection
         end
+        resources :notifications, only: [:index]
       end
 
       namespace :customer do
