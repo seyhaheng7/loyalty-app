@@ -11,6 +11,9 @@
             = f.input :image, as: :file, label: 'Upload Image',
               :label_html => { class: 'btn btn-default'}
             = f.hidden_field :image_cache
+            %p
+              (250 x 166)
+
           = f.input :name
           = f.association :sticker_group
           .pull-left

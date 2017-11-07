@@ -8,6 +8,9 @@
           = image_tag f.object.thumbnail, class: 'img-responsive', size: '150x150'
         = f.input :thumbnail, as: :file, label: 'Upload Thumbnail',
           :label_html => { class: 'btn btn-default'}
+        %p
+          (250 x 166)
+
         = f.hidden_field :thumbnail_cache
       = f.input :title
       = f.input :youtube_url

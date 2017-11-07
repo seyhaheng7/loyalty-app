@@ -7,6 +7,9 @@
       = f.input :banner, as: :file, label: 'Upload Banner',
         :label_html => { class: 'btn btn-default'}
       = f.hidden_field :banner_cache
+      %p
+        (700 x 300)
+
     = f.input :name
     = f.input :active
     = f.input :for_page, collection: Advertisement::PAGES
@@ -17,14 +20,14 @@
     = f.input :website
     = f.input :start_date, as: :string, input_html: {class: 'date-picker'}
     = f.input :end_date, as: :string, input_html: {class: 'date-picker'}
-    %h5 Images
+    %h5 Store Banners
     .row
       .container-fluid
         #store-images
           = f.simple_fields_for :banners do |image|
             = render 'banner_fields', f: image
           .links
-            = link_to_add_association 'Add Image', f, :banners, class: 'btn btn-success'
+            = link_to_add_association 'Add Store Banner', f, :banners, class: 'btn btn-success'
   .row
     .col-xs-12.col-md-12
       #map-advertisement
