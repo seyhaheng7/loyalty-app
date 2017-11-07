@@ -4,20 +4,26 @@
       = f.error_notification
       = f.association :company
       = f.input :name
-      = f.input :address
-
-      %span#loading
-        = image_tag 'loading.gif', size: '30x30', id: 'loading_image'
-        %b#loading_message
-
-      = f.input :email
-      = f.input :open_and_close, label: 'Open and Close Time'
-      = f.input :facebook
-      = f.input :website
-      = f.input :phone, input_html: { class: 'inputmask' }
-      = f.association :location
-      = f.input :lat, input_html: {id: 'place_latitude'}
-      = f.input :long, input_html: {id: 'place_longitude'}
+      .row
+        .col-xs-12.col-md-6
+          = f.input :address
+          %span#loading
+            = image_tag 'loading.gif', size: '30x30', id: 'loading_image'
+            %b#loading_message
+          = f.input :phone, input_html: { class: 'inputmask' }
+          = f.input :open_and_close
+          = f.input :facebook
+          = f.input :email
+          = f.input :website
+          = f.association :company
+          = f.association :location
+        .col-xs-12.col-md-6
+          .row
+            .col-xs-12.col-md-6
+              = f.input :lat, input_html: {id: 'place_latitude'}
+            .col-xs-12.col-md-6
+              = f.input :long, input_html: {id: 'place_longitude'}
+          #map
 
       %h5 Images
       .row
@@ -27,8 +33,7 @@
               = render 'store_banner_fields', f: image
             .links
               = link_to_add_association 'Add Image', f, :store_banners, class: 'btn btn-success'
-
-      #map
+      %br
       .pull-left
         -if policy(@store).create? || policy(@store).update?
           = f.button :submit, class: "btn btn-primary"
