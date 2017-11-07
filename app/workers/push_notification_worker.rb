@@ -24,8 +24,20 @@ class PushNotificationWorker
   def push_notification(notification)
     sleep 1
     notifyable = notification.notifyable
+    APP_ID =  if notifyable.class == Merchant
+                ENV['ONE_SIGNAL_MERCHANT_APP_ID']
+              else
+                ENV['ONE_SIGNAL_MERCHANT_APP_ID']
+              end
+
+    APP_KEY = if notifyable.class == Merchant
+                ENV['ONE_SIGNAL_APP_KEY']
+              else
+                ENV['ONE_SIGNAL_APP_ID']
+              end
+
     paramsnotification = {
-      "app_id" => ENV['ONE_SIGNAL_APP_ID'],
+      "app_id" => APP_ID,
       "contents" => {"en" => "#{notification.text}"},
       "include_player_ids" => notifyable.devices.pluck(:device_id),
       "data" => {
@@ -50,7 +62,7 @@ class PushNotificationWorker
 
     request = Net::HTTP::Post.new(uri.path,
                                   'Content-Type'  => 'application/json;charset=utf-8',
-                                  'Authorization' => "Basic #{ENV['ONE_SIGNAL_APP_KEY']}")
+                                  'Authorization' => "Basic #{APP_KEY}")
 
     request.body = paramsnotification.as_json.to_json
     response = http.request(request)
