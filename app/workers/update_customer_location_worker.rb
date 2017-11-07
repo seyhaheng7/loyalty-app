@@ -14,7 +14,7 @@ class UpdateCustomerLocationWorker
     customer_id = customer.id
     land_marks = Geocoder.search("#{lat},#{long}")
     if land_marks.present?
-      land_mark = land_marks.select{ |lm| lm.include?('neighborhood') }.first
+      land_mark = land_marks.select{ |lm| lm.types.include?('neighborhood') }.first
       if land_mark.blank?
         land_mark = land_marks.first
       end
@@ -27,3 +27,4 @@ class UpdateCustomerLocationWorker
     end
   end
 end
+11.561214, 104.853016
