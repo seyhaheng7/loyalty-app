@@ -10,7 +10,7 @@ module Api::V1::Customer
 
     swagger_api :statistic do
       summary 'Fetches user statistic'
-      param :query, :time, :string, :required, '[this_month, last_month, before_last_month]'
+      param :query, :time, :string, :optional, '[this_month, last_month, before_last_month]'
       response :unauthorized
       response :not_acceptable
     end
