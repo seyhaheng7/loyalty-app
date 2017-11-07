@@ -4,7 +4,8 @@ class ApprovedClaimedRewardNotificationsWorker
 
   def perform(claimed_reward_id)
     claimed_reward = ClaimedReward.find claimed_reward_id
-
+    notify_customer(claimed_reward)
+    notify_merchant(claimed_reward)
   end
 
   def notify_customer(claimed_reward)
