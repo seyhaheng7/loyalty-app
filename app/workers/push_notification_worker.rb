@@ -24,17 +24,9 @@ class PushNotificationWorker
   def push_notification(notification)
     sleep 1
     notifyable = notification.notifyable
-    APP_ID =  if notifyable.class == Merchant
-                ENV['ONE_SIGNAL_MERCHANT_APP_ID']
-              else
-                ENV['ONE_SIGNAL_MERCHANT_APP_ID']
-              end
+    APP_ID = app_id(notifyable)
 
-    APP_KEY = if notifyable.class == Merchant
-                ENV['ONE_SIGNAL_APP_KEY']
-              else
-                ENV['ONE_SIGNAL_APP_ID']
-              end
+    APP_KEY = app_key(notifyable)
 
     paramsnotification = {
       "app_id" => APP_ID,
@@ -82,6 +74,25 @@ class PushNotificationWorker
       raise "Unknown type"
     end
 
+  end
+
+  private
+
+  def app_id(notifyable)
+    if notifyable.class == Merchant
+      ENV['ONE_SIGNAL_MERCHANT_APP_ID']
+    else
+      ENV['ONE_SIGNAL_APP_ID']
+    end
+  end
+
+
+  def app_key(notifyable)
+    if notifyable.class == Merchant
+      ENV['ONE_SIGNAL_MERCHANT_APP_KEY']
+    else
+      ENV['ONE_SIGNAL_APP_KEY']
+    end
   end
 
 end
