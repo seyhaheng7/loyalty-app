@@ -80,6 +80,10 @@ class ClaimedReward < ApplicationRecord
     expired_at > Date.today
   end
 
+  def self.notify_expired
+    NotifyExpiredClaimedReward.perform_async
+  end
+
   private
 
   def customer_points
