@@ -65,6 +65,7 @@ class ClaimedReward < ApplicationRecord
   scope :not_give, -> { where.not(given) }
 
   after_create :create_submitted_claimed_reward_notifications
+  after_commit :create_given_claimed_reward_notifications, if: ->{ saved_change_to_given? && given? }
 
   def broadcast_claimed_reward_status(id, status)
     ClaimedRewardApprovalWorker.perform_async(id, status)
@@ -115,7 +116,8 @@ class ClaimedReward < ApplicationRecord
     ClaimedRewardApprovalWorker.perform_async(self.id, self.status)
   end
 
-  def given_reward
+  def create_given_claimed_reward_notifications
+    GivenClaimedRewardNotificationsWorker.perform_async(id)
   end
 
 end
