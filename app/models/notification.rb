@@ -7,7 +7,8 @@ class Notification < ApplicationRecord
     'ApprovedClaimedReward',
     'RejectedClaimedReward',
     'NewPromotion',
-    'GivenClaimedReward'
+    'GivenClaimedReward',
+    'ClaimedRewardExpired'
   ]
 
   belongs_to :notifyable, polymorphic: true
