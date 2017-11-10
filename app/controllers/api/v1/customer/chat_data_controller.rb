@@ -13,7 +13,7 @@ module Api::V1::Customer
     end
 
     swagger_api :create do |api|
-      summary 'Create customer chat data'
+      summary 'Create customer chat data (Channel: CustomerChatCustomerChannel)'
       api.param :form, 'data[text]', :string, :required, 'Text'
       api.param :form, 'data[sticker]', :string, :required, 'Sticker Url'
       api.param :form, 'data[audio]', :string, :required, 'Audio Url'

@@ -14,7 +14,7 @@ module Api::V1::Customer
 
 
     swagger_api :create do |api|
-      summary 'Create customer chat support data'
+      summary 'Create customer chat support data (Channel: CustomerChatSupportChannel)'
 
       api.param :form, 'data[text]', :string, :required, 'Text'
       response :unauthorized
