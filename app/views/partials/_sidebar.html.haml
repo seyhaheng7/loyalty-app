@@ -126,19 +126,27 @@
         -#       %i.icon-envelope
         -#       %span.title Watch and Earn Guides
 
-        - if policy(:report).rewards?
+        - if policy(:report).rewards? || policy(:report).video_ads? || policy(:report).ads? || policy(:land_mark).index?
           %li.nav-item{:class => ( "active" if sidebar_active?('reports') )}
             %a.nav-link.nav-toggle
               %i.icon-notebook
               %span.title Reports
               %span.arrow
             %ul.sub-menu
-              %li.nav-item
-                = link_to "Rewards", rewards_reports_path, class: 'nav-link'
-              %li.nav-item
-                = link_to "Watch and Earn", video_ads_reports_path, class: 'nav-link'
-              %li.nav-item
-                = link_to " Ads", ads_reports_path, class: 'nav-link'
+              - if policy(:land_mark).index?
+                %li.nav-item{ class: ('active' if sidebar_active?('land_marks')) }
+                  = link_to land_marks_url do
+                    %span.title Land Mark
+              - if policy(:report).rewards?
+                %li.nav-item
+                  = link_to "Rewards", rewards_reports_path, class: 'nav-link'
+              - if policy(:report).video_ads?
+                %li.nav-item
+                  = link_to "Watch and Earn", video_ads_reports_path, class: 'nav-link'
+
+              - if policy(:report).ads?
+                %li.nav-item
+                  = link_to " Ads", ads_reports_path, class: 'nav-link'
 
 
         %li.nav-item{ class: ( "active" if sidebar_active?('settings') || sidebar_active?('term_conditions') || sidebar_active?('privacy_policies') || sidebar_active?('customer_locations') ||sidebar_active?('stickers') || sidebar_active?('sticker_groups'))}
@@ -147,10 +155,6 @@
             %span.title Setting
             %span.arrow
           %ul.sub-menu
-            - if policy(:land_mark).index?
-              %li.nav-item{ class: ('active' if sidebar_active?('land_marks')) }
-                = link_to land_marks_url do
-                  %span.title Land Mark
             - if policy(:setting).index?
               %li.nav-item{:class => ( "active" if sidebar_active?('settings') )}
                 = link_to settings_url do

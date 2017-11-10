@@ -7,5 +7,9 @@ class ReportPolicy < ApplicationPolicy
     user.admin? || user.super?
   end
 
+  def ads?
+    user.admin?
+  end
+
 end
 
