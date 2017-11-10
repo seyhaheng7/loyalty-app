@@ -12,11 +12,41 @@ module Api::V1::Customer
       response :requested_range_not_satisfiable
     end
 
+    swagger_api :create do |api|
+      summary 'Create customer chat data'
+      api.param :form, 'data[text]', :string, :required, 'Text'
+      api.param :form, 'data[sticker]', :string, :required, 'Sticker Url'
+      api.param :form, 'data[audio]', :string, :required, 'Audio Url'
+      response :unauthorized
+      response :success
+      response :not_acceptable, "The request you made is not acceptable"
+    end
+
+    before_action :find_chat_room
+
     def index
-      chat_room = current_customer.chat_rooms.find(params[:chat_room_id])
       @chat_data = chat_room.chat_data.page(params[:page]).includes(:customer)
       render json: @chat_data
     end
 
+    def create
+      @chat_data = chat_room.chat_data.new(chat_datumn_params.merge(customer: current_customer))
+      if @chat_data.save
+
+        render json: @chat_data, status: :created
+      else
+        render json: @chat_data.errors, status: :unprocessable_entity
+      end
+    end
+
+    private
+
+    def find_chat_room
+      @chat_room = current_customer.chat_rooms.find(params[:chat_room_id])
+    end
+
+    def chat_datumn_params
+      params.require(:chat_datumn).permit(:text, :sticker, :audio)
+    end
   end
 end

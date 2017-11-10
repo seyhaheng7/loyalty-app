@@ -119,7 +119,7 @@ Rails.application.routes.draw do
         resources :customer_chat_support_data, only: [:index, :create]
 
         resources :chat_rooms, only: [:index, :create] do
-          resources :chat_data, only: [:index]
+          resources :chat_data, only: [:index, :create]
         end
 
       end
