@@ -12,7 +12,7 @@ module Api::V1::Customer
     end
 
     def index
-      @customers = Customer.near([current_customer.lat, current_customer.long], 1, units: :km).page(params[:page]).per(params[:limit]||10)
+      @customers = Customer.active.where.not(id: current_customer.id).near([current_customer.lat, current_customer.long], 1, units: :km).page(params[:page]).per(params[:limit]||10)
       render json: @customers, status: :ok
     end
   end

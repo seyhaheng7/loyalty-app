@@ -1,5 +1,7 @@
 class VideoAd < ApplicationRecord
   validates :title, presence: true
+  validates :video_file, presence: true
+  validates :thumbnail, presence: true
 
   mount_uploader :video_file, VideoAdUploader
   mount_uploader :thumbnail, ImageUploader
