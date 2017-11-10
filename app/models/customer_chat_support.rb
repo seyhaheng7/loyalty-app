@@ -16,9 +16,9 @@ class CustomerChatSupport < ApplicationRecord
   end
 
   private
-  
+
     def broadcast_active_chat_support
-      CustomerActiveChatSupportWorker.perform_async id
+      # CustomerActiveChatSupportWorker.perform_async id
     end
 
 end

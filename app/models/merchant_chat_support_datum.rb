@@ -7,7 +7,7 @@ class MerchantChatSupportDatum < ApplicationRecord
 
   private
     def show_new_message
-      MerchantChatSupportWorker.perform_async id
+      ActionCable.server.broadcast "merchant_chat_support_channel_#{merchant_chat_support.id}", chat_datum: as_json, action: 'speak'
     end
 
     def set_unseen

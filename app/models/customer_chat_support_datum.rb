@@ -2,12 +2,12 @@ class CustomerChatSupportDatum < ApplicationRecord
   belongs_to :customer_chat_support
   belongs_to :supportable, polymorphic: true
 
-  after_commit :show_new_message
+  after_commit :broadcast_new_message
   after_commit :set_unseen
 
   private
-    def show_new_message
-      CustomerChatSupportWorker.perform_async id
+    def broadcast_new_message
+      ActionCable.server.broadcast "customer_chat_support_channel_#{customer_chat_support.id}", chat_datum: as_json, action: 'speak'
     end
 
     def set_unseen
