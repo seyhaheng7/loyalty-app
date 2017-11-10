@@ -63,6 +63,9 @@ class ClaimedReward < ApplicationRecord
 
   scope :given, -> { where(given: true) }
   scope :not_give, -> { where.not(given) }
+  scope :customer_name_like, ->(value){ joins(:customer).merge(Customer.name_like(value)) }
+  scope :reward_name_like, ->(value){ joins(:reward).merge(Reward.name_like(value)) }
+
 
   after_create :create_submitted_claimed_reward_notifications
   after_commit :create_given_claimed_reward_notifications, if: ->{ saved_change_to_given? && given? }
