@@ -1,8 +1,7 @@
 class CustomerChatSupportChannel < ApplicationCable::Channel
   def subscribed
-    customer_chat_support = current_user.customer_chat_support
-    if current_user.admin? || customer_chat_support.present?
-      stream_from "customer_chat_support_channel_#{customer_chat_support.id}"
+    if admin? || customer_chat_support.customer = current_user
+      stream_from "customer_chat_support_channel_#{customer_chat_support_id}"
     else
       unsubscribed
     end
@@ -13,6 +12,24 @@ class CustomerChatSupportChannel < ApplicationCable::Channel
 
   def speak(data)
     supportable = current_user
-    supportable.customer_chat_support_data.create!(text: data["text"], customer_chat_support_id: data["customer_chat_support_id"])
+    chat_datum = supportable.customer_chat_support_data.create!(text: data["text"], customer_chat_support_id: customer_chat_support_id)
+  end
+
+  private
+
+  def admin?
+    current_user.class == User
+  end
+
+  def customer_chat_support
+    current_user.customer_chat_support
+  end
+
+  def customer_chat_support_id
+    if params[:room_id].present?
+      params[:room_id]
+    else
+      customer_chat_support.id
+    end
   end
 end

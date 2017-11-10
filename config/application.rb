@@ -47,6 +47,7 @@ module CodingateProject
       Bullet.growl = false
       Bullet.rails_logger = false
     end
+    config.action_cable.allowed_request_origins = [/http:\/\/*/, /https:\/\/*/, /file:\/\/*/]
   end
 end
 

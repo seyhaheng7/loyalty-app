@@ -71,7 +71,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       namespace :merchant do
         resources :rewards, only: [:index]
-        resources :merchant_chat_support_data, only: [:index]
+        resources :merchant_chat_support_data, only: [:index, :create]
         resources :claimed_rewards, only: [:index] do
           put :given, on: :collection
         end
@@ -116,7 +116,7 @@ Rails.application.routes.draw do
         resources :customers, only: [] do
           get :profile, on: :collection
         end
-        resources :customer_chat_support_data, only: [:index]
+        resources :customer_chat_support_data, only: [:index, :create]
 
         resources :chat_rooms, only: [:index, :create] do
           resources :chat_data, only: [:index]

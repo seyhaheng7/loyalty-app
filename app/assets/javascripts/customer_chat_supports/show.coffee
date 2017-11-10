@@ -7,6 +7,9 @@ Codingate.CustomerChatSupportsMessageForm = Codingate.CustomerChatSupportsShow =
     @_subcribedChannelCustomerChatSupport()
     @_handleMessageFormSubmitted()
 
+  _scrollToBottom: ->
+    $('#customer-chat-supports-list').scrollTop($("#chat-data")[0].scrollHeight);
+
   _initCustomerChatSupportRoomID: ->
     @room_id = $('#chat-data').data('room-id')
 
@@ -20,6 +23,8 @@ Codingate.CustomerChatSupportsMessageForm = Codingate.CustomerChatSupportsShow =
   _loadCustomerChatSupportData: ->
     self = @
     $.getScript(window.location.href+".js?page=#{@page}").then ->
+      if self.page == 1
+        self._scrollToBottom()
       self.page++
 
   _appendChatSupportData: (chat_datum)->
@@ -55,7 +60,7 @@ Codingate.CustomerChatSupportsMessageForm = Codingate.CustomerChatSupportsShow =
           setTimeout self._setSeenAtToDateNow, 100
 
       speak: (data)->
-        @perform 'speak', text: data["text"], customer_chat_support_id: data["customer_chat_support_id"]
+        @perform 'speak', text: data["text"], customer_chat_support_id: data["customer_chat_support_id"], action: 'speak'
 
   _handleMessageFormSubmitted: ->
     $('#message-form').submit (e) ->
