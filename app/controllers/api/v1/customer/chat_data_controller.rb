@@ -25,12 +25,12 @@ module Api::V1::Customer
     before_action :find_chat_room
 
     def index
-      @chat_data = chat_room.chat_data.page(params[:page]).includes(:customer)
+      @chat_data = @chat_room.chat_data.page(params[:page]).includes(:customer)
       render json: @chat_data
     end
 
     def create
-      @chat_data = chat_room.chat_data.new(chat_datumn_params.merge(customer: current_customer))
+      @chat_data = @chat_room.chat_data.new(chat_datumn_params.merge(customer: current_customer))
       if @chat_data.save
 
         render json: @chat_data, status: :created
