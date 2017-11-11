@@ -46,7 +46,7 @@ module Api::V1::Customer
     end
 
     def chat_datumn_params
-      params.require(:chat_datumn).permit(:text, :sticker, :audio)
+      params.require(:data).permit(:text, :sticker, :audio)
     end
   end
 end
