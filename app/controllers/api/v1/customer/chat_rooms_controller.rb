@@ -3,7 +3,7 @@ module Api::V1::Customer
     swagger_controller :chat_rooms, 'ChatRooms'
 
     def self.add_common_params(api)
-      api.param :form, 'chat_room[customer][id]', :integer, :required, 'Customer ID to recieved the message'
+      api.param :form, 'customer_id', :integer, :required, 'Customer ID to recieved the message'
     end
 
     swagger_api :index do
