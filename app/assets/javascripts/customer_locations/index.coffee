@@ -61,7 +61,7 @@ Codingate.CustomerLocationsIndex =
     self = @
     setTimeout ->
       self._removeCustomerMarker(customer) if self._isUpdateMoreThan30Minutes(customer)
-    , 30*60*1000
+    , 2*60*1000
 
   _contentofInforWindow: (customer)->
     avatar_size = "style = 'height: 83px; width: 83px;'"
@@ -97,8 +97,9 @@ Codingate.CustomerLocationsIndex =
 
     different_date = current_date - last_update_location_date
 
+    # Convert Date to durations
     durations = Math.round(different_date % (24*60*60*1000) % (60*60*1000) / (60*1000))
-    return durations > 30
+    return durations > 2
 
   _updateCustomerOnMap: (customer)->
     @_removeCustomerMarker(customer)
