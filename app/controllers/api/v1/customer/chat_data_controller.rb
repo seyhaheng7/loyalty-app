@@ -25,7 +25,7 @@ module Api::V1::Customer
     before_action :find_chat_room
 
     def index
-      @chat_data = @chat_room.chat_data.page(params[:page]).includes(:customer)
+      @chat_data = @chat_room.chat_data.order(id: :desc).page(params[:page]).includes(:customer)
       render json: @chat_data
     end
 

@@ -1,6 +1,6 @@
 class MerchantChatSupportChannel < ApplicationCable::Channel
   def subscribed
-    if current_user.admin? || merchant_chat_support.merchant == merchant
+    if admin? || merchant_chat_support.merchant == current_user
       stream_from "merchant_chat_support_channel_#{merchant_chat_support_id}"
     else
       unsubscribed
@@ -17,6 +17,10 @@ class MerchantChatSupportChannel < ApplicationCable::Channel
 
 
   private
+
+  def admin?
+    current_user.class == User
+  end
 
 
   def merchant_chat_support

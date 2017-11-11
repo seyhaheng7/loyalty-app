@@ -24,7 +24,7 @@ module Api::V1::Merchant
 
     def index
       merchant_chat_support = current_merchant.merchant_chat_support
-      @merchant_chat_support_data = merchant_chat_support.merchant_chat_support_data.page(params[:page])
+      @merchant_chat_support_data = merchant_chat_support.merchant_chat_support_data.order(id: :desc).page(params[:page])
       render json: @merchant_chat_support_data
     end
 
