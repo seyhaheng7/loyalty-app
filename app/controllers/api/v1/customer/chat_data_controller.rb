@@ -14,9 +14,9 @@ module Api::V1::Customer
 
     swagger_api :create do |api|
       summary 'Create customer chat data (Channel: CustomerChatCustomerChannel)'
-      api.param :form, 'data[text]', :string, :required, 'Text'
-      api.param :form, 'data[sticker]', :string, :required, 'Sticker Url'
-      api.param :form, 'data[audio]', :string, :required, 'Audio Url'
+      api.param :form, 'data[text]', :string, :optional, 'Text'
+      api.param :form, 'data[sticker]', :string, :optional, 'Sticker Url'
+      api.param :form, 'data[audio]', :string, :optional, 'Audio Url'
       response :unauthorized
       response :success
       response :not_acceptable, "The request you made is not acceptable"
