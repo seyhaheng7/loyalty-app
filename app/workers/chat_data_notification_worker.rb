@@ -24,7 +24,7 @@ class ChatDataNotificationWorker
 
       paramsnotification = {
         "app_id" => app_id,
-        "contents" => {"en" => content}
+        "contents" => {"en" => content},
         "include_player_ids" => member.devices.pluck(:device_id),
         "data" => {
           "type" => 'CustomerChatCustomer',
