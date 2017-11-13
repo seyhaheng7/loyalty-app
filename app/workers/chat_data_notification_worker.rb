@@ -11,7 +11,6 @@ class ChatDataNotificationWorker
 
   def push_notification(chat_datum, members, current_customer, chat_room)
     members.each do |member|
-      notifyable = notification.notifyable
       app_id  = ENV['ONE_SIGNAL_APP_ID']
       app_key = ENV['ONE_SIGNAL_APP_KEY']
 
@@ -25,7 +24,7 @@ class ChatDataNotificationWorker
 
       paramsnotification = {
         "app_id" => app_id,
-        "contents" => {"en" => content,
+        "contents" => {"en" => content}
         "include_player_ids" => member.devices.pluck(:device_id),
         "data" => {
           "type" => 'CustomerChatCustomer',

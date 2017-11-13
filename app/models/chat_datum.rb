@@ -15,9 +15,9 @@ class ChatDatum < ApplicationRecord
   after_commit :broadcast_new_message
 
   # Create methods (text? sticker? audio?)
-  TYPES.each do |role_name|
-    define_method "#{role_name.downcase.parameterize.underscore}?" do
-      role == role_name
+  TYPES.each do |chat_type|
+    define_method "#{chat_type.downcase.parameterize.underscore}?" do
+      data_type == chat_type
     end
   end
 
