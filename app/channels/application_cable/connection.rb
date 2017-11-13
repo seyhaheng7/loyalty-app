@@ -19,12 +19,8 @@ module ApplicationCable
         current_user
       else
         user = Customer.find_by uid: uid
-        if user.present?
-          if user.valid_token?(access_token, client_id)
-            user
-          else
-            reject_unauthorized_connection
-          end
+        if user.present? && user.valid_token?(access_token, client_id)
+          user
         else
           user = Merchant.find_by uid: uid
           if user.present? && user.valid_token?(access_token, client_id)
