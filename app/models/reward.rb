@@ -1,7 +1,7 @@
 class Reward < ApplicationRecord
   acts_as_paranoid
 
-  belongs_to :store, optional: true
+  belongs_to :store
 
   has_many :claimed_rewards, dependent: :restrict_with_error
   has_many :approved_claimed_rewards, -> { approved }, class_name: 'ClaimedReward'
