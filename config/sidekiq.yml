@@ -6,7 +6,7 @@ production:
   :concurrency: 10
 :queues:
   - ["notification", 2]
-  - ["chat", 4]
-  - ["default", 4]
+  - ["chat", 1]
+  - ["default", 7]
 
 
