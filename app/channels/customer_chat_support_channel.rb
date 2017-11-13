@@ -2,12 +2,22 @@ class CustomerChatSupportChannel < ApplicationCable::Channel
   def subscribed
     if admin? || customer_chat_support.customer = current_user
       stream_from "customer_chat_support_channel_#{customer_chat_support_id}"
+      if admin?
+        customer_chat_support.update(admin_streaming: true)
+      else
+        customer_chat_support.update(customer_streaming: true)
+      end
     else
       unsubscribed
     end
   end
 
   def unsubscribed
+    if admin?
+      customer_chat_support.update(admin_streaming: false)
+    else
+      customer_chat_support.update(customer_streaming: false)
+    end
   end
 
   def speak(data)

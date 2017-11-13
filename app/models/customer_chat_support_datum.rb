@@ -4,8 +4,13 @@ class CustomerChatSupportDatum < ApplicationRecord
 
   after_commit :broadcast_new_message
   after_commit :set_unseen
+  after_commit :notify_offline_member
 
   private
+    def notify_offline_member
+      CustomerChatSupportDatumNotificationWorker.perform_in(1.second, id)
+    end
+
     def broadcast_new_message
       ActionCable.server.broadcast "customer_chat_support_channel_#{customer_chat_support.id}", chat_datum: as_json, action: 'speak'
     end

@@ -5,7 +5,7 @@ class MerchantChatSupportChannel < ApplicationCable::Channel
       if admin?
         merchant_chat_support.update(admin_streaming: true)
       else
-        merchant_chat_support.update(customer_streaming: true)
+        merchant_chat_support.update(merchant_streaming: true)
       end
     else
       unsubscribed
@@ -16,7 +16,7 @@ class MerchantChatSupportChannel < ApplicationCable::Channel
     if admin?
       merchant_chat_support.update(admin_streaming: false)
     else
-      merchant_chat_support.update(customer_streaming: false)
+      merchant_chat_support.update(merchant_streaming: false)
     end
   end
 
