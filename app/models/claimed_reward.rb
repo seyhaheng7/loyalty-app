@@ -62,7 +62,7 @@ class ClaimedReward < ApplicationRecord
   end
 
   scope :given, -> { where(given: true) }
-  scope :not_give, -> { where.not(given) }
+  scope :not_give, -> { where(given: false) }
   scope :customer_name_like, ->(value){ joins(:customer).merge(Customer.name_like(value)) }
   scope :reward_name_like, ->(value){ joins(:reward).merge(Reward.name_like(value)) }
 
