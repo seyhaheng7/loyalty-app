@@ -4,8 +4,13 @@ class MerchantChatSupportDatum < ApplicationRecord
 
   after_commit :show_new_message
   after_commit :set_unseen
+  after_commit :notify_offline_member
 
   private
+    def notify_offline_member
+      MerchantChatSupportDatumNotificationWorker.perform_in(1.second, id)
+    end
+
     def show_new_message
       ActionCable.server.broadcast "merchant_chat_support_channel_#{merchant_chat_support.id}", chat_datum: as_json, action: 'speak'
     end

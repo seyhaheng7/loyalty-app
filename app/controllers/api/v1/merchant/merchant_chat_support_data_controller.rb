@@ -14,8 +14,8 @@ module Api::V1::Merchant
 
 
     swagger_api :create do |api|
-      summary 'Create merchant chat support data (Channel: MerchantChatSupportChannel)'
-
+      summary 'Create merchant chat support data'
+      notes "(Channel: MerchantChatSupportChannel) (Notification: MerchantChatSupport)"
       api.param :form, 'data[text]', :string, :required, 'Text'
       response :unauthorized
       response :success

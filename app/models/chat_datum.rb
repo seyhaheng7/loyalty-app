@@ -13,6 +13,7 @@ class ChatDatum < ApplicationRecord
   before_save :set_data_type
 
   after_commit :broadcast_new_message
+  after_commit :notify_offline_member
 
   # Create methods (text? sticker? audio?)
   TYPES.each do |chat_type|

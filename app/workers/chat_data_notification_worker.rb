@@ -15,7 +15,7 @@ class ChatDataNotificationWorker
       app_key = ENV['ONE_SIGNAL_APP_KEY']
 
       content = if chat_datum.text?
-                  chat_datum.text
+                  "#{current_customer.name} sent you a text message"
                 elsif chat_datum.sticker?
                   "#{current_customer.name} sent you a sticker"
                 elsif chat_datum.audio?
