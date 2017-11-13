@@ -3,7 +3,7 @@ class NotifyExpiredClaimedReward
 
 
   def perform
-    ClaimedReward.not_give.where(created_at: Time.now.beginning_of_day..Time.now.end_of_day).each do |claimed_reward|
+    ClaimedReward.not_give.where(expired_at: Time.now.beginning_of_day..Time.now.end_of_day).each do |claimed_reward|
       notify_customer(claimed_reward)
       notify_merchants(claimed_reward)
     end
