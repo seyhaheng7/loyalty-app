@@ -18,7 +18,9 @@ class CustomerChatSupport < ApplicationRecord
   private
 
     def broadcast_active_chat_support
-      # CustomerActiveChatSupportWorker.perform_async id
+      if !admin_streaming?
+        ActionCable.server.broadcast "customer_active_chat_support_channel", id: id, seen_at: seen_at
+      end
     end
 
 end

@@ -18,8 +18,8 @@ class MerchantChatSupport < ApplicationRecord
   private
 
     def broadcast_active_chat_support
-      if !merchant_chat_support.admin_streaming?
-        MerchantActiveChatSupportWorker.perform_async id
+      if !admin_streaming?
+        ActionCable.server.broadcast "merchant_active_chat_support_channel", id: id, seen_at: seen_at
       end
     end
 end
