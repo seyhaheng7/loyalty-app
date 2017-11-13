@@ -26,10 +26,10 @@ class ChatDataNotificationWorker
         "app_id" => app_id,
         "contents" => {"en" => content},
         "include_player_ids" => member.devices.pluck(:device_id),
-        "data" => {
+        "data" => ChatDatumSerializer.new(chat_datum).as_json.merge({
           "type" => 'CustomerChatCustomer',
           "chat_room_id" => chat_room.id
-        }
+        })
       }
 
       uri = URI.parse('https://onesignal.com/api/v1/notifications')
