@@ -10,7 +10,8 @@ class ChatDatum < ApplicationRecord
 
   private
     def broadcast_new_message
-      ActionCable.server.broadcast "customer_chat_customer_channel_#{chat_room_id}", chat_datum: as_json, action: 'speak'
+      json = ChatDatumSerializer.new(self).as_json
+      ActionCable.server.broadcast "customer_chat_customer_channel_#{chat_room_id}", chat_datum: json, action: 'speak'
     end
 
     def set_data_type
