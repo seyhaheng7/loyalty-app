@@ -32,7 +32,11 @@ class CustomerChatSupportChannel < ApplicationCable::Channel
   end
 
   def customer_chat_support
-    current_user.customer_chat_support
+    @customer_chat_support ||=  if params[:room_id].present?
+                                  CustomerChatSupport.find params[:room_id]
+                                else
+                                  current_user.customer_chat_support
+                                end
   end
 
   def customer_chat_support_id

@@ -34,7 +34,11 @@ class MerchantChatSupportChannel < ApplicationCable::Channel
 
 
   def merchant_chat_support
-    current_user.merchant_chat_support
+    @merchant_chat_support ||=  if params[:room_id].present?
+                                  MerchantChatSupport.find params[:room_id]
+                                else
+                                  current_user.merchant_chat_support
+                                end
   end
 
   def merchant_chat_support_id

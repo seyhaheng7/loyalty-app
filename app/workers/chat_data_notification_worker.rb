@@ -5,7 +5,7 @@ class ChatDataNotificationWorker
     chat_datum  = ChatDatum.find chat_datum_id
     current_customer = chat_datum.customer
     chat_room   = chat_datum.chat_room
-    members     = chat_room.chat_members.where.not(customer: current_customer, streaming: false).map(&:customer)
+    members     = chat_room.chat_members.where.not(customer: current_customer, streaming: true).map(&:customer)
     push_notification(chat_datum, members, current_customer, chat_room)
   end
 
