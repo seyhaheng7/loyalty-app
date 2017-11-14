@@ -6,6 +6,8 @@ module Api::V1::Customer
 
     include Pundit
     include DeviseTokenAuth::Concerns::SetUserByToken
+
+    before_action :check_access_country!
     before_action :authenticate_customer!
     before_action :check_customer_verification!, if: :customer_signed_in?
 
@@ -32,6 +34,15 @@ module Api::V1::Customer
     def devise_token_controller?
       params[:controller].include? 'devise_token_auth'
     end
+
+    def check_access_country!
+    if !Rails.env.development? && ENV['RESTRICT_ACCESS'] == 'true'
+      country = GEOIP.country(request.remote_ip)
+      if country.country_name != 'Cambodia'
+        render plain: 'Restrict Access from your country', status: 401
+      end
+    end
+  end
 
     # swagger doc authentication header request
     class << self
