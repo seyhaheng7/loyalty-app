@@ -21,7 +21,7 @@ class ClaimedRewardsGrid
   end
 
   column(:status)
-  column(:created_at) do |model|
+  column(:created_at, header: 'Claimed Date') do |model|
     model.created_at.to_date
   end
   column(:actions, html:true) do |record|
