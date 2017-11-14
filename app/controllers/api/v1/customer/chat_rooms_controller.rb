@@ -26,7 +26,7 @@ module Api::V1::Customer
 
     def create
       member = Customer.find params[:customer_id]
-      chat_room = ChatRoom.member(current_customer.id).member(member.id).first
+      chat_room = ChatRoom.members(current_customer.id, member.id).first
       if chat_room.blank?
         chat_room = current_customer.chat_rooms.create
         chat_room.chat_members.create(customer_id: params[:customer_id])
