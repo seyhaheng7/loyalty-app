@@ -19,8 +19,7 @@
           = f.input :email
           = f.input :phone, input_html: { class: 'inputmask' }
           = f.input :address
-          = f.input :gender
-          = f.input :password
+          = f.input :gender, collection: ['Male', 'Female']
           = f.input :current_points
           = f.input :lat, as: :hidden
           = f.input :long, as: :hidden
