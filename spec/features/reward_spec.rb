@@ -22,6 +22,8 @@ feature 'Reward' do
       fill_in 'Name', with: 'Ipad'
       fill_in 'Require points', with: '1'
       fill_in 'Quantity', with: '10'
+      fill_in 'Start date', with: Date.today
+      fill_in 'End date', with: Date.today+5.days
       attach_file('reward[image]', File.join(Rails.root, 'spec/support/default.png'))
       select 'KFC', :from => 'Store'
       click_on 'Create Reward'

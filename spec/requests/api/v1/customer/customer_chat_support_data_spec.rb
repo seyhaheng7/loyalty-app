@@ -3,9 +3,9 @@ describe 'CustomerChatSupportDatum' do
   let!(:customer_chat_support_datum){ create(:customer_chat_support_datum, supportable: customer, customer_chat_support: customer.customer_chat_support) }
   let!(:customer_chat_support_data){ create_list(:customer_chat_support_datum, 10, supportable: customer, customer_chat_support: customer.customer_chat_support) }
 
-  describe 'GET api/v1/customer/customer_chat_supports/:customer_chat_support_id/customer_chat_support_data' do
+  describe 'GET api/v1/customer/customer_chat_support_data' do
     before do
-      get api_v1_customer_customer_chat_support_customer_chat_support_data_path(customer.customer_chat_support), headers: customer.create_new_auth_token
+      get api_v1_customer_customer_chat_support_data_path, headers: customer.create_new_auth_token
     end
 
     it 'return status successful' do

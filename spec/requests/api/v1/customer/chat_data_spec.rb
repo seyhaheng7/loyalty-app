@@ -4,10 +4,10 @@ describe 'ChatDatum' do
   let!(:voice_message){ create(:voice_message) }
   let!(:chat_member){ create(:chat_member, chat_room: chat_room, customer: customer) }
 
+  let!(:chat_data){ create_list(:chat_datum, 10, chat_room: chat_room, customer: customer) }
   let!(:chat_datum){ create(:chat_datum, :data_type_text, chat_room: chat_room, customer: customer) }
   let!(:chat_datum2){ create(:chat_datum, :data_type_sticker, chat_room: chat_room, customer: customer) }
   let!(:chat_datum3){ create(:chat_datum, :data_type_audio,chat_room: chat_room, customer: customer) }
-  let!(:chat_data){ create_list(:chat_datum, 10, chat_room: chat_room, customer: customer) }
 
   describe 'GET api/v1/customer/chat_rooms/:chat_room_id/chat_data' do
     before do

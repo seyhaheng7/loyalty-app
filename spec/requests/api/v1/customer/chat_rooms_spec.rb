@@ -34,11 +34,18 @@ describe 'CustomerChatSupport' do
     let!(:customer3){ create(:customer) }
 
     before do
+      post api_v1_customer_chat_rooms_path, headers: customer.create_new_auth_token, params: { customer_id: customer3.id }
     end
 
     it 'return status successful' do
-      post api_v1_customer_chat_rooms_path, headers: customer.create_new_auth_token, params: { customer_id: customer3.id }
       expect(response).to have_http_status(200)
+    end
+
+    it 'return chat of member' do
+      json = JSON.parse(response.body)
+      chat_room = ChatRoom.find json['id']
+      expect(chat_room.customers).to include customer3
+      expect(chat_room.customers).to include customer
     end
 
   end
