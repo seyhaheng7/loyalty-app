@@ -19,12 +19,11 @@ class Promotion < ApplicationRecord
   # end
   #
 
-  scope :daily_push_condition, ->{where(start_date: Date.today, sent: 'false')}
+  scope :daily_push_condition, ->{where(start_date: Date.today, sent: false)}
 
   def push_daily_promotion
     Promotion.daily_push_condition.each do |promotion|
       PromotionNotificationsWorker.perform_async(promotion.id)
-      promotion.update(sent: 'true')
     end
   end
 
