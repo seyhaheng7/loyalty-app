@@ -19,6 +19,9 @@ feature 'Video ad' do
       visit video_ads_path
       click_link 'Add New Video'
       fill_in 'Title', with: 'Video'
+      attach_file('video_ad[video_file]', "#{Rails.root}/spec/support/mov_bbb.mp4")
+      attach_file('video_ad[thumbnail]', "#{Rails.root}/spec/support/default.png")
+
       click_on 'Create Video'
       expect(page).to have_content 'Video was successfully created'
     end
@@ -51,7 +54,7 @@ feature 'Video ad' do
     scenario 'details of video_ad' do
       visit video_ad_path(video_ad)
       expect(page).to have_content (video_ad.title)
-    end    
+    end
   end
 
   feature 'Destroy' do

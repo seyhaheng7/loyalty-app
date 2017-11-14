@@ -3,9 +3,9 @@ describe 'MerchantChatSupportDatum' do
   let!(:merchant_chat_support_datum){ create(:merchant_chat_support_datum, supportable: merchant, merchant_chat_support: merchant.merchant_chat_support) }
   let!(:merchant_chat_support_data){ create_list(:merchant_chat_support_datum, 10, supportable: merchant, merchant_chat_support: merchant.merchant_chat_support) }
 
-  describe 'GET api/v1/merchant/merchant_chat_supports/:merchant_chat_support_id/merchant_chat_support_data' do
+  describe 'GET api/v1/merchant/merchant_chat_support_data' do
     before do
-      get api_v1_merchant_merchant_chat_support_merchant_chat_support_data_path(merchant.merchant_chat_support), headers: merchant.create_new_auth_token
+      get api_v1_merchant_merchant_chat_support_data_path, headers: merchant.create_new_auth_token
     end
 
     it 'return status successful' do

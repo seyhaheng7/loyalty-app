@@ -22,7 +22,6 @@ feature 'Customer' do
       fill_in 'Last name', with: 'Google'
       fill_in 'Email', with: 'bunutu1@gmail.com'
       fill_in 'Phone', with: '014567890'
-      fill_in 'Password', with: 'Ubuntu1234!'
       click_on 'Create Customer'
 
       expect(page).to have_content 'Customer was successfully created.'
@@ -41,7 +40,6 @@ feature 'Customer' do
       find("a[href='#{edit_customer_path(customer)}']").click
       fill_in 'First name', with: 'Codingate'
       fill_in 'Last name', with: 'Codingate'
-      fill_in 'Password', with: 'Ubuntu1234!'
       click_on 'Update Customer'
       expect(page).to have_content 'Customer was successfully updated.'
     end
