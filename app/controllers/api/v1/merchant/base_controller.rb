@@ -8,6 +8,8 @@ module Api::V1::Merchant
 
     include Pundit
     include DeviseTokenAuth::Concerns::SetUserByToken
+
+    before_action :check_access_country!
     before_action :authenticate_merchant!
 
     # user not allow to access
@@ -32,6 +34,15 @@ module Api::V1::Merchant
 
     def devise_token_controller?
       params[:controller].include? 'devise_token_auth'
+    end
+
+    def check_access_country!
+      if !Rails.env.development? && ENV['RESTRICT_ACCESS'] == 'true'
+        country = GEOIP.country(request.remote_ip)
+        if country.country_name != 'Cambodia'
+          render plain: 'Restrict Access from your country', status: 401
+        end
+      end
     end
 
     # swagger doc authentication header request
