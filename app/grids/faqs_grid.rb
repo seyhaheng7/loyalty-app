@@ -6,7 +6,7 @@ class FaqsGrid
     Faq
   end
 
-  filter(:title, :string)
+  filter(:title, :string){ |value, scope| scope.title_like(value) }
 
   column(:title)
   column(:actions, html:true) do |record|

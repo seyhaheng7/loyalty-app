@@ -7,9 +7,10 @@
       = f.input :content, as: :ckeditor
       %br
       .pull-left
-        -if policy(@faq).create? || policy(@faq).updates?
-          = f.button :submit, class: 'btn btn-primary'
-
+        -if params[:action] == "new" && policy(@faq).create?
+          = f.button :submit, 'Create FAQ', class: 'btn btn-primary'
+        -if params[:action] == "edit" && policy(@faq).update?
+          = f.button :submit, 'Update FAQ', class: 'btn btn-primary'
       .pull-right
         -if policy(@faq).index?
           = link_to faqs_path, class: 'btn btn-default' do
