@@ -252,6 +252,7 @@ GEM
     mime-types (3.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2016.0521)
+    mini_magick (4.8.0)
     mini_mime (0.1.4)
     mini_portile2 (2.2.0)
     minitest (5.10.3)
@@ -485,6 +486,7 @@ DEPENDENCIES
   letter_opener (~> 1.4.1)
   listen (>= 3.0.5, < 3.2)
   lunchy
+  mini_magick (~> 4.8.0)
   nexmo (~> 4.7.0)
   omniauth (~> 1.6.1)
   omniauth-facebook (~> 1.4.0)

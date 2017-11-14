@@ -13,7 +13,7 @@ class Customer < ActiveRecord::Base
   validates :phone, uniqueness: { message: "already registered" }, allow_blank: true
   validates :phone, numericality: { message: 'Not a phone number' }, allow_blank: true
   validates :phone, length: { minimum: 9, maximum: 10, message: 'Not a phone number' }, allow_blank: true
-  validates :first_name, :last_name, presence: true, if: :omniauth_provider?
+  validates :first_name, :last_name, presence: true
   validate :correct_facebook_uid, if: :facebook_provider?
   validate :correct_google_uid, if: :google_provider?
 
