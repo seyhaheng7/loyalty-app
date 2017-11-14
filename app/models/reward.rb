@@ -9,6 +9,8 @@ class Reward < ApplicationRecord
   validates :require_points, presence: true
   validates :quantity, presence: true
   validates :image, presence: true
+  validates :start_date, presence: true
+  validates :end_date, presence: true
   validates :name, presence: true, uniqueness: {scope: :store_id}
 
   mount_uploader :image, ImageUploader
@@ -64,6 +66,14 @@ class Reward < ApplicationRecord
 
   def quantity_remain
     quantity - claimed_rewards.given.count.to_i
+  end
+
+  validate :end_date_after_start_date?
+
+  def end_date_after_start_date?
+    if end_date.present? and start_date.present?
+      errors.add :end_date, "must be after start date" if end_date < start_date
+    end
   end
 
 end
