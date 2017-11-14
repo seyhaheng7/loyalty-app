@@ -29,6 +29,7 @@ class CustomersController < ApplicationController
   def create
     @customer = Customer.new(customer_params)
     authorize @customer
+    @customer.password = Devise.friendly_token(8)
 
     if @customer.save
       redirect_to @customer, notice: 'Customer was successfully created.'
@@ -40,7 +41,7 @@ class CustomersController < ApplicationController
   # PATCH/PUT /customers/1
   def update
     authorize @customer
-    if @customer.update(customer_params)
+    if @customer.update_without_password(customer_params)
       redirect_to @customer, notice: 'Customer was successfully updated.'
     else
       render :edit
@@ -62,6 +63,6 @@ class CustomersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def customer_params
-      params.require(:customer).permit(:first_name, :last_name, :email, :phone, :address, :avatar, :gender, :password, :current_points, :role, :lat, :long, :last_update, :confirmation_code, :confirmation_at, :avatar_cache)
+      params.require(:customer).permit(:first_name, :last_name, :email, :phone, :address, :avatar, :gender, :current_points, :role, :lat, :long, :last_update, :confirmation_code, :confirmation_at, :avatar_cache)
     end
 end

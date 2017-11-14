@@ -30,4 +30,9 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  errors:
+    messages:
+      wrong_geometry: "is the wrong geometry (should be %{file_geometry} pixels)"
+      geometry_too_small: "is too small (should be at least %{file_geometry} pixels)"
+      geometry_too_big: "is too big (should be at most %{file_geometry} pixels)"
+      mini_magick_processing_error: "Failed to manipulate with MiniMagick, maybe it is not an image? Original Error: %{e}"

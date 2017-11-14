@@ -86,3 +86,4 @@ gem "asset_sync", '~> 2.2.0'
 gem "fog-aws", '~> 1.4.1'
 gem 'cocoon', '~> 1.2.10'
 gem 'jquery-ui-rails', '~> 6.0.1'
+gem "mini_magick", "~> 4.8.0"
