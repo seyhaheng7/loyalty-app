@@ -21,7 +21,7 @@ class Promotion < ApplicationRecord
 
   scope :daily_push_condition, ->{where(start_date: Date.today, sent: false)}
 
-  def push_daily_promotion
+  def self.push_daily_promotion
     Promotion.daily_push_condition.each do |promotion|
       PromotionNotificationsWorker.perform_async(promotion.id)
     end
