@@ -3,6 +3,7 @@ class BannerUploader < CarrierWave::Uploader::Base
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
   # include CarrierWave::MiniMagick
+  include CarrierWave::MiniMagick
 
   # Choose what kind of storage to use for this uploader:
   # storage :file
@@ -17,6 +18,15 @@ class BannerUploader < CarrierWave::Uploader::Base
   def default_url
     'default.png'
   end
+
+    def filename
+      @name ||= "#{timestamp}-#{super}" if original_filename.present? and super.present?
+    end
+
+    def timestamp
+      var = :"@#{mounted_as}_timestamp"
+      model.instance_variable_get(var) or model.instance_variable_set(var, Time.now.to_i)
+    end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
   # def default_url(*args)
@@ -49,5 +59,20 @@ class BannerUploader < CarrierWave::Uploader::Base
   # def filename
   #   "something.jpg" if original_filename
   # end
+
+
+  attr_accessor :geometry
+
+  process :set_geometry
+
+
+  protected
+
+  def set_geometry
+    manipulate! do |image|
+      @geometry = ::MiniMagick::Image.open(file.file)[:dimensions]
+      image
+    end
+  end
 
 end
