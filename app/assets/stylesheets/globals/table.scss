@@ -12,3 +12,7 @@
 .table > tfoot > tr.active > th {
   background-color: transparent;
 }
+
+.table > tbody > tr > td {
+  vertical-align: middle;
+}
