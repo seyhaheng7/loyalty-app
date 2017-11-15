@@ -8,6 +8,8 @@ class Company < ApplicationRecord
   validates :address, presence: true
   validates_uniqueness_of :name
   validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i }, allow_blank: true
+  validates :logo, presence: true
+  validates :logo, file_geometry: {is: [250, 166]}, if: :logo_changed?
 
   mount_uploader :logo, LogoUploader
 
