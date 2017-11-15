@@ -2,9 +2,9 @@ class CustomerChatSupportDatum < ApplicationRecord
   belongs_to :customer_chat_support
   belongs_to :supportable, polymorphic: true
 
-  after_commit :broadcast_new_message
-  after_commit :set_unseen
-  after_commit :notify_offline_member
+  after_save :broadcast_new_message
+  after_save :set_unseen
+  after_save :notify_offline_member
 
   private
     def notify_offline_member

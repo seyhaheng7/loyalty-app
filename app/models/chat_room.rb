@@ -1,7 +1,7 @@
 class ChatRoom < ApplicationRecord
-  has_many :chat_members
+  has_many :chat_members, dependent: :destroy
   has_many :customers, through: :chat_members
-  has_many :chat_data
+  has_many :chat_data, dependent: :destroy
 
   scope :member, ->(member_id){ joins(:chat_members).merge(ChatMember.member(member_id)) }
 

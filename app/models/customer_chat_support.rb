@@ -1,7 +1,7 @@
 class CustomerChatSupport < ApplicationRecord
   belongs_to :customer
 
-  has_many :customer_chat_support_data
+  has_many :customer_chat_support_data, dependent: :destroy
 
   scope :lastest_chat_order, -> { select('customer_chat_supports.*,MAX(customer_chat_support_data.created_at) as last').joins(:customer_chat_support_data).order('last DESC').group(:id) }
 
