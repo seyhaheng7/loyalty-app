@@ -104,7 +104,7 @@ class Receipt < ApplicationRecord
   end
 
   def create_notifications
-    SubmittedReceiptNotificationsWorker.perform_in(3.seconds, id)
+    SubmittedReceiptNotificationsWorker.perform_in(1.seconds, id)
   end
 
   def create_rejected_notifications
@@ -116,7 +116,7 @@ class Receipt < ApplicationRecord
   end
 
   def broadcast_receipt_status
-    ReceiptApprovalWorker.perform_async(self.id, self.status)
+    ActionCable.server.broadcast "receipt_approval_channel", id: id, status: status
   end
 
 end

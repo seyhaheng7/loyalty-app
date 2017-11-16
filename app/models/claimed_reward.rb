@@ -120,7 +120,7 @@ class ClaimedReward < ApplicationRecord
   end
 
   def broadcast_claimed_reward_status
-    ClaimedRewardApprovalWorker.perform_async(self.id, self.status)
+    ActionCable.server.broadcast "claimed_reward_approval_channel", id: id, status: status
   end
 
   def create_given_claimed_reward_notifications
