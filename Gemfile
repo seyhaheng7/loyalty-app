@@ -88,3 +88,6 @@ gem "fog-aws", '~> 1.4.1'
 gem 'cocoon', '~> 1.2.10'
 gem 'jquery-ui-rails', '~> 6.0.1'
 gem "mini_magick", "~> 4.8.0"
+gem 'activeadmin', github: 'activeadmin'
+gem "active_admin_paranoia" , '~> 1.0.11'
+gem 'active_admin_flat_skin'
