@@ -3,9 +3,13 @@ class Advertisement < ApplicationRecord
 
   validates :name, presence: true
   validates :banner, presence:true
+  validate :end_date_after_start_date?
 
   PAGES = ['Home', 'Watch & Earn', 'Category detail', 'Rewards', 'Snap']
-  validates :for_page, inclusion: PAGES
+  validates :for_page, inclusion: PAGES, presence:true
+
+  scope :name_like, ->(name){ where("#{table_name}.name ilike ?", "%#{name}%") }
+  scope :address_like, ->(address){ where("#{table_name}.address ilike ?", "%#{address}%") }
 
   mount_uploader :banner, BannerUploader
 
@@ -29,5 +33,13 @@ class Advertisement < ApplicationRecord
 
   has_many :banners, dependent: :destroy
   accepts_nested_attributes_for :banners, allow_destroy: true,  reject_if: :all_blank
+
+  private
+
+  def end_date_after_start_date?
+    if end_date.present? and start_date.present?
+      errors.add :end_date, "must be after start date" if end_date < start_date
+    end
+  end
 
 end

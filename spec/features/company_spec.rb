@@ -21,6 +21,7 @@ feature 'Company' do
     scenario 'Create Successfully' do
       visit companies_path
       click_link 'New Company'
+      attach_file('company[logo]', File.join(Rails.root, 'spec/support/img(250166).jpg'))
       fill_in 'Name', with: 'Codingate'
       fill_in 'Address', with: 'Phnom Penh'
       select 'test', from: 'Category'
