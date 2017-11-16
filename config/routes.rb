@@ -3,7 +3,10 @@ Rails.application.routes.draw do
 
   ActiveAdmin.routes(self)
   mount ActionCable.server => '/cable'
-  mount Sidekiq::Web => '/sidekiq'
+
+  authenticate :user, lambda { |u| u.admin? } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
 
   resource :reports, only: [] do
     member do
