@@ -7,4 +7,5 @@ class StickerGroup < ApplicationRecord
   validates :image, presence: true
 
   mount_uploader :image, ImageUploader
+  validates :image, presence: true, file_geometry: {is: [128, 128]}, if: :image_changed?
 end
