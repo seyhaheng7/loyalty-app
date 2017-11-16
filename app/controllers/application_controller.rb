@@ -17,6 +17,17 @@ class ApplicationController < ActionController::Base
   skip_before_action :authenticate_user!, if: :devise_token_controller?
 
   layout :set_layout
+
+
+  # restrict access to admin module for non-admin users
+  def authenticate_admin_user!
+    raise SecurityError unless current_user.try(:admin?)
+  end
+
+  rescue_from SecurityError do |exception|
+    redirect_to root_url
+  end
+
   private
 
   def api?
