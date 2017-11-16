@@ -7,6 +7,7 @@ module Api::V1::Customer
     include Pundit
     include DeviseTokenAuth::Concerns::SetUserByToken
 
+    # before_action ->{ binding.pry }
     before_action :check_access_country!
     before_action :authenticate_customer!
     before_action :check_customer_verification!, if: :customer_signed_in?

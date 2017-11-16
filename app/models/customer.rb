@@ -32,8 +32,8 @@ class Customer < ActiveRecord::Base
   has_many :chat_members, dependent: :destroy
   has_many :chat_rooms, through: :chat_members, dependent: :destroy
   has_many :customer_land_marks, dependent: :destroy
-  has_many :land_marks, through: :customer_land_marks
-  has_many :chat_data, :dependent: :destroy
+  has_many :land_marks, through: :customer_land_marks, dependent: :destroy
+  has_many :chat_data, dependent: :destroy
 
   default_scope { order(created_at: :desc) }
   scope :able_to_verify,        ->{ where('verification_expired_at > ?', DateTime.now) }

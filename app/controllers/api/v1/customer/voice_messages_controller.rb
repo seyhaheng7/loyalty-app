@@ -5,7 +5,7 @@ module Api::V1::Customer
     swagger_controller :voice_messages, 'Voice Messages'
 
     def self.add_common_params(api)
-      api.param :form, 'voice_message[voice_file]', :file, :required, 'Voice File'
+      api.param :form, 'file', :file, :required, 'Voice File'
     end
 
     swagger_api :show do
@@ -28,7 +28,7 @@ module Api::V1::Customer
     end
 
     def create
-      @voice_message = VoiceMessage.new(voice_message_params)
+      @voice_message = VoiceMessage.new(voice_file: voice_message_params[:file])
       if @voice_message.save
         render json: @voice_message, status: :created
       else
@@ -43,7 +43,7 @@ module Api::V1::Customer
       end
 
       def voice_message_params
-        params.require(:voice_message).permit(:voice_file)
+        params.permit(:file)
       end
   end
 end
