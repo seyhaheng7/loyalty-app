@@ -1,11 +1,13 @@
 class Guide < ApplicationRecord
 
   validates :title, presence: true
-  
+
   mount_uploader :thumbnail, ThumbnailUploader
 
   default_scope { order(created_at: :desc) }
-  
+
+  scope :title_like, ->(title){ where("#{table_name}.title ilike ?", "%#{title}%") }
+
   def youtube_id
     YoutubeID.from(youtube_url)
   end

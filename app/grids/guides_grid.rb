@@ -6,7 +6,7 @@ class GuidesGrid
     Guide
   end
 
-  filter(:title, :string)
+  filter(:title, :string){ |value, scope| scope.title_like(value) }
 
   #add 's' to thumbnail cuz it duplicate with bootstrap class
   column(:thumbnails, html: true) do |record|
@@ -15,7 +15,7 @@ class GuidesGrid
 
   column(:title)
   column(:youtube_url)
-  
+
 
   column(:actions, html:true) do |record|
     render 'guides/control', guide: record

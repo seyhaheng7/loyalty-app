@@ -6,7 +6,7 @@ class VideoAdsGrid
     VideoAd
   end
 
-  filter(:title, :string)
+  filter(:title, :string){ |value, scope| scope.title_like(value) }
 
 
   column(:title)
