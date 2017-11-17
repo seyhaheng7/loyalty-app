@@ -18,6 +18,8 @@ class CompaniesController < ApplicationController
   def new
     @company = Company.new
     authorize @company
+
+    @company.category = Category.find_by(name: 'Other')
   end
 
   # GET /companies/1/edit
