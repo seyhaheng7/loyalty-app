@@ -17,6 +17,9 @@ class ThumbnailUploader < CarrierWave::Uploader::Base
   def default_url
     'default.png'
   end
+  def filename
+    @name ||= "#{super}-#{Devise.friendly_token}" if original_filename.present? and super.present?
+  end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
   # def default_url(*args)
