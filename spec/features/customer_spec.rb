@@ -20,7 +20,7 @@ feature 'Customer' do
       click_link 'New Customer'
       fill_in 'First name', with: 'Codingate'
       fill_in 'Last name', with: 'Google'
-      fill_in 'Email', with: 'bunutu1@gmail.com'
+      fill_in 'Email', with: 'codingate@gmail.com'
       fill_in 'Phone', with: '014567890'
       click_on 'Create Customer'
 

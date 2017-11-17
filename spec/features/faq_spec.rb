@@ -1,5 +1,5 @@
 feature 'Faq' do
-  
+
   given!(:user){ create(:user) }
   given!(:faq){ create(:faq) }
 
@@ -21,7 +21,7 @@ feature 'Faq' do
       click_link 'Add New FAQ'
       fill_in 'Title', with: 'Question1'
       fill_in 'Content', with: 'Question1 content'
-      click_on 'Create Faq'
+      click_on 'Create FAQ'
       expect(page).to have_content 'Faq was successfully created.'
     end
 
@@ -30,7 +30,7 @@ feature 'Faq' do
       click_link 'Add New FAQ'
       fill_in 'Title', with: ''
       fill_in 'Content', with: ''
-      click_on 'Create Faq'
+      click_on 'Create FAQ'
       expect(page).to have_content 'can\'t be blank'
     end
   end
@@ -41,16 +41,16 @@ feature 'Faq' do
       find("a[href='#{edit_faq_path(faq)}']").click
       fill_in 'Title', with: 'Title'
       fill_in 'Content', with: 'Content'
-      click_on 'Update Faq'
+      click_on 'Update FAQ'
       expect(page).to have_content 'Faq was successfully updated.'
-    end 
+    end
 
     scenario 'update faq unsuccessfully' do
       visit faqs_path
       find("a[href='#{edit_faq_path(faq)}']").click
       fill_in 'Title', with: ''
       fill_in 'Content', with: ''
-      click_on 'Update Faq'
+      click_on 'Update FAQ'
       expect(page).to have_content 'can\'t be blank'
     end
   end
