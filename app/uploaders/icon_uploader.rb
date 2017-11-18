@@ -11,7 +11,7 @@ class IconUploader < CarrierWave::Uploader::Base
   end
 
   def filename
-    @name ||= "#{super}-#{Devise.friendly_token}" if original_filename.present? and super.present?
+    @name ||= "#{Devise.friendly_token}-#{super}" if original_filename.present? and super.present?
   end
 
 end

@@ -15,7 +15,7 @@ class CaptureUploader < CarrierWave::Uploader::Base
   end
 
   def filename
-    @name ||= "#{super}-#{Devise.friendly_token}" if original_filename.present? and super.present?
+    @name ||= "#{Devise.friendly_token}-#{super}" if original_filename.present? and super.present?
   end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:

@@ -12,7 +12,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   end
 
   def filename
-    @name ||= "#{timestamp}-#{super}-#{Devise.friendly_token}" if original_filename.present? and super.present?
+    @name ||= "#{Devise.friendly_token}-#{timestamp}-#{super}" if original_filename.present? and super.present?
   end
 
   def timestamp
