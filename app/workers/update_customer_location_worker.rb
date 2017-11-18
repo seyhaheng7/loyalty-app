@@ -15,9 +15,6 @@ class UpdateCustomerLocationWorker
     land_marks = Geocoder.search("#{lat},#{long}")
     if land_marks.present?
       land_mark = land_marks.first
-      if land_mark.blank?
-        land_mark = land_marks.first
-      end
       land_mark_name = land_mark.formatted_address
       land_mark = LandMark.first_or_create(name: land_mark_name)
       customer_land_marks = CustomerLandMark.where(customer_id: customer_id, land_mark: land_mark).today
