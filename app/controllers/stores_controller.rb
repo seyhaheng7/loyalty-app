@@ -68,7 +68,7 @@ class StoresController < ApplicationController
     def store_params
       params.require(:store).permit(
         :name, :lat, :long, :address, :company_id, :location_id, :website,
-        :phone, :open_and_close, :email, :facebook, :term_and_condition
+        :phone, :open_and_close, :email, :facebook, :term_and_condition,
         store_banners_attributes: [:id, :image, :image_cache, :_destroy]
       )
     end
