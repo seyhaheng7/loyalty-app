@@ -1,5 +1,5 @@
 class StoreSerializer < ActiveModel::Serializer
-  attributes :id, :name, :lat, :long, :address, :distance, :phone_number, :facebook, :open_and_close, :email, :website, :banners
+  attributes :id, :name, :lat, :long, :address, :distance, :phone_number, :facebook, :open_and_close, :email, :website, :banners, :term_and_condition
   attributes :errors
   belongs_to :company
   belongs_to :location
