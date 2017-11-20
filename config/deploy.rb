@@ -37,5 +37,4 @@ namespace :deploy do
   after :updated, :swagger_docs
 end
 
-
-
+require "whenever/capistrano"

@@ -7,6 +7,9 @@ Codingate.MerchantChatSupportsMessageForm = Codingate.MerchantChatSupportsShow =
     @_subcribedChannelMerchantChatSupport()
     @_handleMessageFormSubmitted()
 
+   _scrollToBottom: ->
+    $('#merchant-chat-supports-list').scrollTop($("#chat-data")[0].scrollHeight);
+
   _initMerchantChatSupportRoomID: ->
     @room_id = $('#chat-data').data('room-id')
 
@@ -20,6 +23,8 @@ Codingate.MerchantChatSupportsMessageForm = Codingate.MerchantChatSupportsShow =
   _loadMerchantChatSupportData: ->
     self = @
     $.getScript(window.location.href+".js?page=#{@page}").then ->
+      if self.page == 1
+        self._scrollToBottom()
       self.page++
 
   _appendChatSupportData: (chat_datum)->
