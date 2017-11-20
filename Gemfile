@@ -35,6 +35,7 @@ gem 'ffaker',             '~> 2.6.0'
 gem 'bullet',             '~> 5.6.1'
 gem 'koala',              '~> 3.0.0'
 gem 'geoip',              '~> 1.6.3'
+gem 'fog',                '~> 1.38'
 
 group :development, :test do
   gem 'lunchy'
