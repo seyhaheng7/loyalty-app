@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171118034204) do
+ActiveRecord::Schema.define(version: 20171120035448) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -405,6 +405,7 @@ ActiveRecord::Schema.define(version: 20171118034204) do
     t.date "start_date"
     t.date "end_date"
     t.integer "claimed_reward_expired"
+    t.text "term"
     t.index ["deleted_at"], name: "index_rewards_on_deleted_at"
     t.index ["name"], name: "index_rewards_on_name"
     t.index ["quantity", "approved_claimed_rewards_count"], name: "index_rewards_on_quantity_and_approved_claimed_rewards_count"
