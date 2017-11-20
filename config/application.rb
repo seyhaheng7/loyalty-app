@@ -36,7 +36,12 @@ module CodingateProject
     config.time_zone = 'Bangkok'
 
     if ENV['ENABLE_S3'] == 'true'
-      config.action_controller.asset_host = "//#{ENV['FOG_DIRECTORY']}.s3.amazonaws.com"
+      if ENV['ASSETS_HOST'].present?
+        config.action_controller.asset_host = ENV['ASSETS_HOST']
+      else
+        config.action_controller.asset_host = "//#{ENV['FOG_DIRECTORY']}.s3.amazonaws.com"
+      end
+
       config.assets.prefix = "/assets"
     else
       config.action_controller.asset_host = ENV['ASSETS_HOST']
