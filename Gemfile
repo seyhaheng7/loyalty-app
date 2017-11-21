@@ -35,7 +35,7 @@ gem 'ffaker',             '~> 2.6.0'
 gem 'bullet',             '~> 5.6.1'
 gem 'koala',              '~> 3.0.0'
 gem 'geoip',              '~> 1.6.3'
-gem 'fog',                '~> 1.38'
+gem 'fog-aws'
 
 group :development, :test do
   gem 'lunchy'
@@ -85,7 +85,6 @@ gem 'youtube_id', '~> 0.0.3'
 gem 'whenever', '~> 0.9.7'
 
 gem "asset_sync", '~> 2.2.0'
-gem "fog-aws", '~> 1.4.1'
 gem 'cocoon', '~> 1.2.10'
 gem 'jquery-ui-rails', '~> 6.0.1'
 gem "mini_magick", "~> 4.8.0"
