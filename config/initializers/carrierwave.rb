@@ -3,6 +3,7 @@ CarrierWave.configure do |config|
   config.asset_host = ActionController::Base.asset_host
   if ENV['ENABLE_S3'] == 'true'
     if Rails.env.staging? || Rails.env.production?
+      config.storage = :fog
       config.fog_provider = 'fog/aws'
       config.fog_credentials = {
         aws_secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],
