@@ -51,7 +51,7 @@ module Api::V1::Customer
       if @receipt.save
         render json: @receipt, status: :created, location: @receipt
       else
-        render json: @receipt.errors, status: :unprocessable_entity
+        render json: @receipt, status: :unprocessable_entity
       end
     end
 

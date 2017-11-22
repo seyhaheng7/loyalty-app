@@ -23,7 +23,7 @@ feature 'Sticker' do
       visit stickers_path
       click_link 'New Sticker'
       fill_in 'Name', with: 'Happies Logo'
-      attach_file('sticker[image]', File.join(Rails.root, 'spec/support/default.png'))
+      attach_file('sticker[image]', File.join(Rails.root, 'spec/support/Pik.png'))
       select 'test', from: 'Sticker group'
       click_on 'Create Sticker'
       expect(page).to have_content 'Sticker was successfully created'
