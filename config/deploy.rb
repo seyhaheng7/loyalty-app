@@ -15,7 +15,7 @@ set :scm, :git
 
 set :pty, false
 
-set :keep_releases, 5
+set :keep_releases, 3
 
 set :whenever_identifier, -> { "#{fetch(:application)}_#{fetch(:stage)}" }
 

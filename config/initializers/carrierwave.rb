@@ -1,4 +1,3 @@
-
 CarrierWave.configure do |config|
   config.storage = :file
   config.asset_host = ActionController::Base.asset_host
@@ -11,6 +10,7 @@ CarrierWave.configure do |config|
         provider: 'AWS',
         region: ENV['FOG_REGION']
       }
+      config.storage = :fog
       config.fog_attributes = {'Cache-Control'=>'max-age=315576000'}
       config.fog_directory = ENV['FOG_DIRECTORY']
     end
