@@ -11,7 +11,7 @@
               :label_html => { class: 'btn btn-default'}
             = f.hidden_field :thumbnail_cache
             %p
-              (250 x 166)
+              (Width 250px) - (Height 166px)
 
         .col-xs-12.col-sm-6.text-center
           .image-uploader{align: 'center'}
@@ -21,11 +21,12 @@
               :label_html => { class: 'btn btn-default'}
             = f.hidden_field :banner_cache
             %p
-              (720 x 480)
+              (Width 720px) - (Height 480px)
+
 
 
       = f.input :title
-      = f.input :video_file, label: "Video File ( 720 x 1280 )"
+      = f.input :video_file, label: "Video File ( Width 1280px - Height 720px )"
       = f.input :start_date, as: :string, input_html: {class: 'date-picker'}
       = f.input :end_date, as: :string, input_html: {class: 'date-picker'}
       = f.input :earned_points

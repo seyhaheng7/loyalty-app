@@ -8,7 +8,7 @@
       %col{width: '350'}
       %tr
         %th Logo:
-        %td= image_tag @advertisement.banner, size: '50x50'
+        %td= image_tag @advertisement.banner, size: '120x60'
       %tr
         %th Name:
         %td= @advertisement.name
@@ -38,7 +38,7 @@
         %th Image:
         %td
           - @advertisement.banners.each do |pic|
-            = image_tag pic.image_url, size: '50x50'
+            = image_tag pic.image_url, size: '120x60'
 
     .row.wrap-pad
       .pull-left
