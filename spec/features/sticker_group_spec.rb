@@ -19,7 +19,7 @@ feature 'StickerGroup' do
       visit sticker_groups_path
       click_link 'New StickerGroup'
       fill_in 'Name', with: 'Happies Logo'
-      attach_file('sticker_group[image]', File.join(Rails.root, 'spec/support/default.png'))
+      attach_file('sticker_group[image]', File.join(Rails.root, 'spec/support/Pik.png'))
       click_on 'Create Sticker'
       expect(page).to have_content 'StickerGroup was successfully created'
     end
