@@ -27,17 +27,18 @@
       %tr
         %th Android ULR:
         %td= @video_ad.android_url
-      %tr
-        %th Thumbnail:
-        %td= image_tag @video_ad.thumbnail, class: 'img-responsive'
-      %tr
-        %th Banner:
-        %td= image_tag @video_ad.banner, class: 'img-responsive'
-      %tr
-        %th Video ad:
-        %td
-          %video{ controls: "", name: "media", :height => "350px;", :width => "500px;"}
-            %source{src: "#{@video_ad.video_file}", type: "video/mp4"}
+      .row
+        .col-sm-6
+          %th
+            %p{style: "margin-bottom: 8px;"} Thumbnail:
+            = image_tag @video_ad.thumbnail, size: '100x100'
+            %p{style: "margin-top: 15px;margin-bottom: 10px;"} Banner:
+            = image_tag @video_ad.banner, size: '100x100'
+        .col-sm-6
+          %th
+            %p{style: "margin: 0;"} Video ad:
+            %video{ controls: "", name: "media", :height => "300px;", :width => "500px;"}
+              %source{src: "#{@video_ad.video_file}", type: "video/mp4"}
 
 
     .row.wrap-pad
