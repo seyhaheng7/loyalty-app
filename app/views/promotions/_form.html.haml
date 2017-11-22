@@ -9,6 +9,8 @@
         = f.input :image, as: :file, label: 'Upload Image',
           :label_html => { class: 'btn btn-default'}
         = f.hidden_field :image_cache
+        %p
+          (Width 480px) - (Height 320px)
 
       = f.input :title
       = f.input :body, as: :ckeditor
