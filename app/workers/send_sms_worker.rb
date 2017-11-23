@@ -13,7 +13,7 @@ class SendSmsWorker
     username = ENV['SMS_USER']
     password = ENV['SMS_PASSWORD_MD5']
     if username.present? && password.present?
-      sender   = 'Codingate'
+      sender   = ENV['SMS_SENDER']
       sms_url = "http://client.mekongsms.com/api/sendsms.aspx?username=#{username}&pass=#{password}&cd=besting&sender=#{sender}&isflash=0&smstext=#{text_body}&gsm=#{number}"
 
       puts sms_url
