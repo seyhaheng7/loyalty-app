@@ -6,8 +6,10 @@ class SendSmsWorker
     sms_log_text = "send sms to #{number} with body #{text_body}"
     puts sms_log_text
     sms_log_file = Rails.root.join('public', 'sms_logs.txt')
-    open(sms_log_file, 'a') do |f|
-      f << sms_log_text+"\n"
+    if !Rails.env.production?
+      open(sms_log_file, 'a') do |f|
+        f << sms_log_text+"\n"
+      end
     end
 
     username = ENV['SMS_USER']
