@@ -4,10 +4,10 @@ class Store < ApplicationRecord
   belongs_to :company, optional: true
   belongs_to :location, optional: true
 
-  has_many :receipts
-  has_many :rewards
+  has_many :receipts, dependent: :destroy
+  has_many :rewards, dependent: :destroy
   has_many :claimed_rewards, through: :rewards
-  has_many :merchants
+  has_many :merchants, dependent: :destroy
 
   has_many :store_banners, dependent: :destroy
   accepts_nested_attributes_for :store_banners, allow_destroy: true,  reject_if: :all_blank
@@ -17,13 +17,10 @@ class Store < ApplicationRecord
   validates :address, presence: true
   validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i }, allow_blank: true
 
-
-  delegate :name, to: :company, prefix: true, allow_nil: true
-  delegate :name, to: :location, prefix: true, allow_nil: true
-
   reverse_geocoded_by :lat, :long
 
   default_scope { order(completed: :desc, created_at: :desc) }
+
   scope :name_like, ->(name){ where("#{table_name}.name ilike ?", "%#{name}%") }
   scope :in_category, ->(category_id){ joins(:company).merge(Company.in_category(category_id)) }
 
