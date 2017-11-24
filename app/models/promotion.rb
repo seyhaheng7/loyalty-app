@@ -9,7 +9,7 @@ class Promotion < ApplicationRecord
   default_scope { order(created_at: :desc) }
   scope :active, -> {where(":today >= start_date AND :today <= end_date", today: Date.today)}
 
-  has_many :notifications, as: :objectable
+  has_many :notifications, as: :objectable, dependent: :destroy
 
   scope :title_like, ->(title){ where("#{table_name}.title ilike ?", "%#{title}%") }
   scope :start_between, ->(start_date, end_date){ where(start_date: start_date.beginning_of_day..end_date.end_of_day) }

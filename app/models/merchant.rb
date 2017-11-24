@@ -2,10 +2,10 @@ class Merchant < ActiveRecord::Base
   acts_as_paranoid
   default_scope { order(created_at: :desc) }
 
-  has_one :merchant_chat_support
-  has_many :merchant_chat_support_data, as: :supportable
-  has_many :devices, as: :deviceable
-  has_many :notifications, as: :notifyable
+  has_one :merchant_chat_support, dependent: :destroy
+  has_many :merchant_chat_support_data, as: :supportable, dependent: :destroy
+  has_many :devices, as: :deviceable, dependent: :destroy
+  has_many :notifications, as: :notifyable, dependent: :destroy
 
   # Include default devise modules.
   devise :database_authenticatable, :recoverable, :registerable,

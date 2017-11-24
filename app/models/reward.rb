@@ -3,8 +3,8 @@ class Reward < ApplicationRecord
 
   belongs_to :store
 
-  has_many :claimed_rewards, dependent: :restrict_with_error
-  has_many :approved_claimed_rewards, -> { approved }, class_name: 'ClaimedReward'
+  has_many :claimed_rewards, dependent: :destroy
+  has_many :approved_claimed_rewards, -> { approved }, class_name: 'ClaimedReward', dependent: :destroy
 
   validates :require_points, presence: true
   validates :quantity, presence: true

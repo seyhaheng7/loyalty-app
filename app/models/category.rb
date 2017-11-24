@@ -1,6 +1,6 @@
 class Category < ApplicationRecord
   acts_as_paranoid
-  has_many :companies
+  has_many :companies, dependent: :destroy
 
   mount_uploader :icon, IconUploader
 

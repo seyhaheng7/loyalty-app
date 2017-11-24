@@ -1,5 +1,5 @@
 class StickerGroup < ApplicationRecord
-  has_many :stickers
+  has_many :stickers, dependent: :destroy
 
   acts_as_paranoid
 

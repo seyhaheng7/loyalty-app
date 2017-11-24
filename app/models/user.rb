@@ -7,10 +7,10 @@ class User < ApplicationRecord
 
   acts_as_paranoid
 
-  has_many :devices, as: :deviceable
-  has_many :notifications, as: :notifyable
-  has_many :customer_chat_support_data, as: :supportable
-  has_many :merchant_chat_support_data, as: :supportable
+  has_many :devices, as: :deviceable, dependent: :destroy
+  has_many :notifications, as: :notifyable, dependent: :destroy
+  has_many :customer_chat_support_data, as: :supportable, dependent: :destroy
+  has_many :merchant_chat_support_data, as: :supportable, dependent: :destroy
 
   mount_uploader :avatar, ImageUploader
 

@@ -32,7 +32,7 @@ class ClaimedReward < ApplicationRecord
 
   end
 
-  has_many :notifications, as: :objectable
+  has_many :notifications, as: :objectable, dependent: :destroy
 
   belongs_to :customer
   belongs_to :managed_by, :class_name => "User", optional: true

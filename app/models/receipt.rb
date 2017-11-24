@@ -21,7 +21,7 @@ class Receipt < ApplicationRecord
   belongs_to :customer
   belongs_to :managed_by, :class_name => "User", optional: true
 
-  has_many :notifications, as: :objectable
+  has_many :notifications, as: :objectable, dependent: :destroy
   mount_base64_uploader :capture, ImageUploader
 
   validates :receipt_id, presence: true
