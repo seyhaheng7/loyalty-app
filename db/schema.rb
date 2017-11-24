@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171120035448) do
+ActiveRecord::Schema.define(version: 20171122070107) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -189,6 +189,7 @@ ActiveRecord::Schema.define(version: 20171120035448) do
     t.integer "failed_attempts", default: 0, null: false
     t.string "unlock_token"
     t.datetime "locked_at"
+    t.datetime "deleted_at"
     t.string "phone"
     t.string "address"
     t.string "gender"
@@ -204,9 +205,9 @@ ActiveRecord::Schema.define(version: 20171120035448) do
     t.string "first_name"
     t.string "last_name"
     t.datetime "update_location_at"
-    t.datetime "deleted_at"
     t.string "provider_access_token"
     t.index ["confirmation_token"], name: "index_customers_on_confirmation_token", unique: true
+    t.index ["deleted_at"], name: "index_customers_on_deleted_at"
     t.index ["digit_expired_at"], name: "index_customers_on_digit_expired_at"
     t.index ["first_name", "last_name"], name: "index_customers_on_first_name_and_last_name"
     t.index ["lat", "long"], name: "index_customers_on_lat_and_long"
@@ -243,7 +244,9 @@ ActiveRecord::Schema.define(version: 20171120035448) do
     t.string "youtube_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
     t.string "thumbnail"
+    t.index ["deleted_at"], name: "index_guides_on_deleted_at"
   end
 
   create_table "land_marks", force: :cascade do |t|
@@ -399,9 +402,9 @@ ActiveRecord::Schema.define(version: 20171120035448) do
     t.bigint "store_id"
     t.float "price"
     t.text "description"
-    t.integer "claimed_reward_expired"
     t.date "start_date"
     t.date "end_date"
+    t.integer "claimed_reward_expired"
     t.text "term"
     t.index ["deleted_at"], name: "index_rewards_on_deleted_at"
     t.index ["name"], name: "index_rewards_on_name"
@@ -463,6 +466,7 @@ ActiveRecord::Schema.define(version: 20171120035448) do
     t.string "facebook"
     t.string "open_and_close"
     t.text "term_and_condition"
+    t.boolean "completed", default: true
     t.index ["company_id"], name: "index_stores_on_company_id"
     t.index ["deleted_at"], name: "index_stores_on_deleted_at"
     t.index ["lat", "long"], name: "index_stores_on_lat_and_long"
@@ -511,12 +515,14 @@ ActiveRecord::Schema.define(version: 20171120035448) do
     t.integer "earned_points"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
     t.integer "max_view_per_day"
     t.string "thumbnail"
     t.string "label"
     t.string "ios_url"
     t.string "android_url"
     t.string "banner"
+    t.index ["deleted_at"], name: "index_video_ads_on_deleted_at"
     t.index ["max_view_per_day"], name: "index_video_ads_on_max_view_per_day"
   end
 
