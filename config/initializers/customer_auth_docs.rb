@@ -61,6 +61,7 @@ Overrides::DeviseTokenAuth::Customer::RegistrationsController.class_eval do
     param :form, 'gender', :string, :optional, 'Gender'
     param :form, 'avatar', :string, :optional, 'Avatar'
     param :form, 'address', :string, :optional, 'Address'
+    param :form, 'language', :base64, :optional, 'Language'
     param :form, 'lat', :float, :optional, 'Lat'
     param :form, 'long', :float, :optional, 'Long'
     param :form, 'email', :string, :optional, 'Email'
