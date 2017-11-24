@@ -89,6 +89,7 @@ class Receipt < ApplicationRecord
 
   def new_store=(params)
     new_store = Store.new params
+    new_store.completed = false
     new_store.save(validate: false)
     self.store = new_store
   end

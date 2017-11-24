@@ -23,7 +23,7 @@ class Store < ApplicationRecord
 
   reverse_geocoded_by :lat, :long
 
-  default_scope { order(created_at: :desc) }
+  default_scope { order(completed: :desc, created_at: :desc) }
   scope :name_like, ->(name){ where("#{table_name}.name ilike ?", "%#{name}%") }
   scope :in_category, ->(category_id){ joins(:company).merge(Company.in_category(category_id)) }
 
