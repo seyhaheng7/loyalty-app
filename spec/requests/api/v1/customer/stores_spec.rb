@@ -1,15 +1,14 @@
 describe 'stores' do
-  let!(:customer){ create(:customer) }
-  let!(:stores){ create_list(:store, 10) }
-  let!(:store){ create(:store) }
-
-  let!(:store1){create(:store)}
-
-  let!(:store_banners){create_list(:store_banner, 10, store_id: store1.id)}
-
 
 
   describe 'GET api/v1/customer/stores' do
+    let!(:customer){ create(:customer) }
+    let!(:stores){ create_list(:store, 10) }
+    let!(:store){ create(:store) }
+
+    let!(:store1){create(:store)}
+
+
     before do
       get api_v1_customer_stores_path, headers: customer.create_new_auth_token
     end
@@ -30,11 +29,27 @@ describe 'stores' do
     end
   end
 
-  describe 'Get api/v1/customer/stores?' do
+  describe 'GET api/v1/customer/stores' do
+    let!(:customer){ create(:customer) }
+    let!(:store){ create(:store) }
+    let!(:store1){ create(:store, completed: false) }
+
+    before do
+      get api_v1_customer_stores_path, headers: customer.create_new_auth_token
+    end
+
+    it 'order completed store at the top' do
+      json = JSON.parse(response.body)
+      ids = json.map{ |j| j['id'] }
+      expect(ids).to eq [store.id, store1.id]
+    end
+
+  end
+
+  describe 'Get api/v1/customer/stores?order' do
+    let!(:customer){ create(:customer) }
 
     it 'return list of asc' do
-
-      Store.destroy_all
       create(:store, name: 'ABC')
       create(:store, name: 'BCA')
       get api_v1_customer_stores_path(order: { name: 'asc' }), headers: customer.create_new_auth_token
@@ -46,7 +61,6 @@ describe 'stores' do
 
     it 'return list of desc' do
 
-      Store.destroy_all
       create(:store, name: 'ABC')
       create(:store, name: 'BCA')
       get api_v1_customer_stores_path(order: { name: 'desc' }), headers: customer.create_new_auth_token
@@ -59,6 +73,10 @@ describe 'stores' do
   end
 
   describe 'GET api/v1/customer/stores?lat=lat&long=long' do
+    let!(:customer){ create(:customer) }
+    let!(:stores){ create_list(:store, 10) }
+    let!(:store){ create(:store) }
+
     let!(:store1){ create(:store, lat: 13.095730, long: 103.202205) }
     let!(:store2){ create(:store, lat: 13.082966, long: 103.145485) }
     before do
@@ -79,6 +97,7 @@ describe 'stores' do
   end
 
   describe 'GET api/v1/customer/stores?category_id=category_id' do
+    let!(:customer){ create(:customer) }
     let!(:category1){  create(:category) }
     let!(:company1){ create(:company, category: category1) }
     let!(:store1){create(:store, company: company1)}
@@ -102,6 +121,7 @@ describe 'stores' do
   end
 
   describe 'GET api/v1/stores?only_partners=true' do
+    let!(:customer){ create(:customer) }
     let!(:company1){ create(:company, partner: false) }
     let!(:company2){ create(:company, partner: true) }
     let!(:store1){ create(:store, company: company1) }
@@ -120,6 +140,9 @@ describe 'stores' do
   end
 
   describe 'GET api/v1/customer/stores/:id' do
+    let!(:customer){ create(:customer) }
+    let!(:store){ create(:store) }
+
     before do
       get api_v1_customer_store_path(store), headers: customer.create_new_auth_token
     end
@@ -137,6 +160,10 @@ describe 'stores' do
   end
 
   describe 'GET api/v1/customer/stores/:id' do
+    let!(:customer){ create(:customer) }
+    let!(:store1){ create(:store) }
+    let!(:store_banners){ create_list(:store_banner, 10, store_id: store1.id) }
+
     before do
       get api_v1_customer_store_path(store1), headers: customer.create_new_auth_token
     end
