@@ -146,7 +146,11 @@
 
               - if policy(:report).ads?
                 %li.nav-item
-                  = link_to " Ads", ads_reports_path, class: 'nav-link'
+                  = link_to "Ads", ads_reports_path, class: 'nav-link'
+
+              - if policy(:report).customer_log?
+                %li.nav-item
+                  = link_to "Customer Log", customer_log_reports_path, class: 'nav-link'
 
 
         %li.nav-item{ class: ( "active" if sidebar_active?('settings') || sidebar_active?('term_conditions') || sidebar_active?('privacy_policies') || sidebar_active?('customer_locations') ||sidebar_active?('stickers') || sidebar_active?('sticker_groups'))}

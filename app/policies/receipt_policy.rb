@@ -1,15 +1,15 @@
 class ReceiptPolicy < ApplicationPolicy
 
   def index?
-    user.approver? || user.receptionist? || user.admin? || user.super?
+    user.approver? || user.admin?
   end
 
   def show?
-    user.approver? || user.receptionist? || user.admin? || user.super?
+    user.approver? || user.admin?
   end
 
   def approve?
-    record.submitted? and ( user.approver?|| user.admin? || user.super? )
+    record.submitted? and ( user.approver?|| user.admin? )
   end
 
   def reject?

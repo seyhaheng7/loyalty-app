@@ -1,13 +1,17 @@
 class ReportPolicy < ApplicationPolicy
   def rewards?
-    user.admin? || user.super?
+    user.admin?
   end
 
   def video_ads?
-    user.admin? || user.super?
+    user.admin?
   end
 
   def ads?
+    user.admin?
+  end
+
+  def customer_log?
     user.admin?
   end
 

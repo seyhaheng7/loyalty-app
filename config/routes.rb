@@ -13,6 +13,7 @@ Rails.application.routes.draw do
       get :video_ads
       get :rewards
       get :ads
+      get :customer_log
     end
   end
 

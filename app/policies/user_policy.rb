@@ -1,14 +1,14 @@
 class UserPolicy < ApplicationPolicy
   def index?
-    user.admin? || user.super?
+    user.admin?
   end
 
   def show?
-    user.admin? || user.super?
+    user.admin?
   end
 
   def create?
-    user.admin? || user.super?
+    user.admin?
   end
 
   def new?
@@ -16,7 +16,7 @@ class UserPolicy < ApplicationPolicy
   end
 
   def update?
-    user.admin? || user.super?
+    user.admin?
   end
 
   def edit?
@@ -24,7 +24,7 @@ class UserPolicy < ApplicationPolicy
   end
 
   def destroy?
-    user.admin? || user.super?
+    user.admin?
   end
 
 end
