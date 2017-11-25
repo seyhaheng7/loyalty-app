@@ -7,15 +7,15 @@ class ApplicationPolicy
   end
 
   def index?
-    user.receptionist? || user.admin? || user.super?
+    user.admin?
   end
 
   def show?
-    user.receptionist? || user.admin? || user.super?
+    user.admin?
   end
 
   def create?
-    user.receptionist? || user.admin? || user.super?
+    user.admin?
   end
 
   def new?
@@ -23,7 +23,7 @@ class ApplicationPolicy
   end
 
   def update?
-    user.receptionist? || user.admin? || user.super?
+    user.admin?
   end
 
   def edit?
@@ -31,7 +31,7 @@ class ApplicationPolicy
   end
 
   def destroy?
-    user.receptionist? || user.admin? || user.super?
+    user.admin?
   end
 
   def scope

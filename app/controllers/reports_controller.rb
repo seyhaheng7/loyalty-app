@@ -19,4 +19,11 @@ class ReportsController < ApplicationController
       scope.page(params[:page])
     end
   end
+
+  def customer_log
+    authorize :report
+    @grid = CustomerLogGrid.new(params[:customer_log_grid]) do |scope|
+      scope.page(params[:page])
+    end
+  end
 end
