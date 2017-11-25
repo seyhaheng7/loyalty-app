@@ -6,7 +6,7 @@ class PromotionsGrid
     Promotion
   end
 
-  filter(:title, :string)
+  filter(:title, :string){ |value, scope| scope.title_like(value) }
   filter(:date, :date, range: true) do |value, scope|
     start_date = value.first
     end_date  = value.second

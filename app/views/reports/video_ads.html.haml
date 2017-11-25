@@ -6,6 +6,11 @@
     .caption
       %i.icon-diamond
       Report Watch and Earn
+    .pull-right
+      = link_to url_for(format: 'csv', report_video_ads_grid: params[:report_video_ads_grid].try(:permit!)), class: "btn btn-sm btn-success" do
+        = fa_icon 'download'
+        Export Excel
+
   .portlet-body
     .table-scrollable
       = datagrid_table @grid
