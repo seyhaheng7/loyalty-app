@@ -1,7 +1,7 @@
 #tab_1_2.tab-pane
   .slimScrollDiv
     %ul.feeds
-      - @merchant.claimed_rewards.approved.each do |claimed_reward|
+      - @merchant.claimed_rewards.each do |claimed_reward|
         %li
           = link_to claimed_reward do
             .col1

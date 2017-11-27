@@ -17,12 +17,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :claimed_rewards do
-    member do
-      patch :reject
-      patch :approve
-    end
-  end
+  resources :claimed_rewards
 
   resources :receipts do
     member do

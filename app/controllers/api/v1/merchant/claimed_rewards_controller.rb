@@ -6,7 +6,6 @@ module Api::V1::Merchant
     swagger_api :index do
       summary 'Fetches all approved claimed rewards'
       param :query, :page, :integer, :optional, "Page number"
-      param :query, :status, :string, :optional, "Filter by approved, rejected, submitted"
       param :query, :given, :string, :optional, "[true, false]"
       response :unauthorized
       response :success
@@ -29,7 +28,7 @@ module Api::V1::Merchant
 
 
     def index
-      @claimed_rewards = current_merchant.claimed_rewards.approved.filter(params).page(params[:page]).includes(:customer, :reward)
+      @claimed_rewards = current_merchant.claimed_rewards.filter(params).page(params[:page]).includes(:customer, :reward)
       render json: @claimed_rewards, status: :ok
     end
 

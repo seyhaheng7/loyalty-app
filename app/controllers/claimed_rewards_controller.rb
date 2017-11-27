@@ -21,33 +21,10 @@ class ClaimedRewardsController < ApplicationController
     redirect_to claimed_rewards_url, notice: 'Claimed Reward was successfully deleted.'
   end
 
-  # APPROVE /claimed_rewards
-  def approve
-    authorize @claimed_reward
-
-    if @claimed_reward.update(managed_by: current_user)
-      @claimed_reward.approving!
-      redirect_to @claimed_reward, notice: 'Claimed Reward was successfully approved.'
-    else
-      redirect_to @claimed_reward, notice: 'Claimed Reward was unsuccessfully approved.'
-    end
-  end
-
-  # REJECT /claimed_rewards
-  def reject
-    authorize @claimed_reward
-    if @claimed_reward.update(managed_by: current_user)
-      @claimed_reward.rejecting!
-      redirect_to @claimed_reward, notice: 'Claimed Reward was successfully rejected.'
-    else
-      redirect_to @claimed_reward, notice: 'Claimed Reward was successfully rejected.'
-    end
-  end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_claimed_reward
-      @claimed_reward = ClaimedReward.find(params[:id]).decorate
+      @claimed_reward = ClaimedReward.find(params[:id])
     end
-  
+
 end
