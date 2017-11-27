@@ -15,6 +15,7 @@ class AdvertisementsGrid
     image_tag record.banner, size: '50x50'
   end
   column(:for_page, header: 'Page')
+  column(:price)
   column(:active)
   column(:phone, order: false)
 
