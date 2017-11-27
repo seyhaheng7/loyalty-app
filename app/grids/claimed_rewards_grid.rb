@@ -8,7 +8,6 @@ class ClaimedRewardsGrid
 
   filter(:reward_name, :string) { |value, scope| scope.reward_name_like(value) }
   filter(:customer_name, :string) { |value, scope| scope.customer_name_like(value) }
-  filter(:status, :enum, select: ClaimedReward.aasm.states.map(&:name))
   filter(:created_at, :date, range: true)
 
 

@@ -40,7 +40,6 @@
 #= require notifications/index
 #= require advertisements/form
 #= require advertisements/show
-#= require claimed_rewards/show
 #= require receipts/show
 #= require home/index
 #= require land_marks/show

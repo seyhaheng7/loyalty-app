@@ -20,7 +20,7 @@ FactoryGirl.define do
 
     trait :available do
       quantity 4
-      approved_claimed_rewards_count 2
+      claimed_rewards_count 2
     end
   end
 end

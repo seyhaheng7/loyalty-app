@@ -5,7 +5,7 @@ describe 'Reward' do
   context 'GET api/v1/merchant/rewards' do
     let!(:reward1){ create(:reward, name: "Car", require_points: 300, quantity: 6, store: store ) }
     let!(:reward2){ create(:reward, name: "Moto", require_points: 400, quantity: 6, store: store ) }
-    let!(:reward3){ create(:reward, name: "Laptop", require_points: 500, quantity: 2, approved_claimed_rewards_count: 2, store: store ) }
+    let!(:reward3){ create(:reward, name: "Laptop", require_points: 500, quantity: 2, claimed_rewards_count: 2, store: store ) }
 
     before do
       get api_v1_merchant_rewards_path, headers: merchant.create_new_auth_token
