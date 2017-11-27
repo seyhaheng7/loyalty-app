@@ -15,9 +15,10 @@ class Merchant < ActiveRecord::Base
 
   mount_base64_uploader :avatar, ImageUploader
 
-  belongs_to :store
+  belongs_to :store, optional: true
 
   validates :name, presence: true
+  validates :password, presence: true
   validates :phone,:presence => true, uniqueness: { message: "already registered" }
   validates :phone, numericality: { message: 'Not a phone number' }, allow_blank: true
   validates :phone, length: { minimum: 9, maximum: 10, message: 'Not a phone number' }, allow_blank: true
