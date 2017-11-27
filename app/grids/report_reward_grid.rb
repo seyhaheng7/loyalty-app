@@ -33,19 +33,18 @@ class ReportRewardGrid
     record.quantity
   end
 
-  column(:pending) do |record|
-    record.claimed_rewards.submitted.count
+  column(:claimed) do |record|
+    record.claimed_rewards.count
   end
+
   column(:claimed_reward_expired, header: 'Expired') do |record|
     record.claimed_reward_expired
   end
 
-  column(:claimed) do |record|
+  column(:given) do |record|
     record.claimed_rewards.given.count
   end
-  column(:rejected) do |record|
-    record.claimed_rewards.rejected.count
-  end
+
   column(:remain) do |record|
     record.quantity_remain
   end
