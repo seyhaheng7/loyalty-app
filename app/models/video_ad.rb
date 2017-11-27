@@ -23,9 +23,29 @@ class VideoAd < ApplicationRecord
   # order desc & filter by name
   scope :active, -> {where(":today >= start_date AND :today <= end_date", today: Date.today)}
 
-  scope :start_between, ->(start_date, end_date){ where(start_date: start_date.beginning_of_day..end_date.end_of_day) }
-  scope :end_between, ->(start_date, end_date){ where(end_date: start_date.beginning_of_day..end_date.end_of_day) }
-  scope :active_between, ->(start_date, end_date){ start_between(start_date, end_date).or(end_between(start_date, end_date)) }
+    def self.start_between(start_date, end_date)
+    if start_date.present? and end_date.present?
+      where(start_date: start_date.beginning_of_day..end_date.end_of_day)
+    elsif start_date.present?
+      where('start_date > ?', start_date)
+    elsif end_date.present?
+      where('start_date < ?', end_date)
+    end
+  end
+
+  def self.end_between(start_date, end_date)
+    if start_date.present? and end_date.present?
+      where(end_date: start_date.beginning_of_day..end_date.end_of_day)
+    elsif start_date.present?
+      where('end_date > ?', start_date)
+    elsif end_date.present?
+      where('end_date < ?', end_date)
+    end
+  end
+
+  def self.active_between(start_date, end_date)
+    start_between(start_date, end_date).or(end_between(start_date, end_date))
+  end
 
   def self.filter(params)
 

@@ -6,6 +6,10 @@
     .caption
       %i.icon-diamond
       Report Adversements
+    .pull-right
+      = link_to url_for(format: 'csv', report_reward_grid: params[:report_reward_grid].try(:permit!)), class: "btn btn-sm btn-success" do
+        = fa_icon 'download'
+        Export Excel
   .portlet-body
     .table-scrollable
       = datagrid_table @grid
