@@ -4,7 +4,7 @@ describe 'Reward' do
   context 'GET api/v1/customer/rewards' do
     let!(:store){ create(:store, name: "Codingate") }
     let!(:reward1){ create(:reward, :active, name: "google", require_points: 300, quantity: 6, store: store ) }
-    let!(:reward2){ create(:reward, :active, name: "facebook", require_points: 500, quantity: 2, approved_claimed_rewards_count: 2, store: store ) }
+    let!(:reward2){ create(:reward, :active, name: "facebook", require_points: 500, quantity: 2, claimed_rewards_count: 2, store: store ) }
     let!(:reward3){ create(:reward, :inactive, :available) }
     before do
       get api_v1_customer_rewards_path, headers: customer.create_new_auth_token

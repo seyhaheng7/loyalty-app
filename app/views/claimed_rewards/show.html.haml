@@ -4,8 +4,7 @@
     .caption
       Status :
       = @claimed_reward.status
-    .pull-right
-      %h5= @claimed_reward.manage_climed_reward.html_safe
+
   .portlet-body
     .row
       .col-xs-12.col-md-7
@@ -48,18 +47,6 @@
           %tr
             %th Current Points
             %td= @claimed_reward.customer.current_points
-
-        .pull-right
-          #claimed-reward-data{'data-claimed-reward-id' => @claimed_reward.id}
-            - if policy(@claimed_reward).approve?
-              = link_to approve_claimed_reward_path(@claimed_reward.id), method: :patch, class: 'btn btn-success' do
-                = fa_icon "check"
-                Approve
-            - if policy(@claimed_reward).reject?
-              = link_to reject_claimed_reward_path(@claimed_reward.id), method: :patch, class: 'btn btn-danger' do
-                = fa_icon "close"
-                Reject
-
 
   .row.wrap-pad
     .pull-left

@@ -10,7 +10,6 @@ module Api::V1::Customer
     swagger_api :index do
       summary 'Fetches all claimed_reward'
       param :query, :page, :integer, :optional, "Page number"
-      param :query, :status, :string, :optional, "Filter by approved, rejected, submitted"
 
       response :unauthorized
       response :success

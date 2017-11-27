@@ -1,4 +1,4 @@
-class ApprovedClaimedRewardNotificationsWorker
+class ClaimedRewardSuccessNotificationsWorker
   include Sidekiq::Worker
   sidekiq_options queue: 'notification'
 
@@ -12,8 +12,8 @@ class ApprovedClaimedRewardNotificationsWorker
     customer = claimed_reward.customer
     notification = claimed_reward.notifications.new
     notification.notifyable = customer
-    notification.notification_type = "ApprovedClaimedReward"
-    notification.text = "Your reward claim was approved!"
+    notification.notification_type = "ClaimedRewardSuccess"
+    notification.text = "Your reward has successfully claimed!"
     notification.save
   end
 
@@ -22,8 +22,8 @@ class ApprovedClaimedRewardNotificationsWorker
     store.merchants.each do |merchant|
       notification = claimed_reward.notifications.new
       notification.notifyable = merchant
-      notification.notification_type = "ApprovedClaimedReward"
-      notification.text = "Reward claimed was approved!"
+      notification.notification_type = "ClaimedRewardSuccess"
+      notification.text = "Reward claimed successfully!"
       notification.save
     end
 

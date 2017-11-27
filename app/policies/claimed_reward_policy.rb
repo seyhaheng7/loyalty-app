@@ -8,15 +8,10 @@ class ClaimedRewardPolicy < ApplicationPolicy
     user.approver? || user.admin?
   end
 
-  def approve?
-    record.submitted? and ( user.approver? || user.admin?)
-  end
-
   def create?
     # disable create feature
     false
   end
-
 
   def destroy?
     # disable delete feature
@@ -26,9 +21,5 @@ class ClaimedRewardPolicy < ApplicationPolicy
   def update?
     # disable edit feature
     false
-  end
-
-  def reject?
-    approve?
   end
 end
