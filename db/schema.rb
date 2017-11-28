@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171122070107) do
+ActiveRecord::Schema.define(version: 20171127063109) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -398,7 +398,7 @@ ActiveRecord::Schema.define(version: 20171122070107) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
-    t.integer "approved_claimed_rewards_count", default: 0
+    t.integer "claimed_rewards_count", default: 0
     t.bigint "store_id"
     t.float "price"
     t.text "description"
@@ -408,7 +408,7 @@ ActiveRecord::Schema.define(version: 20171122070107) do
     t.text "term"
     t.index ["deleted_at"], name: "index_rewards_on_deleted_at"
     t.index ["name"], name: "index_rewards_on_name"
-    t.index ["quantity", "approved_claimed_rewards_count"], name: "index_rewards_on_quantity_and_approved_claimed_rewards_count"
+    t.index ["quantity", "claimed_rewards_count"], name: "index_rewards_on_quantity_and_claimed_rewards_count"
     t.index ["store_id"], name: "index_rewards_on_store_id"
   end
 

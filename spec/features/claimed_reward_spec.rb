@@ -20,52 +20,8 @@ feature 'ClaimedReward' do
   feature 'Show' do
     scenario 'Show claimed_reward detail' do
       visit claimed_reward_path(claimed_reward)
-      expect(page).to have_content(claimed_reward.status)
-    end
-
-    scenario 'Approve Successfully' do
-      visit claimed_reward_path(claimed_reward)
-      click_on 'Approve'
-
-      expect(claimed_reward).to transition_from(:submitted).to(:approved).on_event(:approving)
-      expect(page).to have_content 'Claimed Reward was successfully approved.'
-    end
-
-    scenario 'Descrease points from user' do
-      visit claimed_reward_path(claimed_reward)
-      click_on 'Approve'
-
-      left_points = customer.current_points.to_i - reward.require_points.to_i
-      customer.reload
-      expect(customer).to have_attributes(current_points: left_points)
-      expect(page).to have_content 'Claimed Reward was successfully approved.'
-    end
-
-    scenario 'Reject Successfully' do
-      visit claimed_reward_path(claimed_reward)
-      click_on 'Reject'
-
-      expect(claimed_reward).to transition_from(:submitted).to(:rejected).on_event(:rejecting)
-      expect(page).to have_content 'Claimed Reward was successfully rejected.'
-    end
-
-    scenario 'Generate QrToken after Approved' do
-       visit claimed_reward_path(claimed_reward)
-       click_on 'Approve'
-       claimed_reward.reload
-       expect(claimed_reward.qr_token).not_to be_nil
-    end
-
-  end
-
-  xfeature 'Destroy' do
-    scenario 'Destroy Successfully' do
-      visit claimed_reward_path(claimed_reward)
-      click_link 'Delete'
-      expect(page).to have_content 'Claimed Reward was successfully deleted.'
+      expect(page).to have_content(claimed_reward.customer.name)
     end
   end
-
-
 
 end

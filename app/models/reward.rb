@@ -4,7 +4,6 @@ class Reward < ApplicationRecord
   belongs_to :store
 
   has_many :claimed_rewards, dependent: :destroy
-  has_many :approved_claimed_rewards, -> { approved }, class_name: 'ClaimedReward', dependent: :destroy
 
   validates :require_points, presence: true
   validates :quantity, presence: true
@@ -18,8 +17,8 @@ class Reward < ApplicationRecord
   delegate :name, :location, to: :store, prefix: true, allow_nil: true
 
   default_scope { order(created_at: :desc) }
-  scope :available, -> { where("quantity > approved_claimed_rewards_count") }
-  scope :unavailable, -> { where("quantity <= approved_claimed_rewards_count") }
+  scope :available, -> { where("quantity > claimed_rewards_count") }
+  scope :unavailable, -> { where("quantity <= claimed_rewards_count") }
   scope :name_like, ->(name){ where("#{table_name}.name ilike ?", "%#{name}%") }
 
   def self.filter(params)
@@ -82,7 +81,7 @@ class Reward < ApplicationRecord
   scope :active, -> {where(":today >= start_date AND :today <= end_date", today: Date.today)}
 
   def available?
-    quantity > approved_claimed_rewards_count
+    quantity > claimed_rewards_count
   end
 
   def unavailable?

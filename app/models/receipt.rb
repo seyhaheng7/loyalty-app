@@ -39,7 +39,7 @@ class Receipt < ApplicationRecord
   scope :in_month, ->(date){ where(created_at: (date.beginning_of_month)..(date.end_of_month)) }
   scope :this_month, ->{ in_month(Date.today) }
   scope :last_month, ->{ in_month(Date.today-1.month) }
-  scope :before_last_month, ->{ where('created_at < ? ', Time.now.beginning_of_month-1.month) }
+  scope :before_last_month, ->{ where("#{table_name}.created_at < ? ", Time.now.beginning_of_month - 2.month) }
   scope :in_category, ->(category_id){ joins(:store).merge(Store.in_category(category_id)) }
 
   def self.time_filter(time)
