@@ -67,10 +67,11 @@ Codingate.MerchantChatSupportsMessageForm = Codingate.MerchantChatSupportsShow =
     $('#message-form').submit (e) ->
       e.preventDefault()
       text = $('#text').val()
-      merchant_chat_support_id = $('#merchant_chat_support_id').val()
-      data = {text: text, merchant_chat_support_id: merchant_chat_support_id}
-      AppCable.merchant_chat_support.speak data
-      $(this).trigger 'reset'
+      if text != '' or text != null or text != undefined
+        merchant_chat_support_id = $('#merchant_chat_support_id').val()
+        data = {text: text, merchant_chat_support_id: merchant_chat_support_id}
+        AppCable.merchant_chat_support.speak data
+        $(this).trigger 'reset'
 
   _setSeenAtToDateNow: ->
     self = @

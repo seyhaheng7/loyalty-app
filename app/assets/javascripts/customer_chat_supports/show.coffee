@@ -66,10 +66,11 @@ Codingate.CustomerChatSupportsMessageForm = Codingate.CustomerChatSupportsShow =
     $('#message-form').submit (e) ->
       e.preventDefault()
       text = $('#text').val()
-      customer_chat_support_id = $('#customer_chat_support_id').val()
-      data = {text: text, customer_chat_support_id: customer_chat_support_id}
-      AppCable.customer_chat_support.speak data
-      $(this).trigger 'reset'
+      if text != '' or text != null or text != undefined
+        customer_chat_support_id = $('#customer_chat_support_id').val()
+        data = {text: text, customer_chat_support_id: customer_chat_support_id}
+        AppCable.customer_chat_support.speak data
+        $(this).trigger 'reset'
 
   _setSeenAtToDateNow: ->
     self = @
