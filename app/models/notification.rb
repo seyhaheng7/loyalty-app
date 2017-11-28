@@ -3,12 +3,10 @@ class Notification < ApplicationRecord
     'SubmittedReceipt',
     'RejectedReceipt',
     'ApprovedReceipt',
-    'SubmittedClaimedReward',
-    'ApprovedClaimedReward',
-    'RejectedClaimedReward',
     'NewPromotion',
     'GivenClaimedReward',
-    'ClaimedRewardExpired'
+    'ClaimedRewardExpired',
+    'ClaimedRewardSuccess'
   ]
 
   belongs_to :notifyable, polymorphic: true

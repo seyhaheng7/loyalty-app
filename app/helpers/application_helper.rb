@@ -26,12 +26,12 @@ module ApplicationHelper
 
     when 'SubmittedReceipt'
       receipt_path(object)
-    when 'SubmittedClaimedReward'
+    when 'ClaimedRewardSuccess'
       claimed_reward_path(object)
     else
       raise "Unknown type"
     end
-  
+
   end
 
 
