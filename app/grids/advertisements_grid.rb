@@ -8,8 +8,11 @@ class AdvertisementsGrid
 
   filter(:name, :string){ |value, scope| scope.name_like(value) }
   filter(:phone, :string)
-  filter(:address, :string){ |value, scope| scope.address_like(value) }
-
+  filter(:date, :date, range: true) do |value, scope|
+    start_date = value.first
+    end_date  = value.second
+    scope.active_between(start_date, end_date)
+  end
   column(:name)
   column(:banner, html: true, order: false) do |record|
     image_tag record.banner, size: '50x50'

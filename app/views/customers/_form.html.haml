@@ -17,7 +17,7 @@
           = f.input :first_name
           = f.input :last_name
           = f.input :email
-          = f.input :phone, input_html: { class: 'inputmask' }
+          = f.input :phone, input_html: { class: 'inputmask' }, required: true
           = f.input :address
           = f.input :gender, collection: ['Male', 'Female']
           = f.input :current_points

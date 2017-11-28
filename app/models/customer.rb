@@ -40,7 +40,7 @@ class Customer < ActiveRecord::Base
   scope :able_to_verify,        ->{ where('verification_expired_at > ?', DateTime.now) }
   scope :digit_not_yet_expired, ->{ where('digit_expired_at > ?', DateTime.now) }
   scope :verified,              ->{ where.not(verified_at: nil) }
-  scope :name_like,             ->(name){ where("#{table_name}.first_name || #{table_name}.last_name ilike ?", "%#{name}%") }
+  scope :name_like,             ->(name){ where("#{table_name}.first_name || ' ' || #{table_name}.last_name ilike ?", "%#{name}%") }
   scope :active,                ->{ where("update_location_at > ?", DateTime.now - 2.minutes) }
   scope :unverified,            ->{ where(verified_at: nil) }
 
