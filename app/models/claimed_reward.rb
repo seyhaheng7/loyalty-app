@@ -70,7 +70,7 @@ class ClaimedReward < ApplicationRecord
   end
 
   def create_claimed_reward_success_notifications
-    ClaimedRewardSuccessNotificationsWorker.perform_async(id)
+    ClaimedRewardSuccessNotificationsWorker.perform_in(2.seconds, id)
   end
 
   def create_given_claimed_reward_notifications
