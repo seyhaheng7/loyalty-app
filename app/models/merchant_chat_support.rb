@@ -5,6 +5,8 @@ class MerchantChatSupport < ApplicationRecord
 
   scope :lastest_chat_order, -> { select('merchant_chat_supports.*,MAX(merchant_chat_support_data.created_at) as last').joins(:merchant_chat_support_data).order('last DESC').group(:id) }
 
+  validates :text, presence: true
+
   delegate :avatar, to: :merchant, prefix: true, allow_nil: true
   delegate :name, to: :merchant, prefix: true, allow_nil: true
 
