@@ -19,7 +19,6 @@ class ClaimedRewardsGrid
     link_to record.customer_name, record.customer
   end
 
-  column(:status)
   column(:created_at, header: 'Claimed Date') do |model|
     model.created_at.to_date
   end

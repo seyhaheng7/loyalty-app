@@ -7,13 +7,8 @@
             .col1
               .cont
                 .cont-col1
-                  .label.label-sm.label-success{class: "#{claimed_reward.status}"}
-                    - if claimed_reward.status == 'submitted'
-                      %i.fa.fa-info
-                    - if claimed_reward.status == 'approved'
+                  .label.label-sm.label-success.approved
                       %i.fa.fa-check
-                    - if claimed_reward.status == 'rejected'
-                      %i.fa.fa-close
                 .cont-col2
                   .desc
                     = claimed_reward.status
