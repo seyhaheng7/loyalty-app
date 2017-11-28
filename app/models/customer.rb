@@ -16,6 +16,7 @@ class Customer < ActiveRecord::Base
   validates :first_name, :last_name, presence: true
   validate :correct_facebook_uid, if: :facebook_provider?
   validate :correct_google_uid, if: :google_provider?
+  validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i}
 
 
   has_many :receipts, dependent: :destroy
