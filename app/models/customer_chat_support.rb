@@ -8,8 +8,6 @@ class CustomerChatSupport < ApplicationRecord
   delegate :avatar, to: :customer, prefix: true, allow_nil: true
   delegate :name, to: :customer, prefix: true, allow_nil: true
 
-  validates :text, presence: true
-
   after_commit :broadcast_active_chat_support, if: :saved_change_to_seen_at?
 
   def set_seen_at_to_blank
