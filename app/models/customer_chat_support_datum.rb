@@ -6,6 +6,8 @@ class CustomerChatSupportDatum < ApplicationRecord
   after_save :set_unseen
   after_save :notify_offline_member
 
+  validates :text, presence: true
+
   private
     def notify_offline_member
       CustomerChatSupportDatumNotificationWorker.perform_in(1.second, id)

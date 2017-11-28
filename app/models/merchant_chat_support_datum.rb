@@ -6,6 +6,8 @@ class MerchantChatSupportDatum < ApplicationRecord
   after_commit :set_unseen
   after_commit :notify_offline_member
 
+  validates :text, presence: true
+
   private
     def notify_offline_member
       MerchantChatSupportDatumNotificationWorker.perform_in(1.second, id)
