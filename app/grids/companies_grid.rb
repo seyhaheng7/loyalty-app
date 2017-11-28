@@ -12,6 +12,7 @@ class CompaniesGrid
 
 
   column(:name)
+  column(:contact_name)
   column(:email)
   column(:phone)
 
