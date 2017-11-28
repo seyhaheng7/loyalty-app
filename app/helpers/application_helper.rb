@@ -29,7 +29,13 @@ module ApplicationHelper
     when 'ClaimedRewardSuccess'
       claimed_reward_path(object)
     else
-      raise "Unknown type"
+      if object.type.include?('ClaimedReward')
+        receipt_path(object)
+      elsif object.type.include?('ClaimedReward')
+        claimed_reward_path(object)
+      else
+        raise "Unknown type"
+      end
     end
 
   end
