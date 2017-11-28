@@ -44,7 +44,7 @@ class Receipt < ApplicationRecord
 
   def self.time_filter(time)
     records = all
-    if time == 'bofore_last_month'
+    if time == 'before_last_month'
       records = records.before_last_month
     elsif time == 'last_month'
       records = records.last_month
