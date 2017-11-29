@@ -5,6 +5,8 @@ class Promotion < ApplicationRecord
 
   validates :title, presence: true
   validate :end_date_after_start_date?
+  validate :start_date_value
+  validate :end_date_value
 
   default_scope { order(created_at: :desc) }
   scope :active, -> {where(":today >= start_date AND :today <= end_date", today: Date.today)}
@@ -49,6 +51,18 @@ class Promotion < ApplicationRecord
     def end_date_after_start_date?
       if end_date.present? and start_date.present?
         errors.add :end_date, "must be after start date" if end_date < start_date
+      end
+    end
+
+    def start_date_value
+      if self.start_date.present? && self.start_date < Date.today
+        errors.add :start_date, "must be after today"
+      end
+    end
+
+    def end_date_value
+      if self.end_date.present? && self.start_date < Date.today + 1.day
+        errors.add :end_date, "must be after tomorrow"
       end
     end
 
