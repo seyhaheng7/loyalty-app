@@ -22,6 +22,7 @@ feature 'Store' do
       click_link 'Add New Store'
       fill_in 'Name', with: 'Caltax Shop'
       fill_in 'Address', with: 'Caltax Shop'
+      fill_in 'Term and condition', with: 'rolify'
       select 'MyString', from: 'Company'
       select 'MyString', from: 'Location'
       click_on 'Create Store'

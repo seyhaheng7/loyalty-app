@@ -15,6 +15,7 @@ class Store < ApplicationRecord
 
   validates :name, presence: true, uniqueness: {scope: :company_id}
   validates :address, presence: true
+  validates :term_and_condition, presence: true
   validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i }, allow_blank: true
 
   reverse_geocoded_by :lat, :long
