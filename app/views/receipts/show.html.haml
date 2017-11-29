@@ -34,6 +34,9 @@
             %th Customer:
             %td
               = link_to @receipt.customer_name, @receipt.customer
+          %tr
+            %th Submitted at
+            %td= @receipt.created_at.strftime("%Y-%b-%d %H:%M")
         .pull-left{style: "margin-top: 110px;"}
           -if policy(@receipt).index?
             = link_to receipts_path, class: 'btn btn-default' do
