@@ -7,7 +7,7 @@ class CompaniesGrid
   end
 
   filter(:name, :string){ |value, scope| scope.name_like(value) }
-  filter(:address)
+  filter(:phone)
   filter(:category_id, :enum, :select => lambda {Category.pluck(:name, :id)})
 
 
