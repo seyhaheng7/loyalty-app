@@ -1,7 +1,7 @@
 describe 'promotions' do
   let!(:customer){ create(:customer) }
   let!(:promotion){ create(:promotion) }
-  let!(:promotion_inactive){create(:promotion, start_date: '2017-10-01', end_date: '2017-10-01')}
+  let!(:promotion_inactive){ build(:promotion, start_date: '2017-10-01', end_date: '2017-10-01').tap{ |p| p.save(validate: false) }}
   let!(:promotions){ create_list(:promotion, 10) }
 
   describe 'GET api/v1/customer/promotions' do
@@ -12,7 +12,7 @@ describe 'promotions' do
     it 'return status successful' do
       expect(response).to have_http_status(200)
     end
-    
+
     it 'include promotion' do
       json = JSON.parse(response.body)
       titles = json.map{ |j| j['title'] }
@@ -24,7 +24,7 @@ describe 'promotions' do
       expect(json.size).to eq(11)
     end
 
-    it 'return active promotion' do 
+    it 'return active promotion' do
       expect(Date.today).to be_between(promotion.start_date, promotion.end_date)
     end
 

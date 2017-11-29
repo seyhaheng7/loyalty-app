@@ -61,7 +61,7 @@ class Promotion < ApplicationRecord
     end
 
     def end_date_value
-      if self.end_date.present? && self.start_date < Date.today + 1.day
+      if self.end_date.present? && self.end_date < Date.tomorrow
         errors.add :end_date, "must be after tomorrow"
       end
     end

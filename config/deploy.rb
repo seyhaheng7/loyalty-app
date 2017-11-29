@@ -1,4 +1,4 @@
-lock "3.10.0"
+lock "3.9.1"
 
 set :application, 'customer-layalty'
 set :repo_url, "git@gitlab.com:codingategitlab/app-customer-loyalty.git"

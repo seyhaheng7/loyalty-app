@@ -12,10 +12,20 @@ module Api::V1::Customer
     skip_before_action :authenticate_customer!
 
     def send_digit
-      @customer = Customer.verified.find_by phone: params[:phone]
+      @customer = Customer.find_by phone: params[:phone]
       if @customer.present?
-        @customer.send_login_digit
-        head :ok
+        if @customer.phone_provider?
+          if @customer.verified?
+            @customer.send_login_digit
+            head :ok
+          else
+            errors = ['not yet verified']
+            render json: { errors:  errors }, status: 401
+          end
+        else
+          errors = ["you registered with #{@customer.provider}"]
+          render json: { errors:  errors }, status: 401
+        end
       else
         errors = ['not yet registered']
         render json: { errors:  errors }, status: :not_found
