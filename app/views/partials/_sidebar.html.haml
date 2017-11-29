@@ -101,12 +101,12 @@
             = link_to merchants_url do
               %i.icon-user-following
               %span.title Merchants
-
-        - if policy(:contact_form).index?
-          %li.nav-item{:class => ( "active" if sidebar_active?('contact_forms') )}
-            = link_to contact_forms_url do
-              %i.icon-notebook
-              %span.title Contact Forms
+        / Contact Form feature has been temporary removed
+        / - if policy(:contact_form).index?
+        /   %li.nav-item{:class => ( "active" if sidebar_active?('contact_forms') )}
+        /     = link_to contact_forms_url do
+        /       %i.icon-notebook
+        /       %span.title Contact Forms
 
         - if policy(:merchant_chat_support).index?
           %li.nav-item{:class => ( "active" if sidebar_active?('merchant_chat_supports') )}

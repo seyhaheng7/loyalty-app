@@ -1,6 +1,7 @@
+# Contact Form feature has been temporary removed
 class ContactForm < ApplicationRecord
   acts_as_paranoid
-  
+
   belongs_to :customer
 
   validates :subject, presence: true

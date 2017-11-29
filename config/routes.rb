@@ -46,7 +46,9 @@ Rails.application.routes.draw do
   resources :guides
   resources :faqs
   resources :advertisements
-  resources :contact_forms, only: [:index, :show, :destroy]
+
+  # Contact Form feature has been temporary removed
+  # resources :contact_forms, only: [:index, :show, :destroy]
   resources :video_ads
   resources :customer_locations, only: :index
 
@@ -98,7 +100,9 @@ Rails.application.routes.draw do
         resources :operating_systems, only: [:create]
         resources :faqs, only: [:index, :show]
         resources :advertisements, only: [:index, :show]
-        resources :contact_forms, only: [:create]
+        # Contact Form feature has been temporary removed
+        # resources :contact_forms, only: [:create]
+
         resources :video_ads, only: [:index, :show]
         resources :promotions, only: [:index, :show]
         resources :guides, only: [:index, :show]
